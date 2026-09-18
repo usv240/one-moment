@@ -15,7 +15,7 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const require = createRequire(import.meta.url);
 const axeSource = fs.readFileSync(require.resolve('axe-core/axe.min.js'), 'utf8');
 const base = process.argv[2] ?? 'http://localhost:3000';
-const PAGES = ['/', '/demo', '/judges', '/technology', '/evidence', '/limits', '/glossary', '/accessibility'];
+const PAGES = ['/', '/demo', '/replay', '/setup', '/api', '/judges', '/technology', '/evidence', '/limits', '/glossary', '/accessibility'];
 const CHROME = process.env.CHROME_PATH ?? 'C:/Program Files/Google/Chrome/Application/chrome.exe';
 
 const browser = await chromium.launch({ executablePath: CHROME });

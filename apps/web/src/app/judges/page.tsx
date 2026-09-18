@@ -32,9 +32,9 @@ export default function JudgesPage() {
     >
       <Block id="path" title="Three steps">
         <ol className="grid gap-4 md:grid-cols-3">
-          <Step n={1} title="Hear a recorded call (30 seconds)" href="/#watch">
-            A real call through the live system, replayed with its audio and every event it produced. Watch the hold line get
-            cut off the instant Robert finds his word.
+          <Step n={1} title="Hear the two recorded calls (1 minute)" href="/replay">
+            Real calls through the live system, replayed with their audio and every event they produced. In the first, the hold
+            line is cut off the instant Robert finds his word. In the second, the medicine name only half comes out, and it asks.
           </Step>
           <Step n={2} title="Run one live (1 minute)" href="/demo">
             &ldquo;Play the recorded call&rdquo; drives the live engine with a recorded caller. Or use your microphone: start a
@@ -56,8 +56,9 @@ export default function JudgesPage() {
               <b key="a">Application of technology</b>,
               <span key="a2">
                 Two concurrent Universal-Streaming sessions configured in opposite directions, their disagreement used as the
-                uncertainty signal, <Code>ForceEndpoint</Code> for semantic patience, and a Voice Agent whose LLM is an endpoint
-                that is not a model. <Link className="text-accent underline underline-offset-2" href="/technology">Technology</Link>
+                uncertainty signal, and <Code>keyterms_prompt</Code> on one only, so the other can check a boosted word was really
+                said. <Code>ForceEndpoint</Code> for semantic patience. A Voice Agent whose LLM is an endpoint that is not a model.
+                The pre-recorded API grading every call afterwards. <Link className="text-accent underline underline-offset-2" href="/technology">Technology</Link>
               </span>,
             ],
             [
@@ -71,7 +72,8 @@ export default function JudgesPage() {
               <b key="c">Originality</b>,
               <span key="c2">
                 Every voice agent is tuned to respond faster. This one is tuned to hold the floor for someone else, and to say
-                nothing it was not given. The design is the published Supported Conversation technique, made into software.
+                nothing it was not given. The design is the published Supported Conversation technique, made into software. And it
+                publishes its own failure: the one case no live check can catch, and how the self-audit caught it.
               </span>,
             ],
             [
@@ -112,7 +114,7 @@ export default function JudgesPage() {
       <Block id="run" title="Run it yourself">
         <Pre>{`cd one-moment && npm install
 cp .env.example .env     # your AssemblyAI key
-npm test                 # 40 tests: floor, evidence, Dissent, semantic patience
+npm test                 # the engine: floor, evidence, Dissent, rule 11, semantic patience
 npm run orchestrator     # opens a public tunnel so the Voice Agent can reach it
 npm run web              # http://localhost:3000/demo`}</Pre>
         <p className="text-sm text-muted">MIT licensed. Built for the AssemblyAI Voice Agent Hackathon, September 2026. Not a medical device.</p>

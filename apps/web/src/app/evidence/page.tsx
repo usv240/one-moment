@@ -18,7 +18,7 @@ type Bench = {
   conditions: string[]; byCondition: Record<string, { baseline: Arm; full: Arm; overAsked: number }>;
   rows: { groundTruth: string; condition: string; baselineHeard: string; hasNegation: boolean;
     baseline: { relayed: string | null; invented: string[]; inverted: boolean; refused: boolean };
-    full: { relayed: string | null; invented: string[]; inverted: boolean; refused: boolean; rule: number } }[];
+    full: { relayed: string | null; invented: string[]; inverted: boolean; refused: boolean; rule: number; advocate?: string | null; blockedWords?: string[] } }[];
 };
 const bench = negbench as unknown as Bench;
 
@@ -34,6 +34,8 @@ function frac(a: number, b: number) {
 
 function Negbench() {
   const conds = bench.conditions.filter((c) => bench.byCondition[c]);
+  // One real block from this run, if there was one: a model proposed a word nobody said.
+  const block = bench.rows.find((r) => r.full.refused && r.full.advocate && (r.full.blockedWords?.length ?? 0) > 0);
   return (
     <Block id="negbench" title="Does it speak words the person never said?">
       <p>
@@ -68,6 +70,17 @@ function Negbench() {
         </li>
         <li>&ldquo;Not needed&rdquo; counts questions asked where the baseline&apos;s plain reading was in fact correct: the cost of caution.</li>
       </ul>
+      {block && (
+        <div className="rounded-xl border border-line bg-raised p-4">
+          <p className="text-sm font-semibold text-ink">One real block from this run</p>
+          <p className="mt-2 text-sm text-ink">
+            Said: &ldquo;{block.groundTruth}&rdquo;. The Advocate proposed: &ldquo;{block.full.advocate}&rdquo;. Rule 2 blocked it,
+            because &ldquo;{block.full.blockedWords?.join(', ')}&rdquo; was never said, and asked instead.
+            {/amlodipine/i.test(block.full.advocate ?? '') && !/amlodipine/i.test(block.groundTruth) ? ' The small model had repeated the example sentence from its own instructions.' : ''}
+            {' '}That is exactly why the decision is made by code, not by a model.
+          </p>
+        </div>
+      )}
       <details className="rounded-xl border border-line">
         <summary className="cursor-pointer px-4 py-3 text-sm font-medium text-ink">Every case, both arms ({bench.rows.length} rows)</summary>
         <div className="border-t border-line p-3">
@@ -150,7 +163,7 @@ export default function EvidencePage() {
 
       <Block id="failure" title="A failure the live checks missed, and the audit caught">
         <p>
-          We publish this one on purpose. In an earlier run of the harder call, the caller said &ldquo;{failure.said}&rdquo;. In
+          We publish this one on purpose. In an earlier run of the harder call, the caller said &ldquo;{failure.said}&rdquo; In
           context, <b>both</b> live ears wrote &ldquo;amlodipine&rdquo;, so they agreed, no rule fired, and it was relayed.
         </p>
         <Table

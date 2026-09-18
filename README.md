@@ -37,7 +37,9 @@ Every line below came from a real run, and the command to reproduce it is beside
 | The hold line never talks over the caller | Cut off by the orchestrator about 100ms after the caller resumes | `npm run record` |
 | No dead air after a finished sentence | Turn ended **1.5s** after the last word instead of 6s+, via `ForceEndpoint` | `npm run record` |
 | Every call graded against itself | The pre-recorded model heard the pause as **6.3s**, the live stream showed **45ms**; every relayed word confirmed | `npm run record` |
+| A boosted word is not trusted on its own | 4 of 4 slurred ways of saying "amlodipine" came back as amlodipine from the ear told the caller's words, 0 of 4 from the unbiased ear. So rule 11 asks: "Amlodipine, or metformin?" | `node --env-file=.env eval/probe-vocabulary.mjs` |
 | It does not invent words | NEGBENCH on the product's own engine, failures included | `npm run bench` |
+| When both ears are wrong, the audit catches it | A documented failure: both live ears heard "amlodipine" in "am low dippy"; the careful model did not; the self-audit flagged the relay | see `/evidence#failure` |
 
 ---
 
@@ -72,7 +74,11 @@ of what the agent said.
 3. **Dissent for fragments.** An Advocate proposes what was meant. A Skeptic gives its own
    independent reading. If they disagree, or the proposal contains a word the caller never
    said, the caller is asked, never guessed for.
-4. **Forced choice, never yes or no.** In aphasia the default answer may be "yes". So the
+4. **Never trust a half-found word.** A word from the caller's own list that only the ear
+   listening for it heard, or that only partly came out ("am, am lo"), is offered as a
+   choice with its sibling from the list (rule 11). Medicines, pharmacy, doctor, family,
+   place only: never "prescription, or refill?".
+5. **Forced choice, never yes or no.** In aphasia the default answer may be "yes". So the
    caller gets two real options, and the full grounded sentence behind the one they pick
    is what the pharmacist hears.
 

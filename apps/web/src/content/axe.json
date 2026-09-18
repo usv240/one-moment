@@ -5,13 +5,31 @@
     {
       "path": "/",
       "scheme": "light",
-      "passes": 44,
+      "passes": 46,
       "violations": []
     },
     {
       "path": "/demo",
       "scheme": "light",
-      "passes": 41,
+      "passes": 45,
+      "violations": []
+    },
+    {
+      "path": "/replay",
+      "scheme": "light",
+      "passes": 42,
+      "violations": []
+    },
+    {
+      "path": "/setup",
+      "scheme": "light",
+      "passes": 43,
+      "violations": []
+    },
+    {
+      "path": "/api",
+      "scheme": "light",
+      "passes": 47,
       "violations": []
     },
     {
@@ -29,7 +47,7 @@
     {
       "path": "/evidence",
       "scheme": "light",
-      "passes": 46,
+      "passes": 45,
       "violations": []
     },
     {
@@ -53,13 +71,31 @@
     {
       "path": "/",
       "scheme": "dark",
-      "passes": 44,
+      "passes": 46,
       "violations": []
     },
     {
       "path": "/demo",
       "scheme": "dark",
-      "passes": 41,
+      "passes": 45,
+      "violations": []
+    },
+    {
+      "path": "/replay",
+      "scheme": "dark",
+      "passes": 42,
+      "violations": []
+    },
+    {
+      "path": "/setup",
+      "scheme": "dark",
+      "passes": 43,
+      "violations": []
+    },
+    {
+      "path": "/api",
+      "scheme": "dark",
+      "passes": 47,
       "violations": []
     },
     {
@@ -77,7 +113,7 @@
     {
       "path": "/evidence",
       "scheme": "dark",
-      "passes": 46,
+      "passes": 45,
       "violations": []
     },
     {

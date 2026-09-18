@@ -38,6 +38,7 @@ export default async function ReplayPage({ searchParams }: PageProps<'/replay'>)
           ))}
         </nav>
       </header>
+      <h2 className="sr-only">The call, moment by moment</h2>
       <ReplayPlayer key={id} recording={call.recording} audioSrc={call.audio} compact video={video} />
     </div>
   );

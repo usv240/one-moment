@@ -8,6 +8,7 @@ export function SiteFooter() {
           <p className="font-semibold">Product</p>
           <ul className="space-y-1 text-muted">
             <li><Link className="hover:text-ink" href="/demo">Try it</Link></li>
+            <li><Link className="hover:text-ink" href="/replay">Recorded calls</Link></li>
             <li><Link className="hover:text-ink" href="/setup">Make it yours</Link></li>
             <li><Link className="hover:text-ink" href="/judges">For judges</Link></li>
             <li><Link className="hover:text-ink" href="/limits">What it does not do</Link></li>

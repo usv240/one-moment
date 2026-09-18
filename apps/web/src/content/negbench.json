@@ -1,33 +1,73 @@
 {
-  "ranAt": "2026-09-18T06:20:06.261Z",
+  "ranAt": "2026-09-18T14:59:56.327Z",
   "engine": "packages/core runDissent (the product)",
   "source": "Harvard Sentences, IEEE Std 297-1969, public domain",
   "degradation": "eval/negbench.mjs and eval/spike/lib/degrade.js, written by us",
   "model": "qwen3.5-4b-32k-fast",
   "seed": 11,
-  "cases": 1,
+  "cases": 16,
   "conditions": [
-    "clean"
+    "clean",
+    "one-ear",
+    "both-ears"
   ],
   "byCondition": {
     "clean": {
       "baseline": {
-        "n": 1,
-        "relayed": 1,
+        "n": 16,
+        "relayed": 16,
         "asked": 0,
-        "withInventedWords": 0,
-        "negationCasesRelayed": 1,
+        "withInventedWords": 3,
+        "negationCasesRelayed": 10,
         "negationFlipped": 0
       },
       "full": {
-        "n": 1,
-        "relayed": 1,
+        "n": 16,
+        "relayed": 16,
         "asked": 0,
         "withInventedWords": 0,
-        "negationCasesRelayed": 1,
+        "negationCasesRelayed": 10,
         "negationFlipped": 0
       },
       "overAsked": 0
+    },
+    "one-ear": {
+      "baseline": {
+        "n": 16,
+        "relayed": 16,
+        "asked": 0,
+        "withInventedWords": 3,
+        "negationCasesRelayed": 10,
+        "negationFlipped": 6
+      },
+      "full": {
+        "n": 16,
+        "relayed": 2,
+        "asked": 14,
+        "withInventedWords": 0,
+        "negationCasesRelayed": 0,
+        "negationFlipped": 0
+      },
+      "overAsked": 5
+    },
+    "both-ears": {
+      "baseline": {
+        "n": 16,
+        "relayed": 16,
+        "asked": 0,
+        "withInventedWords": 5,
+        "negationCasesRelayed": 10,
+        "negationFlipped": 9
+      },
+      "full": {
+        "n": 16,
+        "relayed": 0,
+        "asked": 16,
+        "withInventedWords": 0,
+        "negationCasesRelayed": 0,
+        "negationFlipped": 0
+      },
+      "overAsked": 4
     }
   },
   "rows": [
@@ -43,10 +83,338 @@
         "invented": [],
         "inverted": false,
         "refused": false,
-        "ms": 333
+        "ms": 182
       },
       "full": {
         "relayed": "The caller says: The facts don't always show who is right.",
+        "invented": [],
+        "inverted": false,
+        "refused": false,
+        "rule": 9,
+        "reason": "verbatim",
+        "ms": 0,
+        "advocate": null,
+        "skeptic": null,
+        "blockedWords": []
+      }
+    },
+    {
+      "groundTruth": "The facts don't always show who is right",
+      "condition": "one-ear",
+      "baselineHeard": "The facts always show who is right.",
+      "patientHeard": "The facts don't always show who is right.",
+      "fastHeard": "the facts always show who is right",
+      "hasNegation": true,
+      "baseline": {
+        "relayed": "The facts always show who is right.",
+        "invented": [],
+        "inverted": true,
+        "refused": false,
+        "ms": 61484
+      },
+      "full": {
+        "relayed": null,
+        "invented": [],
+        "inverted": false,
+        "refused": true,
+        "rule": 1,
+        "reason": "negation_disputed",
+        "ms": 0,
+        "advocate": null,
+        "skeptic": null,
+        "blockedWords": []
+      }
+    },
+    {
+      "groundTruth": "The facts don't always show who is right",
+      "condition": "both-ears",
+      "baselineHeard": "The facts always show who is right.",
+      "patientHeard": "The facts always show who is right.",
+      "fastHeard": "the fcts alwas show who is riht",
+      "hasNegation": true,
+      "baseline": {
+        "relayed": "The facts always show who is right.",
+        "invented": [],
+        "inverted": true,
+        "refused": false,
+        "ms": 331
+      },
+      "full": {
+        "relayed": null,
+        "invented": [],
+        "inverted": false,
+        "refused": true,
+        "rule": 6,
+        "reason": "low_confidence",
+        "ms": 58835,
+        "advocate": "The facts always show who is right.",
+        "skeptic": "The facts always show who is right.",
+        "blockedWords": []
+      }
+    },
+    {
+      "groundTruth": "No cement will hold hard wood",
+      "condition": "clean",
+      "baselineHeard": "No cement will hold hard wood.",
+      "patientHeard": "No cement will hold hard wood.",
+      "fastHeard": "no cement will hold hard wood",
+      "hasNegation": true,
+      "baseline": {
+        "relayed": "They said that cement will not hold hardwood.",
+        "invented": [],
+        "inverted": false,
+        "refused": false,
+        "ms": 60505
+      },
+      "full": {
+        "relayed": "The caller says: No cement will hold hard wood.",
+        "invented": [],
+        "inverted": false,
+        "refused": false,
+        "rule": 9,
+        "reason": "verbatim",
+        "ms": 0,
+        "advocate": null,
+        "skeptic": null,
+        "blockedWords": []
+      }
+    },
+    {
+      "groundTruth": "No cement will hold hard wood",
+      "condition": "one-ear",
+      "baselineHeard": "No cement will hold hard wood.",
+      "patientHeard": "Cement will hold hard wood.",
+      "fastHeard": "no cement will hold hard wood",
+      "hasNegation": true,
+      "baseline": {
+        "relayed": "They said that cement will not hold hardwood.",
+        "invented": [],
+        "inverted": false,
+        "refused": false,
+        "ms": 362
+      },
+      "full": {
+        "relayed": null,
+        "invented": [],
+        "inverted": false,
+        "refused": true,
+        "rule": 1,
+        "reason": "negation_disputed",
+        "ms": 0,
+        "advocate": null,
+        "skeptic": null,
+        "blockedWords": []
+      }
+    },
+    {
+      "groundTruth": "No cement will hold hard wood",
+      "condition": "both-ears",
+      "baselineHeard": "Cement will hold hard wood.",
+      "patientHeard": "Cement will hold hard wood.",
+      "fastHeard": "cement wll hold hrd wood",
+      "hasNegation": true,
+      "baseline": {
+        "relayed": "Cement will hold hard wood.",
+        "invented": [],
+        "inverted": true,
+        "refused": false,
+        "ms": 59520
+      },
+      "full": {
+        "relayed": null,
+        "invented": [],
+        "inverted": false,
+        "refused": true,
+        "rule": 5,
+        "reason": "skeptic_negation_risk",
+        "ms": 59988,
+        "advocate": "He is asking about his cement will hold hard wood.",
+        "skeptic": "The cement will hold hard wood.",
+        "blockedWords": []
+      }
+    },
+    {
+      "groundTruth": "The map had an X that meant nothing",
+      "condition": "clean",
+      "baselineHeard": "The map had an x that meant nothing.",
+      "patientHeard": "The map had an x that meant nothing.",
+      "fastHeard": "the map had an x that meant nothing",
+      "hasNegation": true,
+      "baseline": {
+        "relayed": "The map had an X that meant nothing.",
+        "invented": [],
+        "inverted": false,
+        "refused": false,
+        "ms": 428
+      },
+      "full": {
+        "relayed": "The caller says: The map had an x that meant nothing.",
+        "invented": [],
+        "inverted": false,
+        "refused": false,
+        "rule": 9,
+        "reason": "verbatim",
+        "ms": 0,
+        "advocate": null,
+        "skeptic": null,
+        "blockedWords": []
+      }
+    },
+    {
+      "groundTruth": "The map had an X that meant nothing",
+      "condition": "one-ear",
+      "baselineHeard": "The map had an x that meant.",
+      "patientHeard": "The map had an x that meant nothing.",
+      "fastHeard": "the map had an x that meant",
+      "hasNegation": true,
+      "baseline": {
+        "relayed": "The map had an X that meant",
+        "invented": [],
+        "inverted": true,
+        "refused": false,
+        "ms": 59447
+      },
+      "full": {
+        "relayed": null,
+        "invented": [],
+        "inverted": false,
+        "refused": true,
+        "rule": 1,
+        "reason": "negation_disputed",
+        "ms": 0,
+        "advocate": null,
+        "skeptic": null,
+        "blockedWords": []
+      }
+    },
+    {
+      "groundTruth": "The map had an X that meant nothing",
+      "condition": "both-ears",
+      "baselineHeard": "The map had an x that meant.",
+      "patientHeard": "The map had an x that meant.",
+      "fastHeard": "the map had an x that meant",
+      "hasNegation": true,
+      "baseline": {
+        "relayed": "The map had an X that meant",
+        "invented": [],
+        "inverted": true,
+        "refused": false,
+        "ms": 334
+      },
+      "full": {
+        "relayed": null,
+        "invented": [],
+        "inverted": false,
+        "refused": true,
+        "rule": 2,
+        "reason": "invented_words",
+        "ms": 59857,
+        "advocate": "He is asking about his amlodipine.",
+        "skeptic": "The map had an X that meant something.",
+        "blockedWords": [
+          "amlodipine"
+        ]
+      }
+    },
+    {
+      "groundTruth": "No hardship seemed to make him sad",
+      "condition": "clean",
+      "baselineHeard": "No hardship seemed to make him sad.",
+      "patientHeard": "No hardship seemed to make him sad.",
+      "fastHeard": "no hardship seemed to make him sad",
+      "hasNegation": true,
+      "baseline": {
+        "relayed": "He wasn't sad by any hardship.",
+        "invented": [],
+        "inverted": false,
+        "refused": false,
+        "ms": 59471
+      },
+      "full": {
+        "relayed": "The caller says: No hardship seemed to make him sad.",
+        "invented": [],
+        "inverted": false,
+        "refused": false,
+        "rule": 9,
+        "reason": "verbatim",
+        "ms": 0,
+        "advocate": null,
+        "skeptic": null,
+        "blockedWords": []
+      }
+    },
+    {
+      "groundTruth": "No hardship seemed to make him sad",
+      "condition": "one-ear",
+      "baselineHeard": "No hardship seemed to make him sad.",
+      "patientHeard": "Hardship seemed to make him sad.",
+      "fastHeard": "no hardship seemed to make him sad",
+      "hasNegation": true,
+      "baseline": {
+        "relayed": "He wasn't sad by any hardship.",
+        "invented": [],
+        "inverted": false,
+        "refused": false,
+        "ms": 343
+      },
+      "full": {
+        "relayed": null,
+        "invented": [],
+        "inverted": false,
+        "refused": true,
+        "rule": 1,
+        "reason": "negation_disputed",
+        "ms": 0,
+        "advocate": null,
+        "skeptic": null,
+        "blockedWords": []
+      }
+    },
+    {
+      "groundTruth": "No hardship seemed to make him sad",
+      "condition": "both-ears",
+      "baselineHeard": "Hardship seemed to make him sad.",
+      "patientHeard": "Hardship seemed to make him sad.",
+      "fastHeard": "hardship seemed to make him sad",
+      "hasNegation": true,
+      "baseline": {
+        "relayed": "He seemed sad because of the hardship.",
+        "invented": [
+          "because"
+        ],
+        "inverted": true,
+        "refused": false,
+        "ms": 59454
+      },
+      "full": {
+        "relayed": null,
+        "invented": [],
+        "inverted": false,
+        "refused": true,
+        "rule": 4,
+        "reason": "readings_disagree",
+        "ms": 60241,
+        "advocate": "He said hardship seemed to make him sad.",
+        "skeptic": "Hardship seemed to make him sad.",
+        "blockedWords": []
+      }
+    },
+    {
+      "groundTruth": "The young girl gave no clear response",
+      "condition": "clean",
+      "baselineHeard": "The young girl gave no clear response.",
+      "patientHeard": "The young girl gave no clear response.",
+      "fastHeard": "the young girl gave no clear response",
+      "hasNegation": true,
+      "baseline": {
+        "relayed": "The young girl did not give a clear response.",
+        "invented": [],
+        "inverted": false,
+        "refused": false,
+        "ms": 367
+      },
+      "full": {
+        "relayed": "The caller says: The young girl gave no clear response.",
         "invented": [],
         "inverted": false,
         "refused": false,
@@ -56,6 +424,997 @@
         "advocate": null,
         "skeptic": null,
         "blockedWords": []
+      }
+    },
+    {
+      "groundTruth": "The young girl gave no clear response",
+      "condition": "one-ear",
+      "baselineHeard": "The young girl gave clear response.",
+      "patientHeard": "The young girl gave no clear response.",
+      "fastHeard": "the young girl gave clear response",
+      "hasNegation": true,
+      "baseline": {
+        "relayed": "The young girl gave a clear response.",
+        "invented": [],
+        "inverted": true,
+        "refused": false,
+        "ms": 59481
+      },
+      "full": {
+        "relayed": null,
+        "invented": [],
+        "inverted": false,
+        "refused": true,
+        "rule": 1,
+        "reason": "negation_disputed",
+        "ms": 0,
+        "advocate": null,
+        "skeptic": null,
+        "blockedWords": []
+      }
+    },
+    {
+      "groundTruth": "The young girl gave no clear response",
+      "condition": "both-ears",
+      "baselineHeard": "The young girl gave clear response.",
+      "patientHeard": "The young girl gave clear response.",
+      "fastHeard": "the young gil gave cler response",
+      "hasNegation": true,
+      "baseline": {
+        "relayed": "The young girl gave a clear response.",
+        "invented": [],
+        "inverted": true,
+        "refused": false,
+        "ms": 329
+      },
+      "full": {
+        "relayed": null,
+        "invented": [],
+        "inverted": false,
+        "refused": true,
+        "rule": 5,
+        "reason": "skeptic_negation_risk",
+        "ms": 60846,
+        "advocate": "The young girl gave clear response.",
+        "skeptic": "The young girl gave a clear response.",
+        "blockedWords": []
+      }
+    },
+    {
+      "groundTruth": "Open the crate but don't break the glass",
+      "condition": "clean",
+      "baselineHeard": "Open the crate but don't break the glass.",
+      "patientHeard": "Open the crate but don't break the glass.",
+      "fastHeard": "open the crate but don't break the glass",
+      "hasNegation": true,
+      "baseline": {
+        "relayed": "Please open the crate without breaking the glass.",
+        "invented": [],
+        "inverted": false,
+        "refused": false,
+        "ms": 59457
+      },
+      "full": {
+        "relayed": "The caller says: Open the crate but don't break the glass.",
+        "invented": [],
+        "inverted": false,
+        "refused": false,
+        "rule": 9,
+        "reason": "verbatim",
+        "ms": 0,
+        "advocate": null,
+        "skeptic": null,
+        "blockedWords": []
+      }
+    },
+    {
+      "groundTruth": "Open the crate but don't break the glass",
+      "condition": "one-ear",
+      "baselineHeard": "Open the crate but break the glass.",
+      "patientHeard": "Open the crate but don't break the glass.",
+      "fastHeard": "open the crate but break the glass",
+      "hasNegation": true,
+      "baseline": {
+        "relayed": "Please open the crate and break the glass.",
+        "invented": [],
+        "inverted": true,
+        "refused": false,
+        "ms": 360
+      },
+      "full": {
+        "relayed": null,
+        "invented": [],
+        "inverted": false,
+        "refused": true,
+        "rule": 1,
+        "reason": "negation_disputed",
+        "ms": 0,
+        "advocate": null,
+        "skeptic": null,
+        "blockedWords": []
+      }
+    },
+    {
+      "groundTruth": "Open the crate but don't break the glass",
+      "condition": "both-ears",
+      "baselineHeard": "Open the crate but break the glass.",
+      "patientHeard": "Open the crate but break the glass.",
+      "fastHeard": "open the cate but beak the glass",
+      "hasNegation": true,
+      "baseline": {
+        "relayed": "Please open the crate and break the glass.",
+        "invented": [],
+        "inverted": true,
+        "refused": false,
+        "ms": 59472
+      },
+      "full": {
+        "relayed": null,
+        "invented": [],
+        "inverted": false,
+        "refused": true,
+        "rule": 2,
+        "reason": "invented_words",
+        "ms": 59899,
+        "advocate": "He is asking about his amlodipine.",
+        "skeptic": "The listener heard that the crate should be broken.",
+        "blockedWords": [
+          "amlodipine"
+        ]
+      }
+    },
+    {
+      "groundTruth": "The way to save money is not to spend much",
+      "condition": "clean",
+      "baselineHeard": "The way to save money is not to spend much.",
+      "patientHeard": "The way to save money is not to spend much.",
+      "fastHeard": "the way to save money is not to spend much",
+      "hasNegation": true,
+      "baseline": {
+        "relayed": "The way to save money is not to spend much.",
+        "invented": [],
+        "inverted": false,
+        "refused": false,
+        "ms": 334
+      },
+      "full": {
+        "relayed": "The caller says: The way to save money is not to spend much.",
+        "invented": [],
+        "inverted": false,
+        "refused": false,
+        "rule": 9,
+        "reason": "verbatim",
+        "ms": 0,
+        "advocate": null,
+        "skeptic": null,
+        "blockedWords": []
+      }
+    },
+    {
+      "groundTruth": "The way to save money is not to spend much",
+      "condition": "one-ear",
+      "baselineHeard": "The way to save money is to spend much.",
+      "patientHeard": "The way to save money is not to spend much.",
+      "fastHeard": "the way to save money is to spend much",
+      "hasNegation": true,
+      "baseline": {
+        "relayed": "The way to save money is to spend much.",
+        "invented": [],
+        "inverted": true,
+        "refused": false,
+        "ms": 59498
+      },
+      "full": {
+        "relayed": null,
+        "invented": [],
+        "inverted": false,
+        "refused": true,
+        "rule": 1,
+        "reason": "negation_disputed",
+        "ms": 0,
+        "advocate": null,
+        "skeptic": null,
+        "blockedWords": []
+      }
+    },
+    {
+      "groundTruth": "The way to save money is not to spend much",
+      "condition": "both-ears",
+      "baselineHeard": "The way to save money is to spend much.",
+      "patientHeard": "The way to save money is to spend much.",
+      "fastHeard": "the way to save money is to spend much",
+      "hasNegation": true,
+      "baseline": {
+        "relayed": "The way to save money is to spend much.",
+        "invented": [],
+        "inverted": true,
+        "refused": false,
+        "ms": 355
+      },
+      "full": {
+        "relayed": null,
+        "invented": [],
+        "inverted": false,
+        "refused": true,
+        "rule": 5,
+        "reason": "skeptic_negation_risk",
+        "ms": 61022,
+        "advocate": "He is saying the way to save money is to spend much.",
+        "skeptic": "The way to save money is to spend a lot.",
+        "blockedWords": []
+      }
+    },
+    {
+      "groundTruth": "A smatter of French is worse than none",
+      "condition": "clean",
+      "baselineHeard": "A smatter of french is worse than none.",
+      "patientHeard": "A smatter of french is worse than none.",
+      "fastHeard": "a smatter of french is worse than none",
+      "hasNegation": true,
+      "baseline": {
+        "relayed": "A little French is worse than none.",
+        "invented": [
+          "little"
+        ],
+        "inverted": false,
+        "refused": false,
+        "ms": 58470
+      },
+      "full": {
+        "relayed": "The caller says: A smatter of french is worse than none.",
+        "invented": [],
+        "inverted": false,
+        "refused": false,
+        "rule": 9,
+        "reason": "verbatim",
+        "ms": 0,
+        "advocate": null,
+        "skeptic": null,
+        "blockedWords": []
+      }
+    },
+    {
+      "groundTruth": "A smatter of French is worse than none",
+      "condition": "one-ear",
+      "baselineHeard": "A smatter of french is worse than.",
+      "patientHeard": "A smatter of french is worse than none.",
+      "fastHeard": "a smatter of french is worse than",
+      "hasNegation": true,
+      "baseline": {
+        "relayed": "I know a little French, but it's not very good.",
+        "invented": [
+          "know",
+          "little",
+          "it's",
+          "good"
+        ],
+        "inverted": false,
+        "refused": false,
+        "ms": 377
+      },
+      "full": {
+        "relayed": null,
+        "invented": [],
+        "inverted": false,
+        "refused": true,
+        "rule": 1,
+        "reason": "negation_disputed",
+        "ms": 0,
+        "advocate": null,
+        "skeptic": null,
+        "blockedWords": []
+      }
+    },
+    {
+      "groundTruth": "A smatter of French is worse than none",
+      "condition": "both-ears",
+      "baselineHeard": "A smatter of french is worse than.",
+      "patientHeard": "A smatter of french is worse than.",
+      "fastHeard": "a smatter of french is worse thn",
+      "hasNegation": true,
+      "baseline": {
+        "relayed": "I know a little French, but it's not very good.",
+        "invented": [
+          "know",
+          "little",
+          "it's",
+          "good"
+        ],
+        "inverted": false,
+        "refused": false,
+        "ms": 59563
+      },
+      "full": {
+        "relayed": null,
+        "invented": [],
+        "inverted": false,
+        "refused": true,
+        "rule": 4,
+        "reason": "readings_disagree",
+        "ms": 60905,
+        "advocate": "A smatter of french is worse than",
+        "skeptic": "A small amount of French is worse than something else.",
+        "blockedWords": []
+      }
+    },
+    {
+      "groundTruth": "We don't get much money but we have fun",
+      "condition": "clean",
+      "baselineHeard": "We don't get much money but we have fun.",
+      "patientHeard": "We don't get much money but we have fun.",
+      "fastHeard": "we don't get much money but we have fun",
+      "hasNegation": true,
+      "baseline": {
+        "relayed": "They mentioned that while they don't earn much money, they do have fun.",
+        "invented": [
+          "mentioned",
+          "while",
+          "earn"
+        ],
+        "inverted": false,
+        "refused": false,
+        "ms": 374
+      },
+      "full": {
+        "relayed": "The caller says: We don't get much money but we have fun.",
+        "invented": [],
+        "inverted": false,
+        "refused": false,
+        "rule": 9,
+        "reason": "verbatim",
+        "ms": 0,
+        "advocate": null,
+        "skeptic": null,
+        "blockedWords": []
+      }
+    },
+    {
+      "groundTruth": "We don't get much money but we have fun",
+      "condition": "one-ear",
+      "baselineHeard": "We don't get much money but we have fun.",
+      "patientHeard": "We get much money but we have fun.",
+      "fastHeard": "we don't get much money but we have fun",
+      "hasNegation": true,
+      "baseline": {
+        "relayed": "They mentioned that while they don't earn much money, they do have fun.",
+        "invented": [
+          "mentioned",
+          "while",
+          "earn"
+        ],
+        "inverted": false,
+        "refused": false,
+        "ms": 59580
+      },
+      "full": {
+        "relayed": null,
+        "invented": [],
+        "inverted": false,
+        "refused": true,
+        "rule": 1,
+        "reason": "negation_disputed",
+        "ms": 0,
+        "advocate": null,
+        "skeptic": null,
+        "blockedWords": []
+      }
+    },
+    {
+      "groundTruth": "We don't get much money but we have fun",
+      "condition": "both-ears",
+      "baselineHeard": "We get much money but we have fun.",
+      "patientHeard": "We get much money but we have fun.",
+      "fastHeard": "we get muh money but we hae fun",
+      "hasNegation": true,
+      "baseline": {
+        "relayed": "They mentioned that although they earn a lot of money, they also have fun.",
+        "invented": [
+          "mentioned",
+          "although",
+          "earn",
+          "lot",
+          "also"
+        ],
+        "inverted": true,
+        "refused": false,
+        "ms": 394
+      },
+      "full": {
+        "relayed": null,
+        "invented": [],
+        "inverted": false,
+        "refused": true,
+        "rule": 6,
+        "reason": "low_confidence",
+        "ms": 59935,
+        "advocate": "He says we get much money but we have fun.",
+        "skeptic": "We get a lot of money and have fun.",
+        "blockedWords": []
+      }
+    },
+    {
+      "groundTruth": "We don't like to admit our small faults",
+      "condition": "clean",
+      "baselineHeard": "We don't like to admit our small faults.",
+      "patientHeard": "We don't like to admit our small faults.",
+      "fastHeard": "we don't like to admit our small faults",
+      "hasNegation": true,
+      "baseline": {
+        "relayed": "They said they don't like to admit their small faults.",
+        "invented": [],
+        "inverted": false,
+        "refused": false,
+        "ms": 59468
+      },
+      "full": {
+        "relayed": "The caller says: We don't like to admit our small faults.",
+        "invented": [],
+        "inverted": false,
+        "refused": false,
+        "rule": 9,
+        "reason": "verbatim",
+        "ms": 0,
+        "advocate": null,
+        "skeptic": null,
+        "blockedWords": []
+      }
+    },
+    {
+      "groundTruth": "We don't like to admit our small faults",
+      "condition": "one-ear",
+      "baselineHeard": "We like to admit our small faults.",
+      "patientHeard": "We don't like to admit our small faults.",
+      "fastHeard": "we like to admit our small faults",
+      "hasNegation": true,
+      "baseline": {
+        "relayed": "We like to admit our small faults.",
+        "invented": [],
+        "inverted": true,
+        "refused": false,
+        "ms": 319
+      },
+      "full": {
+        "relayed": null,
+        "invented": [],
+        "inverted": false,
+        "refused": true,
+        "rule": 1,
+        "reason": "negation_disputed",
+        "ms": 0,
+        "advocate": null,
+        "skeptic": null,
+        "blockedWords": []
+      }
+    },
+    {
+      "groundTruth": "We don't like to admit our small faults",
+      "condition": "both-ears",
+      "baselineHeard": "We like to admit our small faults.",
+      "patientHeard": "We like to admit our small faults.",
+      "fastHeard": "we lie to admt our small faults",
+      "hasNegation": true,
+      "baseline": {
+        "relayed": "We like to admit our small faults.",
+        "invented": [],
+        "inverted": true,
+        "refused": false,
+        "ms": 59451
+      },
+      "full": {
+        "relayed": null,
+        "invented": [],
+        "inverted": false,
+        "refused": true,
+        "rule": 6,
+        "reason": "low_confidence",
+        "ms": 59875,
+        "advocate": "He says we lie to admit our small faults.",
+        "skeptic": "We admit our small faults.",
+        "blockedWords": []
+      }
+    },
+    {
+      "groundTruth": "All sat frozen and watched the screen",
+      "condition": "clean",
+      "baselineHeard": "All sat frozen and watched the screen.",
+      "patientHeard": "All sat frozen and watched the screen.",
+      "fastHeard": "all sat frozen and watched the screen",
+      "hasNegation": false,
+      "baseline": {
+        "relayed": "Everyone sat frozen and watched the screen.",
+        "invented": [
+          "everyone"
+        ],
+        "inverted": false,
+        "refused": false,
+        "ms": 365
+      },
+      "full": {
+        "relayed": "The caller says: All sat frozen and watched the screen.",
+        "invented": [],
+        "inverted": false,
+        "refused": false,
+        "rule": 9,
+        "reason": "verbatim",
+        "ms": 0,
+        "advocate": null,
+        "skeptic": null,
+        "blockedWords": []
+      }
+    },
+    {
+      "groundTruth": "All sat frozen and watched the screen",
+      "condition": "one-ear",
+      "baselineHeard": "All sat frozen watched the screen.",
+      "patientHeard": "All sat frozen and watched the screen.",
+      "fastHeard": "all sat frozen watched the screen",
+      "hasNegation": false,
+      "baseline": {
+        "relayed": "Everyone sat frozen and watched the screen.",
+        "invented": [
+          "everyone"
+        ],
+        "inverted": false,
+        "refused": false,
+        "ms": 59495
+      },
+      "full": {
+        "relayed": null,
+        "invented": [],
+        "inverted": false,
+        "refused": true,
+        "rule": 5,
+        "reason": "skeptic_negation_risk",
+        "ms": 59905,
+        "advocate": "He is saying all sat frozen watched the screen.",
+        "skeptic": "All sat frozen and watched the screen.",
+        "blockedWords": []
+      }
+    },
+    {
+      "groundTruth": "All sat frozen and watched the screen",
+      "condition": "both-ears",
+      "baselineHeard": "All sat frozen and watched screen.",
+      "patientHeard": "All sat frozen and watched screen.",
+      "fastHeard": "all sat frozen and watced screen",
+      "hasNegation": false,
+      "baseline": {
+        "relayed": "Everyone sat frozen and watched the screen.",
+        "invented": [
+          "everyone"
+        ],
+        "inverted": false,
+        "refused": false,
+        "ms": 340
+      },
+      "full": {
+        "relayed": null,
+        "invented": [],
+        "inverted": false,
+        "refused": true,
+        "rule": 4,
+        "reason": "readings_disagree",
+        "ms": 60985,
+        "advocate": "He sat frozen and watched the screen.",
+        "skeptic": "Everyone sat frozen and watched the screen.",
+        "blockedWords": []
+      }
+    },
+    {
+      "groundTruth": "Sit on the perch and tell the others what to do",
+      "condition": "clean",
+      "baselineHeard": "Sit on the perch and tell the others what to do.",
+      "patientHeard": "Sit on the perch and tell the others what to do.",
+      "fastHeard": "sit on the perch and tell the others what to do",
+      "hasNegation": false,
+      "baseline": {
+        "relayed": "Please sit on the perch and tell the others what to do.",
+        "invented": [],
+        "inverted": false,
+        "refused": false,
+        "ms": 58447
+      },
+      "full": {
+        "relayed": "The caller says: Sit on the perch and tell the others what to do.",
+        "invented": [],
+        "inverted": false,
+        "refused": false,
+        "rule": 9,
+        "reason": "verbatim",
+        "ms": 0,
+        "advocate": null,
+        "skeptic": null,
+        "blockedWords": []
+      }
+    },
+    {
+      "groundTruth": "Sit on the perch and tell the others what to do",
+      "condition": "one-ear",
+      "baselineHeard": "Sit on the perch and tell the others what to do.",
+      "patientHeard": "Sit on perch and tell the others what to do.",
+      "fastHeard": "sit on the perch and tell the others what to do",
+      "hasNegation": false,
+      "baseline": {
+        "relayed": "Please sit on the perch and tell the others what to do.",
+        "invented": [],
+        "inverted": false,
+        "refused": false,
+        "ms": 369
+      },
+      "full": {
+        "relayed": null,
+        "invented": [],
+        "inverted": false,
+        "refused": true,
+        "rule": 2,
+        "reason": "invented_words",
+        "ms": 60133,
+        "advocate": "He is asking about his amlodipine.",
+        "skeptic": "The speaker instructed others to sit on a perch and give them directions.",
+        "blockedWords": [
+          "amlodipine"
+        ]
+      }
+    },
+    {
+      "groundTruth": "Sit on the perch and tell the others what to do",
+      "condition": "both-ears",
+      "baselineHeard": "Sit the perch and tell the others what to do.",
+      "patientHeard": "Sit the perch and tell the others what to do.",
+      "fastHeard": "sit the perch and tel the others what to do",
+      "hasNegation": false,
+      "baseline": {
+        "relayed": "Please sit on the perch and tell the others what to do.",
+        "invented": [],
+        "inverted": false,
+        "refused": false,
+        "ms": 59483
+      },
+      "full": {
+        "relayed": null,
+        "invented": [],
+        "inverted": false,
+        "refused": true,
+        "rule": 2,
+        "reason": "invented_words",
+        "ms": 60977,
+        "advocate": "He is asking about his amlodipine.",
+        "skeptic": "The speaker instructed others to sit on the perch and perform a task.",
+        "blockedWords": [
+          "amlodipine"
+        ]
+      }
+    },
+    {
+      "groundTruth": "Seed is needed to plant the spring corn",
+      "condition": "clean",
+      "baselineHeard": "Seed is needed to plant the spring corn.",
+      "patientHeard": "Seed is needed to plant the spring corn.",
+      "fastHeard": "seed is needed to plant the spring corn",
+      "hasNegation": false,
+      "baseline": {
+        "relayed": "They said that seed is needed to plant the spring corn.",
+        "invented": [],
+        "inverted": false,
+        "refused": false,
+        "ms": 344
+      },
+      "full": {
+        "relayed": "The caller says: Seed is needed to plant the spring corn.",
+        "invented": [],
+        "inverted": false,
+        "refused": false,
+        "rule": 9,
+        "reason": "verbatim",
+        "ms": 0,
+        "advocate": null,
+        "skeptic": null,
+        "blockedWords": []
+      }
+    },
+    {
+      "groundTruth": "Seed is needed to plant the spring corn",
+      "condition": "one-ear",
+      "baselineHeard": "Seed is needed to plant the spring corn.",
+      "patientHeard": "Seed needed to plant the spring corn.",
+      "fastHeard": "seed is needed to plant the spring corn",
+      "hasNegation": false,
+      "baseline": {
+        "relayed": "They said that seed is needed to plant the spring corn.",
+        "invented": [],
+        "inverted": false,
+        "refused": false,
+        "ms": 59504
+      },
+      "full": {
+        "relayed": "He is saying seed is needed to plant the spring corn.",
+        "invented": [],
+        "inverted": false,
+        "refused": false,
+        "rule": 8,
+        "reason": "grounded",
+        "ms": 59879,
+        "advocate": "He is saying seed is needed to plant the spring corn.",
+        "skeptic": "The speaker stated that seeds are required to plant spring corn.",
+        "blockedWords": []
+      }
+    },
+    {
+      "groundTruth": "Seed is needed to plant the spring corn",
+      "condition": "both-ears",
+      "baselineHeard": "Seed needed to plant the spring corn.",
+      "patientHeard": "Seed needed to plant the spring corn.",
+      "fastHeard": "seed needed to plant the spring corn",
+      "hasNegation": false,
+      "baseline": {
+        "relayed": "I need to order seed to plant the spring corn.",
+        "invented": [
+          "order"
+        ],
+        "inverted": false,
+        "refused": false,
+        "ms": 343
+      },
+      "full": {
+        "relayed": null,
+        "invented": [],
+        "inverted": false,
+        "refused": true,
+        "rule": 6,
+        "reason": "low_confidence",
+        "ms": 59954,
+        "advocate": "He is asking about his seed needed to plant the spring corn.",
+        "skeptic": "The speaker stated that seeds are needed to plant the spring corn.",
+        "blockedWords": []
+      }
+    },
+    {
+      "groundTruth": "The red tape bound the smuggled food",
+      "condition": "clean",
+      "baselineHeard": "The red tape bound the smuggled food.",
+      "patientHeard": "The red tape bound the smuggled food.",
+      "fastHeard": "the red tape bound the smuggled food",
+      "hasNegation": false,
+      "baseline": {
+        "relayed": "The red tape bound the smuggled food.",
+        "invented": [],
+        "inverted": false,
+        "refused": false,
+        "ms": 59522
+      },
+      "full": {
+        "relayed": "The caller says: The red tape bound the smuggled food.",
+        "invented": [],
+        "inverted": false,
+        "refused": false,
+        "rule": 9,
+        "reason": "verbatim",
+        "ms": 0,
+        "advocate": null,
+        "skeptic": null,
+        "blockedWords": []
+      }
+    },
+    {
+      "groundTruth": "The red tape bound the smuggled food",
+      "condition": "one-ear",
+      "baselineHeard": "Red tape bound the smuggled food.",
+      "patientHeard": "The red tape bound the smuggled food.",
+      "fastHeard": "red tape bound the smuggled food",
+      "hasNegation": false,
+      "baseline": {
+        "relayed": "Red tape bound the smuggled food.",
+        "invented": [],
+        "inverted": false,
+        "refused": false,
+        "ms": 363
+      },
+      "full": {
+        "relayed": null,
+        "invented": [],
+        "inverted": false,
+        "refused": true,
+        "rule": 2,
+        "reason": "invented_words",
+        "ms": 59878,
+        "advocate": "He is talking about red tape bound the smuggled food.",
+        "skeptic": "The smuggled food was bound by red tape.",
+        "blockedWords": [
+          "talking"
+        ]
+      }
+    },
+    {
+      "groundTruth": "The red tape bound the smuggled food",
+      "condition": "both-ears",
+      "baselineHeard": "Red tape bound the smuggled food.",
+      "patientHeard": "Red tape bound the smuggled food.",
+      "fastHeard": "red tape bund the smuggled fod",
+      "hasNegation": false,
+      "baseline": {
+        "relayed": "Red tape bound the smuggled food.",
+        "invented": [],
+        "inverted": false,
+        "refused": false,
+        "ms": 59518
+      },
+      "full": {
+        "relayed": null,
+        "invented": [],
+        "inverted": false,
+        "refused": true,
+        "rule": 4,
+        "reason": "readings_disagree",
+        "ms": 59920,
+        "advocate": "He is asking about his red tape bound smuggled food.",
+        "skeptic": "The smuggled red tape was bound.",
+        "blockedWords": []
+      }
+    },
+    {
+      "groundTruth": "The knife was hung inside its bright sheath",
+      "condition": "clean",
+      "baselineHeard": "The knife was hung inside its bright sheath.",
+      "patientHeard": "The knife was hung inside its bright sheath.",
+      "fastHeard": "the knife was hung inside its bright sheath",
+      "hasNegation": false,
+      "baseline": {
+        "relayed": "The knife was hanging inside its bright sheath.",
+        "invented": [],
+        "inverted": false,
+        "refused": false,
+        "ms": 371
+      },
+      "full": {
+        "relayed": "The caller says: The knife was hung inside its bright sheath.",
+        "invented": [],
+        "inverted": false,
+        "refused": false,
+        "rule": 9,
+        "reason": "verbatim",
+        "ms": 0,
+        "advocate": null,
+        "skeptic": null,
+        "blockedWords": []
+      }
+    },
+    {
+      "groundTruth": "The knife was hung inside its bright sheath",
+      "condition": "one-ear",
+      "baselineHeard": "The knife was hung inside its bright sheath.",
+      "patientHeard": "Knife was hung inside its bright sheath.",
+      "fastHeard": "the knife was hung inside its bright sheath",
+      "hasNegation": false,
+      "baseline": {
+        "relayed": "The knife was hanging inside its bright sheath.",
+        "invented": [],
+        "inverted": false,
+        "refused": false,
+        "ms": 59471
+      },
+      "full": {
+        "relayed": "The knife was hung inside its bright sheath.",
+        "invented": [],
+        "inverted": false,
+        "refused": false,
+        "rule": 8,
+        "reason": "grounded",
+        "ms": 59884,
+        "advocate": "The knife was hung inside its bright sheath.",
+        "skeptic": "The knife was hung inside its bright sheath.",
+        "blockedWords": []
+      }
+    },
+    {
+      "groundTruth": "The knife was hung inside its bright sheath",
+      "condition": "both-ears",
+      "baselineHeard": "Knife was hung inside its bright sheath.",
+      "patientHeard": "Knife was hung inside its bright sheath.",
+      "fastHeard": "knife was hung inside its briht shath",
+      "hasNegation": false,
+      "baseline": {
+        "relayed": "The knife was hanging inside its bright sheath.",
+        "invented": [],
+        "inverted": false,
+        "refused": false,
+        "ms": 356
+      },
+      "full": {
+        "relayed": null,
+        "invented": [],
+        "inverted": false,
+        "refused": true,
+        "rule": 6,
+        "reason": "low_confidence",
+        "ms": 60922,
+        "advocate": "He said the knife was hung inside its bright sheath.",
+        "skeptic": "The knife was hung inside its bright sheath.",
+        "blockedWords": []
+      }
+    },
+    {
+      "groundTruth": "The houses are built of red clay bricks",
+      "condition": "clean",
+      "baselineHeard": "The houses are built of red clay bricks.",
+      "patientHeard": "The houses are built of red clay bricks.",
+      "fastHeard": "the houses are built of red clay bricks",
+      "hasNegation": false,
+      "baseline": {
+        "relayed": "The houses are built of red clay bricks.",
+        "invented": [],
+        "inverted": false,
+        "refused": false,
+        "ms": 58481
+      },
+      "full": {
+        "relayed": "The caller says: The houses are built of red clay bricks.",
+        "invented": [],
+        "inverted": false,
+        "refused": false,
+        "rule": 9,
+        "reason": "verbatim",
+        "ms": 0,
+        "advocate": null,
+        "skeptic": null,
+        "blockedWords": []
+      }
+    },
+    {
+      "groundTruth": "The houses are built of red clay bricks",
+      "condition": "one-ear",
+      "baselineHeard": "Houses are built of red clay bricks.",
+      "patientHeard": "The houses are built of red clay bricks.",
+      "fastHeard": "houses are built of red clay bricks",
+      "hasNegation": false,
+      "baseline": {
+        "relayed": "They said that houses are built of red clay bricks.",
+        "invented": [],
+        "inverted": false,
+        "refused": false,
+        "ms": 376
+      },
+      "full": {
+        "relayed": null,
+        "invented": [],
+        "inverted": false,
+        "refused": true,
+        "rule": 2,
+        "reason": "invented_words",
+        "ms": 60979,
+        "advocate": "He is asking about his amlodipine.",
+        "skeptic": "The houses are constructed from red clay bricks.",
+        "blockedWords": [
+          "amlodipine"
+        ]
+      }
+    },
+    {
+      "groundTruth": "The houses are built of red clay bricks",
+      "condition": "both-ears",
+      "baselineHeard": "Houses are built of red clay bricks.",
+      "patientHeard": "Houses are built of red clay bricks.",
+      "fastHeard": "houses are built of red cay briks",
+      "hasNegation": false,
+      "baseline": {
+        "relayed": "They said that houses are built of red clay bricks.",
+        "invented": [],
+        "inverted": false,
+        "refused": false,
+        "ms": 59464
+      },
+      "full": {
+        "relayed": null,
+        "invented": [],
+        "inverted": false,
+        "refused": true,
+        "rule": 2,
+        "reason": "invented_words",
+        "ms": 59904,
+        "advocate": "He is asking about his amlodipine.",
+        "skeptic": "The houses are constructed from red clay bricks.",
+        "blockedWords": [
+          "amlodipine"
+        ]
       }
     }
   ]
