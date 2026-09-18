@@ -103,6 +103,8 @@ export function reduceCall(s: CallState, a: Action): CallState {
     case 'simulation':
       return {
         ...next,
+        // The simulated caller answered the question on screen.
+        ...(m.event === 'caller_chose' ? { question: null } : {}),
         simulation: [...next.simulation, { event: m.event, ...(m.detail ? { detail: m.detail } : {}), t: m.t }],
         complete: next.complete || m.event === 'call_complete',
       };
@@ -133,7 +135,7 @@ export function useCall() {
 
   useEffect(() => teardown, [teardown]);
 
-  const start = useCallback(async (mode: Mode, opts: { grade?: boolean } = {}) => {
+  const start = useCallback(async (mode: Mode, opts: { grade?: boolean; scenario?: 'pause' | 'choice' } = {}) => {
     teardown();
     dispatch({ type: 'reset' });
     dispatch({ type: 'status', status: 'connecting' });
@@ -161,6 +163,7 @@ export function useCall() {
     const { key } = loadKey();
     const hello = {
       type: 'hello', role: 'caller', mode, simulateFarParty: true,
+      ...(mode === 'sample' && opts.scenario ? { scenario: opts.scenario } : {}),
       // Keep the caller's audio for the self-audit only if they said yes.
       ...(mode === 'live' && opts.grade ? { retainAudio: true } : {}),
       ...(key.trim() ? { apiKey: key.trim() } : {}),

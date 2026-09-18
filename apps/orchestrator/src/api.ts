@@ -26,8 +26,8 @@ export type DecideRequest = {
   fastTranscript?: string;
   /** How to refer to the caller when relaying: "Robert says: ...". */
   name?: string;
-  /** The caller's own vocabulary. */
-  lexicon?: string[];
+  /** The caller's own vocabulary: words, or { term, category } so rule 11 can offer siblings. */
+  lexicon?: (string | { term: string; category?: LexiconTerm['category'] })[];
   /** A sentence of context for the models. */
   context?: string;
   /** An LLM Gateway model id. */
@@ -71,7 +71,8 @@ export async function decide(body: DecideRequest, apiKey: string | null): Promis
   if (patient.transcript.length > 2000) throw new BadRequest('transcript is longer than 2000 characters');
   const span = patient.words.length ? patient.words[patient.words.length - 1]!.end : undefined;
   const fast = body.fastTurn ?? (body.fastTranscript ? textTurn(body.fastTranscript, span) : null);
-  const lexicon: LexiconTerm[] = (body.lexicon ?? []).slice(0, 100).filter((x) => typeof x === 'string').map((term) => ({ term }));
+  const lexicon: LexiconTerm[] = (body.lexicon ?? []).slice(0, 100).flatMap((x): LexiconTerm[] =>
+    typeof x === 'string' ? [{ term: x }] : x && typeof x.term === 'string' ? [{ term: x.term, ...(x.category ? { category: x.category } : {}) }] : []);
   const ev = assembleEvidence({ patient, ...(fast ? { fastFinals: [fast] } : {}), lexicon });
   const name = (body.name ?? 'The caller').slice(0, 40);
 
@@ -81,6 +82,7 @@ export async function decide(body: DecideRequest, apiKey: string | null): Promis
     ...(body.context ? { context: body.context.slice(0, 500) } : {}),
     allowedWords: [name],
     callerName: name,
+    lexicon,
     mode: 'parallel',
     live: true,
     noModels: !apiKey,

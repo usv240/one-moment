@@ -10,6 +10,7 @@
 import { Ban, Check, Clock, Headphones, Mic, Scissors, ShieldCheck } from 'lucide-react';
 import type { ServerMessage } from '@one-moment/core';
 import { Explain } from '../explain';
+import { shownTranscript } from '@/lib/text';
 
 type Entry =
   | { who: 'caller'; text: string; t: number }
@@ -44,13 +45,17 @@ export function lineOf(events: ServerMessage[]) {
 
 const KIND_LABEL = { disclosure: 'Says who it is', hold: 'Holds the floor', relay: 'Relays the caller' } as const;
 
-export function TheLine({ events, farLeg, simulated, start }: {
+export function TheLine({ events, farLeg, simulated, start, last }: {
   events: ServerMessage[];
   farLeg: 'voice-agent' | 'browser' | null;
   simulated: boolean;
   start: number | null;
+  /** Show only the most recent lines (for a fixed-height frame, such as a video). */
+  last?: number;
 }) {
-  const { entries, spokenCount, unapproved } = lineOf(events);
+  const all = lineOf(events);
+  const { spokenCount, unapproved } = all;
+  const entries = last ? all.entries.slice(-last) : all.entries;
   const at = (t: number) => (start === null ? '' : `${((t - start) / 1000).toFixed(1)}s`);
   const clean = unapproved.length === 0;
 
@@ -89,7 +94,7 @@ export function TheLine({ events, farLeg, simulated, start }: {
               {e.who === 'caller' ? (
                 <div className="rounded-lg border border-line bg-raised px-3 py-2">
                   <p className="flex items-center gap-1.5 text-xs font-medium text-muted"><Mic aria-hidden className="h-3.5 w-3.5" />Caller, heard by the patient ear</p>
-                  <p className="text-sm text-ink">{e.text}</p>
+                  <p className="text-sm text-ink">{shownTranscript(e.text)}</p>
                 </div>
               ) : e.who === 'far' ? (
                 <div className="rounded-lg border border-line bg-raised px-3 py-2">

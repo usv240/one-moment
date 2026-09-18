@@ -1,0 +1,18 @@
+{
+  "recordedAt": "2026-09-18T14:16:49.857Z",
+  "said": "I need to refill my ... am low dippy prescription, please.",
+  "patient": [
+    "I need to refill my amlodipine prescription, please."
+  ],
+  "fast": [
+    "I need to refill my...",
+    "Amlodipine prescription, please."
+  ],
+  "relayed": [
+    "Robert says: I need to refill my amlodipine prescription, please."
+  ],
+  "careful": "I need to refill my\u2014 I'm low. Dippy prescription, please.",
+  "carefulModel": "universal-3-5-pro",
+  "verdict": "Some relayed words were not in the careful transcript: amlodipine.",
+  "rule": 9
+}

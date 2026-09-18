@@ -59,17 +59,22 @@ export function grade(args: {
   patientTurns: StreamTurn[];
   relays: string[];
   callerName: string;
+  /** Labels the caller tapped. A word they chose is confirmed by them, not by the audio. */
+  chosen?: string[];
   ms: number;
 }): CallAudit {
   const { careful, patientTurns } = args;
   const heard = new Set(contentWords(careful.text));
   const near = (w: string) => heard.has(w) || [...heard].some((h) => h.slice(0, 5) === w.slice(0, 5) && Math.min(h.length, w.length) >= 4);
   const nameWords = new Set(contentWords(args.callerName));
+  const chosen = new Set((args.chosen ?? []).flatMap(contentWords));
   const relays = args.relays.map((said) => {
     // "Robert says:" is framing we add, not a claim about what he said.
     const body = said.replace(/^[^:]{1,40}\bsays:\s*/i, '');
-    const missing = contentWords(body).filter((w) => !nameWords.has(w) && !near(w));
-    return { said, confirmed: missing.length === 0, missing };
+    const unheard = contentWords(body).filter((w) => !nameWords.has(w) && !near(w));
+    const byChoice = unheard.filter((w) => chosen.has(w));
+    const missing = unheard.filter((w) => !chosen.has(w));
+    return { said, confirmed: missing.length === 0, missing, byChoice };
   });
 
   const livePatient = patientTurns.map((t) => t.transcript).join(' ');
@@ -81,11 +86,14 @@ export function grade(args: {
   const estimate = liveWords.length ? swallowedSilenceMs(liveWords) : null;
 
   const allConfirmed = relays.every((r) => r.confirmed);
+  const byChoice = [...new Set(relays.flatMap((r) => r.byChoice))];
   const verdict = relays.length === 0
     ? 'Nothing was relayed on this call, so there was nothing to confirm.'
-    : allConfirmed
-      ? `Every relayed word was confirmed by the careful transcript.`
-      : `Some relayed words were not in the careful transcript: ${relays.flatMap((r) => r.missing).join(', ')}.`;
+    : !allConfirmed
+      ? `Some relayed words were not in the careful transcript: ${relays.flatMap((r) => r.missing).join(', ')}.`
+      : byChoice.length
+        ? `Every relayed word was confirmed: by the careful transcript, or by the caller's own choice (${byChoice.join(', ')}).`
+        : 'Every relayed word was confirmed by the careful transcript.';
 
   return {
     model: careful.model,

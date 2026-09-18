@@ -2,8 +2,8 @@ import Link from 'next/link';
 import { ArrowRight, ClipboardCheck, Ear, Hand, Hourglass, MessageSquareQuote, Scale, Scissors } from 'lucide-react';
 import { Cite, Section } from '@/components/cite';
 import { Explain } from '@/components/explain';
-import { ReplayPlayer } from '@/components/replay/replay-player';
-import { CALL, RECORDING, SPIKE } from '@/content/measured';
+import { ReplayTabs } from '@/components/replay/replay-tabs';
+import { CALL, SPIKE, VOCABULARY } from '@/content/measured';
 
 export default function Home() {
   return (
@@ -14,13 +14,13 @@ export default function Home() {
       <Section id="watch" eyebrow="Watch it happen" title="A real call, recorded, and scrubbable.">
         <p className="max-w-3xl text-lg text-muted">
           This is recorded data, not a video. The audio is one real call through the live system, and everything on screen
-          is replayed from the {RECORDING.events.length} events that call produced. Drag the timeline, or step moment by moment
+          is replayed from every event that call produced. Drag the timeline, or step moment by moment
           with the arrow keys. The caller and the pharmacist are computer voices; everything that listens, decides and speaks for
           Robert was running live.
           <Explain id="simulated" className="ml-2 align-middle" />
         </p>
         <div className="mt-8">
-          <ReplayPlayer recording={RECORDING} audioSrc="/recorded/robert-call.mp3" compact />
+          <ReplayTabs />
         </div>
         <p className="mt-6 text-sm text-muted">
           Want the full engine view, with both listening streams, the pause chart and the decision rules?{' '}
@@ -221,6 +221,11 @@ function Measured() {
           <Stat value="0" label="Model calls to relay his sentence" note={`On the recorded call, a clear and complete sentence was relayed in his own words by rule 9, decided in ${CALL.decisionMs !== null && CALL.decisionMs < 1 ? 'under a millisecond' : `${CALL.decisionMs}ms`}.`} />
         )}
         <Stat value="1.5s" label="Wait after a finished sentence" note="Both ears must agree it is finished. An unfinished one still gets the full 6 seconds and more." />
+        <Stat
+          value={`${VOCABULARY.boostedHeardTerm} of ${VOCABULARY.variants}`}
+          label="Slurred medicine names the boosted ear 'heard' as amlodipine"
+          note={`The unbiased ear heard it ${VOCABULARY.unbiasedHeardTerm} times. So a word only the listening-for-it ear heard is asked about, never trusted.`}
+        />
         {CALL.audit && CALL.audit.pause.carefulMs !== null && (
           <Stat
             value={`${(CALL.audit.pause.carefulMs / 1000).toFixed(1)}s`}

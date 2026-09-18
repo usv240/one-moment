@@ -22,10 +22,12 @@ const fmt = (ms: number) => {
 
 const noop = () => {};
 
-export function ReplayPlayer({ recording, audioSrc, compact = false, full = false }: {
+export function ReplayPlayer({ recording, audioSrc, compact = false, full = false, video = false }: {
   recording: Recording; audioSrc: string; compact?: boolean;
   /** Show the whole engine view (streams, chart, Dissent), not just the line. */
   full?: boolean;
+  /** Fixed-height framing for a screen recording: recent lines only, compact grade. */
+  video?: boolean;
 }) {
   const r = useReplay(recording, audioSrc);
   const level = useRef(0);
@@ -129,8 +131,8 @@ export function ReplayPlayer({ recording, audioSrc, compact = false, full = fals
         ) : (
           <div className="min-w-0 space-y-6">
             <FloorStrip state={r.state.floor} events={shown} />
-            <TheLine events={shown} farLeg={r.state.farLeg} simulated start={0} />
-            <AuditPanel audit={r.state.audit} failed={r.state.auditFailed} pending={r.state.auditing} />
+            <TheLine events={shown} farLeg={r.state.farLeg} simulated start={0} {...(video ? { last: r.state.audit ? 2 : 4 } : {})} />
+            <AuditPanel audit={r.state.audit} failed={r.state.auditFailed} pending={r.state.auditing} compact={video} />
           </div>
         )}
       </div>

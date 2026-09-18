@@ -55,10 +55,15 @@ export class Simulator {
   private silentMs = 0;
   private turnOpen = false;
 
-  constructor(call: Call, opts: { playCaller: boolean }) {
+  private scenario: 'pause' | 'choice';
+  private chose = false;
+
+  constructor(call: Call, opts: { playCaller: boolean; scenario?: 'pause' | 'choice' }) {
     this.call = call;
     this.playCaller = opts.playCaller;
-    this.callerPcm = opts.playCaller ? readPcm(path.join(FIXTURES, 'caller-pause-6s.wav')) : null;
+    this.scenario = opts.scenario ?? 'pause';
+    const fixture = this.scenario === 'choice' ? 'caller-choice-6s.wav' : 'caller-pause-6s.wav';
+    this.callerPcm = opts.playCaller ? readPcm(path.join(FIXTURES, fixture)) : null;
     this.hello = readPcm(path.join(FIXTURES, 'pharmacist-hello-24k.wav'));
     this.thanks = readPcm(path.join(FIXTURES, 'pharmacist-thanks-24k.wav'));
   }
@@ -67,7 +72,11 @@ export class Simulator {
     this.call.on('message', this.onMsg);
     this.call.on('audio', this.onAudio);
     this.start = Date.now();
-    if (this.playCaller) this.call.note('caller_sample_started', 'Recorded caller, synthetic voice, with a real 6-second pause.');
+    if (this.playCaller) {
+      this.call.note('caller_sample_started', this.scenario === 'choice'
+        ? 'Recorded caller, synthetic voice: a 6-second pause, then the medicine name slurred.'
+        : 'Recorded caller, synthetic voice, with a real 6-second pause.');
+    }
     // Drift-corrected 50ms clock: turn detection depends on wall-clock silence.
     const step = () => {
       this.frame();
@@ -121,6 +130,17 @@ export class Simulator {
   }
 
   private react(m: ServerMessage): void {
+    // The recorded caller cannot tap a screen, so in the choice scenario a
+    // simulated tap answers the question after a human-length pause. Labelled.
+    if (m.type === 'question' && this.playCaller && this.scenario === 'choice' && !this.chose) {
+      this.chose = true;
+      const q = m.question;
+      const pick = q.options[0]!;
+      setTimeout(() => {
+        this.call.note('caller_chose', pick.label);
+        this.call.choose(q.id, pick.id);
+      }, 3000);
+    }
     if (m.type === 'floor') this.turnOpen = m.state === 'USER_SPEAKING' || m.state === 'USER_PAUSED';
     // Fallback: if the caller's audio is too quiet to judge, the Floor
     // Controller's own pause state still prompts the pharmacist.

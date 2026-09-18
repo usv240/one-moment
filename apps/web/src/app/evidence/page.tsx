@@ -2,8 +2,10 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Block, Code, Page, Pre, Table } from '@/components/page';
 import { CITATIONS, type Group } from '@/content/citations';
-import { CALL, SPIKE } from '@/content/measured';
+import { CALL, SPIKE, VOCABULARY } from '@/content/measured';
 import negbench from '@/content/negbench.json';
+import failure from '@/content/failure-agreeing-ears.json';
+import { shownTranscript } from '@/lib/text';
 
 export const metadata: Metadata = {
   title: 'Evidence',
@@ -27,7 +29,7 @@ const CONDITION_LABEL: Record<string, string> = {
 };
 
 function frac(a: number, b: number) {
-  return b ? `${a} of ${b}` : 'none';
+  return b ? `${a} of ${b}` : 'none spoken';
 }
 
 function Negbench() {
@@ -127,6 +129,47 @@ export default function EvidencePage() {
 
       {/* A smoke run is not a result. The section appears only with a real sample. */}
       {bench.cases >= 10 && <Negbench />}
+
+      <Block id="vocabulary" title="Your words, double-checked">
+        <p>
+          The patient ear is told the caller&apos;s own words, so it hears them more easily. That is also the danger: a word it
+          is listening for can be heard because it was expected. We tested it with four slurred ways of saying a medicine.
+        </p>
+        <Table
+          caption="Vocabulary probe"
+          head={['Said', 'Ear told the caller\'s words', 'Ear not told']}
+          rows={VOCABULARY.examples.map((e) => [<span key="s" className="font-mono">{e.said}</span>, e.boosted, e.unbiased])}
+        />
+        <p>
+          The boosted ear produced &ldquo;amlodipine&rdquo; {VOCABULARY.boostedHeardTerm} times out of {VOCABULARY.variants}; the
+          unbiased ear, {VOCABULARY.unbiasedHeardTerm}. So rule 11: a word from the caller&apos;s list that only the listening-for-it
+          ear heard, or that only partly came out, is offered as a choice (&ldquo;Amlodipine, or metformin?&rdquo;) and never
+          relayed on trust. Measured {'18 September 2026'} with <Code>eval/probe-vocabulary.mjs</Code>.
+        </p>
+      </Block>
+
+      <Block id="failure" title="A failure the live checks missed, and the audit caught">
+        <p>
+          We publish this one on purpose. In an earlier run of the harder call, the caller said &ldquo;{failure.said}&rdquo;. In
+          context, <b>both</b> live ears wrote &ldquo;amlodipine&rdquo;, so they agreed, no rule fired, and it was relayed.
+        </p>
+        <Table
+          caption="The failure"
+          head={['Source', 'What it had']}
+          rows={[
+            ['Patient ear (live)', failure.patient.map(shownTranscript).join(' ')],
+            ['Fast ear (live)', failure.fast.map(shownTranscript).join(' ')],
+            ['Relayed to the pharmacist', failure.relayed.join(' ')],
+            [`Careful transcript after the call (${failure.carefulModel})`, shownTranscript(failure.careful)],
+            ['Self-audit verdict', failure.verdict],
+          ]}
+        />
+        <p>
+          When both ears are wrong the same way, no live check can know. The self-audit can, because the pre-recorded model
+          listens more carefully and was not told what to expect. This is why every call is graded afterwards, and why the
+          product is positioned as a first line with a human behind it.
+        </p>
+      </Block>
 
       <Block id="reproduce" title="Reproduce it">
         <Pre>{`git clone <this repository>

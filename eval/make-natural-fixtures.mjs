@@ -110,6 +110,16 @@ function save(name, pcm24, { to16k = false } = {}) {
 const ROBERT = 'george';
 const PHARMACIST = 'jane';
 
+// --only choice: just the second demo caller, who slurs the medicine name so the
+// boosted ear and the unbiased ear disagree about it (measured, probe-vocabulary.mjs).
+if (process.argv.includes('--only') && process.argv.includes('choice')) {
+  const first = await tts('I need to refill my', ROBERT);
+  const second = await tts('um, am, am lo, prescription, please.', ROBERT);
+  console.log(`  "${first.spoken}" / "${second.spoken}"`);
+  save('caller-choice-6s', Buffer.concat([silence(500), trim(first.pcm), silence(6000), trim(second.pcm), silence(1500)]), { to16k: true });
+  process.exit(0);
+}
+
 console.log('Robert, first half');
 const a = await tts('I need to refill my', ROBERT);
 console.log(`  "${a.spoken}" ${(a.pcm.length / 2 / RATE).toFixed(2)}s`);

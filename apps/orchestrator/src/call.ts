@@ -132,12 +132,13 @@ export class Call extends EventEmitter<CallEvents> {
   }
 
   /** For the simulator: record what the simulated parties did, in the same stamped log. */
-  note(event: 'caller_sample_started' | 'caller_sample_ended' | 'pharmacist_spoke' | 'call_complete', detail?: string): void {
+  note(event: 'caller_sample_started' | 'caller_sample_ended' | 'pharmacist_spoke' | 'caller_chose' | 'call_complete', detail?: string): void {
     this.send({ type: 'simulation', event, ...(detail ? { detail } : {}) });
     if (event === 'call_complete') void this.audit();
   }
 
   private auditing: Promise<void> | null = null;
+  private chosenLabels: string[] = [];
   private patientFinals: StreamTurn[] = [];
 
   /**
@@ -156,7 +157,7 @@ export class Call extends EventEmitter<CallEvents> {
     this.auditing = transcribeCarefully(this.opts.apiKey, pcm)
       .then((careful) => {
         const relays = this.history.flatMap((m) => (m.type === 'outward' && m.kind === 'relay' ? [m.text] : []));
-        this.send({ type: 'audit', audit: grade({ careful, patientTurns: this.patientFinals, relays, callerName: this.opts.profile.displayName, ms: Date.now() - t0 }) });
+        this.send({ type: 'audit', audit: grade({ careful, patientTurns: this.patientFinals, relays, callerName: this.opts.profile.displayName, chosen: this.chosenLabels, ms: Date.now() - t0 }) });
       })
       .catch((err) => { this.send({ type: 'audit_failed', message: (err as Error).message }); });
     return this.auditing;
@@ -415,6 +416,7 @@ export class Call extends EventEmitter<CallEvents> {
       context: this.opts.profile.context,
       allowedWords: [this.opts.profile.displayName],
       callerName: this.opts.profile.displayName,
+      lexicon: this.opts.lexicon,
       mode: 'parallel',
       live: true,
     });
@@ -495,6 +497,7 @@ export class Call extends EventEmitter<CallEvents> {
     const opt = q.options.find((o) => o.id === optionId);
     if (!opt) return;
     this.pendingQuestion = null;
+    this.chosenLabels.push(opt.label);
     this.step({ type: 'choice', at: this.now(), label: opt.relay ?? opt.label });
   }
 

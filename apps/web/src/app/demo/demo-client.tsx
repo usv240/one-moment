@@ -4,13 +4,12 @@
 // actually happening. Side by side from the lg breakpoint, tabs below it.
 
 import { useEffect, useState } from 'react';
-import { Mic, Play, PhoneOff, RotateCcw } from 'lucide-react';
+import { Mic, Pill, Play, PhoneOff, RotateCcw } from 'lucide-react';
 import { CallerView } from '@/components/caller-view';
 import { ObserverView } from '@/components/observer/observer-view';
 import { Explain } from '@/components/explain';
 import { ORCHESTRATOR_URL, useCall, type Mode } from '@/lib/use-call';
-import { ReplayPlayer } from '@/components/replay/replay-player';
-import { RECORDING } from '@/content/measured';
+import { ReplayTabs } from '@/components/replay/replay-tabs';
 import { hasProfile, useSettings } from '@/lib/settings';
 import Link from 'next/link';
 
@@ -35,7 +34,7 @@ export function DemoClient() {
   }, []);
 
   const running = state.status === 'connecting' || state.status === 'live' || state.status === 'ending';
-  const begin = (m: Mode) => { setMode(m); void call.start(m, { grade }); };
+  const begin = (m: Mode, scenario?: 'pause' | 'choice') => { setMode(m); void call.start(m, { grade, ...(scenario ? { scenario } : {}) }); };
 
   return (
     <div className="mx-auto max-w-7xl px-4 pb-24 pt-8 sm:px-6">
@@ -59,6 +58,14 @@ export function DemoClient() {
             >
               {state.status === 'idle' ? <Play aria-hidden className="h-5 w-5" /> : <RotateCcw aria-hidden className="h-5 w-5" />}
               {state.status === 'idle' ? 'Play the recorded call' : 'Play it again'}
+            </button>
+            <button
+              type="button"
+              onClick={() => begin('sample', 'choice')}
+              className="inline-flex min-h-12 items-center gap-2 rounded-xl border border-line-strong bg-raised px-5 font-semibold text-ink transition-colors hover:border-accent"
+            >
+              <Pill aria-hidden className="h-5 w-5" />
+              Play the harder call
             </button>
             <button
               type="button"
@@ -119,7 +126,7 @@ export function DemoClient() {
             The live engine is not reachable right now, so here is a recording of a real call through it instead: the same
             audio, and every event it produced, replayed through the same code.
           </p>
-          <ReplayPlayer recording={RECORDING} audioSrc="/recorded/robert-call.mp3" full />
+          <ReplayTabs full />
         </div>
       )}
 

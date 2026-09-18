@@ -15,7 +15,7 @@
 //   apps/web/src/content/recorded-call.json   { recordedAt, events }
 //   apps/web/public/recorded/robert-call.mp3  mixed audio, t=0 is call time 0
 //
-// Usage: node --env-file=.env apps/orchestrator/scripts/record-sample-call.ts
+// Usage: node --env-file=.env apps/orchestrator/scripts/record-sample-call.ts [--scenario choice]
 
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
@@ -29,6 +29,8 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const WEB = path.resolve(here, '../../web');
 const RATE = 24000;
 const CH_RATE: Record<number, number> = { 1: 16000, 2: 24000, 3: 24000 };
+const SCENARIO = process.argv.includes('choice') ? 'choice' : 'pause';
+const SUFFIX = SCENARIO === 'choice' ? '-choice' : '';
 
 const server = await startServer({ port: 8799, tunnel: true });
 console.log(`server up, public URL ${server.publicUrl ?? 'none'}`);
@@ -42,7 +44,7 @@ let done = false;
 let graded = false;
 
 const ws = new WebSocket(`ws://localhost:${server.port}/ws`);
-ws.on('open', () => ws.send(JSON.stringify({ type: 'hello', role: 'caller', mode: 'sample' })));
+ws.on('open', () => ws.send(JSON.stringify({ type: 'hello', role: 'caller', mode: 'sample', scenario: SCENARIO })));
 ws.on('message', (data, isBinary) => {
   const now = Date.now();
   if (isBinary) {
@@ -77,6 +79,7 @@ ws.on('message', (data, isBinary) => {
   if (m.type === 'agent_spoke') console.log(`${(m.t / 1000).toFixed(1).padStart(5)}s SPOKEN "${m.text}"`);
   if (m.type === 'floor' && m.state !== 'USER_SPEAKING') console.log(`${(m.t / 1000).toFixed(1).padStart(5)}s floor ${m.state}`);
   if (m.type === 'log') console.log(`${(m.t / 1000).toFixed(1).padStart(5)}s log ${m.message}`);
+  if (m.type === 'question') console.log(`${(m.t / 1000).toFixed(1).padStart(5)}s QUESTION "${m.question.prompt}" ${m.question.options.map((o) => o.label).join(' | ')}`);
   if (m.type === 'dissent') console.log(`${(m.t / 1000).toFixed(1).padStart(5)}s DECIDED ${m.result.decision.action} rule ${m.result.decision.policyRule}`);
   if (m.type === 'simulation' && m.event === 'call_complete') done = true;
   if (m.type === 'audit' || m.type === 'audit_failed') {
@@ -130,16 +133,16 @@ header.write('data', 36); header.writeUInt32LE(pcm.length, 40);
 
 const audioDir = path.join(WEB, 'public', 'recorded');
 fs.mkdirSync(audioDir, { recursive: true });
-const tmp = path.join(audioDir, 'robert-call.wav');
+const tmp = path.join(audioDir, `robert-call${SUFFIX}.wav`);
 fs.writeFileSync(tmp, Buffer.concat([header, pcm]));
-execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-i', tmp, '-codec:a', 'libmp3lame', '-b:a', '64k', path.join(audioDir, 'robert-call.mp3')]);
+execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-i', tmp, '-codec:a', 'libmp3lame', '-b:a', '64k', path.join(audioDir, `robert-call${SUFFIX}.mp3`)]);
 fs.rmSync(tmp);
 
-const out = path.join(WEB, 'src', 'content', 'recorded-call.json');
+const out = path.join(WEB, 'src', 'content', `recorded-call${SUFFIX}.json`);
 fs.writeFileSync(out, JSON.stringify({ recordedAt: new Date().toISOString(), durationMs: Math.round(endMs), events }, null, 0));
 
 const secs = (ch: number) => (chunks.filter((c) => c.ch === ch).reduce((s, c) => s + c.pcm.length / 2, 0) / CH_RATE[ch]!).toFixed(1);
 console.log(`\naudio: caller ${secs(1)}s, pharmacist ${secs(2)}s, agent ${secs(3)}s, total ${(endMs / 1000).toFixed(1)}s`);
 console.log(`wrote ${path.relative(process.cwd(), out)} (${events.length} events)`);
-console.log(`wrote ${path.relative(process.cwd(), path.join(audioDir, 'robert-call.mp3'))}`);
+console.log(`wrote ${path.relative(process.cwd(), path.join(audioDir, `robert-call${SUFFIX}.mp3`))}`);
 process.exit(0);

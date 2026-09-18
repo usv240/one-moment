@@ -8,7 +8,7 @@ import type { CallAudit } from '@one-moment/core';
 
 const s = (ms: number | null) => (ms === null ? 'n/a' : ms >= 1000 ? `${(ms / 1000).toFixed(1)}s` : `${ms}ms`);
 
-export function AuditPanel({ audit, failed, pending }: { audit: CallAudit | null; failed: string | null; pending: boolean }) {
+export function AuditPanel({ audit, failed, pending, compact = false }: { audit: CallAudit | null; failed: string | null; pending: boolean; compact?: boolean }) {
   if (!audit && !failed && !pending) return null;
   return (
     <section aria-labelledby="audit-h" className="space-y-3">
@@ -30,10 +30,10 @@ export function AuditPanel({ audit, failed, pending }: { audit: CallAudit | null
               : <Ban aria-hidden className="mt-0.5 h-5 w-5 shrink-0 text-vetoed" />}
             {audit.verdict}
           </p>
-          <div>
+          {!compact && <div>
             <p className="text-xs font-medium uppercase tracking-wider text-muted">The careful transcript ({audit.model})</p>
             <p className="mt-1 text-ink">&ldquo;{audit.carefulText}&rdquo;</p>
-          </div>
+          </div>}
           <dl className="grid gap-3 sm:grid-cols-3">
             <div className="rounded-lg bg-sunken p-3">
               <dt className="text-xs text-muted">The pause, as the careful model heard it</dt>
@@ -49,14 +49,18 @@ export function AuditPanel({ audit, failed, pending }: { audit: CallAudit | null
               <dd className="mt-1 font-mono text-2xl font-semibold text-ink">{s(audit.pause.estimatedMs)}</dd>
             </div>
           </dl>
-          {audit.relays.length > 0 && (
+          {!compact && audit.relays.length > 0 && (
             <ul className="space-y-1.5">
               {audit.relays.map((r) => (
                 <li key={r.said} className="flex items-start gap-2 text-sm text-ink">
                   {r.confirmed
                     ? <Check aria-label="confirmed" className="mt-0.5 h-4 w-4 shrink-0 text-grounded" />
                     : <Ban aria-label="not confirmed" className="mt-0.5 h-4 w-4 shrink-0 text-vetoed" />}
-                  <span>&ldquo;{r.said}&rdquo;{r.missing.length ? ` (not heard: ${r.missing.join(', ')})` : ''}</span>
+                  <span>
+                    &ldquo;{r.said}&rdquo;
+                    {r.missing.length ? ` (not heard: ${r.missing.join(', ')})` : ''}
+                    {r.byChoice?.length ? ` (${r.byChoice.join(', ')}: confirmed by the caller's choice, not by the audio)` : ''}
+                  </span>
                 </li>
               ))}
             </ul>

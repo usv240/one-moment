@@ -10,11 +10,12 @@
 // autonomy the product exists to restore.
 
 import type {
-  AdvocateOutput, Decision, DeterministicFindings, DissentResult, EvidenceBundle, SkepticOutput,
+  AdvocateOutput, Decision, DeterministicFindings, DissentResult, EvidenceBundle, LexiconTerm, SkepticOutput,
 } from './types.ts';
 import { chat, discoverModel, extractJson, type GatewayConfig } from './gateway.ts';
 import { assessNegation, hasNegator, polarityOf } from './negation.ts';
 import { normalizeTokens } from './align.ts';
+import { vocabularyDoubt } from './vocabulary.ts';
 
 // Prompts are written for a small model. Measured: the first, elaborate drafts
 // produced 0 percent valid JSON on the only model a free key can reach. A flat
@@ -22,7 +23,7 @@ import { normalizeTokens } from './align.ts';
 
 export const ADVOCATE_PROMPT = `You speak on behalf of a person with aphasia on a phone call. Output ONE line of JSON. No prose. No markdown. No code fence.
 Schema: {"say":"string","polarity":"affirmative"|"negative","guessed":["word"]}
-say is one short sentence, in the third person, telling the other party what the person wants. Use only what the evidence supports.
+say is one short sentence, in the third person, reporting what the person said. Keep their own words. Do not add wants, needs or requests they did not say. Use only what the evidence supports.
 polarity is negative if the person is refusing, cancelling or negating something.
 guessed lists every content word in say that is NOT in the evidence words.
 Example: {"say":"He is asking about his amlodipine.","polarity":"affirmative","guessed":[]}`;
@@ -47,6 +48,7 @@ export const POLICY_RULES: Record<number, { name: string; plain: string }> = {
   8: { name: 'grounded', plain: 'Every word traces back to something the person said. Safe to speak.' },
   9: { name: 'verbatim', plain: 'The person said a complete sentence clearly. Their own words are relayed, with nothing added.' },
   10: { name: 'model_unavailable', plain: 'The checking models are busy or unreachable, so the system asks rather than guessing.' },
+  11: { name: 'vocabulary_uncertain', plain: 'A word from the caller\'s own list was only partly said, or heard only by the ear that was listening for it. It is offered as a choice, never assumed. Checked second, before any model.' },
 };
 
 /**
@@ -179,6 +181,8 @@ export type DissentOptions = GatewayConfig & {
   modelsOnly?: boolean;
   /** No model may be called (no key supplied). Turns that need one are asked, never guessed. */
   noModels?: boolean;
+  /** The caller's own vocabulary, for rule 11. */
+  lexicon?: LexiconTerm[];
 };
 
 export async function runDissent(ev: EvidenceBundle, opts: DissentOptions): Promise<DissentResult> {
@@ -198,6 +202,16 @@ export async function runDissent(ev: EvidenceBundle, opts: DissentOptions): Prom
   // Deterministic checks first. Rules that need no model cannot be argued past.
   const pre = deterministicFindings(ev, null, opts.allowedWords);
   if (pre.negationDisputed) return done({ action: 'ask', policyRule: 1, reason: 'negation_disputed', target: 'polarity' });
+
+  // Rule 11. The patient ear is told the caller's vocabulary; the fast ear is
+  // not. MEASURED 18 Sept: four slurred ways of saying "amlodipine" all came
+  // back as "amlodipine" from the boosted ear, and never from the unbiased one.
+  // A boosted word nobody else heard may have been heard because it was
+  // expected. For a medicine, that is exactly the word not to guess.
+  // And a caller mid-way through finding a word often gets part of it out
+  // ("am, am lo"). That is an attempt at a word on their list, not the word.
+  const doubt = vocabularyDoubt(ev, opts.lexicon ?? []);
+  if (doubt) return done({ action: 'ask', policyRule: 11, reason: `vocabulary_${doubt.why}`, target: doubt.term });
 
   // A complete, clear sentence: relay the person's own words. Zero model calls.
   if (!opts.modelsOnly && verbatimEligible(ev)) {

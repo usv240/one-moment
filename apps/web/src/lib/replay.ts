@@ -44,10 +44,19 @@ export function keyMoments(events: ServerMessage[]): Moment[] {
   const decided = first('dissent');
   if (decided) {
     const d = decided.result.decision;
+    const heard = [...events].reverse().find((m): m is Extract<ServerMessage, { type: 'evidence' }> => m.type === 'evidence' && m.t <= decided.t)?.evidence.patientTranscript;
     out.push(d.action === 'relay' && d.policyRule === 9
       ? { t: decided.t, title: 'His own words, nothing added', body: 'Complete and clear, so Robert\u2019s sentence is relayed exactly as he said it. Zero model calls.' }
-      : { t: decided.t, title: d.action === 'ask' ? 'Not sure, so it asks Robert' : 'Decided', body: `Rule ${d.policyRule}.` });
+      : d.policyRule === 11
+        ? { t: decided.t, title: 'Only part of the word came out', body: `The patient ear heard ${quote(heard ?? '')} That is an attempt at a medicine on his list, not the medicine. A wrong medicine is the one word not to guess. Rule 11, no model.` }
+        : { t: decided.t, title: d.action === 'ask' ? 'Not sure, so it asks Robert' : 'Decided', body: `Rule ${d.policyRule}.` });
   }
+
+  const question = first('question');
+  if (question) out.push({ t: question.t + 100, title: 'It asks, never guesses', body: `On Robert\u2019s screen: ${quote(question.question.prompt)} Two real choices, never yes or no.` });
+
+  const chose = first('simulation', (m) => m.event === 'caller_chose');
+  if (chose) out.push({ t: chose.t, title: `Robert taps ${quote(chose.detail ?? '')}`, body: 'His choice, not a guess, is what puts the word in the sentence. The tap is simulated in this recording; in a real call it is his.' });
 
   const relay = first('outward', (m) => m.kind === 'relay');
   if (relay) out.push({ t: relay.t + 400, title: 'The pharmacist hears Robert', body: quote(relay.text) });

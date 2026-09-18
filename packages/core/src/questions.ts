@@ -11,6 +11,7 @@ import type { DissentResult, EvidenceBundle, ForcedChoice, LexiconTerm } from '.
 import { chat, extractJson, type GatewayConfig } from './gateway.ts';
 import { normalizeTokens } from './align.ts';
 import { hasNegator, NEGATORS } from './negation.ts';
+import { sentenceWith, vocabularyDoubt, CHOOSABLE } from './vocabulary.ts';
 
 const wordCount = (s: string) => s.trim().split(/\s+/).filter(Boolean).length;
 let seq = 0;
@@ -71,6 +72,27 @@ export function lexiconChoice(ev: EvidenceBundle, lexicon: LexiconTerm[], advoca
     ? [base, swapTerm(base, hit.term, sibling.term)]
     : [`It is about ${hit.term}.`, `It is about ${sibling.term}.`];
   return make(`${cap(hit.term)}, or ${sibling.term}?`, [cap(hit.term), cap(sibling.term)], icon, relays);
+}
+
+/**
+ * Rule 11: a word from the caller's list the evidence cannot vouch for. Offer
+ * it beside its sibling from the same list, each option relaying the caller's
+ * own sentence with that word in place. "Amlodipine, or metformin?"
+ */
+export function vocabularyChoice(ev: EvidenceBundle, lexicon: LexiconTerm[], name = 'The caller'): ForcedChoice | null {
+  const doubt = vocabularyDoubt(ev, lexicon);
+  if (!doubt) return null;
+  const entry = lexicon.find((l) => l.term === doubt.term);
+  const sibling = lexicon.find((l) => l.term !== doubt.term && l.category && l.category === entry?.category && CHOOSABLE.has(l.category));
+  if (!entry || !sibling) return null;
+  const text = doubt.source === 'fast' && ev.fastTranscript ? ev.fastTranscript : ev.patientTranscript;
+  const a = sentenceWith(text, doubt, doubt.term);
+  const b = sentenceWith(text, doubt, sibling.term);
+  const relays: [string, string] = a && b
+    ? [`${name} says: ${a}`, `${name} says: ${b}`]
+    : [`${name} is asking about ${doubt.term}.`, `${name} is asking about ${sibling.term}.`];
+  const q = make(`${cap(doubt.term)}, or ${sibling.term}?`, [cap(doubt.term), cap(sibling.term)], entry.category === 'medication' ? 'pill' : undefined, relays);
+  return validateChoice(q).length === 0 ? q : null;
 }
 
 const STOP = new Set(['a', 'an', 'the', 'to', 'of', 'it', 'my', 'is', 'am', 'are', 'be', 'do', 'does', 'did', 'for', 'on', 'in', 'at', 'with']);
@@ -152,7 +174,9 @@ export async function buildQuestion(args: {
   gateway: Omit<GatewayConfig, 'model'> & { model: string | null };
   callerName?: string;
 }): Promise<ForcedChoice> {
-  return (args.result.decision.policyRule === 1 ? negationChoice(args.ev, args.callerName) : null)
+  const rule = args.result.decision.policyRule;
+  return (rule === 1 ? negationChoice(args.ev, args.callerName) : null)
+    ?? (rule === 11 ? vocabularyChoice(args.ev, args.lexicon, args.callerName) : null)
     ?? lexiconChoice(args.ev, args.lexicon, args.result.advocate?.say)
     ?? (await readingsChoice(args.result, args.ev, args.gateway));
 }

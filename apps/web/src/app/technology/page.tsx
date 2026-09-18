@@ -108,8 +108,8 @@ export default function TechnologyPage() {
 
       <Block id="rules" title="The Adjudicator: the rules that decide what is said">
         <p>
-          Not a model. Checked in order; the first rule that matches decides. Rules 1 to 3 are checked by code, not by a model, so no
-          model can argue past them.
+          Not a model. The first rule that matches decides. Rules 1, 2, 3 and 11 are checked by code, not by a model, so no model can
+          argue past them, and rules 1 and 11 run before any model is called.
         </p>
         <Table
           caption="Adjudicator rules"

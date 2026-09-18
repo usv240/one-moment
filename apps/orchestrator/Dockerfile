@@ -21,7 +21,7 @@ RUN npm ci --omit=dev --omit=optional --workspace=@one-moment/orchestrator --inc
 COPY packages/core/src packages/core/src
 COPY apps/orchestrator/src apps/orchestrator/src
 # The recorded caller and pharmacist voices for "Play the recorded call".
-COPY eval/fixtures/caller-pause-6s.wav eval/fixtures/pharmacist-hello-24k.wav eval/fixtures/pharmacist-thanks-24k.wav eval/fixtures/
+COPY eval/fixtures/caller-pause-6s.wav eval/fixtures/caller-choice-6s.wav eval/fixtures/pharmacist-hello-24k.wav eval/fixtures/pharmacist-thanks-24k.wav eval/fixtures/
 
 EXPOSE 8787
 CMD ["node", "apps/orchestrator/src/server.ts"]

@@ -32,6 +32,12 @@ export type ClientMessage =
        * call with no microphone and no second person.
        */
       mode?: 'live' | 'sample';
+      /**
+       * Which recorded caller, in sample mode. pause: a clear sentence with a
+       * 6-second block. choice: the medicine name is slurred, so the ears
+       * disagree about it and the caller is asked (and a simulated tap answers).
+       */
+      scenario?: 'pause' | 'choice';
       /** A simulated pharmacist who speaks up when the caller pauses mid-turn. Labelled as simulated in the UI. */
       simulateFarParty?: boolean;
       /**
@@ -53,7 +59,7 @@ type Stamp = { seq: number; t: number };
 
 export type ServerMessage = Stamp & (
   | { type: 'ready'; callId: string; role: Role; streams: { patient: string; fast: string }; farLeg: 'voice-agent' | 'browser'; caller: string; lexicon: string[] }
-  | { type: 'simulation'; event: 'caller_sample_started' | 'caller_sample_ended' | 'pharmacist_spoke' | 'call_complete'; detail?: string }
+  | { type: 'simulation'; event: 'caller_sample_started' | 'caller_sample_ended' | 'pharmacist_spoke' | 'caller_chose' | 'call_complete'; detail?: string }
   | { type: 'partial'; stream: 'patient' | 'fast'; text: string }
   | { type: 'turn'; stream: 'patient' | 'fast'; turn: StreamTurn }
   | { type: 'evidence'; evidence: EvidenceBundle }
@@ -84,8 +90,11 @@ export type CallAudit = {
   carefulText: string;
   /** The longest pause: as the careful model heard it, as the live stream reported it, and as we estimated it. */
   pause: { carefulMs: number | null; liveGapMs: number | null; estimatedMs: number | null };
-  /** Every relayed line, and whether each of its words was confirmed. */
-  relays: { said: string; confirmed: boolean; missing: string[] }[];
+  /**
+   * Every relayed line, and whether each of its words was confirmed: by the
+   * careful transcript, or by the caller's own tap on a choice (byChoice).
+   */
+  relays: { said: string; confirmed: boolean; missing: string[]; byChoice: string[] }[];
   /** Word-level disagreement between the live patient transcript and the careful one, 0 to 1. */
   drift: number | null;
   verdict: string;

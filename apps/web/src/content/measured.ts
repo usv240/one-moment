@@ -3,10 +3,13 @@
 // with the script that produced it. Nothing here is typed as a target.
 
 import recorded from './recorded-call.json';
+import recordedChoice from './recorded-call-choice.json';
 import type { ServerMessage } from '@one-moment/core';
 import type { Recording } from '@/lib/replay';
 
 export const RECORDING = recorded as unknown as Recording;
+/** The harder call: the medicine name only half comes out, so it asks. */
+export const RECORDING_CHOICE = recordedChoice as unknown as Recording;
 
 const ev = RECORDING.events as ServerMessage[];
 const find = <T extends ServerMessage['type']>(type: T, pred: (m: Extract<ServerMessage, { type: T }>) => boolean = () => true) =>
@@ -40,6 +43,23 @@ export const CALL = {
  * silence estimate is a unit test on the recorded live word timings:
  * packages/core/test/evidence.test.ts.
  */
+/**
+ * Measured 18 September 2026, eval/probe-vocabulary.mjs: four slurred ways of
+ * saying "amlodipine", each through both ears. The patient ear carried the
+ * caller's vocabulary; the fast ear did not.
+ */
+export const VOCABULARY = {
+  variants: 4,
+  boostedHeardTerm: 4,
+  unbiasedHeardTerm: 0,
+  examples: [
+    { said: 'am low dippy', boosted: 'amlodipine', unbiased: 'AMLO Dippy' },
+    { said: 'amla deepin', boosted: 'amlodipine', unbiased: 'Amla Deepin' },
+    { said: 'amblo, dipine', boosted: 'amlodipine', unbiased: 'amblyodipine' },
+    { said: 'um, am, am lo', boosted: 'um, amlodipine', unbiased: 'um, am. Am. Am low' },
+  ],
+};
+
 export const SPIKE = {
   pauseMs: 6020,
   defaultTurns: 2,

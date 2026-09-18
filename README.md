@@ -120,9 +120,10 @@ opens a Cloudflare quick tunnel automatically. Deployed, set `PUBLIC_URL` instea
 
 ## Deploy
 
-- **Orchestrator:** `apps/orchestrator/Dockerfile`, configured for Railway in
-  `railway.json`. Set `ASSEMBLYAI_API_KEY`, `PUBLIC_URL` (its own https address) and
-  `ALLOWED_ORIGINS` (the website's address). See `.env.example` for the demo limits.
+- **Orchestrator:** `apps/orchestrator/Dockerfile`, built from the repository root. On
+  Railway set `RAILWAY_DOCKERFILE_PATH=apps/orchestrator/Dockerfile`, plus
+  `ASSEMBLYAI_API_KEY`, `PUBLIC_URL` (its own https address) and `ALLOWED_ORIGINS` (the
+  website's address). See `.env.example` for the demo limits.
 - **Website:** `apps/web` on Vercel, with `NEXT_PUBLIC_ORCHESTRATOR_URL` set to the
   orchestrator's address. The build fails if any colour pair falls below its WCAG ratio.
 

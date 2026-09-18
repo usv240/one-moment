@@ -104,6 +104,12 @@ export const EXPLANATIONS: Explanation[] = [
     technical: 'If the two listeners disagree about a negator, or a negator was heard below 0.6 confidence, rule 1 fires before any model runs. Honest limit: if both listeners lose the same "not", no check on the text can recover it.',
   },
   {
+    id: 'vocabulary',
+    term: 'Your words, double-checked',
+    plain: 'The system listens out for the words on your list, like your medicines. But a word it was listening out for is not trusted until the other ear hears it too, or you choose it.',
+    technical: 'Rule 11. The patient stream carries your list in keyterms_prompt; the fast stream does not. Measured: four slurred ways of saying amlodipine all came back as amlodipine from the boosted stream and never from the unbiased one. A boosted word only one ear heard, or a partial attempt at a listed word ("am, am lo"), is offered as a two-way choice with its sibling from your list.',
+  },
+  {
     id: 'self-audit',
     term: 'Grading itself',
     plain: 'After the call, a slower and more careful AssemblyAI model listens to the recording. The system checks every word it said on the caller\'s behalf against what the careful model heard.',

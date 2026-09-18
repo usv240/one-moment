@@ -27,8 +27,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { assembleEvidence, chat, contentWords, discoverModel, extractJson, FRAMING, runDissent } from '@one-moment/core';
-import { degrade, hasNegation, isInverted, seededRng, tokenize } from './spike/lib/degrade.js';
+import { assembleEvidence, chat, contentWords, discoverModel, extractJson, FRAMING, hasNegator, NEGATORS, polarityOf, runDissent } from '@one-moment/core';
+import { degrade, hasNegation, seededRng, tokenize } from './spike/lib/degrade.js';
 
 /**
  * Real Universal-3.5 Pro finals are formatted: capitalised and punctuated. A
@@ -45,16 +45,36 @@ const formatted = (s) => {
 
 /**
  * The same scorer for both arms. A relay invents a word if it has a content
- * word that is not in what the person actually said. Pronouns and reporting
- * framing ("they said that", "he wants") are not counted, for either arm.
+ * word that is not in what the person actually said. Pronouns, reporting
+ * framing ("they said that", "he wants") and negators are not counted, for
+ * either arm: a moved "not" is scored by polarity, not as an invented word.
  */
-const CALLER = new Set(contentWords('The caller'));
+const CALLER = new Set([...contentWords('The caller'), 'any', 'some', 'all', 'every', 'each', 'very']);
+/** "hung" and "hanging" are the same word said differently, not an invented one. */
+const IRREGULAR = { gave: 'give', given: 'give', hung: 'hang', made: 'make', sat: 'sit', said: 'say', took: 'take', ran: 'run', went: 'go', gone: 'go', bought: 'buy', brought: 'bring', thought: 'think', told: 'tell', found: 'find', kept: 'keep', left: 'leave', felt: 'feel', held: 'hold', broke: 'break', broken: 'break', spent: 'spend', meant: 'mean', built: 'build', bound: 'bind', got: 'get', seemed: 'seem', were: 'be', was: 'be' };
+const lemma = (w) => {
+  if (IRREGULAR[w]) return IRREGULAR[w];
+  for (const suf of ['ing', 'ed', 'es', 's']) if (w.length > suf.length + 2 && w.endsWith(suf)) return w.slice(0, -suf.length);
+  return w;
+};
 function findInventedWords(relayed, groundTruth) {
   if (!relayed) return [];
-  const truth = new Set(contentWords(groundTruth));
+  const truth = new Set(contentWords(groundTruth).map(lemma));
   const near = (w) => [...truth].some((t) => t.slice(0, 4) === w.slice(0, 4) && Math.min(t.length, w.length) >= 4);
-  return contentWords(relayed).filter((w) => !truth.has(w) && !FRAMING.has(w) && !CALLER.has(w) && !near(w));
+  return contentWords(relayed).filter((w) => {
+    const l = lemma(w);
+    return !truth.has(l) && !FRAMING.has(w) && !CALLER.has(w) && !NEGATORS.has(w) && !near(l);
+  });
 }
+
+/** Meaning flipped: the relay and what was said differ in polarity, by the full negator list (didn't, isn't, ...). */
+const isInverted = (relayed, groundTruth) => (relayed ? polarityOf(relayed) !== polarityOf(groundTruth) : false);
+
+const score = (relayed, groundTruth) => ({
+  relayed,
+  invented: findInventedWords(relayed, groundTruth),
+  inverted: isInverted(relayed, groundTruth),
+});
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const argv = Object.fromEntries(process.argv.slice(2).reduce((acc, a, i, all) => {
@@ -65,7 +85,7 @@ const N = Number(argv.n ?? 20);
 const SEED = Number(argv.seed ?? 11);
 const CONDITIONS = (argv.conditions ?? 'clean,one-ear,both-ears').split(',');
 const apiKey = process.env.ASSEMBLYAI_API_KEY;
-if (!apiKey) throw new Error('ASSEMBLYAI_API_KEY is not set');
+if (!apiKey && !argv.rescore) throw new Error('ASSEMBLYAI_API_KEY is not set');
 
 function loadHarvard() {
   const raw = fs.readFileSync(path.join(here, 'spike', 'fixtures', 'corpora', 'harvard.txt'), 'utf8');
@@ -133,6 +153,19 @@ async function baseline(model, text) {
   return { relayed: typeof j?.relay === 'string' && j.relay.trim() ? j.relay.trim() : null, ms: r.ms, ok: r.ok };
 }
 
+// --rescore <results.json>: recompute every score from the stored relays, with no API calls.
+if (argv.rescore) {
+  const prev = JSON.parse(fs.readFileSync(argv.rescore, 'utf8'));
+  const rows = prev.rows.map((r) => ({
+    ...r,
+    hasNegation: hasNegator(r.groundTruth),
+    baseline: { ...r.baseline, ...score(r.baseline.relayed, r.groundTruth) },
+    full: { ...r.full, ...score(r.full.relayed, r.groundTruth) },
+  }));
+  finish({ ...prev, rescoredAt: new Date().toISOString() }, rows, prev.conditions);
+  process.exit(0);
+}
+
 const model = argv.model ?? (await discoverModel({ apiKey }));
 if (!model) throw new Error('No LLM Gateway model reachable');
 const rng = seededRng(SEED);
@@ -153,17 +186,12 @@ for (const groundTruth of cases) {
     const b = await baseline(model, text);
     const f = await runDissent(ev, { apiKey, model, mode: 'serial', live: false, maxRetries: 6, callerName: 'The caller' });
     const fullText = f.decision.action === 'relay' ? f.decision.text : null;
-    const score = (relayed) => ({
-      relayed,
-      invented: findInventedWords(relayed, groundTruth),
-      inverted: relayed ? isInverted(relayed, null, groundTruth) : false,
-    });
     const row = {
       groundTruth, condition, baselineHeard: text, patientHeard: ev.patientTranscript, fastHeard: ev.fastTranscript,
-      hasNegation: hasNegation(groundTruth),
-      baseline: { ...score(b.relayed), refused: !b.relayed, ms: b.ms },
+      hasNegation: hasNegator(groundTruth),
+      baseline: { ...score(b.relayed, groundTruth), refused: !b.relayed, ms: b.ms },
       full: {
-        ...score(fullText), refused: !fullText, rule: f.decision.policyRule, reason: f.decision.reason, ms: f.timings.totalMs,
+        ...score(fullText, groundTruth), refused: !fullText, rule: f.decision.policyRule, reason: f.decision.reason, ms: f.timings.totalMs,
         // What the models proposed, so every blocked case can be inspected.
         advocate: f.advocate?.say ?? null, skeptic: f.skeptic?.reading ?? null, blockedWords: f.deterministic.invented,
       },
@@ -174,38 +202,39 @@ for (const groundTruth of cases) {
   }
 }
 
-const summarise = (arm, subset = rows) => {
-  const xs = subset.map((r) => r[arm]);
-  const relayed = xs.filter((x) => !x.refused);
-  const negRelayed = subset.filter((r) => r.hasNegation && !r[arm].refused);
-  return {
-    n: xs.length,
-    relayed: relayed.length,
-    asked: xs.length - relayed.length,
-    withInventedWords: relayed.filter((x) => x.invented.length).length,
-    negationCasesRelayed: negRelayed.length,
-    negationFlipped: negRelayed.filter((r) => r[arm].inverted).length,
-  };
-};
-
-const byCondition = Object.fromEntries(CONDITIONS.map((c) => {
-  const sub = rows.filter((r) => r.condition === c);
-  // Asked although the plain reading was fine: the baseline relayed something with
-  // no invented words and no flipped meaning. That question was not needed.
-  const overAsked = sub.filter((r) => r.full.refused && r.baseline.relayed && !r.baseline.invented.length && !r.baseline.inverted).length;
-  return [c, { baseline: summarise('baseline', sub), full: summarise('full', sub), overAsked }];
-}));
-
-const result = {
+finish({
   ranAt: new Date().toISOString(),
   engine: 'packages/core runDissent (the product)',
   source: 'Harvard Sentences, IEEE Std 297-1969, public domain',
   degradation: 'eval/negbench.mjs and eval/spike/lib/degrade.js, written by us',
-  model, seed: SEED, cases: cases.length, conditions: CONDITIONS,
-  byCondition, rows,
-};
-const stamp = result.ranAt.slice(0, 10);
-fs.mkdirSync(path.join(here, 'results'), { recursive: true });
-fs.writeFileSync(path.join(here, 'results', `negbench-${stamp}-seed${SEED}.json`), JSON.stringify(result, null, 2));
-fs.writeFileSync(path.join(here, '..', 'apps', 'web', 'src', 'content', 'negbench.json'), JSON.stringify(result, null, 2));
-console.log('\n' + JSON.stringify(byCondition, null, 2));
+  model, seed: SEED, cases: cases.length,
+}, rows, CONDITIONS);
+
+function finish(meta, rows, conditions) {
+  const summarise = (arm, subset) => {
+    const xs = subset.map((r) => r[arm]);
+    const relayed = xs.filter((x) => !x.refused);
+    const negRelayed = subset.filter((r) => r.hasNegation && !r[arm].refused);
+    return {
+      n: xs.length,
+      relayed: relayed.length,
+      asked: xs.length - relayed.length,
+      withInventedWords: relayed.filter((x) => x.invented.length).length,
+      negationCasesRelayed: negRelayed.length,
+      negationFlipped: negRelayed.filter((r) => r[arm].inverted).length,
+    };
+  };
+  const byCondition = Object.fromEntries(conditions.map((c) => {
+    const sub = rows.filter((r) => r.condition === c);
+    // Asked although the plain reading was fine: the baseline relayed something with
+    // no invented words and no flipped meaning. That question was not needed.
+    const overAsked = sub.filter((r) => r.full.refused && r.baseline.relayed && !r.baseline.invented.length && !r.baseline.inverted).length;
+    return [c, { baseline: summarise('baseline', sub), full: summarise('full', sub), overAsked }];
+  }));
+  const result = { ...meta, conditions, byCondition, rows };
+  const stamp = String(meta.ranAt).slice(0, 10);
+  fs.mkdirSync(path.join(here, 'results'), { recursive: true });
+  fs.writeFileSync(path.join(here, 'results', `negbench-${stamp}-seed${meta.seed}.json`), JSON.stringify(result, null, 2));
+  fs.writeFileSync(path.join(here, '..', 'apps', 'web', 'src', 'content', 'negbench.json'), JSON.stringify(result, null, 2));
+  console.log('\n' + JSON.stringify(byCondition, null, 2));
+}

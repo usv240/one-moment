@@ -11,13 +11,9 @@
 import type { StreamTurn } from '@one-moment/core';
 import { Scissors } from 'lucide-react';
 import { Explain } from '../explain';
+import { shownTranscript } from '@/lib/text';
 
-/**
- * AssemblyAI marks a cut-off partial with a trailing dash ("refill my" plus a
- * dash). Shown as an ellipsis: the same meaning, and how the fast ear formats
- * the same moment. The data itself is never altered.
- */
-const shown = (s: string) => s.replace(/\s*\u2014/g, '...');
+const shown = shownTranscript;
 
 type Props = {
   patientTurns: StreamTurn[];

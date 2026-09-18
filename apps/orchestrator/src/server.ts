@@ -283,7 +283,7 @@ export async function startServer(opts: { port?: number; tunnel?: boolean; apiKe
               c.once('ended', () => clearTimeout(limit));
               attach(c);
               if (mode === 'sample' || msg.simulateFarParty) {
-                sim = new Simulator(c, { playCaller: mode === 'sample' });
+                sim = new Simulator(c, { playCaller: mode === 'sample', scenario: msg.scenario === 'choice' ? 'choice' : 'pause' });
                 c.once('ended', () => sim?.stop());
                 sim.run();
               }
