@@ -6,6 +6,9 @@ One Moment waits as long as a stroke survivor needs, offers two choices when the
 will not come, asks the pharmacist to hold the line, and speaks only the words he
 actually said.
 
+**Live:** https://one-moment-mu.vercel.app  (try a call at [/demo](https://one-moment-mu.vercel.app/demo), the three-minute path for judges at [/judges](https://one-moment-mu.vercel.app/judges))
+**API:** https://orchestrator-production-494f.up.railway.app/v1/decide  (playground at [/api](https://one-moment-mu.vercel.app/api))
+
 Built for the AssemblyAI Voice Agent Hackathon, September 2026. MIT licensed.
 Not a medical device. Not clinically validated.
 

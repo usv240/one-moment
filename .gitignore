@@ -12,3 +12,6 @@ eval/results/*
 !eval/results/negbench-*.json
 eval/data/
 eval/fixtures/*.raw.wav
+.vercel
+.env*
+!.env.example
