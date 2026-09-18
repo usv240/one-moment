@@ -1,0 +1,12 @@
+**/node_modules
+**/.next
+.env
+.env.*
+!.env.example
+.git
+eval/results
+eval/data
+apps/web/*
+!apps/web/package.json
+eval/spike/*
+!eval/spike/package.json

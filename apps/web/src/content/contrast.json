@@ -1,0 +1,313 @@
+{
+  "checkedAt": "2026-09-18",
+  "rows": [
+    {
+      "mode": "light",
+      "fg": "text",
+      "bg": "bg",
+      "fgHex": "#1c1b19",
+      "bgHex": "#fbfaf9",
+      "ratio": 16.51,
+      "min": 7,
+      "why": "body text, AAA",
+      "pass": true
+    },
+    {
+      "mode": "light",
+      "fg": "text",
+      "bg": "bg-raised",
+      "fgHex": "#1c1b19",
+      "bgHex": "#ffffff",
+      "ratio": 17.21,
+      "min": 7,
+      "why": "body text on cards, AAA",
+      "pass": true
+    },
+    {
+      "mode": "light",
+      "fg": "text-muted",
+      "bg": "bg",
+      "fgHex": "#55514c",
+      "bgHex": "#fbfaf9",
+      "ratio": 7.55,
+      "min": 4.5,
+      "why": "secondary text, AA",
+      "pass": true
+    },
+    {
+      "mode": "light",
+      "fg": "text-muted",
+      "bg": "bg-raised",
+      "fgHex": "#55514c",
+      "bgHex": "#ffffff",
+      "ratio": 7.87,
+      "min": 4.5,
+      "why": "secondary text on cards, AA",
+      "pass": true
+    },
+    {
+      "mode": "light",
+      "fg": "text-subtle",
+      "bg": "bg",
+      "fgHex": "#6b665f",
+      "bgHex": "#fbfaf9",
+      "ratio": 5.46,
+      "min": 4.5,
+      "why": "captions and metadata, AA",
+      "pass": true
+    },
+    {
+      "mode": "light",
+      "fg": "accent-fg",
+      "bg": "accent",
+      "fgHex": "#ffffff",
+      "bgHex": "#1f6a6b",
+      "ratio": 6.3,
+      "min": 4.5,
+      "why": "primary button label, AA",
+      "pass": true
+    },
+    {
+      "mode": "light",
+      "fg": "danger-fg",
+      "bg": "danger",
+      "fgHex": "#ffffff",
+      "bgHex": "#b3261e",
+      "ratio": 6.54,
+      "min": 4.5,
+      "why": "Stop button label, AA even though it is large text",
+      "pass": true
+    },
+    {
+      "mode": "light",
+      "fg": "accent",
+      "bg": "bg",
+      "fgHex": "#1f6a6b",
+      "bgHex": "#fbfaf9",
+      "ratio": 6.05,
+      "min": 4.5,
+      "why": "links, AA",
+      "pass": true
+    },
+    {
+      "mode": "light",
+      "fg": "focus-ring",
+      "bg": "bg",
+      "fgHex": "#1f6a6b",
+      "bgHex": "#fbfaf9",
+      "ratio": 6.05,
+      "min": 3,
+      "why": "focus indicator, non-text 1.4.11",
+      "pass": true
+    },
+    {
+      "mode": "light",
+      "fg": "focus-ring",
+      "bg": "bg-raised",
+      "fgHex": "#1f6a6b",
+      "bgHex": "#ffffff",
+      "ratio": 6.3,
+      "min": 3,
+      "why": "focus indicator on cards",
+      "pass": true
+    },
+    {
+      "mode": "light",
+      "fg": "border-strong",
+      "bg": "bg",
+      "fgHex": "#8a847b",
+      "bgHex": "#fbfaf9",
+      "ratio": 3.55,
+      "min": 3,
+      "why": "borders that carry state, 1.4.11",
+      "pass": true
+    },
+    {
+      "mode": "light",
+      "fg": "ev-grounded",
+      "bg": "bg-raised",
+      "fgHex": "#2a78d6",
+      "bgHex": "#ffffff",
+      "ratio": 4.42,
+      "min": 3,
+      "why": "evidence mark, non-text",
+      "pass": true
+    },
+    {
+      "mode": "light",
+      "fg": "ev-vetoed",
+      "bg": "bg-raised",
+      "fgHex": "#e34948",
+      "bgHex": "#ffffff",
+      "ratio": 3.95,
+      "min": 3,
+      "why": "evidence mark, non-text",
+      "pass": true
+    },
+    {
+      "mode": "light",
+      "fg": "ev-inferred",
+      "bg": "bg-raised",
+      "fgHex": "#eda100",
+      "bgHex": "#ffffff",
+      "ratio": 2.17,
+      "min": 1.9,
+      "why": "evidence mark, relieved by label (documented)",
+      "pass": true
+    },
+    {
+      "mode": "dark",
+      "fg": "text",
+      "bg": "bg",
+      "fgHex": "#f6f5f3",
+      "bgHex": "#121110",
+      "ratio": 17.31,
+      "min": 7,
+      "why": "body text, AAA",
+      "pass": true
+    },
+    {
+      "mode": "dark",
+      "fg": "text",
+      "bg": "bg-raised",
+      "fgHex": "#f6f5f3",
+      "bgHex": "#1c1b19",
+      "ratio": 15.8,
+      "min": 7,
+      "why": "body text on cards, AAA",
+      "pass": true
+    },
+    {
+      "mode": "dark",
+      "fg": "text-muted",
+      "bg": "bg",
+      "fgHex": "#c4c0b9",
+      "bgHex": "#121110",
+      "ratio": 10.41,
+      "min": 4.5,
+      "why": "secondary text, AA",
+      "pass": true
+    },
+    {
+      "mode": "dark",
+      "fg": "text-muted",
+      "bg": "bg-raised",
+      "fgHex": "#c4c0b9",
+      "bgHex": "#1c1b19",
+      "ratio": 9.5,
+      "min": 4.5,
+      "why": "secondary text on cards, AA",
+      "pass": true
+    },
+    {
+      "mode": "dark",
+      "fg": "text-subtle",
+      "bg": "bg",
+      "fgHex": "#a39e96",
+      "bgHex": "#121110",
+      "ratio": 7.09,
+      "min": 4.5,
+      "why": "captions and metadata, AA",
+      "pass": true
+    },
+    {
+      "mode": "dark",
+      "fg": "accent-fg",
+      "bg": "accent",
+      "fgHex": "#121110",
+      "bgHex": "#7cc2bf",
+      "ratio": 9.27,
+      "min": 4.5,
+      "why": "primary button label, AA",
+      "pass": true
+    },
+    {
+      "mode": "dark",
+      "fg": "danger-fg",
+      "bg": "danger",
+      "fgHex": "#1c1b19",
+      "bgHex": "#f2b8b5",
+      "ratio": 10.08,
+      "min": 4.5,
+      "why": "Stop button label, AA even though it is large text",
+      "pass": true
+    },
+    {
+      "mode": "dark",
+      "fg": "accent",
+      "bg": "bg",
+      "fgHex": "#7cc2bf",
+      "bgHex": "#121110",
+      "ratio": 9.27,
+      "min": 4.5,
+      "why": "links, AA",
+      "pass": true
+    },
+    {
+      "mode": "dark",
+      "fg": "focus-ring",
+      "bg": "bg",
+      "fgHex": "#7cc2bf",
+      "bgHex": "#121110",
+      "ratio": 9.27,
+      "min": 3,
+      "why": "focus indicator, non-text 1.4.11",
+      "pass": true
+    },
+    {
+      "mode": "dark",
+      "fg": "focus-ring",
+      "bg": "bg-raised",
+      "fgHex": "#7cc2bf",
+      "bgHex": "#1c1b19",
+      "ratio": 8.46,
+      "min": 3,
+      "why": "focus indicator on cards",
+      "pass": true
+    },
+    {
+      "mode": "dark",
+      "fg": "border-strong",
+      "bg": "bg",
+      "fgHex": "#6b675f",
+      "bgHex": "#121110",
+      "ratio": 3.35,
+      "min": 3,
+      "why": "borders that carry state, 1.4.11",
+      "pass": true
+    },
+    {
+      "mode": "dark",
+      "fg": "ev-grounded",
+      "bg": "bg-raised",
+      "fgHex": "#3987e5",
+      "bgHex": "#1c1b19",
+      "ratio": 4.73,
+      "min": 3,
+      "why": "evidence mark, non-text",
+      "pass": true
+    },
+    {
+      "mode": "dark",
+      "fg": "ev-vetoed",
+      "bg": "bg-raised",
+      "fgHex": "#e8577f",
+      "bgHex": "#1c1b19",
+      "ratio": 5,
+      "min": 3,
+      "why": "evidence mark, non-text",
+      "pass": true
+    },
+    {
+      "mode": "dark",
+      "fg": "ev-inferred",
+      "bg": "bg-raised",
+      "fgHex": "#c98500",
+      "bgHex": "#1c1b19",
+      "ratio": 5.6,
+      "min": 1.9,
+      "why": "evidence mark, relieved by label (documented)",
+      "pass": true
+    }
+  ]
+}

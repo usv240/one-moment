@@ -1,0 +1,62 @@
+{
+  "ranAt": "2026-09-18T06:20:06.261Z",
+  "engine": "packages/core runDissent (the product)",
+  "source": "Harvard Sentences, IEEE Std 297-1969, public domain",
+  "degradation": "eval/negbench.mjs and eval/spike/lib/degrade.js, written by us",
+  "model": "qwen3.5-4b-32k-fast",
+  "seed": 11,
+  "cases": 1,
+  "conditions": [
+    "clean"
+  ],
+  "byCondition": {
+    "clean": {
+      "baseline": {
+        "n": 1,
+        "relayed": 1,
+        "asked": 0,
+        "withInventedWords": 0,
+        "negationCasesRelayed": 1,
+        "negationFlipped": 0
+      },
+      "full": {
+        "n": 1,
+        "relayed": 1,
+        "asked": 0,
+        "withInventedWords": 0,
+        "negationCasesRelayed": 1,
+        "negationFlipped": 0
+      },
+      "overAsked": 0
+    }
+  },
+  "rows": [
+    {
+      "groundTruth": "The facts don't always show who is right",
+      "condition": "clean",
+      "baselineHeard": "The facts don't always show who is right.",
+      "patientHeard": "The facts don't always show who is right.",
+      "fastHeard": "the facts don't always show who is right",
+      "hasNegation": true,
+      "baseline": {
+        "relayed": "The facts don't always show who is right.",
+        "invented": [],
+        "inverted": false,
+        "refused": false,
+        "ms": 333
+      },
+      "full": {
+        "relayed": "The caller says: The facts don't always show who is right.",
+        "invented": [],
+        "inverted": false,
+        "refused": false,
+        "rule": 9,
+        "reason": "verbatim",
+        "ms": 1,
+        "advocate": null,
+        "skeptic": null,
+        "blockedWords": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "name": "one-moment",
+  "private": true,
+  "type": "module",
+  "description": "A voice agent whose job is to make the other person wait, so people with aphasia can make their own phone calls.",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*",
+    "apps/*",
+    "eval/spike"
+  ],
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "test": "node --test \"packages/*/test/*.test.ts\" \"apps/orchestrator/test/*.test.ts\"",
+    "typecheck": "tsc -p tsconfig.json",
+    "orchestrator": "node --env-file-if-exists=.env apps/orchestrator/src/server.ts",
+    "web": "npm run dev -w @one-moment/web",
+    "e2e:headless": "node --env-file-if-exists=.env apps/orchestrator/scripts/headless-call.ts",
+    "record": "node --env-file-if-exists=.env apps/orchestrator/scripts/record-sample-call.ts",
+    "bench": "node --env-file-if-exists=.env eval/negbench.mjs --n 16 --seed 11",
+    "audit:a11y": "node apps/web/scripts/axe-audit.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/ws": "^8.5.12",
+    "typescript": "^5.9.0"
+  }
+}

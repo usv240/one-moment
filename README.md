@@ -1,0 +1,164 @@
+# One Moment
+
+**The voice agent that waits for you.**
+
+One Moment waits as long as a stroke survivor needs, offers two choices when the word
+will not come, asks the pharmacist to hold the line, and speaks only the words he
+actually said.
+
+Built for the AssemblyAI Voice Agent Hackathon, September 2026. MIT licensed.
+Not a medical device. Not clinically validated.
+
+---
+
+## The problem, in one paragraph
+
+People with aphasia, often after a stroke, know exactly what they mean. Finding the word
+takes time: several seconds of silence in the middle of a sentence. Every voice agent is
+built to treat that silence as the end of a turn. On a recording of one such sentence,
+AssemblyAI's default settings split it into two turns at the pause. One Moment keeps it
+whole, holds the line while the caller finds the word, and relays only what was said.
+
+---
+
+## What it does, measured against the live AssemblyAI APIs
+
+Every line below came from a real run, and the command to reproduce it is beside it.
+
+| Claim | Measured | Reproduce |
+|---|---|---|
+| A 6-second mid-sentence pause survives | Server defaults split it into **2 turns**. The patient ear keeps **1 sentence**. | `node --env-file=.env eval/spike/tests/02-patience.js` |
+| Two differently configured listening sessions on one microphone | Both run, **4 held at once**, the second costs **-67ms** | `node --env-file=.env eval/spike/tests/01-dual-stream.js` |
+| The silence the realtime API hides can be recovered | **7186ms** of hidden silence estimated against **7220ms** actual | `npm test` |
+| The Voice Agent speaks only what our Adjudicator approves | **Word for word**, and silent when we approve nothing | `node --env-file=.env eval/proofs/voice-agent-verbatim.mjs` |
+| The hold line never talks over the caller | Cut off by the orchestrator about 100ms after the caller resumes | `npm run record` |
+| No dead air after a finished sentence | Turn ended **1.5s** after the last word instead of 6s+, via `ForceEndpoint` | `npm run record` |
+| Every call graded against itself | The pre-recorded model heard the pause as **6.3s**, the live stream showed **45ms**; every relayed word confirmed | `npm run record` |
+| It does not invent words | NEGBENCH on the product's own engine, failures included | `npm run bench` |
+
+---
+
+## How it works
+
+    caller mic --16kHz--> patient ear    Universal-3.5 Pro, max_accuracy,
+                   |                     6s min / 9s max turn silence,
+                   |                     the caller's own vocabulary
+                   +----> fast ear       min_latency, defaults, unbiased
+
+    pharmacist ---24kHz--> Voice Agent API, whose "LLM" is One Moment's own endpoint
+
+    patient turn ends --> evidence --> Dissent --> Adjudicator --> relay | ask | hold
+    pharmacist speaks while the caller is mid-turn --> Floor Controller --> hold line
+    caller speaks again mid-hold --> orchestrator stops relaying the agent's audio
+    both ears agree the sentence is finished --> ForceEndpoint after 1.5s of silence
+    call ends --> pre-recorded API transcribes the caller's audio --> self-audit
+
+**The central idea.** The Voice Agent API lets a stored agent point its LLM at any
+OpenAI-compatible endpoint. One Moment hosts that endpoint, and it is not a language
+model. It is the Adjudicator's output channel. It returns exactly the approved text, or
+nothing. **The voice cannot say a word the rules did not approve, because it has no other
+source of words.** The live view checks every reply against AssemblyAI's own transcript
+of what the agent said.
+
+### Deciding what to say
+
+1. **Deterministic checks first.** If the two listening streams disagree about a "not",
+   ask, offering the two readings the ears actually heard. No model is involved.
+2. **Verbatim when possible.** A complete, clear sentence is relayed as the caller's own
+   words: "Robert says: ...". Zero model calls, so zero chance of an invented word.
+3. **Dissent for fragments.** An Advocate proposes what was meant. A Skeptic gives its own
+   independent reading. If they disagree, or the proposal contains a word the caller never
+   said, the caller is asked, never guessed for.
+4. **Forced choice, never yes or no.** In aphasia the default answer may be "yes". So the
+   caller gets two real options, and the full grounded sentence behind the one they pick
+   is what the pharmacist hears.
+
+---
+
+## Bring your own
+
+- **Your words.** Medicines, pharmacy, doctor, family names, on the setup page. They bias
+  the patient ear only, so the unbiased fast ear can confirm a boosted word was said.
+  Exported as a file you can take elsewhere.
+- **Your key.** Paste an AssemblyAI key on the setup page and calls run on your account.
+  It goes from the browser to the orchestrator for that call only, and is never stored or
+  logged there.
+- **Your model.** Pick the LLM Gateway model the Advocate and the Skeptic run on.
+
+## The API
+
+    POST /v1/decide     a Turn message (or text) in, relay | ask | hold out
+    GET  /v1/models     the LLM Gateway models a key can use
+
+Stateless, open to any origin, rate limited on the public demo. Without a key it still
+answers every turn that needs no model, and asks on the rest. The website has a live
+playground at `/api`.
+
+---
+
+## Run it
+
+Requires Node 24 (runs TypeScript natively, no build step) and an AssemblyAI API key.
+
+    cp .env.example .env         # add ASSEMBLYAI_API_KEY
+    npm install
+    npm test                     # the engine, no network
+    npm run orchestrator         # opens a Cloudflare quick tunnel for the Voice Agent
+    npm run web                  # http://localhost:3000
+
+Other commands:
+
+    npm run e2e:headless         # a full live call in the terminal, about 40 seconds
+    npm run record               # record the demo call the website replays
+    npm run bench                # NEGBENCH, about 75 minutes on the free LLM tier
+
+The Voice Agent API only calls public HTTPS endpoints, so on a laptop the orchestrator
+opens a Cloudflare quick tunnel automatically. Deployed, set `PUBLIC_URL` instead.
+
+## Deploy
+
+- **Orchestrator:** `apps/orchestrator/Dockerfile`, configured for Railway in
+  `railway.json`. Set `ASSEMBLYAI_API_KEY`, `PUBLIC_URL` (its own https address) and
+  `ALLOWED_ORIGINS` (the website's address). See `.env.example` for the demo limits.
+- **Website:** `apps/web` on Vercel, with `NEXT_PUBLIC_ORCHESTRATOR_URL` set to the
+  orchestrator's address. The build fails if any colour pair falls below its WCAG ratio.
+
+---
+
+## Repository
+
+    packages/core/        the engine: evidence, negation checks, Dissent, Adjudicator,
+                          forced choices, Floor Controller, stream settings. Pure and tested.
+    apps/orchestrator/    the call: two realtime streams, the Voice Agent leg, the endpoint
+                          the agent calls, the self-audit, the public API, the demo guard
+    apps/web/             the website: landing page, live demo, replay, setup, API
+                          playground, evidence, accessibility report
+    eval/negbench.mjs     the benchmark, run against the product's own engine
+    eval/spike/           the day-one assumption tests that proved the architecture
+    eval/proofs/          standalone proofs of each claim above
+    eval/fixtures/        the demo voices, generated with AssemblyAI text to speech
+
+---
+
+## What we measured, and what we did not
+
+- Tested on synthetic speech with exactly known pauses, and on published sentence sets.
+  **Not tested with people who have aphasia.**
+- Recognition of disordered speech is hard for every system. We do not improve it and do
+  not claim to. The claim is that the conversation still reaches its goal without
+  anything being invented.
+- If both listening streams lose the same "not", no check can recover it from text alone.
+  NEGBENCH publishes how often that happens.
+- The free-tier LLM Gateway allows 2 requests per minute. The verbatim path needs none;
+  fragmentary turns need two. For more, bring your own key and model.
+
+---
+
+## Built on
+
+AssemblyAI Universal-Streaming (Universal-3.5 Pro, two sessions per call, `ForceEndpoint`),
+the Voice Agent API with a custom LLM endpoint and its text to speech, the LLM Gateway, and
+the pre-recorded API for the post-call self-audit.
+
+Cite the Harvard Sentences (IEEE Std 297-1969) and, where used, the TORGO database
+(Rudzicz, Namasivayam and Wolff, 2012) wherever their numbers appear.

@@ -1,0 +1,9 @@
+{
+  "name": "@one-moment/core",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "description": "The One Moment engine: evidence assembly, Dissent, the Adjudicator and the Floor Controller. No I/O except the model client.",
+  "exports": { ".": "./src/index.ts" }
+}

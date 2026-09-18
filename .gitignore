@@ -1,0 +1,14 @@
+node_modules/
+.env
+.env.local
+.next/
+out/
+dist/
+*.log
+*.tsbuildinfo
+.DS_Store
+# Raw run output. The benchmark results the site shows are committed.
+eval/results/*
+!eval/results/negbench-*.json
+eval/data/
+eval/fixtures/*.raw.wav

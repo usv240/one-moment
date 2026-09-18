@@ -1,0 +1,85 @@
+{
+  "testId": "00-connect",
+  "ranAt": "2026-09-18T05:01:18.573Z",
+  "connected": true,
+  "model": "universal-3-5-pro",
+  "minSilenceKey": "min_turn_silence",
+  "sessionId": "ad2eb38d-230e-435f-9a55-8874c686d839",
+  "attempts": [
+    {
+      "step": "bare",
+      "config": {
+        "encoding": "pcm_s16le",
+        "sample_rate": 16000
+      },
+      "ok": true
+    },
+    {
+      "step": "model",
+      "model": "universal-3-5-pro",
+      "ok": true
+    },
+    {
+      "step": "minSilenceKey",
+      "key": "min_turn_silence",
+      "ok": true
+    },
+    {
+      "step": "optional",
+      "key": "end_of_turn_confidence_threshold",
+      "value": 0.85,
+      "ok": true
+    },
+    {
+      "step": "optional",
+      "key": "vad_threshold",
+      "value": 0.12,
+      "ok": true
+    },
+    {
+      "step": "optional",
+      "key": "format_turns",
+      "value": true,
+      "ok": false,
+      "error": "[opt:format_turns] server error: Unauthorized Connection: Too many concurrent sessions"
+    },
+    {
+      "step": "optional",
+      "key": "speaker_labels",
+      "value": true,
+      "ok": false,
+      "error": "[opt:speaker_labels] server error: Unauthorized Connection: Too many concurrent sessions"
+    },
+    {
+      "step": "optional",
+      "key": "language_detection",
+      "value": true,
+      "ok": true
+    },
+    {
+      "step": "optional",
+      "key": "keyterms_prompt",
+      "value": [
+        "amlodipine",
+        "metformin"
+      ],
+      "ok": true
+    },
+    {
+      "step": "optional",
+      "key": "mode",
+      "value": "max_accuracy",
+      "ok": true
+    },
+    {
+      "step": "optional",
+      "key": "min_turn_silence",
+      "value": 6000,
+      "ok": true
+    }
+  ],
+  "unsupported": [
+    "format_turns",
+    "speaker_labels"
+  ]
+}

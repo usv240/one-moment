@@ -1,0 +1,180 @@
+@import "tailwindcss";
+
+/*
+ * One Moment design tokens. Single source of truth for both themes.
+ * Spec: _shared/01-DESIGN-SYSTEM.md. Contrast is checked in CI by
+ * scripts/check-contrast.mjs; the evidence triad was chosen by the six-checks
+ * palette validator, not by eye, after the first draft failed colorblind
+ * separation between "grounded" and "blocked".
+ *
+ * Theme: no data-theme attribute means follow the OS. data-theme="light" or
+ * "dark" is an explicit choice, applied by an inline script before first paint.
+ */
+
+:root {
+  color-scheme: light;
+
+  --bg: #fbfaf9;
+  --bg-raised: #ffffff;
+  --bg-sunken: #f3f2ef;
+  --border: #dcd9d4;
+  --border-strong: #8a847b;
+  --text: #1c1b19;
+  --text-muted: #55514c;
+  --text-subtle: #6b665f;
+
+  --accent: #1f6a6b;
+  --accent-hover: #1b5455;
+  --accent-fg: #ffffff;
+  --accent-soft: #e6f2f2;
+  --focus-ring: #1f6a6b;
+
+  /* Evidence triad. Validated: CVD worst dE 15.3, normal vision 20.8. */
+  --ev-grounded: #2a78d6;
+  --ev-inferred: #eda100;
+  --ev-vetoed: #e34948;
+
+  /* Holding the floor is a UI state, not a peer of the triad. It uses the accent. */
+  --hold: var(--accent);
+
+  /* The Stop button. Its own token, with real contrast headroom, because it is the
+     one control that must always be readable and always work. */
+  --danger: #b3261e;
+  --danger-fg: #ffffff;
+
+  --shadow-1: 0 1px 2px rgb(28 27 25 / 0.06), 0 1px 3px rgb(28 27 25 / 0.04);
+  --shadow-2: 0 4px 12px rgb(28 27 25 / 0.08), 0 2px 4px rgb(28 27 25 / 0.04);
+  --shadow-3: 0 12px 32px rgb(28 27 25 / 0.12), 0 4px 8px rgb(28 27 25 / 0.06);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #121110;
+    --bg-raised: #1c1b19;
+    --bg-sunken: #0c0b0b;
+    --border: #2e2c29;
+    --border-strong: #6b675f;
+    --text: #f6f5f3;
+    --text-muted: #c4c0b9;
+    --text-subtle: #a39e96;
+    --accent: #7cc2bf;
+    --accent-hover: #aedcd9;
+    --accent-fg: #121110;
+    --accent-soft: #10292a;
+    --focus-ring: #7cc2bf;
+    /* Validated dark steps: CVD worst dE 10.4, normal vision 18.1, zero warnings. */
+    --ev-grounded: #3987e5;
+    --ev-inferred: #c98500;
+    --ev-vetoed: #e8577f;
+    --danger: #f2b8b5;
+    --danger-fg: #1c1b19;
+    --shadow-1: 0 1px 2px rgb(0 0 0 / 0.5);
+    --shadow-2: 0 4px 12px rgb(0 0 0 / 0.55);
+    --shadow-3: 0 12px 32px rgb(0 0 0 / 0.6);
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #121110;
+  --bg-raised: #1c1b19;
+  --bg-sunken: #0c0b0b;
+  --border: #2e2c29;
+  --border-strong: #6b675f;
+  --text: #f6f5f3;
+  --text-muted: #c4c0b9;
+  --text-subtle: #a39e96;
+  --accent: #7cc2bf;
+  --accent-hover: #aedcd9;
+  --accent-fg: #121110;
+  --accent-soft: #10292a;
+  --focus-ring: #7cc2bf;
+  --ev-grounded: #3987e5;
+  --ev-inferred: #c98500;
+  --ev-vetoed: #e8577f;
+  --danger: #f2b8b5;
+  --danger-fg: #1c1b19;
+  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.5);
+  --shadow-2: 0 4px 12px rgb(0 0 0 / 0.55);
+  --shadow-3: 0 12px 32px rgb(0 0 0 / 0.6);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-raised: var(--bg-raised);
+  --color-sunken: var(--bg-sunken);
+  --color-line: var(--border);
+  --color-line-strong: var(--border-strong);
+  --color-ink: var(--text);
+  --color-muted: var(--text-muted);
+  --color-subtle: var(--text-subtle);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-soft: var(--accent-soft);
+  --color-grounded: var(--ev-grounded);
+  --color-inferred: var(--ev-inferred);
+  --color-vetoed: var(--ev-vetoed);
+  --color-hold: var(--hold);
+  --color-danger: var(--danger);
+  --color-danger-fg: var(--danger-fg);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-caller: var(--font-atkinson), var(--font-inter), sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+
+  --shadow-1: var(--shadow-1);
+  --shadow-2: var(--shadow-2);
+  --shadow-3: var(--shadow-3);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  line-height: 1.6;
+}
+
+/* WCAG 2.4.7 and 2.4.11: a visible focus ring on everything, never hidden by the sticky header. */
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+[id] {
+  scroll-margin-top: 88px;
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--text);
+}
+
+/* Motion communicates state, never personality. Honour the OS setting. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* The one expressive animation in the product: time being held open. */
+@keyframes hold-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.55; }
+  50% { transform: scale(1.08); opacity: 0.9; }
+}
+.hold-pulse {
+  animation: hold-pulse 1.6s ease-in-out infinite;
+}
+
+@media (forced-colors: active) {
+  .ev-underline { text-decoration-color: CanvasText !important; }
+}

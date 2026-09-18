@@ -1,0 +1,102 @@
+{
+  "checkedAt": "2026-09-18",
+  "tool": "axe-core 4.13.0 (WCAG 2.2 AA and best-practice rules)",
+  "pages": [
+    {
+      "path": "/",
+      "scheme": "light",
+      "passes": 44,
+      "violations": []
+    },
+    {
+      "path": "/demo",
+      "scheme": "light",
+      "passes": 41,
+      "violations": []
+    },
+    {
+      "path": "/judges",
+      "scheme": "light",
+      "passes": 45,
+      "violations": []
+    },
+    {
+      "path": "/technology",
+      "scheme": "light",
+      "passes": 44,
+      "violations": []
+    },
+    {
+      "path": "/evidence",
+      "scheme": "light",
+      "passes": 46,
+      "violations": []
+    },
+    {
+      "path": "/limits",
+      "scheme": "light",
+      "passes": 44,
+      "violations": []
+    },
+    {
+      "path": "/glossary",
+      "scheme": "light",
+      "passes": 40,
+      "violations": []
+    },
+    {
+      "path": "/accessibility",
+      "scheme": "light",
+      "passes": 44,
+      "violations": []
+    },
+    {
+      "path": "/",
+      "scheme": "dark",
+      "passes": 44,
+      "violations": []
+    },
+    {
+      "path": "/demo",
+      "scheme": "dark",
+      "passes": 41,
+      "violations": []
+    },
+    {
+      "path": "/judges",
+      "scheme": "dark",
+      "passes": 45,
+      "violations": []
+    },
+    {
+      "path": "/technology",
+      "scheme": "dark",
+      "passes": 44,
+      "violations": []
+    },
+    {
+      "path": "/evidence",
+      "scheme": "dark",
+      "passes": 46,
+      "violations": []
+    },
+    {
+      "path": "/limits",
+      "scheme": "dark",
+      "passes": 44,
+      "violations": []
+    },
+    {
+      "path": "/glossary",
+      "scheme": "dark",
+      "passes": 40,
+      "violations": []
+    },
+    {
+      "path": "/accessibility",
+      "scheme": "dark",
+      "passes": 44,
+      "violations": []
+    }
+  ]
+}

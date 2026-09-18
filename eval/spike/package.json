@@ -1,0 +1,24 @@
+{
+  "name": "@one-moment/spike",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "Day-one assumption tests for One Moment. Proves or disproves the architecture before anything is built on it.",
+  "scripts": {
+    "fixtures": "node fixtures/make.js",
+    "test:00": "node tests/00-connect.js",
+    "test:01": "node tests/01-dual-stream.js",
+    "test:02": "node tests/02-patience.js",
+    "test:03": "node tests/03-keyterms.js",
+    "test:04": "node tests/04-confidence.js",
+    "test:05": "node tests/05-llm-gateway.js",
+    "all": "node run-all.js",
+    "test:06": "node tests/06-negation-benchmark.js",
+    "bench": "node tests/06-negation-benchmark.js --source harvard --n 30",
+    "bench:torgo": "node tests/06-negation-benchmark.js --source torgo --corpus ./data/torgo --n 40"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "ws": "^8.18.0"
+  }
+}
