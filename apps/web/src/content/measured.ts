@@ -4,6 +4,7 @@
 
 import recorded from './recorded-call.json';
 import recordedChoice from './recorded-call-choice.json';
+import audiobench from './audiobench.json';
 import type { ServerMessage } from '@one-moment/core';
 import type { Recording } from '@/lib/replay';
 
@@ -43,6 +44,16 @@ export const CALL = {
  * silence estimate is a unit test on the recorded live word timings:
  * packages/core/test/evidence.test.ts.
  */
+/**
+ * Real dysarthric speech (TORGO), eval/audiobench-*.mjs. Null until a real
+ * sample exists, so nothing renders from a smoke run.
+ */
+type AudioArm = { spoke: number; wrong: number };
+const ab = audiobench as unknown as { summary: { sentences: number; speakers?: string[]; ordinary?: AudioArm; oneMoment?: AudioArm & { asked: number }; turns?: { fastSplit: number; patientSplit: number } } };
+export const AUDIO = ab.summary.sentences >= 30 && ab.summary.ordinary && ab.summary.oneMoment && ab.summary.turns
+  ? { sentences: ab.summary.sentences, speakers: ab.summary.speakers?.length ?? 0, ordinary: ab.summary.ordinary, oneMoment: ab.summary.oneMoment, turns: ab.summary.turns }
+  : null;
+
 /**
  * Measured 18 September 2026, eval/probe-vocabulary.mjs: four slurred ways of
  * saying "amlodipine", each through both ears. The patient ear carried the

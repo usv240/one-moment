@@ -27,7 +27,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { assembleEvidence, chat, contentWords, discoverModel, extractJson, FRAMING, hasNegator, NEGATORS, polarityOf, runDissent } from '@one-moment/core';
+import { assembleEvidence, chat, discoverModel, extractJson, hasNegator, runDissent } from '@one-moment/core';
+import { findInventedWords, isInverted } from './score.mjs';
 import { degrade, hasNegation, seededRng, tokenize } from './spike/lib/degrade.js';
 
 /**
@@ -43,33 +44,8 @@ const formatted = (s) => {
   return /[.!?]$/.test(c) ? c : `${c}.`;
 };
 
-/**
- * The same scorer for both arms. A relay invents a word if it has a content
- * word that is not in what the person actually said. Pronouns, reporting
- * framing ("they said that", "he wants") and negators are not counted, for
- * either arm: a moved "not" is scored by polarity, not as an invented word.
- */
-const CALLER = new Set([...contentWords('The caller'), 'any', 'some', 'all', 'every', 'each', 'very']);
-/** "hung" and "hanging" are the same word said differently, not an invented one. */
-const IRREGULAR = { gave: 'give', given: 'give', hung: 'hang', made: 'make', sat: 'sit', said: 'say', took: 'take', ran: 'run', went: 'go', gone: 'go', bought: 'buy', brought: 'bring', thought: 'think', told: 'tell', found: 'find', kept: 'keep', left: 'leave', felt: 'feel', held: 'hold', broke: 'break', broken: 'break', spent: 'spend', meant: 'mean', built: 'build', bound: 'bind', got: 'get', seemed: 'seem', were: 'be', was: 'be' };
-const lemma = (w) => {
-  if (IRREGULAR[w]) return IRREGULAR[w];
-  for (const suf of ['ing', 'ed', 'es', 's']) if (w.length > suf.length + 2 && w.endsWith(suf)) return w.slice(0, -suf.length);
-  return w;
-};
-function findInventedWords(relayed, groundTruth) {
-  if (!relayed) return [];
-  const truth = new Set(contentWords(groundTruth).map(lemma));
-  const near = (w) => [...truth].some((t) => t.slice(0, 4) === w.slice(0, 4) && Math.min(t.length, w.length) >= 4);
-  return contentWords(relayed).filter((w) => {
-    const l = lemma(w);
-    return !truth.has(l) && !FRAMING.has(w) && !CALLER.has(w) && !NEGATORS.has(w) && !near(l);
-  });
-}
-
-/** Meaning flipped: the relay and what was said differ in polarity, by the full negator list (didn't, isn't, ...). */
-const isInverted = (relayed, groundTruth) => (relayed ? polarityOf(relayed) !== polarityOf(groundTruth) : false);
-
+// The scorer shared by every benchmark (score.mjs): framing, pronouns, negators
+// and inflected forms are not counted as invented, for either arm.
 const score = (relayed, groundTruth) => ({
   relayed,
   invented: findInventedWords(relayed, groundTruth),

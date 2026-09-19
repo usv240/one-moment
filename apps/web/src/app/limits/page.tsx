@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Block, Page, Table } from '@/components/page';
+import { AUDIO } from '@/content/measured';
 
 export const metadata: Metadata = {
   title: 'What it does not do',
@@ -44,7 +45,7 @@ export default function LimitsPage() {
           caption="Scope"
           head={['Claim', 'Status']}
           rows={[
-            ['Tested with people with aphasia', 'No. Every number comes from synthetic speech with a known pause and from published text corpora. It is a working prototype, not a clinical study.'],
+            ['Tested with people with aphasia', `No. The numbers come from synthetic speech with a known pause, published text corpora${AUDIO ? `, and ${AUDIO.sentences} recorded sentences from ${AUDIO.speakers} speakers with dysarthria (TORGO), which is a motor speech disorder, not aphasia` : ''}. It is a working prototype, not a clinical study.`],
             ['A medical device', 'No. It does not diagnose or treat. It is a conversation partner on a phone call.'],
             ['Better recognition of disordered speech', 'No. We do not improve recognition, and the design assumes it is often wrong.'],
             ['Tested against a live pharmacy', 'No. The far party in the demo is simulated with a computer voice.'],

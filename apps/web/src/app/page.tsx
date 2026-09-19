@@ -3,7 +3,7 @@ import { ArrowRight, ClipboardCheck, Ear, Hand, Hourglass, MessageSquareQuote, S
 import { Cite, Section } from '@/components/cite';
 import { Explain } from '@/components/explain';
 import { ReplayTabs } from '@/components/replay/replay-tabs';
-import { CALL, SPIKE, VOCABULARY } from '@/content/measured';
+import { AUDIO, CALL, SPIKE, VOCABULARY } from '@/content/measured';
 
 export default function Home() {
   return (
@@ -235,6 +235,18 @@ function Measured() {
         )}
         <Stat value="0" label="Words the agent may choose itself" note="The Voice Agent's only source of words is the line our rules approved. Checked live, every call, against AssemblyAI's own transcript of the agent." />
       </div>
+      {AUDIO && (
+        <div className="mt-4 rounded-2xl border-2 border-accent bg-raised p-5">
+          <p className="text-sm font-semibold uppercase tracking-wider text-accent">On real disordered speech</p>
+          <p className="mt-2 text-lg text-ink">
+            {AUDIO.sentences} recorded sentences from {AUDIO.speakers} speakers with dysarthria (TORGO), through both live ears. An ordinary
+            agent would have relayed words the speaker never said, or flipped the meaning, in{' '}
+            <b>{AUDIO.ordinary.wrong} of {AUDIO.ordinary.spoke}</b> sentences. One Moment did in{' '}
+            <b>{AUDIO.oneMoment.wrong} of the {AUDIO.oneMoment.spoke}</b> it spoke, and asked the caller on {AUDIO.oneMoment.asked}.
+          </p>
+          <a href="/evidence#audiobench" className="mt-2 inline-block text-sm font-medium text-accent underline underline-offset-2">How it was measured, and every sentence</a>
+        </div>
+      )}
       <p className="mt-6 max-w-3xl text-sm text-muted">
         Measured 17 and 18 September 2026 on synthetic speech with an exactly known pause. The scripts are in the repository and
         re-run against your own key. Synthetic speech is clean; real disordered speech will score lower on recognition, which is
@@ -269,7 +281,7 @@ function NotThis() {
     <Section id="not" eyebrow="What this is not" title="Honest limits, stated as measurements.">
       <ul className="grid gap-4 md:grid-cols-2">
         {[
-          ['Not tested with people with aphasia.', 'Every number on this page comes from synthetic speech and published text corpora, with ground truth we did not write. It is a working prototype, not a clinical study.'],
+          ['Not tested with people with aphasia.', `Every number on this page comes from synthetic speech, published text corpora${AUDIO ? `, and ${AUDIO.sentences} recorded sentences from speakers with dysarthria (a motor speech disorder, not aphasia)` : ''}, with ground truth we did not write. It is a working prototype, not a clinical study.`],
           ['Not a medical device.', 'It does not diagnose or treat anything. It is a conversation partner on a phone call.'],
           ['Not better recognition.', 'We do not improve speech recognition on disordered speech. The design assumes recognition is often wrong, and refuses to speak when it is unsure.'],
           ['The demo far party is simulated.', 'The pharmacist in the demo is a computer voice. The system has not been tested against a live pharmacy.'],

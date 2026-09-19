@@ -1,0 +1,6516 @@
+{
+ "ranAt": "2026-09-19T18:42:19.443Z",
+ "corpus": "TORGO (Rudzicz, Namasivayam and Wolff, 2012), speakers with dysarthria, read sentences",
+ "licence": "Free for academic, non-profit use. No audio is redistributed; only transcripts of our own runs and the published prompts.",
+ "engine": "packages/core runDissent (the product), both ears streamed live through AssemblyAI Universal-Streaming",
+ "model": "qwen3.5-4b-32k-fast",
+ "summary": {
+  "sentences": 120,
+  "speakers": [
+   "F01",
+   "F03",
+   "F04",
+   "M01",
+   "M02",
+   "M03",
+   "M04",
+   "M05"
+  ],
+  "ordinary": {
+   "spoke": 120,
+   "wrong": 65,
+   "invented": 63,
+   "flipped": 5,
+   "meanWer": 0.42395257520257507
+  },
+  "patient": {
+   "spoke": 120,
+   "wrong": 57,
+   "invented": 56,
+   "flipped": 4,
+   "meanWer": 0.3602058589558589
+  },
+  "oneMoment": {
+   "spoke": 57,
+   "wrong": 11,
+   "invented": 10,
+   "flipped": 1,
+   "meanWer": 0.1983500417710944,
+   "asked": 63,
+   "askedNeeded": 52,
+   "askedUnneeded": 11,
+   "byRule": {
+    "1": 6,
+    "2": 9,
+    "4": 16,
+    "5": 11,
+    "6": 21,
+    "8": 17,
+    "9": 40
+   },
+   "modelCalls": 148
+  },
+  "turns": {
+   "fastSplit": 48,
+   "patientSplit": 0,
+   "endedEarly": 47,
+   "endedCap": 0
+  },
+  "wer": {
+   "fast": 0.42395257520257507,
+   "patient": 0.3602058589558589,
+   "careful": 0.34766451141451143
+  },
+  "audit": {
+   "graded": 57,
+   "wrongRelays": 11,
+   "wrongFlagged": 3,
+   "rightRelays": 46,
+   "rightFlagged": 0
+  }
+ },
+ "rows": [
+  {
+   "id": "F01/Session1/0014",
+   "speaker": "F01",
+   "prompt": "he slowly takes a short walk in the open air each day.",
+   "mic": "head",
+   "audioMs": 6607,
+   "endedBy": "natural",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "He slowly takes a slow walk in the open air again.",
+    "patient": "He slowly takes a slow walk in the open air again."
+   },
+   "wer": {
+    "fast": 0.25,
+    "patient": 0.25
+   },
+   "ordinary": {
+    "relayed": "He slowly takes a slow walk in the open air again.",
+    "invented": [
+     "again"
+    ],
+    "inverted": false,
+    "wer": 0.25,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "He slowly takes a slow walk in the open air again.",
+    "invented": [
+     "again"
+    ],
+    "inverted": false,
+    "wer": 0.25,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": "He slowly takes a slow walk in the open air again.",
+    "invented": [
+     "again"
+    ],
+    "inverted": false,
+    "wer": 0.25,
+    "wrong": true,
+    "action": "relay",
+    "rule": 8,
+    "reason": "grounded",
+    "advocate": "He slowly takes a slow walk in the open air again.",
+    "models": 2
+   },
+   "careful": {
+    "text": "He slowly takes a slow walk in the open air again.",
+    "wer": 0.25,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "F01/Session1/0020",
+   "speaker": "F01",
+   "prompt": "Usually minus several buttons.",
+   "mic": "head",
+   "audioMs": 4907,
+   "endedBy": "natural",
+   "fastTurns": 2,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Oh God. My soul burns.",
+    "patient": "You're gonna make me so embarrassed."
+   },
+   "wer": {
+    "fast": 1.25,
+    "patient": 1.5
+   },
+   "ordinary": {
+    "relayed": "Oh God. My soul burns.",
+    "invented": [
+     "god",
+     "soul",
+     "burns"
+    ],
+    "inverted": false,
+    "wer": 1.25,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "You're gonna make me so embarrassed.",
+    "invented": [
+     "gonna",
+     "make",
+     "embarrassed"
+    ],
+    "inverted": false,
+    "wer": 1.5,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 4,
+    "reason": "readings_disagree",
+    "advocate": "He is saying he is gonna make me so embarrassed.",
+    "models": 2
+   },
+   "careful": {
+    "text": "You're going to buy me a cell phone package.",
+    "wer": 2.25,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "F01/Session1/0022",
+   "speaker": "F01",
+   "prompt": "You wished to know all about my grandfather.",
+   "mic": "head",
+   "audioMs": 5012,
+   "endedBy": "natural",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "And wishing all about my grandfather.",
+    "patient": "And wishing all, all about my grandfather."
+   },
+   "wer": {
+    "fast": 0.5,
+    "patient": 0.5
+   },
+   "ordinary": {
+    "relayed": "And wishing all about my grandfather.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.5,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "And wishing all, all about my grandfather.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.5,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 5,
+    "reason": "skeptic_negation_risk",
+    "advocate": "He is wishing all about his grandfather.",
+    "models": 2
+   },
+   "careful": {
+    "text": "And whispering all about my grandfather.",
+    "wer": 0.5,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "F01/Session1/0028",
+   "speaker": "F01",
+   "prompt": "but he always answers, Banana oil!",
+   "mic": "head",
+   "audioMs": 3655,
+   "endedBy": "natural",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "But he always answers with, I know.",
+    "patient": "But he always ends with a banana oil."
+   },
+   "wer": {
+    "fast": 0.5,
+    "patient": 0.5
+   },
+   "ordinary": {
+    "relayed": "But he always answers with, I know.",
+    "invented": [
+     "know"
+    ],
+    "inverted": false,
+    "wer": 0.5,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "But he always ends with a banana oil.",
+    "invented": [
+     "ends"
+    ],
+    "inverted": false,
+    "wer": 0.5,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 5,
+    "reason": "skeptic_negation_risk",
+    "advocate": "He always answers with I know.",
+    "models": 2
+   },
+   "careful": {
+    "text": "But he always had a good banana oil.",
+    "wer": 0.5,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "F01/Session1/0031",
+   "speaker": "F01",
+   "prompt": "The quick brown fox jumps over the lazy dog.",
+   "mic": "head",
+   "audioMs": 4660,
+   "endedBy": "early",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "The quick brown fox jumped over the lazy dog.",
+    "patient": "The quick brown fox jumped over the lazy dog."
+   },
+   "wer": {
+    "fast": 0.1111111111111111,
+    "patient": 0.1111111111111111
+   },
+   "ordinary": {
+    "relayed": "The quick brown fox jumped over the lazy dog.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.1111111111111111,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "The quick brown fox jumped over the lazy dog.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.1111111111111111,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 6,
+    "reason": "low_confidence",
+    "advocate": "He is saying the quick brown fox jumped over the lazy dog.",
+    "models": 2
+   },
+   "careful": {
+    "text": "The quick brown fox jumps over the lazy dog.",
+    "wer": 0,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "F01/Session1/0032",
+   "speaker": "F01",
+   "prompt": "She had your dark suit in greasy wash water all year.",
+   "mic": "head",
+   "audioMs": 7609,
+   "endedBy": "natural",
+   "fastTurns": 2,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "See, I'm not cool. And we should walk more slowly.",
+    "patient": "She had a natural English walk or audio."
+   },
+   "wer": {
+    "fast": 1,
+    "patient": 0.8181818181818182
+   },
+   "ordinary": {
+    "relayed": "See, I'm not cool. And we should walk more slowly.",
+    "invented": [
+     "see",
+     "cool",
+     "walk",
+     "more",
+     "slowly"
+    ],
+    "inverted": true,
+    "wer": 1,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "She had a natural English walk or audio.",
+    "invented": [
+     "natural",
+     "english",
+     "walk",
+     "audio"
+    ],
+    "inverted": false,
+    "wer": 0.8181818181818182,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 1,
+    "reason": "negation_disputed",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "She had a natural intuition of what I needed.",
+    "wer": 0.8181818181818182,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "F01/Session1/0035",
+   "speaker": "F01",
+   "prompt": "giving those who observe him a pronounced feeling of the utmost respect.",
+   "mic": "head",
+   "audioMs": 12462,
+   "endedBy": "natural",
+   "fastTurns": 5,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "My middle name. Who am I? Do I even— Oh. We almost lost Nick.",
+    "patient": "I mean, I'm, I'm really, really enjoying him. I'm really, really enjoying listening to him."
+   },
+   "wer": {
+    "fast": 1.0833333333333333,
+    "patient": 1.1666666666666667
+   },
+   "ordinary": {
+    "relayed": "My middle name. Who am I? Do I even— Oh. We almost lost Nick.",
+    "invented": [
+     "middle",
+     "name",
+     "even",
+     "almost",
+     "lost",
+     "nick"
+    ],
+    "inverted": false,
+    "wer": 1.0833333333333333,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "I mean, I'm, I'm really, really enjoying him. I'm really, really enjoying listening to him.",
+    "invented": [
+     "mean",
+     "really",
+     "really",
+     "enjoying",
+     "really",
+     "really",
+     "enjoying",
+     "listening"
+    ],
+    "inverted": false,
+    "wer": 1.1666666666666667,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 5,
+    "reason": "skeptic_negation_risk",
+    "advocate": "He is saying he is really enjoying listening to him.",
+    "models": 2
+   },
+   "careful": {
+    "text": "למה לא אומרים? אומרים שהם פריינס פרוינטים או מי אמור לשמח?",
+    "wer": 1,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "F01/Session1/0036",
+   "speaker": "F01",
+   "prompt": "We have often urged him to walk more and smoke less,",
+   "mic": "head",
+   "audioMs": 6359,
+   "endedBy": "early",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "We have often warned him to walk more slowly and smoke less.",
+    "patient": "We have often learned to walk more slowly and smoke less."
+   },
+   "wer": {
+    "fast": 0.18181818181818182,
+    "patient": 0.2727272727272727
+   },
+   "ordinary": {
+    "relayed": "We have often warned him to walk more slowly and smoke less.",
+    "invented": [
+     "warned",
+     "slowly"
+    ],
+    "inverted": false,
+    "wer": 0.18181818181818182,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "We have often learned to walk more slowly and smoke less.",
+    "invented": [
+     "learned",
+     "slowly"
+    ],
+    "inverted": false,
+    "wer": 0.2727272727272727,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 6,
+    "reason": "low_confidence",
+    "advocate": "He has often learned to walk more slowly and smoke less.",
+    "models": 2
+   },
+   "careful": {
+    "text": "We have often learned to walk more slowly and smoke less.",
+    "wer": 0.2727272727272727,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "F01/Session1/0093",
+   "speaker": "F01",
+   "prompt": "A long, flowing beard clings to his chin,",
+   "mic": "head",
+   "audioMs": 4202,
+   "endedBy": "natural",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "A long-form American king.",
+    "patient": "A long-form American king."
+   },
+   "wer": {
+    "fast": 0.75,
+    "patient": 0.75
+   },
+   "ordinary": {
+    "relayed": "A long-form American king.",
+    "invented": [
+     "form",
+     "american",
+     "king"
+    ],
+    "inverted": false,
+    "wer": 0.75,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "A long-form American king.",
+    "invented": [
+     "form",
+     "american",
+     "king"
+    ],
+    "inverted": false,
+    "wer": 0.75,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 6,
+    "reason": "low_confidence",
+    "advocate": "He is saying a long-form American king.",
+    "models": 2
+   },
+   "careful": {
+    "text": "A long-form email, clink, clink, clink.",
+    "wer": 0.75,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "F01/Session1/0106",
+   "speaker": "F01",
+   "prompt": "yet he still thinks as swiftly as ever.",
+   "mic": "head",
+   "audioMs": 5709,
+   "endedBy": "early",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Yes, he still thinks as quickly as ever.",
+    "patient": "Yes, he still thinks as quickly as ever."
+   },
+   "wer": {
+    "fast": 0.25,
+    "patient": 0.25
+   },
+   "ordinary": {
+    "relayed": "Yes, he still thinks as quickly as ever.",
+    "invented": [
+     "yes",
+     "quickly"
+    ],
+    "inverted": false,
+    "wer": 0.25,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "Yes, he still thinks as quickly as ever.",
+    "invented": [
+     "yes",
+     "quickly"
+    ],
+    "inverted": false,
+    "wer": 0.25,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": "He still thinks as quickly as ever.",
+    "invented": [
+     "quickly"
+    ],
+    "inverted": false,
+    "wer": 0.25,
+    "wrong": true,
+    "action": "relay",
+    "rule": 8,
+    "reason": "grounded",
+    "advocate": "He still thinks as quickly as ever.",
+    "models": 2
+   },
+   "careful": {
+    "text": "Yes, he still thinks as quickly as ever.",
+    "wer": 0.25,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "F01/Session1/0114",
+   "speaker": "F01",
+   "prompt": "Well, he is nearly ninety three years old",
+   "mic": "head",
+   "audioMs": 5159,
+   "endedBy": "natural",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Well, he is nearly 93 years old.",
+    "patient": "Well, he is nearly 93 years old."
+   },
+   "wer": {
+    "fast": 0.25,
+    "patient": 0.25
+   },
+   "ordinary": {
+    "relayed": "Well, he is nearly 93 years old.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.25,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "Well, he is nearly 93 years old.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.25,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "He is nearly 93 years old.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.375,
+    "wrong": false,
+    "action": "relay",
+    "rule": 8,
+    "reason": "grounded",
+    "advocate": "He is nearly 93 years old.",
+    "models": 2
+   },
+   "careful": {
+    "text": "Well, he is nearly 93 years old.",
+    "wer": 0.25,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "F01/Session1/0116",
+   "speaker": "F01",
+   "prompt": "Twice each day he plays skillfully and with zest upon our small organ.",
+   "mic": "head",
+   "audioMs": 9856,
+   "endedBy": "early",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Quickly, he placed skillfully and with rest upon a small organ.",
+    "patient": "Why can't I even get him placed skillfully and with rest upon a small organ?"
+   },
+   "wer": {
+    "fast": 0.46153846153846156,
+    "patient": 0.6923076923076923
+   },
+   "ordinary": {
+    "relayed": "Quickly, he placed skillfully and with rest upon a small organ.",
+    "invented": [
+     "quickly",
+     "placed",
+     "rest"
+    ],
+    "inverted": false,
+    "wer": 0.46153846153846156,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "Why can't I even get him placed skillfully and with rest upon a small organ?",
+    "invented": [
+     "why",
+     "even",
+     "get",
+     "placed",
+     "rest"
+    ],
+    "inverted": true,
+    "wer": 0.6923076923076923,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 1,
+    "reason": "negation_disputed",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "While creating, he plays skillfully and with zest upon a small organ.",
+    "wer": 0.3076923076923077,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "F01/Session1/0126",
+   "speaker": "F01",
+   "prompt": "he dresses himself in an ancient black frock coat,",
+   "mic": "head",
+   "audioMs": 6255,
+   "endedBy": "natural",
+   "fastTurns": 2,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "He's waking himself in the morning. Fuckhole.",
+    "patient": "He dresses himself in a jean black buttonhole."
+   },
+   "wer": {
+    "fast": 0.7777777777777778,
+    "patient": 0.4444444444444444
+   },
+   "ordinary": {
+    "relayed": "He's waking himself in the morning. Fuckhole.",
+    "invented": [
+     "waking",
+     "morning",
+     "fuckhole"
+    ],
+    "inverted": false,
+    "wer": 0.7777777777777778,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "He dresses himself in a jean black buttonhole.",
+    "invented": [
+     "jean",
+     "buttonhole"
+    ],
+    "inverted": false,
+    "wer": 0.4444444444444444,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 6,
+    "reason": "low_confidence",
+    "advocate": "He is waking himself in the morning.",
+    "models": 2
+   },
+   "careful": {
+    "text": "He rested himself in a raging black bath hole.",
+    "wer": 0.5555555555555556,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "F01/Session1/0130",
+   "speaker": "F01",
+   "prompt": "Grandfather likes to be modern in his language.",
+   "mic": "head",
+   "audioMs": 5763,
+   "endedBy": "early",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "I'd probably like to be modeling in his language.",
+    "patient": "I'd probably like to be modeling in his language."
+   },
+   "wer": {
+    "fast": 0.5,
+    "patient": 0.5
+   },
+   "ordinary": {
+    "relayed": "I'd probably like to be modeling in his language.",
+    "invented": [
+     "probably"
+    ],
+    "inverted": false,
+    "wer": 0.5,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "I'd probably like to be modeling in his language.",
+    "invented": [
+     "probably"
+    ],
+    "inverted": false,
+    "wer": 0.5,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": "He is saying he would probably like to be modeling in his language.",
+    "invented": [
+     "probably"
+    ],
+    "inverted": false,
+    "wer": 1,
+    "wrong": true,
+    "action": "relay",
+    "rule": 8,
+    "reason": "grounded",
+    "advocate": "He is saying he would probably like to be modeling in his language.",
+    "models": 2
+   },
+   "careful": {
+    "text": "I'd probably like to be modeling in sign language.",
+    "wer": 0.625,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "F01/Session1/0132",
+   "speaker": "F01",
+   "prompt": "When he speaks, his voice is just a bit cracked and quivers a trifle.",
+   "mic": "head",
+   "audioMs": 9214,
+   "endedBy": "natural",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "When he speaks, his voice is covered in crack and huevos.",
+    "patient": "When he speaks, his voice is just a bit cracked and grimace, just a little bit."
+   },
+   "wer": {
+    "fast": 0.5,
+    "patient": 0.2857142857142857
+   },
+   "ordinary": {
+    "relayed": "When he speaks, his voice is covered in crack and huevos.",
+    "invented": [
+     "covered",
+     "huevos"
+    ],
+    "inverted": false,
+    "wer": 0.5,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "When he speaks, his voice is just a bit cracked and grimace, just a little bit.",
+    "invented": [
+     "grimace",
+     "little"
+    ],
+    "inverted": false,
+    "wer": 0.2857142857142857,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 6,
+    "reason": "low_confidence",
+    "advocate": "When he speaks, his voice is just a bit cracked and grimace.",
+    "models": 2
+   },
+   "careful": {
+    "text": "When he speaks, his voice is covered by crack and huevos. It's incredible.",
+    "wer": 0.5,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "F03/Session1/0030",
+   "speaker": "F03",
+   "prompt": "Except in the winter when the ozone or snow or ice prevents.",
+   "mic": "head",
+   "audioMs": 8305,
+   "endedBy": "natural",
+   "fastTurns": 3,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Except in the winter. When the ozone or snow or ice Prevents.",
+    "patient": "Except in the winter when the ozone or snow or ice prevents."
+   },
+   "wer": {
+    "fast": 0,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "Except in the winter. When the ozone or snow or ice Prevents.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "Except in the winter when the ozone or snow or ice prevents.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 4,
+    "reason": "readings_disagree",
+    "advocate": "He says except in the winter when the ozone or snow or ice prevents.",
+    "models": 2
+   },
+   "careful": {
+    "text": "Except in the winter when the ozone or snow or ice prevents",
+    "wer": 0,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "F03/Session1/0141",
+   "speaker": "F03",
+   "prompt": "Jane may earn more money by working hard.",
+   "mic": "head",
+   "audioMs": 3814,
+   "endedBy": "early",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Jane may earn more money by working hard.",
+    "patient": "Jane may earn more money by working hard."
+   },
+   "wer": {
+    "fast": 0,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "Jane may earn more money by working hard.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "Jane may earn more money by working hard.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "The caller says: Jane may earn more money by working hard.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "reason": "verbatim",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "Jane may earn more money by working hard.",
+    "wer": 0,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "F03/Session1/0185",
+   "speaker": "F03",
+   "prompt": "My sister made the flowered curtains.",
+   "mic": "head",
+   "audioMs": 3160,
+   "endedBy": "natural",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "My sister made the flower curtains.",
+    "patient": "My sister made the flower curtains."
+   },
+   "wer": {
+    "fast": 0.16666666666666666,
+    "patient": 0.16666666666666666
+   },
+   "ordinary": {
+    "relayed": "My sister made the flower curtains.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.16666666666666666,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "My sister made the flower curtains.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.16666666666666666,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "The caller says: My sister made the flower curtains.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.16666666666666666,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "reason": "verbatim",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "My sister made the flower curtains.",
+    "wer": 0.16666666666666666,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "F03/Session1/0194",
+   "speaker": "F03",
+   "prompt": "I just try to do my best.",
+   "mic": "head",
+   "audioMs": 3052,
+   "endedBy": "early",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "I just tried to do my best.",
+    "patient": "I just try to do my best."
+   },
+   "wer": {
+    "fast": 0.14285714285714285,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "I just tried to do my best.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.14285714285714285,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "I just try to do my best.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 5,
+    "reason": "skeptic_negation_risk",
+    "advocate": "He is saying he just tried to do his best.",
+    "models": 2
+   },
+   "careful": {
+    "text": "I just tried to do my best.",
+    "wer": 0.14285714285714285,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "F03/Session1/0196",
+   "speaker": "F03",
+   "prompt": "They carried me off on the stretcher.",
+   "mic": "head",
+   "audioMs": 3662,
+   "endedBy": "natural",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "They carry me off on the stretcher.",
+    "patient": "They carry me off on the stretcher."
+   },
+   "wer": {
+    "fast": 0.14285714285714285,
+    "patient": 0.14285714285714285
+   },
+   "ordinary": {
+    "relayed": "They carry me off on the stretcher.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.14285714285714285,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "They carry me off on the stretcher.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.14285714285714285,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "They carry me off on the stretcher.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.14285714285714285,
+    "wrong": false,
+    "action": "relay",
+    "rule": 8,
+    "reason": "grounded",
+    "advocate": "They carry me off on the stretcher.",
+    "models": 2
+   },
+   "careful": {
+    "text": "They carry me off on the stretcher.",
+    "wer": 0.14285714285714285,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "F03/Session2/0098",
+   "speaker": "F03",
+   "prompt": "The museum hires musicians every evening.",
+   "mic": "head",
+   "audioMs": 6159,
+   "endedBy": "early",
+   "fastTurns": 3,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Okay. The museum hires musicians. Every evening.",
+    "patient": "The museum hires musicians every evening."
+   },
+   "wer": {
+    "fast": 0.16666666666666666,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "Okay. The museum hires musicians. Every evening.",
+    "invented": [
+     "okay"
+    ],
+    "inverted": false,
+    "wer": 0.16666666666666666,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "The museum hires musicians every evening.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "He is saying the museum hires musicians every evening.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.5,
+    "wrong": false,
+    "action": "relay",
+    "rule": 8,
+    "reason": "grounded",
+    "advocate": "He is saying the museum hires musicians every evening.",
+    "models": 2
+   },
+   "careful": {
+    "text": "The museum hires musicians every evening.",
+    "wer": 0,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "F03/Session2/0147",
+   "speaker": "F03",
+   "prompt": "The misguided souls have lost their way.",
+   "mic": "head",
+   "audioMs": 4305,
+   "endedBy": "early",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "The misguided souls have lost their way.",
+    "patient": "The misguided souls have lost their way."
+   },
+   "wer": {
+    "fast": 0,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "The misguided souls have lost their way.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "The misguided souls have lost their way.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "The caller says: The misguided souls have lost their way.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "reason": "verbatim",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "The misguided souls have lost their way.",
+    "wer": 0,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "F03/Session3/0001",
+   "speaker": "F03",
+   "prompt": "Trespassers can be prosecuted and fined.",
+   "mic": "head",
+   "audioMs": 4909,
+   "endedBy": "early",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Trespassers can be prosecuted and fined.",
+    "patient": "Trespassers can be prosecuted and fined."
+   },
+   "wer": {
+    "fast": 0,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "Trespassers can be prosecuted and fined.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "Trespassers can be prosecuted and fined.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "The caller says: Trespassers can be prosecuted and fined.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "reason": "verbatim",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "Trespassers can be prosecuted and fined.",
+    "wer": 0,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "F03/Session3/0007",
+   "speaker": "F03",
+   "prompt": "People who value themselves are life's winners.",
+   "mic": "head",
+   "audioMs": 4203,
+   "endedBy": "natural",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "People who value themselves are life's winners.",
+    "patient": "People who value themselves are life's winners."
+   },
+   "wer": {
+    "fast": 0,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "People who value themselves are life's winners.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "People who value themselves are life's winners.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "The caller says: People who value themselves are life's winners.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "reason": "verbatim",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "People who value themselves are life's winners.",
+    "wer": 0,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "F03/Session3/0041",
+   "speaker": "F03",
+   "prompt": "Most young rise early every morning.",
+   "mic": "head",
+   "audioMs": 4514,
+   "endedBy": "early",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Rose Young writes early every morning.",
+    "patient": "Most young rise early every morning."
+   },
+   "wer": {
+    "fast": 0.3333333333333333,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "Rose Young writes early every morning.",
+    "invented": [
+     "rose",
+     "writes"
+    ],
+    "inverted": false,
+    "wer": 0.3333333333333333,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "Most young rise early every morning.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 6,
+    "reason": "low_confidence",
+    "advocate": "He is saying that Rose Young writes early every morning.",
+    "models": 2
+   },
+   "careful": {
+    "text": "Rose Young writes early every morning.",
+    "wer": 0.3333333333333333,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "F03/Session3/0055",
+   "speaker": "F03",
+   "prompt": "The results were very disappointing.",
+   "mic": "head",
+   "audioMs": 3705,
+   "endedBy": "natural",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "The results were very disappointing.",
+    "patient": "The results were very disappointing."
+   },
+   "wer": {
+    "fast": 0,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "The results were very disappointing.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "The results were very disappointing.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "The caller says: The results were very disappointing.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "reason": "verbatim",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "The results were very disappointing.",
+    "wer": 0,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "F03/Session3/0065",
+   "speaker": "F03",
+   "prompt": "There was only one decision to be made.",
+   "mic": "head",
+   "audioMs": 2658,
+   "endedBy": "early",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "There was only one decision to be made.",
+    "patient": "There was only one decision to be made."
+   },
+   "wer": {
+    "fast": 0,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "There was only one decision to be made.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "There was only one decision to be made.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "The caller says: There was only one decision to be made.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "reason": "verbatim",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "There was only one decision to be made.",
+    "wer": 0,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "F03/Session3/0101",
+   "speaker": "F03",
+   "prompt": "I've kept it with me ever since.",
+   "mic": "head",
+   "audioMs": 2657,
+   "endedBy": "early",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "I've kept it with me ever since.",
+    "patient": "I've kept it with me ever since."
+   },
+   "wer": {
+    "fast": 0,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "I've kept it with me ever since.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "I've kept it with me ever since.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "The caller says: I've kept it with me ever since.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "reason": "verbatim",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "I've kept it with me ever since.",
+    "wer": 0,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "F03/Session3/0117",
+   "speaker": "F03",
+   "prompt": "He is definitely a notch above us.",
+   "mic": "head",
+   "audioMs": 4011,
+   "endedBy": "natural",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "He definitely— he's definitely a notch above us.",
+    "patient": "He definitely— he's definitely a notch above us."
+   },
+   "wer": {
+    "fast": 0.2857142857142857,
+    "patient": 0.2857142857142857
+   },
+   "ordinary": {
+    "relayed": "He definitely— he's definitely a notch above us.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.2857142857142857,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "He definitely— he's definitely a notch above us.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.2857142857142857,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "The caller says: He definitely— he's definitely a notch above us.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.2857142857142857,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "reason": "verbatim",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "He definitely— he's definitely a notch above us.",
+    "wer": 0.2857142857142857,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "F03/Session3/0199",
+   "speaker": "F03",
+   "prompt": "Help Greg to pick a peck of potatoes.",
+   "mic": "head",
+   "audioMs": 4500,
+   "endedBy": "natural",
+   "fastTurns": 2,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Help Greg to pick— a pack of potatoes.",
+    "patient": "Help Greg to pick a pack of potatoes."
+   },
+   "wer": {
+    "fast": 0.125,
+    "patient": 0.125
+   },
+   "ordinary": {
+    "relayed": "Help Greg to pick— a pack of potatoes.",
+    "invented": [
+     "pack"
+    ],
+    "inverted": false,
+    "wer": 0.125,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "Help Greg to pick a pack of potatoes.",
+    "invented": [
+     "pack"
+    ],
+    "inverted": false,
+    "wer": 0.125,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": "The caller says: Help Greg to pick a pack of potatoes.",
+    "invented": [
+     "pack"
+    ],
+    "inverted": false,
+    "wer": 0.125,
+    "wrong": true,
+    "action": "relay",
+    "rule": 9,
+    "reason": "verbatim",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "Help Greg to pick a pack of potatoes.",
+    "wer": 0.125,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "F04/Session1/0046",
+   "speaker": "F04",
+   "prompt": "Well, he is nearly ninety-three years old;",
+   "mic": "array",
+   "audioMs": 4662,
+   "endedBy": "early",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Well, he is nearly 93 years old.",
+    "patient": "Well, he is nearly 93 years old."
+   },
+   "wer": {
+    "fast": 0.25,
+    "patient": 0.25
+   },
+   "ordinary": {
+    "relayed": "Well, he is nearly 93 years old.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.25,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "Well, he is nearly 93 years old.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.25,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "The caller says: Well, he is nearly 93 years old.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.25,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "reason": "verbatim",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "Well, he is nearly 93 years old.",
+    "wer": 0.25,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "F04/Session1/0091",
+   "speaker": "F04",
+   "prompt": "Except in the winter when the ooze or snow or ice prevents,",
+   "mic": "array",
+   "audioMs": 7051,
+   "endedBy": "early",
+   "fastTurns": 2,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Except in the winter when the oes or snow or ice prevents.",
+    "patient": "Except in the winter when the ooze or snow or ice prevents."
+   },
+   "wer": {
+    "fast": 0.08333333333333333,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "Except in the winter when the oes or snow or ice prevents.",
+    "invented": [
+     "oes"
+    ],
+    "inverted": false,
+    "wer": 0.08333333333333333,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "Except in the winter when the ooze or snow or ice prevents.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 4,
+    "reason": "readings_disagree",
+    "advocate": "He says except in the winter when the oes or snow or ice prevents.",
+    "models": 2
+   },
+   "careful": {
+    "text": "Except in the winter when the ooze or snow or ice prevents.",
+    "wer": 0,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "F04/Session1/0150",
+   "speaker": "F04",
+   "prompt": "Where were you while we were away?",
+   "mic": "array",
+   "audioMs": 3604,
+   "endedBy": "natural",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Where were you while we were away?",
+    "patient": "Where were you while we were away?"
+   },
+   "wer": {
+    "fast": 0,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "Where were you while we were away?",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "Where were you while we were away?",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "The caller says: Where were you while we were away?",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "reason": "verbatim",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "Where were you while we were away?",
+    "wer": 0,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "F04/Session1/0159",
+   "speaker": "F04",
+   "prompt": "If you destroy confidence in banks, you do something to the economy, he said.",
+   "mic": "array",
+   "audioMs": 7658,
+   "endedBy": "natural",
+   "fastTurns": 3,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "If you destroy confidence in banks, You do something to. The economy, he said.",
+    "patient": "If you destroy confidence in banks, you do something to the economy, he said."
+   },
+   "wer": {
+    "fast": 0,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "If you destroy confidence in banks, You do something to. The economy, he said.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "If you destroy confidence in banks, you do something to the economy, he said.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "The caller says: If you destroy confidence in banks, you do something to the economy, he said.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "reason": "verbatim",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "If you destroy confidence in banks, you do something to the economy, he said.",
+    "wer": 0,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "F04/Session1/0180",
+   "speaker": "F04",
+   "prompt": "Bright sunshine shimmers on the ocean.",
+   "mic": "array",
+   "audioMs": 3453,
+   "endedBy": "early",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Bright sunshine shimmers on the ocean.",
+    "patient": "Bright sunshine shimmers on the ocean."
+   },
+   "wer": {
+    "fast": 0,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "Bright sunshine shimmers on the ocean.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "Bright sunshine shimmers on the ocean.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "The caller says: Bright sunshine shimmers on the ocean.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "reason": "verbatim",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "Bright sunshine shimmers on the ocean.",
+    "wer": 0,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "F04/Session1/0184",
+   "speaker": "F04",
+   "prompt": "Two other cases also were under advisement.",
+   "mic": "array",
+   "audioMs": 7061,
+   "endedBy": "early",
+   "fastTurns": 2,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "2 other cases. Also were under advisement.",
+    "patient": "2 other cases also were under advisement."
+   },
+   "wer": {
+    "fast": 0,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "2 other cases. Also were under advisement.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "2 other cases also were under advisement.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 2,
+    "reason": "invented_words",
+    "advocate": "He said two other cases were also under advisement.",
+    "models": 2
+   },
+   "careful": {
+    "text": "2 other cases also were under advisement.",
+    "wer": 0,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "F04/Session2/0005",
+   "speaker": "F04",
+   "prompt": "I was conscious all the time.",
+   "mic": "head",
+   "audioMs": 3650,
+   "endedBy": "natural",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "I was conscious all the time.",
+    "patient": "I was conscious all the time."
+   },
+   "wer": {
+    "fast": 0,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "I was conscious all the time.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "I was conscious all the time.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "The caller says: I was conscious all the time.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "reason": "verbatim",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "I was conscious all the time.",
+    "wer": 0,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "F04/Session2/0009",
+   "speaker": "F04",
+   "prompt": "He will allow a rare lily...rare lie\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C",
+   "mic": "head",
+   "audioMs": 5309,
+   "endedBy": "early",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "He will allow a rare lily— rare lie.",
+    "patient": "He will allow a rare lily— rare lie."
+   },
+   "wer": {
+    "fast": 0.7142857142857143,
+    "patient": 0.7142857142857143
+   },
+   "ordinary": {
+    "relayed": "He will allow a rare lily— rare lie.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.7142857142857143,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "He will allow a rare lily— rare lie.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.7142857142857143,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "The caller says: He will allow a rare lily— rare lie.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.7142857142857143,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "reason": "verbatim",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "He will allow a rare lily— rare lie.",
+    "wer": 0.7142857142857143,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "F04/Session2/0057",
+   "speaker": "F04",
+   "prompt": "They carried me off on the stretcher.",
+   "mic": "head",
+   "audioMs": 5610,
+   "endedBy": "natural",
+   "fastTurns": 2,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "They carried me off. On this stretcher.",
+    "patient": "They carried me off on the stretcher."
+   },
+   "wer": {
+    "fast": 0.14285714285714285,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "They carried me off. On this stretcher.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.14285714285714285,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "They carried me off on the stretcher.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "They carried me off on the stretcher.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 8,
+    "reason": "grounded",
+    "advocate": "They carried me off on the stretcher.",
+    "models": 2
+   },
+   "careful": {
+    "text": "They carried me off on the stretcher.",
+    "wer": 0,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "F04/Session2/0115",
+   "speaker": "F04",
+   "prompt": "It also provides for funds to clear slums and help colleges build dormitories.",
+   "mic": "head",
+   "audioMs": 9761,
+   "endedBy": "early",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "It also provides for funds to clear slums and help colleges build dormitories.",
+    "patient": "It also provides for funds to clear slums and help colleges build dormitories."
+   },
+   "wer": {
+    "fast": 0,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "It also provides for funds to clear slums and help colleges build dormitories.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "It also provides for funds to clear slums and help colleges build dormitories.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "The caller says: It also provides for funds to clear slums and help colleges build dormitories.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "reason": "verbatim",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "It also provides for funds to clear slums and help colleges build dormitories.",
+    "wer": 0,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "F04/Session2/0128",
+   "speaker": "F04",
+   "prompt": "The dolphins swam around our boat.",
+   "mic": "head",
+   "audioMs": 5508,
+   "endedBy": "early",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "The dolphins swarmed around our boat.",
+    "patient": "The dolphins swarmed around our boat."
+   },
+   "wer": {
+    "fast": 0.16666666666666666,
+    "patient": 0.16666666666666666
+   },
+   "ordinary": {
+    "relayed": "The dolphins swarmed around our boat.",
+    "invented": [
+     "swarmed"
+    ],
+    "inverted": false,
+    "wer": 0.16666666666666666,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "The dolphins swarmed around our boat.",
+    "invented": [
+     "swarmed"
+    ],
+    "inverted": false,
+    "wer": 0.16666666666666666,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": "The caller says: The dolphins swarmed around our boat.",
+    "invented": [
+     "swarmed"
+    ],
+    "inverted": false,
+    "wer": 0.16666666666666666,
+    "wrong": true,
+    "action": "relay",
+    "rule": 9,
+    "reason": "verbatim",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "The dolphins swarm around our boat.",
+    "wer": 0.16666666666666666,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "F04/Session2/0140",
+   "speaker": "F04",
+   "prompt": "The box contained three sweaters.",
+   "mic": "head",
+   "audioMs": 4753,
+   "endedBy": "natural",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "The box contained 3 sweaters.",
+    "patient": "The box contained 3 sweaters."
+   },
+   "wer": {
+    "fast": 0,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "The box contained 3 sweaters.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "The box contained 3 sweaters.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "The caller says: The box contained 3 sweaters.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "reason": "verbatim",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "The box contained 3 sweaters.",
+    "wer": 0,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "F04/Session2/0144",
+   "speaker": "F04",
+   "prompt": "This is not a program of socialized medicine.",
+   "mic": "head",
+   "audioMs": 6510,
+   "endedBy": "early",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "This is not a program of socialized medicine.",
+    "patient": "This is not a program of socialized medicine."
+   },
+   "wer": {
+    "fast": 0,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "This is not a program of socialized medicine.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "This is not a program of socialized medicine.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "The caller says: This is not a program of socialized medicine.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "reason": "verbatim",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "This is not a program of socialized medicine.",
+    "wer": 0,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "F04/Session2/0193",
+   "speaker": "F04",
+   "prompt": "A roll of wire lay near the wall.",
+   "mic": "head",
+   "audioMs": 4563,
+   "endedBy": "early",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "A roll of wire lay near the wall.",
+    "patient": "A roll of wire lay near the wall."
+   },
+   "wer": {
+    "fast": 0,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "A roll of wire lay near the wall.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "A roll of wire lay near the wall.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "The caller says: A roll of wire lay near the wall.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "reason": "verbatim",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "A roll of wire lay near the wall.",
+    "wer": 0,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "F04/Session2/0220",
+   "speaker": "F04",
+   "prompt": "The pair of shoes was new.",
+   "mic": "head",
+   "audioMs": 4457,
+   "endedBy": "natural",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "The pair of shoes was new.",
+    "patient": "The pair of shoes was new."
+   },
+   "wer": {
+    "fast": 0,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "The pair of shoes was new.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "The pair of shoes was new.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "The caller says: The pair of shoes was new.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "reason": "verbatim",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "The pair of shoes was new.",
+    "wer": 0,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "M01/Session1/0041",
+   "speaker": "M01",
+   "prompt": "but he always answers, \"Banana oil!\"",
+   "mic": "head",
+   "audioMs": 7205,
+   "endedBy": "natural",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Birdie, all ender, banana oil.",
+    "patient": "But in the end, when am I?"
+   },
+   "wer": {
+    "fast": 0.6666666666666666,
+    "patient": 1
+   },
+   "ordinary": {
+    "relayed": "Birdie, all ender, banana oil.",
+    "invented": [
+     "birdie",
+     "ender"
+    ],
+    "inverted": false,
+    "wer": 0.6666666666666666,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "But in the end, when am I?",
+    "invented": [
+     "end",
+     "when"
+    ],
+    "inverted": false,
+    "wer": 1,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 4,
+    "reason": "readings_disagree",
+    "advocate": "But in the end when am I?",
+    "models": 2
+   },
+   "careful": {
+    "text": "Buddy, I'll end up burning me, I'll—",
+    "wer": 1.1666666666666667,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M01/Session2_3/0094",
+   "speaker": "M01",
+   "prompt": "I looked up and noticed two old men.",
+   "mic": "head",
+   "audioMs": 5952,
+   "endedBy": "natural",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "I looked up and nodded to Artman.",
+    "patient": "I looked up and nodded to Oddman."
+   },
+   "wer": {
+    "fast": 0.5,
+    "patient": 0.5
+   },
+   "ordinary": {
+    "relayed": "I looked up and nodded to Artman.",
+    "invented": [
+     "nodded",
+     "artman"
+    ],
+    "inverted": false,
+    "wer": 0.5,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "I looked up and nodded to Oddman.",
+    "invented": [
+     "nodded",
+     "oddman"
+    ],
+    "inverted": false,
+    "wer": 0.5,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": "He looked up and nodded to Oddman.",
+    "invented": [
+     "nodded",
+     "oddman"
+    ],
+    "inverted": false,
+    "wer": 0.625,
+    "wrong": true,
+    "action": "relay",
+    "rule": 8,
+    "reason": "grounded",
+    "advocate": "He looked up and nodded to Oddman.",
+    "models": 2
+   },
+   "careful": {
+    "text": "I looked up and nodded to Artman.",
+    "wer": 0.5,
+    "flagged": true,
+    "missing": [
+     "oddman"
+    ]
+   }
+  },
+  {
+   "id": "M01/Session2_3/0095",
+   "speaker": "M01",
+   "prompt": "I scrubbed the floors thoroughly.",
+   "mic": "head",
+   "audioMs": 6559,
+   "endedBy": "natural",
+   "fastTurns": 3,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "I— Scrub the floor. Yeah, really.",
+    "patient": "I scrub the floor thoroughly."
+   },
+   "wer": {
+    "fast": 0.8,
+    "patient": 0.4
+   },
+   "ordinary": {
+    "relayed": "I— Scrub the floor. Yeah, really.",
+    "invented": [
+     "yeah",
+     "really"
+    ],
+    "inverted": false,
+    "wer": 0.8,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "I scrub the floor thoroughly.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.4,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "He is scrubbing the floor thoroughly.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.8,
+    "wrong": false,
+    "action": "relay",
+    "rule": 8,
+    "reason": "grounded",
+    "advocate": "He is scrubbing the floor thoroughly.",
+    "models": 2
+   },
+   "careful": {
+    "text": "I scrub the floor thoroughly.",
+    "wer": 0.4,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "M01/Session2_3/0096",
+   "speaker": "M01",
+   "prompt": "I just try to do my best.",
+   "mic": "head",
+   "audioMs": 4515,
+   "endedBy": "early",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "I just tried to do my best.",
+    "patient": "I just tried to do my best."
+   },
+   "wer": {
+    "fast": 0.14285714285714285,
+    "patient": 0.14285714285714285
+   },
+   "ordinary": {
+    "relayed": "I just tried to do my best.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.14285714285714285,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "I just tried to do my best.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.14285714285714285,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "The caller says: I just tried to do my best.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.14285714285714285,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "reason": "verbatim",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "I just tried to do my best.",
+    "wer": 0.14285714285714285,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "M01/Session2_3/0125",
+   "speaker": "M01",
+   "prompt": "My sister made the flowered curtains.",
+   "mic": "head",
+   "audioMs": 6053,
+   "endedBy": "natural",
+   "fastTurns": 2,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "My little baby. The flower curtain.",
+    "patient": "My little baby, the brown curtain."
+   },
+   "wer": {
+    "fast": 0.6666666666666666,
+    "patient": 0.6666666666666666
+   },
+   "ordinary": {
+    "relayed": "My little baby. The flower curtain.",
+    "invented": [
+     "little",
+     "baby"
+    ],
+    "inverted": false,
+    "wer": 0.6666666666666666,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "My little baby, the brown curtain.",
+    "invented": [
+     "little",
+     "baby",
+     "brown"
+    ],
+    "inverted": false,
+    "wer": 0.6666666666666666,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 6,
+    "reason": "low_confidence",
+    "advocate": "He is saying my little baby the brown curtain.",
+    "models": 2
+   },
+   "careful": {
+    "text": "My little baby, the flower curtain.",
+    "wer": 0.6666666666666666,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M01/Session2_3/0188",
+   "speaker": "M01",
+   "prompt": "Aluminum silverware can often be flimsy.",
+   "mic": "head",
+   "audioMs": 9860,
+   "endedBy": "natural",
+   "fastTurns": 3,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Aluminum everywhere. Can I be the newbie? Fear me.",
+    "patient": "Aluminum everywhere. Can evidence be— feel me?"
+   },
+   "wer": {
+    "fast": 1,
+    "patient": 0.6666666666666666
+   },
+   "ordinary": {
+    "relayed": "Aluminum everywhere. Can I be the newbie? Fear me.",
+    "invented": [
+     "everywhere",
+     "newbie",
+     "fear"
+    ],
+    "inverted": false,
+    "wer": 1,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "Aluminum everywhere. Can evidence be— feel me?",
+    "invented": [
+     "everywhere",
+     "evidence",
+     "feel"
+    ],
+    "inverted": false,
+    "wer": 0.6666666666666666,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 4,
+    "reason": "readings_disagree",
+    "advocate": "He is asking if he can be the newbie and fear me.",
+    "models": 2
+   },
+   "careful": {
+    "text": "Aluminum everywhere can evidently kill me.",
+    "wer": 0.6666666666666666,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M01/Session2_3/0209",
+   "speaker": "M01",
+   "prompt": "Night after night, they received annoying phone calls.",
+   "mic": "head",
+   "audioMs": 7107,
+   "endedBy": "natural",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Night after night, they read in a 9-point font.",
+    "patient": "Night after night, they read in a 9-point font."
+   },
+   "wer": {
+    "fast": 0.75,
+    "patient": 0.75
+   },
+   "ordinary": {
+    "relayed": "Night after night, they read in a 9-point font.",
+    "invented": [
+     "read",
+     "nine",
+     "point",
+     "font"
+    ],
+    "inverted": false,
+    "wer": 0.75,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "Night after night, they read in a 9-point font.",
+    "invented": [
+     "read",
+     "nine",
+     "point",
+     "font"
+    ],
+    "inverted": false,
+    "wer": 0.75,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 6,
+    "reason": "low_confidence",
+    "advocate": "He is saying that they read in a 9-point font after night after night.",
+    "models": 2
+   },
+   "careful": {
+    "text": "Night after night, they read it and no one found God.",
+    "wer": 0.875,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M01/Session2_3/0222",
+   "speaker": "M01",
+   "prompt": "I expect we'll bounce back this week.",
+   "mic": "head",
+   "audioMs": 4601,
+   "endedBy": "early",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "I, I give back what you have bound back to me.",
+    "patient": "I, I give back what you have always been giving me."
+   },
+   "wer": {
+    "fast": 1.2857142857142858,
+    "patient": 1.4285714285714286
+   },
+   "ordinary": {
+    "relayed": "I, I give back what you have bound back to me.",
+    "invented": [
+     "give",
+     "what",
+     "bound"
+    ],
+    "inverted": false,
+    "wer": 1.2857142857142858,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "I, I give back what you have always been giving me.",
+    "invented": [
+     "give",
+     "what",
+     "always",
+     "giving"
+    ],
+    "inverted": false,
+    "wer": 1.4285714285714286,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 5,
+    "reason": "skeptic_negation_risk",
+    "advocate": "He is saying I give back what you have bound back to me.",
+    "models": 2
+   },
+   "careful": {
+    "text": "I, I give back what you have bound back to me.",
+    "wer": 1.2857142857142858,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M01/Session2_3/0232",
+   "speaker": "M01",
+   "prompt": "Before Thursday's exam, review every formula.",
+   "mic": "head",
+   "audioMs": 8156,
+   "endedBy": "natural",
+   "fastTurns": 2,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Be more dirty again, baby. I breathe for me.",
+    "patient": "Before your date again, I believe you. I believe for me."
+   },
+   "wer": {
+    "fast": 1.5,
+    "patient": 1.6666666666666667
+   },
+   "ordinary": {
+    "relayed": "Be more dirty again, baby. I breathe for me.",
+    "invented": [
+     "more",
+     "dirty",
+     "again",
+     "baby",
+     "breathe"
+    ],
+    "inverted": false,
+    "wer": 1.5,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "Before your date again, I believe you. I believe for me.",
+    "invented": [
+     "date",
+     "again",
+     "believe",
+     "believe"
+    ],
+    "inverted": false,
+    "wer": 1.6666666666666667,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 2,
+    "reason": "invented_words",
+    "advocate": "He is asking about his amlodipine.",
+    "models": 2
+   },
+   "careful": {
+    "text": "Before your date, I can't breathe you. I breathe for me.",
+    "wer": 1.6666666666666667,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M01/Session2_3/0239",
+   "speaker": "M01",
+   "prompt": "Alfalfa is healthy for you.",
+   "mic": "head",
+   "audioMs": 5454,
+   "endedBy": "natural",
+   "fastTurns": 2,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "I'm home. He's always here for you.",
+    "patient": "I'm Bob. He's always here for you."
+   },
+   "wer": {
+    "fast": 1,
+    "patient": 1
+   },
+   "ordinary": {
+    "relayed": "I'm home. He's always here for you.",
+    "invented": [
+     "home",
+     "always",
+     "here"
+    ],
+    "inverted": false,
+    "wer": 1,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "I'm Bob. He's always here for you.",
+    "invented": [
+     "bob",
+     "always",
+     "here"
+    ],
+    "inverted": false,
+    "wer": 1,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 6,
+    "reason": "low_confidence",
+    "advocate": "He's always here for you.",
+    "models": 2
+   },
+   "careful": {
+    "text": "And Baba is always here for you.",
+    "wer": 0.8,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M01/Session2_3/0242",
+   "speaker": "M01",
+   "prompt": "I have had my bell rung.",
+   "mic": "head",
+   "audioMs": 5111,
+   "endedBy": "natural",
+   "fastTurns": 2,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "I have held my breath. Borrow a room.",
+    "patient": "I have held my bow wrong."
+   },
+   "wer": {
+    "fast": 0.8333333333333334,
+    "patient": 0.5
+   },
+   "ordinary": {
+    "relayed": "I have held my breath. Borrow a room.",
+    "invented": [
+     "held",
+     "breath",
+     "borrow",
+     "room"
+    ],
+    "inverted": false,
+    "wer": 0.8333333333333334,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "I have held my bow wrong.",
+    "invented": [
+     "held",
+     "bow",
+     "wrong"
+    ],
+    "inverted": false,
+    "wer": 0.5,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 4,
+    "reason": "readings_disagree",
+    "advocate": "He is saying he has held his bow wrong.",
+    "models": 2
+   },
+   "careful": {
+    "text": "I have held my bow around.",
+    "wer": 0.5,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M01/Session2_3/0249",
+   "speaker": "M01",
+   "prompt": "The books are very expensive.",
+   "mic": "head",
+   "audioMs": 3905,
+   "endedBy": "natural",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "The books are very expensive.",
+    "patient": "The books are very expensive."
+   },
+   "wer": {
+    "fast": 0,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "The books are very expensive.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "The books are very expensive.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 4,
+    "reason": "readings_disagree",
+    "advocate": "He is saying the books are very expensive.",
+    "models": 2
+   },
+   "careful": {
+    "text": "The books are very expensive.",
+    "wer": 0,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M01/Session2_3/0254",
+   "speaker": "M01",
+   "prompt": "Students watched as he got out.",
+   "mic": "head",
+   "audioMs": 4514,
+   "endedBy": "natural",
+   "fastTurns": 2,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Do you need an adult? Kind of.",
+    "patient": "Do you think what I did kind of—"
+   },
+   "wer": {
+    "fast": 1.1666666666666667,
+    "patient": 1.3333333333333333
+   },
+   "ordinary": {
+    "relayed": "Do you need an adult? Kind of.",
+    "invented": [
+     "adult",
+     "kind"
+    ],
+    "inverted": false,
+    "wer": 1.1666666666666667,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "Do you think what I did kind of—",
+    "invented": [
+     "think",
+     "what",
+     "kind"
+    ],
+    "inverted": false,
+    "wer": 1.3333333333333333,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 4,
+    "reason": "readings_disagree",
+    "advocate": "He says kind of.",
+    "models": 2
+   },
+   "careful": {
+    "text": "Do you think what I did kind of...",
+    "wer": 1.3333333333333333,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M01/Session2_3/0262",
+   "speaker": "M01",
+   "prompt": "Carl lives in a lively home.",
+   "mic": "head",
+   "audioMs": 4958,
+   "endedBy": "natural",
+   "fastTurns": 2,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Kylie. In the library, oh.",
+    "patient": "Carly, in the name of—"
+   },
+   "wer": {
+    "fast": 0.8333333333333334,
+    "patient": 0.8333333333333334
+   },
+   "ordinary": {
+    "relayed": "Kylie. In the library, oh.",
+    "invented": [
+     "kylie",
+     "library"
+    ],
+    "inverted": false,
+    "wer": 0.8333333333333334,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "Carly, in the name of—",
+    "invented": [
+     "name"
+    ],
+    "inverted": false,
+    "wer": 0.8333333333333334,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 5,
+    "reason": "skeptic_negation_risk",
+    "advocate": "She said Kylie in the library.",
+    "models": 2
+   },
+   "careful": {
+    "text": "Caroline, in the name of the Lord.",
+    "wer": 1.1666666666666667,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M01/Session2_3/0278",
+   "speaker": "M01",
+   "prompt": "Both injuries were to the same leg.",
+   "mic": "head",
+   "audioMs": 6562,
+   "endedBy": "natural",
+   "fastTurns": 2,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "More injuries were due to They made",
+    "patient": "Both injuries were due to same leg."
+   },
+   "wer": {
+    "fast": 0.7142857142857143,
+    "patient": 0.2857142857142857
+   },
+   "ordinary": {
+    "relayed": "More injuries were due to They made",
+    "invented": [
+     "more",
+     "due",
+     "made"
+    ],
+    "inverted": false,
+    "wer": 0.7142857142857143,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "Both injuries were due to same leg.",
+    "invented": [
+     "due"
+    ],
+    "inverted": false,
+    "wer": 0.2857142857142857,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 4,
+    "reason": "readings_disagree",
+    "advocate": "Both injuries were due to same leg.",
+    "models": 2
+   },
+   "careful": {
+    "text": "Both injuries were to the same leg.",
+    "wer": 0,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M02/Session1/0044",
+   "speaker": "M02",
+   "prompt": "he dresses himself in an ancient black frock coat,",
+   "mic": "head",
+   "audioMs": 10161,
+   "endedBy": "natural",
+   "fastTurns": 3,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "He dresses himself and then ancient black rock. told.",
+    "patient": "He dresses himself in an ancient black frock coat."
+   },
+   "wer": {
+    "fast": 0.4444444444444444,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "He dresses himself and then ancient black rock. told.",
+    "invented": [
+     "rock",
+     "told"
+    ],
+    "inverted": false,
+    "wer": 0.4444444444444444,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "He dresses himself in an ancient black frock coat.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "He dresses himself in an ancient black frock coat.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 8,
+    "reason": "grounded",
+    "advocate": "He dresses himself in an ancient black frock coat.",
+    "models": 2
+   },
+   "careful": {
+    "text": "He dresses himself in an ancient black frock coat.",
+    "wer": 0,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "M02/Session1/0135",
+   "speaker": "M02",
+   "prompt": "Why yell or worry over silly items?",
+   "mic": "head",
+   "audioMs": 7514,
+   "endedBy": "natural",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Why yelp? I'm worried over silly items.",
+    "patient": "Why yelp over your silly items?"
+   },
+   "wer": {
+    "fast": 0.42857142857142855,
+    "patient": 0.5714285714285714
+   },
+   "ordinary": {
+    "relayed": "Why yelp? I'm worried over silly items.",
+    "invented": [
+     "yelp"
+    ],
+    "inverted": false,
+    "wer": 0.42857142857142855,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "Why yelp over your silly items?",
+    "invented": [
+     "yelp"
+    ],
+    "inverted": false,
+    "wer": 0.5714285714285714,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 4,
+    "reason": "readings_disagree",
+    "advocate": "He is asking why yelp over silly items.",
+    "models": 2
+   },
+   "careful": {
+    "text": "Why yelp or worry over silly items?",
+    "wer": 0.14285714285714285,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M02/Session1/0150",
+   "speaker": "M02",
+   "prompt": "Are your grades higher or lower than Nancy's?",
+   "mic": "head",
+   "audioMs": 7513,
+   "endedBy": "natural",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Are your grades higher or lower than Nancy's?",
+    "patient": "Are your grades higher or lower than Nancy's?"
+   },
+   "wer": {
+    "fast": 0,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "Are your grades higher or lower than Nancy's?",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "Are your grades higher or lower than Nancy's?",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "The caller says: Are your grades higher or lower than Nancy's?",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "reason": "verbatim",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "Are your grades higher or lower than Nancy's?",
+    "wer": 0,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "M02/Session1/0152",
+   "speaker": "M02",
+   "prompt": "You'd be better off taking a cold shower.",
+   "mic": "head",
+   "audioMs": 7265,
+   "endedBy": "early",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "You'd be better off taking a cold shower.",
+    "patient": "You'd be better off taking a cold shower."
+   },
+   "wer": {
+    "fast": 0,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "You'd be better off taking a cold shower.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "You'd be better off taking a cold shower.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "The caller says: You'd be better off taking a cold shower.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "reason": "verbatim",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "You'd be better off taking a cold shower.",
+    "wer": 0,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "M02/Session1/0184",
+   "speaker": "M02",
+   "prompt": "We gathered shells on the beach.",
+   "mic": "head",
+   "audioMs": 4958,
+   "endedBy": "natural",
+   "fastTurns": 2,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Forget the tears on the pillow. inch.",
+    "patient": "Forget the towels on the beach."
+   },
+   "wer": {
+    "fast": 0.8333333333333334,
+    "patient": 0.5
+   },
+   "ordinary": {
+    "relayed": "Forget the tears on the pillow. inch.",
+    "invented": [
+     "forget",
+     "tears",
+     "pillow",
+     "inch"
+    ],
+    "inverted": false,
+    "wer": 0.8333333333333334,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "Forget the towels on the beach.",
+    "invented": [
+     "forget",
+     "towels"
+    ],
+    "inverted": false,
+    "wer": 0.5,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 4,
+    "reason": "readings_disagree",
+    "advocate": "He is forgetting the towels on the beach.",
+    "models": 2
+   },
+   "careful": {
+    "text": "We gathered shells on the beach.",
+    "wer": 0,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M02/Session1/0196",
+   "speaker": "M02",
+   "prompt": "Their house is grey and white.",
+   "mic": "head",
+   "audioMs": 5552,
+   "endedBy": "natural",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Their house is gray and white.",
+    "patient": "Their house is gray and white."
+   },
+   "wer": {
+    "fast": 0.16666666666666666,
+    "patient": 0.16666666666666666
+   },
+   "ordinary": {
+    "relayed": "Their house is gray and white.",
+    "invented": [
+     "gray"
+    ],
+    "inverted": false,
+    "wer": 0.16666666666666666,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "Their house is gray and white.",
+    "invented": [
+     "gray"
+    ],
+    "inverted": false,
+    "wer": 0.16666666666666666,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 6,
+    "reason": "low_confidence",
+    "advocate": "Their house is gray and white.",
+    "models": 2
+   },
+   "careful": {
+    "text": "There are houses gray and white.",
+    "wer": 0.6666666666666666,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M02/Session1/0203",
+   "speaker": "M02",
+   "prompt": "She is thinner than I am.",
+   "mic": "head",
+   "audioMs": 4261,
+   "endedBy": "natural",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "She is the nerden alien.",
+    "patient": "See you soon. Adios."
+   },
+   "wer": {
+    "fast": 0.6666666666666666,
+    "patient": 1
+   },
+   "ordinary": {
+    "relayed": "She is the nerden alien.",
+    "invented": [
+     "nerden",
+     "alien"
+    ],
+    "inverted": false,
+    "wer": 0.6666666666666666,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "See you soon. Adios.",
+    "invented": [
+     "see",
+     "soon",
+     "adios"
+    ],
+    "inverted": false,
+    "wer": 1,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 5,
+    "reason": "skeptic_negation_risk",
+    "advocate": "See you soon adios.",
+    "models": 2
+   },
+   "careful": {
+    "text": "She yelled, then I ran.",
+    "wer": 0.6666666666666666,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M02/Session1/0208",
+   "speaker": "M02",
+   "prompt": "Just one side got wet.",
+   "mic": "head",
+   "audioMs": 4613,
+   "endedBy": "early",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Just once I got wet.",
+    "patient": "Just once I got wet."
+   },
+   "wer": {
+    "fast": 0.4,
+    "patient": 0.4
+   },
+   "ordinary": {
+    "relayed": "Just once I got wet.",
+    "invented": [
+     "once"
+    ],
+    "inverted": false,
+    "wer": 0.4,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "Just once I got wet.",
+    "invented": [
+     "once"
+    ],
+    "inverted": false,
+    "wer": 0.4,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": "He said he just once got wet.",
+    "invented": [
+     "once"
+    ],
+    "inverted": false,
+    "wer": 1,
+    "wrong": true,
+    "action": "relay",
+    "rule": 8,
+    "reason": "grounded",
+    "advocate": "He said he just once got wet.",
+    "models": 2
+   },
+   "careful": {
+    "text": "Just once I got wet.",
+    "wer": 0.4,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "M02/Session1/0210",
+   "speaker": "M02",
+   "prompt": "You're used to being on the field.",
+   "mic": "head",
+   "audioMs": 4657,
+   "endedBy": "natural",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "We're used to being on the field.",
+    "patient": "We're used to being on the field."
+   },
+   "wer": {
+    "fast": 0.14285714285714285,
+    "patient": 0.14285714285714285
+   },
+   "ordinary": {
+    "relayed": "We're used to being on the field.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.14285714285714285,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "We're used to being on the field.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.14285714285714285,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "The caller says: We're used to being on the field.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.14285714285714285,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "reason": "verbatim",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "We're used to being on the field.",
+    "wer": 0.14285714285714285,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "M02/Session1/0238",
+   "speaker": "M02",
+   "prompt": "The train approached the depot slowly.",
+   "mic": "head",
+   "audioMs": 6515,
+   "endedBy": "natural",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "The train evolved, then devolved slowly.",
+    "patient": "The train evolved, then evolved slowly."
+   },
+   "wer": {
+    "fast": 0.5,
+    "patient": 0.5
+   },
+   "ordinary": {
+    "relayed": "The train evolved, then devolved slowly.",
+    "invented": [
+     "evolved",
+     "devolved"
+    ],
+    "inverted": false,
+    "wer": 0.5,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "The train evolved, then evolved slowly.",
+    "invented": [
+     "evolved",
+     "evolved"
+    ],
+    "inverted": false,
+    "wer": 0.5,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 6,
+    "reason": "low_confidence",
+    "advocate": "The train evolved, then devolved slowly.",
+    "models": 2
+   },
+   "careful": {
+    "text": "The train evolved, then devolved slowly.",
+    "wer": 0.5,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M02/Session2/0098",
+   "speaker": "M02",
+   "prompt": "Aluminum silverware can often be flimsy.",
+   "mic": "head",
+   "audioMs": 9554,
+   "endedBy": "natural",
+   "fastTurns": 2,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "I love my name. Can I be friendly?",
+    "patient": "I love my name. Yeah, but what can happen big than big?"
+   },
+   "wer": {
+    "fast": 1,
+    "patient": 1.8333333333333333
+   },
+   "ordinary": {
+    "relayed": "I love my name. Can I be friendly?",
+    "invented": [
+     "love",
+     "name",
+     "friendly"
+    ],
+    "inverted": false,
+    "wer": 1,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "I love my name. Yeah, but what can happen big than big?",
+    "invented": [
+     "love",
+     "name",
+     "yeah",
+     "what",
+     "happen",
+     "big",
+     "than",
+     "big"
+    ],
+    "inverted": false,
+    "wer": 1.8333333333333333,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 2,
+    "reason": "invented_words",
+    "advocate": "He is saying he loves his name.",
+    "models": 2
+   },
+   "careful": {
+    "text": "I love my name, Deborah. Why can't I be Leslie?",
+    "wer": 1.5,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M02/Session2/0111",
+   "speaker": "M02",
+   "prompt": "Both injuries were to the same leg.",
+   "mic": "head",
+   "audioMs": 10000,
+   "endedBy": "natural",
+   "fastTurns": 3,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Bob's egg was there. Cute. Same leg.",
+    "patient": "Bob's and Judy's were the two that seemed like."
+   },
+   "wer": {
+    "fast": 0.7142857142857143,
+    "patient": 1.1428571428571428
+   },
+   "ordinary": {
+    "relayed": "Bob's egg was there. Cute. Same leg.",
+    "invented": [
+     "bob's",
+     "egg",
+     "there",
+     "cute"
+    ],
+    "inverted": false,
+    "wer": 0.7142857142857143,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "Bob's and Judy's were the two that seemed like.",
+    "invented": [
+     "bob's",
+     "judy's",
+     "two",
+     "seemed"
+    ],
+    "inverted": false,
+    "wer": 1.1428571428571428,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 6,
+    "reason": "low_confidence",
+    "advocate": "Bob's egg was there.",
+    "models": 2
+   },
+   "careful": {
+    "text": "Bob's injuries were the cut of the same leg.",
+    "wer": 0.5714285714285714,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M02/Session2/0202",
+   "speaker": "M02",
+   "prompt": "He further proposed grants of an unspecified sum for experimental hospitals.",
+   "mic": "head",
+   "audioMs": 15952,
+   "endedBy": "natural",
+   "fastTurns": 3,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "She fell upon Grant once. As a part of the experiment. High speed off.",
+    "patient": "He further performed grants of unspecified amount for experimental hospitals."
+   },
+   "wer": {
+    "fast": 1.2727272727272727,
+    "patient": 0.2727272727272727
+   },
+   "ordinary": {
+    "relayed": "She fell upon Grant once. As a part of the experiment. High speed off.",
+    "invented": [
+     "fell",
+     "upon",
+     "once",
+     "part",
+     "high",
+     "speed",
+     "off"
+    ],
+    "inverted": false,
+    "wer": 1.2727272727272727,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "He further performed grants of unspecified amount for experimental hospitals.",
+    "invented": [
+     "performed",
+     "amount"
+    ],
+    "inverted": false,
+    "wer": 0.2727272727272727,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 6,
+    "reason": "low_confidence",
+    "advocate": "He further performed grants of unspecified amount for experimental hospitals.",
+    "models": 2
+   },
+   "careful": {
+    "text": "He further proposed grants of unspecified sums for experimental hospitals.",
+    "wer": 0.18181818181818182,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M02/Session2/0204",
+   "speaker": "M02",
+   "prompt": "If you are losing water, replace it immediately.",
+   "mic": "head",
+   "audioMs": 9510,
+   "endedBy": "natural",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "If you are losing water, we play to the music.",
+    "patient": "If you are losing water, replace it immediately."
+   },
+   "wer": {
+    "fast": 0.625,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "If you are losing water, we play to the music.",
+    "invented": [
+     "play",
+     "music"
+    ],
+    "inverted": false,
+    "wer": 0.625,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "If you are losing water, replace it immediately.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 6,
+    "reason": "low_confidence",
+    "advocate": "If you are losing water, replace it immediately.",
+    "models": 2
+   },
+   "careful": {
+    "text": "If you are losing water, replace it with a drink.",
+    "wer": 0.375,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M02/Session2/0213",
+   "speaker": "M02",
+   "prompt": "The job provides many benefits.",
+   "mic": "head",
+   "audioMs": 7901,
+   "endedBy": "early",
+   "fastTurns": 2,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Good time. Provides many benefits.",
+    "patient": "The drive provides many benefits."
+   },
+   "wer": {
+    "fast": 0.4,
+    "patient": 0.2
+   },
+   "ordinary": {
+    "relayed": "Good time. Provides many benefits.",
+    "invented": [
+     "good",
+     "time"
+    ],
+    "inverted": false,
+    "wer": 0.4,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "The drive provides many benefits.",
+    "invented": [
+     "drive"
+    ],
+    "inverted": false,
+    "wer": 0.2,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": "He says the drive provides many benefits.",
+    "invented": [
+     "drive"
+    ],
+    "inverted": false,
+    "wer": 0.6,
+    "wrong": true,
+    "action": "relay",
+    "rule": 8,
+    "reason": "grounded",
+    "advocate": "He says the drive provides many benefits.",
+    "models": 2
+   },
+   "careful": {
+    "text": "Good time provides many benefits.",
+    "wer": 0.4,
+    "flagged": true,
+    "missing": [
+     "drive"
+    ]
+   }
+  },
+  {
+   "id": "M03/Session2/0045",
+   "speaker": "M03",
+   "prompt": "She had your dark suit in greasy wash water all year.",
+   "mic": "head",
+   "audioMs": 5158,
+   "endedBy": "natural",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "She had your dark suit in greasy wash water all year.",
+    "patient": "She had your dark suit in greasy wash water all year."
+   },
+   "wer": {
+    "fast": 0,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "She had your dark suit in greasy wash water all year.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "She had your dark suit in greasy wash water all year.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "The caller says: She had your dark suit in greasy wash water all year.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "reason": "verbatim",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "She had your dark suit in greasy wash water all year.",
+    "wer": 0,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "M03/Session2/0100",
+   "speaker": "M03",
+   "prompt": "he dresses himself in an ancient black frock coat,",
+   "mic": "head",
+   "audioMs": 5553,
+   "endedBy": "natural",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "He dresses himself in an ancient black frock coat.",
+    "patient": "He dresses himself in an ancient black frock coat."
+   },
+   "wer": {
+    "fast": 0,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "He dresses himself in an ancient black frock coat.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "He dresses himself in an ancient black frock coat.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "The caller says: He dresses himself in an ancient black frock coat.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "reason": "verbatim",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "He dresses himself in an ancient black frock coat.",
+    "wer": 0,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "M03/Session2/0115",
+   "speaker": "M03",
+   "prompt": "A long, flowing beard clings to his chin,",
+   "mic": "head",
+   "audioMs": 4302,
+   "endedBy": "early",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "A long flowing beard clings to his chin.",
+    "patient": "A long flowing beard clings to his chin."
+   },
+   "wer": {
+    "fast": 0,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "A long flowing beard clings to his chin.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "A long flowing beard clings to his chin.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 2,
+    "reason": "invented_words",
+    "advocate": "He is describing his long flowing beard clings to his chin.",
+    "models": 2
+   },
+   "careful": {
+    "text": "A long flowing beard clings to his chin.",
+    "wer": 0,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M03/Session2/0182",
+   "speaker": "M03",
+   "prompt": "I scrubbed the floors thoroughly.",
+   "mic": "head",
+   "audioMs": 3162,
+   "endedBy": "early",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "I scrubbed the floors thoroughly.",
+    "patient": "I, I scrubbed the floors thoroughly."
+   },
+   "wer": {
+    "fast": 0,
+    "patient": 0.2
+   },
+   "ordinary": {
+    "relayed": "I scrubbed the floors thoroughly.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "I, I scrubbed the floors thoroughly.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.2,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "He is saying he scrubbed the floors thoroughly.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.8,
+    "wrong": false,
+    "action": "relay",
+    "rule": 8,
+    "reason": "grounded",
+    "advocate": "He is saying he scrubbed the floors thoroughly.",
+    "models": 2
+   },
+   "careful": {
+    "text": "I scrubbed the floors thoroughly.",
+    "wer": 0,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "M03/Session2/0192",
+   "speaker": "M03",
+   "prompt": "Where were you while we were away?",
+   "mic": "head",
+   "audioMs": 4209,
+   "endedBy": "early",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Where were you while we were away?",
+    "patient": "Where were you while we were away?"
+   },
+   "wer": {
+    "fast": 0,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "Where were you while we were away?",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "Where were you while we were away?",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "The caller says: Where were you while we were away?",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "reason": "verbatim",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "Where were you while we were away?",
+    "wer": 0,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "M03/Session2/0198",
+   "speaker": "M03",
+   "prompt": "We gathered shells on the beach.",
+   "mic": "head",
+   "audioMs": 3831,
+   "endedBy": "early",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "We gathered shells on the beach.",
+    "patient": "We gathered shells on the beach."
+   },
+   "wer": {
+    "fast": 0,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "We gathered shells on the beach.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "We gathered shells on the beach.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "The caller says: We gathered shells on the beach.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "reason": "verbatim",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "We gathered shells on the beach.",
+    "wer": 0,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "M03/Session2/0211",
+   "speaker": "M03",
+   "prompt": "I feel I can play this weekend.",
+   "mic": "head",
+   "audioMs": 3808,
+   "endedBy": "early",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "I feel I can play this weekend.",
+    "patient": "I feel I can play this weekend."
+   },
+   "wer": {
+    "fast": 0,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "I feel I can play this weekend.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "I feel I can play this weekend.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "The caller says: I feel I can play this weekend.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "reason": "verbatim",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "I feel I can play this weekend.",
+    "wer": 0,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "M03/Session2/0260",
+   "speaker": "M03",
+   "prompt": "The little schoolhouse stood empty.",
+   "mic": "head",
+   "audioMs": 3812,
+   "endedBy": "natural",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "The little schoolhouse stood empty.",
+    "patient": "The little schoolhouse stood empty."
+   },
+   "wer": {
+    "fast": 0,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "The little schoolhouse stood empty.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "The little schoolhouse stood empty.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "The caller says: The little schoolhouse stood empty.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "reason": "verbatim",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "The little schoolhouse stood empty.",
+    "wer": 0,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "M03/Session2/0275",
+   "speaker": "M03",
+   "prompt": "Before Thursday's exam, review every formula.",
+   "mic": "head",
+   "audioMs": 6460,
+   "endedBy": "early",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Before Thursday's exam, review every formula.",
+    "patient": "Before Thursday's exam, re— review every formula."
+   },
+   "wer": {
+    "fast": 0,
+    "patient": 0.16666666666666666
+   },
+   "ordinary": {
+    "relayed": "Before Thursday's exam, review every formula.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "Before Thursday's exam, re— review every formula.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.16666666666666666,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "He is reviewing every formula before Thursday's exam.",
+    "invented": [],
+    "inverted": false,
+    "wer": 1.1666666666666667,
+    "wrong": false,
+    "action": "relay",
+    "rule": 8,
+    "reason": "grounded",
+    "advocate": "He is reviewing every formula before Thursday's exam.",
+    "models": 2
+   },
+   "careful": {
+    "text": "Before Thursday's exam, re— review every formula.",
+    "wer": 0.16666666666666666,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "M03/Session2/0318",
+   "speaker": "M03",
+   "prompt": "The box contained three sweaters.",
+   "mic": "head",
+   "audioMs": 4467,
+   "endedBy": "early",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "The box contained 3 sweaters.",
+    "patient": "The box contained 3 sweaters."
+   },
+   "wer": {
+    "fast": 0,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "The box contained 3 sweaters.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "The box contained 3 sweaters.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "The caller says: The box contained 3 sweaters.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "reason": "verbatim",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "The box contained 3 sweaters.",
+    "wer": 0,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "M03/Session2/0329",
+   "speaker": "M03",
+   "prompt": "He wrapped the package hastily.",
+   "mic": "head",
+   "audioMs": 3559,
+   "endedBy": "early",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "He wrapped the package hastily.",
+    "patient": "He wrapped the package hastily."
+   },
+   "wer": {
+    "fast": 0,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "He wrapped the package hastily.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "He wrapped the package hastily.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "The caller says: He wrapped the package hastily.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "reason": "verbatim",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "He wrapped the package hastily.",
+    "wer": 0,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "M03/Session2/0339",
+   "speaker": "M03",
+   "prompt": "The job provides many benefits.",
+   "mic": "head",
+   "audioMs": 4105,
+   "endedBy": "early",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "The job provides many benefits.",
+    "patient": "The job provides many benefits."
+   },
+   "wer": {
+    "fast": 0,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "The job provides many benefits.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "The job provides many benefits.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "The caller says: The job provides many benefits.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "reason": "verbatim",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "The job provides many benefits.",
+    "wer": 0,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "M03/Session2/0368",
+   "speaker": "M03",
+   "prompt": "Aluminum silverware can often be flimsy.",
+   "mic": "head",
+   "audioMs": 5015,
+   "endedBy": "early",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Aluminum silverware can often be flimsy.",
+    "patient": "Aluminum silverware can often be flimsy."
+   },
+   "wer": {
+    "fast": 0,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "Aluminum silverware can often be flimsy.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "Aluminum silverware can often be flimsy.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "The caller says: Aluminum silverware can often be flimsy.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "reason": "verbatim",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "Aluminum silverware can often be flimsy.",
+    "wer": 0,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "M03/Session2/0380",
+   "speaker": "M03",
+   "prompt": "If you are losing water, replace it immediately.",
+   "mic": "head",
+   "audioMs": 4551,
+   "endedBy": "early",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "If you are losing water, replace it immediately.",
+    "patient": "If you are losing water, replace it immediately."
+   },
+   "wer": {
+    "fast": 0,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "If you are losing water, replace it immediately.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "If you are losing water, replace it immediately.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "The caller says: If you are losing water, replace it immediately.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "reason": "verbatim",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "If you are losing water, replace it immediately.",
+    "wer": 0,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "M03/Session2/0400",
+   "speaker": "M03",
+   "prompt": "We bought a brown chair.",
+   "mic": "head",
+   "audioMs": 3404,
+   "endedBy": "early",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "We bought a brown chair.",
+    "patient": "We bought a brown chair."
+   },
+   "wer": {
+    "fast": 0,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "We bought a brown chair.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "We bought a brown chair.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "The caller says: We bought a brown chair.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "reason": "verbatim",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "We bought a brown chair.",
+    "wer": 0,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "M04/Session1/0040",
+   "speaker": "M04",
+   "prompt": "Grandfather likes to be modern in his language.",
+   "mic": "array",
+   "audioMs": 13354,
+   "endedBy": "natural",
+   "fastTurns": 5,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Good work. Like, dude. Be my ring. Mm-hmm. My good.",
+    "patient": "Grabbed water, like to be married in his language."
+   },
+   "wer": {
+    "fast": 1.25,
+    "patient": 0.5
+   },
+   "ordinary": {
+    "relayed": "Good work. Like, dude. Be my ring. Mm-hmm. My good.",
+    "invented": [
+     "good",
+     "work",
+     "dude",
+     "ring",
+     "hmm",
+     "good"
+    ],
+    "inverted": false,
+    "wer": 1.25,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "Grabbed water, like to be married in his language.",
+    "invented": [
+     "grabbed",
+     "water",
+     "married"
+    ],
+    "inverted": false,
+    "wer": 0.5,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 5,
+    "reason": "skeptic_negation_risk",
+    "advocate": "He grabbed water to be married in his language.",
+    "models": 2
+   },
+   "careful": {
+    "text": "Grab better, like to be my way in his language.",
+    "wer": 0.625,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M04/Session1/0063",
+   "speaker": "M04",
+   "prompt": "Except in the winter when the ooze or snow or ice prevents,",
+   "mic": "array",
+   "audioMs": 15763,
+   "endedBy": "natural",
+   "fastTurns": 5,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "It's that in the winter. When The opening. No. Oh, I, I didn't.",
+    "patient": "It set in in the winter when the old— or no, I put them—"
+   },
+   "wer": {
+    "fast": 0.6666666666666666,
+    "patient": 0.6666666666666666
+   },
+   "ordinary": {
+    "relayed": "It's that in the winter. When The opening. No. Oh, I, I didn't.",
+    "invented": [
+     "opening"
+    ],
+    "inverted": true,
+    "wer": 0.6666666666666666,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "It set in in the winter when the old— or no, I put them—",
+    "invented": [
+     "set",
+     "old",
+     "put"
+    ],
+    "inverted": true,
+    "wer": 0.6666666666666666,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 1,
+    "reason": "negation_disputed",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "It's certainly in the winter when the old— or no, or I put them",
+    "wer": 0.5833333333333334,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M04/Session1/0064",
+   "speaker": "M04",
+   "prompt": "he slowly takes a short walk in the open air each day.",
+   "mic": "array",
+   "audioMs": 10664,
+   "endedBy": "natural",
+   "fastTurns": 4,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "He's probably dead. Uh. Good work. In the open air, in the day.",
+    "patient": "He slowly didn't just walk in the open air each day."
+   },
+   "wer": {
+    "fast": 0.6666666666666666,
+    "patient": 0.25
+   },
+   "ordinary": {
+    "relayed": "He's probably dead. Uh. Good work. In the open air, in the day.",
+    "invented": [
+     "probably",
+     "dead",
+     "good",
+     "work"
+    ],
+    "inverted": false,
+    "wer": 0.6666666666666666,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "He slowly didn't just walk in the open air each day.",
+    "invented": [
+     "just"
+    ],
+    "inverted": true,
+    "wer": 0.25,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 1,
+    "reason": "negation_disputed",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "He floored me, then I couldn't walk in the open air. He did.",
+    "wer": 0.5833333333333334,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M04/Session2/0045",
+   "speaker": "M04",
+   "prompt": "We have often urged him to walk more and smoke less,",
+   "mic": "head",
+   "audioMs": 14907,
+   "endedBy": "natural",
+   "fastTurns": 4,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "We, um, I didn't. I didn't do it, but come on. And mugglin'.",
+    "patient": "We have often attempted to warn them and to make them learn."
+   },
+   "wer": {
+    "fast": 1.0909090909090908,
+    "patient": 0.7272727272727273
+   },
+   "ordinary": {
+    "relayed": "We, um, I didn't. I didn't do it, but come on. And mugglin'.",
+    "invented": [
+     "come",
+     "mugglin"
+    ],
+    "inverted": true,
+    "wer": 1.0909090909090908,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "We have often attempted to warn them and to make them learn.",
+    "invented": [
+     "attempted",
+     "warn",
+     "make",
+     "learn"
+    ],
+    "inverted": false,
+    "wer": 0.7272727272727273,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 1,
+    "reason": "negation_disputed",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "We are at the Timbuktu War Memorial in Timbuktu,",
+    "wer": 0.9090909090909091,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M04/Session2/0077",
+   "speaker": "M04",
+   "prompt": "You wished to know all about my grandfather.",
+   "mic": "head",
+   "audioMs": 11907,
+   "endedBy": "natural",
+   "fastTurns": 2,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "You want to know all. About my, my, my grandpa.",
+    "patient": "You want to know all about my, my, my grandfather?"
+   },
+   "wer": {
+    "fast": 0.5,
+    "patient": 0.375
+   },
+   "ordinary": {
+    "relayed": "You want to know all. About my, my, my grandpa.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.5,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "You want to know all about my, my, my grandfather?",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.375,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 6,
+    "reason": "low_confidence",
+    "advocate": "He wants to know all about his grandfather.",
+    "models": 2
+   },
+   "careful": {
+    "text": "You want to know all about my grandfather?",
+    "wer": 0.125,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M04/Session2/0098",
+   "speaker": "M04",
+   "prompt": "Well, he is nearly ninety-three years old;",
+   "mic": "head",
+   "audioMs": 8405,
+   "endedBy": "early",
+   "fastTurns": 3,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Why? He is really 93 years old.",
+    "patient": "Why, he is really 93 years old."
+   },
+   "wer": {
+    "fast": 0.5,
+    "patient": 0.5
+   },
+   "ordinary": {
+    "relayed": "Why? He is really 93 years old.",
+    "invented": [
+     "why",
+     "really"
+    ],
+    "inverted": false,
+    "wer": 0.5,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "Why, he is really 93 years old.",
+    "invented": [
+     "why",
+     "really"
+    ],
+    "inverted": false,
+    "wer": 0.5,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 6,
+    "reason": "low_confidence",
+    "advocate": "He is really 93 years old.",
+    "models": 2
+   },
+   "careful": {
+    "text": "Why, he is really 93 years old.",
+    "wer": 0.5,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M04/Session2/0157",
+   "speaker": "M04",
+   "prompt": "She is thinner than I am.",
+   "mic": "head",
+   "audioMs": 6863,
+   "endedBy": "early",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "To hit wood thinner than I am.",
+    "patient": "She was thinner than I am."
+   },
+   "wer": {
+    "fast": 0.5,
+    "patient": 0.16666666666666666
+   },
+   "ordinary": {
+    "relayed": "To hit wood thinner than I am.",
+    "invented": [
+     "hit",
+     "wood"
+    ],
+    "inverted": false,
+    "wer": 0.5,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "She was thinner than I am.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.16666666666666666,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 4,
+    "reason": "readings_disagree",
+    "advocate": "She was thinner than I am.",
+    "models": 2
+   },
+   "careful": {
+    "text": "to hit wood thinner than I am.",
+    "wer": 0.5,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M04/Session2/0168",
+   "speaker": "M04",
+   "prompt": "I tried to tell people in the community.",
+   "mic": "head",
+   "audioMs": 11711,
+   "endedBy": "natural",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "I try to tell people that the community",
+    "patient": "I try to tell people that the community—"
+   },
+   "wer": {
+    "fast": 0.25,
+    "patient": 0.25
+   },
+   "ordinary": {
+    "relayed": "I try to tell people that the community",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.25,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "I try to tell people that the community—",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.25,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 6,
+    "reason": "low_confidence",
+    "advocate": "He is trying to tell people that the community.",
+    "models": 2
+   },
+   "careful": {
+    "text": "I try to tell people that the community",
+    "wer": 0.25,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M04/Session2/0183",
+   "speaker": "M04",
+   "prompt": "He will allow a rare lie.",
+   "mic": "head",
+   "audioMs": 5705,
+   "endedBy": "natural",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "He will allow a lie.",
+    "patient": "He will allow a lie."
+   },
+   "wer": {
+    "fast": 0.16666666666666666,
+    "patient": 0.16666666666666666
+   },
+   "ordinary": {
+    "relayed": "He will allow a lie.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.16666666666666666,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "He will allow a lie.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.16666666666666666,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 6,
+    "reason": "low_confidence",
+    "advocate": "He will allow a lie.",
+    "models": 2
+   },
+   "careful": {
+    "text": "He will allow a lie.",
+    "wer": 0.16666666666666666,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M04/Session2/0187",
+   "speaker": "M04",
+   "prompt": "Why yell or worry over silly items?",
+   "mic": "head",
+   "audioMs": 7914,
+   "endedBy": "natural",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Why, yeah, we're in over for the item.",
+    "patient": "Why, yeah, we're in— over for the item."
+   },
+   "wer": {
+    "fast": 0.8571428571428571,
+    "patient": 0.8571428571428571
+   },
+   "ordinary": {
+    "relayed": "Why, yeah, we're in over for the item.",
+    "invented": [
+     "yeah"
+    ],
+    "inverted": false,
+    "wer": 0.8571428571428571,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "Why, yeah, we're in— over for the item.",
+    "invented": [
+     "yeah"
+    ],
+    "inverted": false,
+    "wer": 0.8571428571428571,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 6,
+    "reason": "low_confidence",
+    "advocate": "He is saying why we're in over for the item.",
+    "models": 2
+   },
+   "careful": {
+    "text": "Why are you worrying over the item?",
+    "wer": 0.7142857142857143,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M04/Session2/0242",
+   "speaker": "M04",
+   "prompt": "I looked up and noticed two old men.",
+   "mic": "head",
+   "audioMs": 9250,
+   "endedBy": "natural",
+   "fastTurns": 2,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Hallelujah, Ab. And I did, I did do all men.",
+    "patient": "I looked up and there were 2 old men."
+   },
+   "wer": {
+    "fast": 1.125,
+    "patient": 0.25
+   },
+   "ordinary": {
+    "relayed": "Hallelujah, Ab. And I did, I did do all men.",
+    "invented": [
+     "hallelujah"
+    ],
+    "inverted": false,
+    "wer": 1.125,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "I looked up and there were 2 old men.",
+    "invented": [
+     "there"
+    ],
+    "inverted": false,
+    "wer": 0.25,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 2,
+    "reason": "invented_words",
+    "advocate": "He looked up and there were two old men.",
+    "models": 2
+   },
+   "careful": {
+    "text": "I let up, and I didn't know what to do, man.",
+    "wer": 1,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M04/Session2/0248",
+   "speaker": "M04",
+   "prompt": "Nothing is as offensive as innocence.",
+   "mic": "head",
+   "audioMs": 8764,
+   "endedBy": "natural",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Nothing in the bed there.",
+    "patient": "Nothing in—"
+   },
+   "wer": {
+    "fast": 0.8333333333333334,
+    "patient": 0.8333333333333334
+   },
+   "ordinary": {
+    "relayed": "Nothing in the bed there.",
+    "invented": [
+     "bed",
+     "there"
+    ],
+    "inverted": false,
+    "wer": 0.8333333333333334,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "Nothing in—",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.8333333333333334,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 4,
+    "reason": "readings_disagree",
+    "advocate": "He is saying nothing in the bed there.",
+    "models": 2
+   },
+   "careful": {
+    "text": "Nothing in the defendant's head,",
+    "wer": 0.8333333333333334,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M04/Session2/0281",
+   "speaker": "M04",
+   "prompt": "Aluminum silverware can often be flimsy.",
+   "mic": "head",
+   "audioMs": 12401,
+   "endedBy": "natural",
+   "fastTurns": 4,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Hello, Binyam. So we're aware. Glad to be with you. Sunday.",
+    "patient": "How long have you been sober? Can I have a drink?"
+   },
+   "wer": {
+    "fast": 1.6666666666666667,
+    "patient": 1.6666666666666667
+   },
+   "ordinary": {
+    "relayed": "Hello, Binyam. So we're aware. Glad to be with you. Sunday.",
+    "invented": [
+     "hello",
+     "binyam",
+     "aware",
+     "glad",
+     "sunday"
+    ],
+    "inverted": false,
+    "wer": 1.6666666666666667,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "How long have you been sober? Can I have a drink?",
+    "invented": [
+     "how",
+     "long",
+     "sober",
+     "drink"
+    ],
+    "inverted": false,
+    "wer": 1.6666666666666667,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 2,
+    "reason": "invented_words",
+    "advocate": "He is asking about his amlodipine.",
+    "models": 2
+   },
+   "careful": {
+    "text": "حلب يوم ثروة كنعد بيبزندي",
+    "wer": 1,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M04/Session2/0285",
+   "speaker": "M04",
+   "prompt": "I expect we'll bounce back this week.",
+   "mic": "head",
+   "audioMs": 15364,
+   "endedBy": "natural",
+   "fastTurns": 2,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "I've been born I bet we're bound down and did we.",
+    "patient": "I bet we'll build a barn this week."
+   },
+   "wer": {
+    "fast": 1.4285714285714286,
+    "patient": 0.5714285714285714
+   },
+   "ordinary": {
+    "relayed": "I've been born I bet we're bound down and did we.",
+    "invented": [
+     "born",
+     "bet",
+     "bound",
+     "down"
+    ],
+    "inverted": false,
+    "wer": 1.4285714285714286,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "I bet we'll build a barn this week.",
+    "invented": [
+     "bet",
+     "build",
+     "barn"
+    ],
+    "inverted": false,
+    "wer": 0.5714285714285714,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 2,
+    "reason": "invented_words",
+    "advocate": "He is asking about his amlodipine.",
+    "models": 2
+   },
+   "careful": {
+    "text": "I bet we'll build a barn this week.",
+    "wer": 0.5714285714285714,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M04/Session2/0291",
+   "speaker": "M04",
+   "prompt": "Nothing has been done yet to take advantage of the enabling legislation.",
+   "mic": "head",
+   "audioMs": 17458,
+   "endedBy": "natural",
+   "fastTurns": 2,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Nothing. And then, then, yeah, you do take, take, and then, um,",
+    "patient": "Nothing had been done yet to take advantage of them."
+   },
+   "wer": {
+    "fast": 0.9166666666666666,
+    "patient": 0.3333333333333333
+   },
+   "ordinary": {
+    "relayed": "Nothing. And then, then, yeah, you do take, take, and then, um,",
+    "invented": [
+     "yeah"
+    ],
+    "inverted": false,
+    "wer": 0.9166666666666666,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "Nothing had been done yet to take advantage of them.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.3333333333333333,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 4,
+    "reason": "readings_disagree",
+    "advocate": "Nothing has been done yet to take advantage of them.",
+    "models": 2
+   },
+   "careful": {
+    "text": "Nothing had been done yet to take advantage of the disabled.",
+    "wer": 0.25,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M05/Session1/0057",
+   "speaker": "M05",
+   "prompt": "he slowly takes a short walk in the open air each day.",
+   "mic": "head",
+   "audioMs": 10999,
+   "endedBy": "early",
+   "fastTurns": 2,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "He slowly takes a walk. In the open air each day.",
+    "patient": "He surely takes a walk in the open air each day."
+   },
+   "wer": {
+    "fast": 0.08333333333333333,
+    "patient": 0.16666666666666666
+   },
+   "ordinary": {
+    "relayed": "He slowly takes a walk. In the open air each day.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.08333333333333333,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "He surely takes a walk in the open air each day.",
+    "invented": [
+     "surely"
+    ],
+    "inverted": false,
+    "wer": 0.16666666666666666,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": "He surely takes a walk in the open air each day.",
+    "invented": [
+     "surely"
+    ],
+    "inverted": false,
+    "wer": 0.16666666666666666,
+    "wrong": true,
+    "action": "relay",
+    "rule": 8,
+    "reason": "grounded",
+    "advocate": "He surely takes a walk in the open air each day.",
+    "models": 2
+   },
+   "careful": {
+    "text": "He surely takes a walk in the open air each day.",
+    "wer": 0.16666666666666666,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "M05/Session1/0077",
+   "speaker": "M05",
+   "prompt": "yet he still thinks as swiftly as ever.",
+   "mic": "head",
+   "audioMs": 10160,
+   "endedBy": "natural",
+   "fastTurns": 2,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Yet he still thinks I'd switch the ad offer.",
+    "patient": "Yet he still thinks I'd switch the ad ever."
+   },
+   "wer": {
+    "fast": 0.625,
+    "patient": 0.5
+   },
+   "ordinary": {
+    "relayed": "Yet he still thinks I'd switch the ad offer.",
+    "invented": [
+     "switch",
+     "offer"
+    ],
+    "inverted": false,
+    "wer": 0.625,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "Yet he still thinks I'd switch the ad ever.",
+    "invented": [
+     "switch"
+    ],
+    "inverted": false,
+    "wer": 0.5,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 4,
+    "reason": "readings_disagree",
+    "advocate": "He still thinks I'd switch the ad offer.",
+    "models": 2
+   },
+   "careful": {
+    "text": "yet he still thinks and swears thee an ever.",
+    "wer": 0.5,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M05/Session1/0101",
+   "speaker": "M05",
+   "prompt": "Grandfather likes to be modern in his language.",
+   "mic": "head",
+   "audioMs": 12503,
+   "endedBy": "early",
+   "fastTurns": 2,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Grandfather Lake. Very modern in his language.",
+    "patient": "Grandfather liked to read modern in his language."
+   },
+   "wer": {
+    "fast": 0.375,
+    "patient": 0.25
+   },
+   "ordinary": {
+    "relayed": "Grandfather Lake. Very modern in his language.",
+    "invented": [
+     "lake"
+    ],
+    "inverted": false,
+    "wer": 0.375,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "Grandfather liked to read modern in his language.",
+    "invented": [
+     "read"
+    ],
+    "inverted": false,
+    "wer": 0.25,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 6,
+    "reason": "low_confidence",
+    "advocate": "Grandfather liked to read modern in his language.",
+    "models": 2
+   },
+   "careful": {
+    "text": "Grandfather likes to be modern in his language.",
+    "wer": 0,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M05/Session2/0002",
+   "speaker": "M05",
+   "prompt": "Where were you while we were away?",
+   "mic": "head",
+   "audioMs": 7664,
+   "endedBy": "early",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Where were you while we were away?",
+    "patient": "Where were you while we were away?"
+   },
+   "wer": {
+    "fast": 0,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "Where were you while we were away?",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "Where were you while we were away?",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "The caller says: Where were you while we were away?",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "reason": "verbatim",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "Where were you while we were away?",
+    "wer": 0,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "M05/Session2/0049",
+   "speaker": "M05",
+   "prompt": "The islands are sparsely populated.",
+   "mic": "head",
+   "audioMs": 8914,
+   "endedBy": "natural",
+   "fastTurns": 4,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "The island. Uh. Wait. The populated.",
+    "patient": "The island of the people."
+   },
+   "wer": {
+    "fast": 0.8,
+    "patient": 0.8
+   },
+   "ordinary": {
+    "relayed": "The island. Uh. Wait. The populated.",
+    "invented": [
+     "wait"
+    ],
+    "inverted": false,
+    "wer": 0.8,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "The island of the people.",
+    "invented": [
+     "people"
+    ],
+    "inverted": false,
+    "wer": 0.8,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 5,
+    "reason": "skeptic_negation_risk",
+    "advocate": "He is saying the island of the people.",
+    "models": 2
+   },
+   "careful": {
+    "text": "The islands are supposed to be populated.",
+    "wer": 0.6,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M05/Session2/0101",
+   "speaker": "M05",
+   "prompt": "The humidity is overwhelming there.",
+   "mic": "head",
+   "audioMs": 8758,
+   "endedBy": "natural",
+   "fastTurns": 2,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "The humidity is overwhelming. Ew.",
+    "patient": "The humidity is overwhelming here."
+   },
+   "wer": {
+    "fast": 0.2,
+    "patient": 0.2
+   },
+   "ordinary": {
+    "relayed": "The humidity is overwhelming. Ew.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.2,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "The humidity is overwhelming here.",
+    "invented": [
+     "here"
+    ],
+    "inverted": false,
+    "wer": 0.2,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": "He says the humidity is overwhelming.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.6,
+    "wrong": false,
+    "action": "relay",
+    "rule": 8,
+    "reason": "grounded",
+    "advocate": "He says the humidity is overwhelming.",
+    "models": 2
+   },
+   "careful": {
+    "text": "The humidity is overwhelming here.",
+    "wer": 0.2,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "M05/Session2/0236",
+   "speaker": "M05",
+   "prompt": "The misguided souls have lost their way.",
+   "mic": "head",
+   "audioMs": 9512,
+   "endedBy": "natural",
+   "fastTurns": 3,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "The misguided soul. Have lost. No way.",
+    "patient": "The misguided souls have lost their way."
+   },
+   "wer": {
+    "fast": 0.2857142857142857,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "The misguided soul. Have lost. No way.",
+    "invented": [],
+    "inverted": true,
+    "wer": 0.2857142857142857,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "The misguided souls have lost their way.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 1,
+    "reason": "negation_disputed",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "The misguided souls have lost their way.",
+    "wer": 0,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M05/Session2/0265",
+   "speaker": "M05",
+   "prompt": "Carl lives in a lively home.",
+   "mic": "head",
+   "audioMs": 9965,
+   "endedBy": "natural",
+   "fastTurns": 3,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Clearly. In a library. Who?",
+    "patient": "Go away, lady. I need a life of my own."
+   },
+   "wer": {
+    "fast": 0.6666666666666666,
+    "patient": 1.5
+   },
+   "ordinary": {
+    "relayed": "Clearly. In a library. Who?",
+    "invented": [
+     "clearly",
+     "library",
+     "who"
+    ],
+    "inverted": false,
+    "wer": 0.6666666666666666,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "Go away, lady. I need a life of my own.",
+    "invented": [
+     "away",
+     "lady",
+     "life",
+     "own"
+    ],
+    "inverted": false,
+    "wer": 1.5,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 5,
+    "reason": "skeptic_negation_risk",
+    "advocate": "He is saying he needs a life of his own.",
+    "models": 2
+   },
+   "careful": {
+    "text": "Go away, in a lively home.",
+    "wer": 0.3333333333333333,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M05/Session2/0275",
+   "speaker": "M05",
+   "prompt": "Did dad do academic bidding?",
+   "mic": "head",
+   "audioMs": 7665,
+   "endedBy": "natural",
+   "fastTurns": 2,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "でだるいけん。 デミックビルディング。",
+    "patient": "Dede diyor erken demek bir din."
+   },
+   "wer": {
+    "fast": 1,
+    "patient": 1.2
+   },
+   "ordinary": {
+    "relayed": "でだるいけん。 デミックビルディング。",
+    "invented": [],
+    "inverted": false,
+    "wer": 1,
+    "wrong": false
+   },
+   "patient": {
+    "relayed": "Dede diyor erken demek bir din.",
+    "invented": [
+     "dede",
+     "diyor",
+     "erken",
+     "demek",
+     "bir",
+     "din"
+    ],
+    "inverted": false,
+    "wer": 1.2,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 4,
+    "reason": "readings_disagree",
+    "advocate": "Dede diyor erken demek bir din.",
+    "models": 2
+   },
+   "careful": {
+    "text": "Did that do a kingdom building?",
+    "wer": 0.8,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M05/Session2/0305",
+   "speaker": "M05",
+   "prompt": "He really crucified him; he nailed it for a yard loss.",
+   "mic": "head",
+   "audioMs": 12508,
+   "endedBy": "natural",
+   "fastTurns": 5,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "He recrucified himself. He knew. It. Was a. You'd.",
+    "patient": "He recrucified himself. He named it for a yodel."
+   },
+   "wer": {
+    "fast": 0.6363636363636364,
+    "patient": 0.5454545454545454
+   },
+   "ordinary": {
+    "relayed": "He recrucified himself. He knew. It. Was a. You'd.",
+    "invented": [
+     "recrucified",
+     "himself",
+     "knew"
+    ],
+    "inverted": false,
+    "wer": 0.6363636363636364,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "He recrucified himself. He named it for a yodel.",
+    "invented": [
+     "recrucified",
+     "himself",
+     "named",
+     "yodel"
+    ],
+    "inverted": false,
+    "wer": 0.5454545454545454,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 6,
+    "reason": "low_confidence",
+    "advocate": "He recrucified himself.",
+    "models": 2
+   },
+   "careful": {
+    "text": "He really crucified himself. He nailed it for a yard.",
+    "wer": 0.18181818181818182,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M05/Session2/0321",
+   "speaker": "M05",
+   "prompt": "Beg that guard for one gallon of gas.",
+   "mic": "head",
+   "audioMs": 9657,
+   "endedBy": "early",
+   "fastTurns": 3,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Big red. Good. For 1 gallon of gas.",
+    "patient": "Big that good for 1 gallon of gas."
+   },
+   "wer": {
+    "fast": 0.375,
+    "patient": 0.25
+   },
+   "ordinary": {
+    "relayed": "Big red. Good. For 1 gallon of gas.",
+    "invented": [
+     "big",
+     "red",
+     "good"
+    ],
+    "inverted": false,
+    "wer": 0.375,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "Big that good for 1 gallon of gas.",
+    "invented": [
+     "big",
+     "good"
+    ],
+    "inverted": false,
+    "wer": 0.25,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 2,
+    "reason": "invented_words",
+    "advocate": "He is saying big red is good for one gallon of gas.",
+    "models": 2
+   },
+   "careful": {
+    "text": "Make that good for 1 gallon of gas.",
+    "wer": 0.25,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M05/Session2/0381",
+   "speaker": "M05",
+   "prompt": "Although always again again",
+   "mic": "head",
+   "audioMs": 8151,
+   "endedBy": "early",
+   "fastTurns": 2,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Uh, though, are we— Again, again.",
+    "patient": "I know, always again, again."
+   },
+   "wer": {
+    "fast": 1,
+    "patient": 0.5
+   },
+   "ordinary": {
+    "relayed": "Uh, though, are we— Again, again.",
+    "invented": [
+     "though"
+    ],
+    "inverted": false,
+    "wer": 1,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "I know, always again, again.",
+    "invented": [
+     "know"
+    ],
+    "inverted": false,
+    "wer": 0.5,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 2,
+    "reason": "invented_words",
+    "advocate": "He is saying he knows again and again.",
+    "models": 2
+   },
+   "careful": {
+    "text": "Although, always again, again, again,",
+    "wer": 0.25,
+    "flagged": null,
+    "missing": []
+   }
+  },
+  {
+   "id": "M05/Session2/0385",
+   "speaker": "M05",
+   "prompt": "Only lawyers love millionaires.",
+   "mic": "head",
+   "audioMs": 9413,
+   "endedBy": "natural",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "Only those that have millionaires.",
+    "patient": "Only lawyers love millionaires."
+   },
+   "wer": {
+    "fast": 0.75,
+    "patient": 0
+   },
+   "ordinary": {
+    "relayed": "Only those that have millionaires.",
+    "invented": [
+     "those"
+    ],
+    "inverted": false,
+    "wer": 0.75,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "Only lawyers love millionaires.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false
+   },
+   "oneMoment": {
+    "relayed": "Only those that have millionaires.",
+    "invented": [
+     "those"
+    ],
+    "inverted": false,
+    "wer": 0.75,
+    "wrong": true,
+    "action": "relay",
+    "rule": 8,
+    "reason": "grounded",
+    "advocate": "Only those that have millionaires.",
+    "models": 2
+   },
+   "careful": {
+    "text": "Uniroyals love melding mix.",
+    "wer": 1,
+    "flagged": true,
+    "missing": [
+     "only",
+     "those",
+     "millionaires"
+    ]
+   }
+  },
+  {
+   "id": "M05/Session2/0387",
+   "speaker": "M05",
+   "prompt": "He is definitely a notch above us.",
+   "mic": "head",
+   "audioMs": 8500,
+   "endedBy": "early",
+   "fastTurns": 1,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "He is definitely not above us.",
+    "patient": "He is definitely not above us."
+   },
+   "wer": {
+    "fast": 0.2857142857142857,
+    "patient": 0.2857142857142857
+   },
+   "ordinary": {
+    "relayed": "He is definitely not above us.",
+    "invented": [],
+    "inverted": true,
+    "wer": 0.2857142857142857,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "He is definitely not above us.",
+    "invented": [],
+    "inverted": true,
+    "wer": 0.2857142857142857,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": "The caller says: He is definitely not above us.",
+    "invented": [],
+    "inverted": true,
+    "wer": 0.2857142857142857,
+    "wrong": true,
+    "action": "relay",
+    "rule": 9,
+    "reason": "verbatim",
+    "advocate": null,
+    "models": 0
+   },
+   "careful": {
+    "text": "He is definitely not above us.",
+    "wer": 0.2857142857142857,
+    "flagged": false,
+    "missing": []
+   }
+  },
+  {
+   "id": "M05/Session2/0393",
+   "speaker": "M05",
+   "prompt": "the pair of shoes was new",
+   "mic": "head",
+   "audioMs": 5457,
+   "endedBy": "natural",
+   "fastTurns": 2,
+   "patientTurns": 1,
+   "heard": {
+    "fast": "The big issue. We knew.",
+    "patient": "The big shoes are new."
+   },
+   "wer": {
+    "fast": 0.8333333333333334,
+    "patient": 0.5
+   },
+   "ordinary": {
+    "relayed": "The big issue. We knew.",
+    "invented": [
+     "big",
+     "issue",
+     "knew"
+    ],
+    "inverted": false,
+    "wer": 0.8333333333333334,
+    "wrong": true
+   },
+   "patient": {
+    "relayed": "The big shoes are new.",
+    "invented": [
+     "big"
+    ],
+    "inverted": false,
+    "wer": 0.5,
+    "wrong": true
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 5,
+    "reason": "skeptic_negation_risk",
+    "advocate": "The big shoes are new.",
+    "models": 2
+   },
+   "careful": {
+    "text": "The big shoes are new.",
+    "wer": 0.5,
+    "flagged": null,
+    "missing": []
+   }
+  }
+ ]
+}

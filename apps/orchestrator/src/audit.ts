@@ -14,7 +14,7 @@
 // Only with audio the caller agreed to keep (always, for the recorded demo
 // caller). The audio goes to AssemblyAI for this and nowhere else.
 
-import { contentWords, disagreementRate, normalizeTokens, swallowedSilenceMs, type CallAudit, type StreamTurn } from '@one-moment/core';
+import { contentWords, disagreementRate, FRAMING, normalizeTokens, swallowedSilenceMs, type CallAudit, type StreamTurn } from '@one-moment/core';
 
 const BASE = 'https://api.assemblyai.com/v2';
 
@@ -71,7 +71,8 @@ export function grade(args: {
   const relays = args.relays.map((said) => {
     // "Robert says:" is framing we add, not a claim about what he said.
     const body = said.replace(/^[^:]{1,40}\bsays:\s*/i, '');
-    const unheard = contentWords(body).filter((w) => !nameWords.has(w) && !near(w));
+    // Reporting words the relay adds ("He is saying ...") are not claims about what was said.
+    const unheard = contentWords(body).filter((w) => !nameWords.has(w) && !FRAMING.has(w) && !near(w));
     const byChoice = unheard.filter((w) => chosen.has(w));
     const missing = unheard.filter((w) => !chosen.has(w));
     return { said, confirmed: missing.length === 0, missing, byChoice };

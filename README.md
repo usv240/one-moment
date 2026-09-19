@@ -39,6 +39,7 @@ Every line below came from a real run, and the command to reproduce it is beside
 | Every call graded against itself | The pre-recorded model heard the pause as **6.3s**, the live stream showed **45ms**; every relayed word confirmed | `npm run record` |
 | A boosted word is not trusted on its own | 4 of 4 slurred ways of saying "amlodipine" came back as amlodipine from the ear told the caller's words, 0 of 4 from the unbiased ear. So rule 11 asks: "Amlodipine, or metformin?" | `node --env-file=.env eval/probe-vocabulary.mjs` |
 | It does not invent words | NEGBENCH on the product's own engine, failures included | `npm run bench` |
+| It holds up on real disordered speech | 120 recorded sentences, 8 speakers with dysarthria (TORGO): an ordinary agent would have relayed something wrong in **65 of 120**; One Moment in **11 of the 57** it spoke, asking on the other 63 (52 of those questions needed). Ordinary settings split **48** sentences mid-way; the patient ear split **0** | `eval/audiobench-stream.mjs`, then `eval/audiobench-decide.mjs` |
 | When both ears are wrong, the audit catches it | A documented failure: both live ears heard "amlodipine" in "am low dippy"; the careful model did not; the self-audit flagged the relay | see `/evidence#failure` |
 
 ---
@@ -152,8 +153,13 @@ opens a Cloudflare quick tunnel automatically. Deployed, set `PUBLIC_URL` instea
 
 ## What we measured, and what we did not
 
-- Tested on synthetic speech with exactly known pauses, and on published sentence sets.
-  **Not tested with people who have aphasia.**
+- Tested on synthetic speech with exactly known pauses, on published sentence sets, and on
+  120 recorded sentences from 8 speakers with dysarthria (TORGO; Rudzicz, Namasivayam and
+  Wolff, 2012; free for academic, non-profit use; no audio redistributed). Dysarthria is a
+  motor speech disorder, not aphasia. **Not tested with people who have aphasia.**
+- On that real speech, AssemblyAI's pre-recorded model was barely more accurate than the
+  live ears (35% word error rate against 36%), so the self-audit flagged 3 of One Moment's
+  11 wrong relays: it catches context-driven mistakes, not errors every model shares.
 - Recognition of disordered speech is hard for every system. We do not improve it and do
   not claim to. The claim is that the conversation still reaches its goal without
   anything being invented.

@@ -6,6 +6,7 @@ import { CALL, SPIKE, VOCABULARY } from '@/content/measured';
 import negbench from '@/content/negbench.json';
 import failure from '@/content/failure-agreeing-ears.json';
 import { shownTranscript } from '@/lib/text';
+import { audio, Audiobench } from './audiobench';
 
 export const metadata: Metadata = {
   title: 'Evidence',
@@ -142,6 +143,7 @@ export default function EvidencePage() {
 
       {/* A smoke run is not a result. The section appears only with a real sample. */}
       {bench.cases >= 10 && <Negbench />}
+      {audio.summary.sentences >= 30 && <Audiobench />}
 
       <Block id="vocabulary" title="Your words, double-checked">
         <p>

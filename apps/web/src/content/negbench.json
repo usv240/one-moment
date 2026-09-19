@@ -685,7 +685,6 @@
         "invented": [
           "know",
           "little",
-          "it's",
           "good"
         ],
         "inverted": false,
@@ -717,7 +716,6 @@
         "invented": [
           "know",
           "little",
-          "it's",
           "good"
         ],
         "inverted": false,
@@ -1417,5 +1415,6 @@
         ]
       }
     }
-  ]
+  ],
+  "rescoredAt": "2026-09-19T18:39:48.941Z"
 }

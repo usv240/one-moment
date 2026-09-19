@@ -114,7 +114,7 @@ export function TheLine({ events, farLeg, simulated, start, last }: {
                         ? <span className="flex items-center gap-1 text-ink"><Check aria-hidden className="h-3.5 w-3.5 text-grounded" />spoken in full</span>
                         : <span className="flex items-center gap-1"><Clock aria-hidden className="h-3.5 w-3.5" />approved, waiting for a gap</span>)}
                   </p>
-                  <p className="text-sm text-ink">{e.text}</p>
+                  <p className="text-sm text-ink">{shownTranscript(e.text)}</p>
                 </div>
               )}
             </li>

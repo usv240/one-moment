@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Block, Code, Page, Pre, Table } from '@/components/page';
-import { CALL, SPIKE } from '@/content/measured';
+import { AUDIO, CALL, SPIKE } from '@/content/measured';
 
 export const metadata: Metadata = {
   title: 'For judges',
@@ -108,6 +108,14 @@ export default function JudgesPage() {
           <li>The live transcript hides that pause as {SPIKE.realtimeGapMs}ms gaps. Word durations recover {SPIKE.recoveredMs}ms of the {SPIKE.actualMs}ms.</li>
           <li>On the recorded call, the sentence was relayed in the caller&apos;s own words with {CALL.modelCalls === 0 ? 'zero model calls' : 'model calls'}.</li>
           <li>The benchmark, on the product&apos;s own engine, with the failures included: <Link className="text-accent underline underline-offset-2" href="/evidence#negbench">NEGBENCH</Link>.</li>
+          {AUDIO && (
+            <li>
+              On {AUDIO.sentences} real recorded sentences from {AUDIO.speakers} speakers with dysarthria (TORGO): an ordinary agent would have relayed
+              something wrong in {AUDIO.ordinary.wrong} of {AUDIO.ordinary.spoke}; One Moment in {AUDIO.oneMoment.wrong} of the {AUDIO.oneMoment.spoke} it spoke, asking on
+              the rest. Ordinary settings split {AUDIO.turns.fastSplit} sentences mid-way; the patient ear split {AUDIO.turns.patientSplit}.{' '}
+              <Link className="text-accent underline underline-offset-2" href="/evidence#audiobench">AUDIOBENCH</Link>.
+            </li>
+          )}
         </ul>
       </Block>
 
