@@ -73,6 +73,11 @@ export default function ApiPage() {
           <li>Stateless. Nothing you send is stored. A key, if sent, is used for that request only.</li>
           <li>Twenty requests a minute per address on the public demo.</li>
           <li>Also: <Code>GET /v1/models</Code> with your key lists the models it can use.</li>
+          <li>
+            After a call: <Code>GET /calls/:id/record</Code> and <Code>/record.txt</Code> return what was said in the
+            caller&apos;s name, built from the call&apos;s own event log. <Code>/events</Code> returns that log, and{' '}
+            <Code>/escalation</Code> the handoff packet for a human relay assistant.
+          </li>
           <li>MIT licensed. Run your own: the orchestrator is one Node process.</li>
         </ul>
       </Block>

@@ -20,6 +20,7 @@
     "e2e:headless": "node --env-file-if-exists=.env apps/orchestrator/scripts/headless-call.ts",
     "record": "node --env-file-if-exists=.env apps/orchestrator/scripts/record-sample-call.ts",
     "bench": "node --env-file-if-exists=.env eval/negbench.mjs --n 16 --seed 11",
+    "verify": "node eval/verify.mjs",
     "audit:a11y": "node apps/web/scripts/axe-audit.mjs"
   },
   "devDependencies": {

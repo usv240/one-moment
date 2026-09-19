@@ -84,6 +84,12 @@ export const EXPLANATIONS: Explanation[] = [
     technical: 'Rule 9. If the turn ends in terminal punctuation, has at least three content words, every word is at confidence 0.8 or above, both listeners agree, and no boosted vocabulary went unconfirmed, the relay is "Name says: <transcript>". Zero model calls.',
   },
   {
+    id: 'invented-words',
+    term: 'A word you never said',
+    plain: 'The failure that matters most. If it passes on a word you did not say, the other person acts on something you never asked for, and you cannot hear that it happened. So it is counted, and the count has to be zero.',
+    technical: 'Scored by eval/score.mjs, shared by every benchmark so all of them mean the same thing: a content word in the relay that is not in what the speaker said, after lemmatising, spelling numbers out, and excluding our own reporting framing, pronouns and near matches. Counted the same way for our engine and for the baseline it is compared against.',
+  },
+  {
     id: 'dissent',
     term: 'Two AIs checking each other',
     plain: 'When speech is broken up, one AI suggests what you meant and a second AI looks for anything you did not actually say. If they disagree, you are asked.',

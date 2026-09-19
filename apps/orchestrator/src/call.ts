@@ -65,6 +65,11 @@ export class Call extends EventEmitter<CallEvents> {
   readonly history: ServerMessage[] = [];
   readonly transcript: EscalationPacket['transcript'] = [];
 
+  /** How the caller is named in anything this call produces. */
+  get caller(): string {
+    return this.opts.profile.displayName;
+  }
+
   private opts: CallOptions;
   private seq = 0;
   private patient: RealtimeStream;

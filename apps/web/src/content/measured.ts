@@ -5,6 +5,7 @@
 import recorded from './recorded-call.json';
 import recordedChoice from './recorded-call-choice.json';
 import audiobench from './audiobench.json';
+import negbench from './negbench.json';
 import type { ServerMessage } from '@one-moment/core';
 import type { Recording } from '@/lib/replay';
 
@@ -53,6 +54,34 @@ const ab = audiobench as unknown as { summary: { sentences: number; speakers?: s
 export const AUDIO = ab.summary.sentences >= 30 && ab.summary.ordinary && ab.summary.oneMoment && ab.summary.turns
   ? { sentences: ab.summary.sentences, speakers: ab.summary.speakers?.length ?? 0, ordinary: ab.summary.ordinary, oneMoment: ab.summary.oneMoment, turns: ab.summary.turns }
   : null;
+
+/**
+ * What it refused to do, as numbers, from the same two runs.
+ *
+ * A system whose value is declining to speak has to be measured on the
+ * declining, in both directions: it must not put words in someone's mouth, and
+ * it must not get in the way when nothing is wrong. Every figure here is
+ * derived from the committed benchmark files, never typed.
+ */
+type Arm = { n: number; relayed: number; asked: number; withInventedWords: number; negationCasesRelayed: number; negationFlipped: number };
+type Cond = { baseline: Arm; full: Arm; overAsked: number };
+const nb = negbench as unknown as { cases: number; conditions: string[]; byCondition: Record<string, Cond> };
+const conds = Object.values(nb.byCondition);
+const sum = (pick: (c: Cond) => number) => conds.reduce((s, c) => s + pick(c), 0);
+const audi = (audiobench as unknown as { summary: { audit?: { rightRelays: number; rightFlagged: number } } }).summary.audit ?? null;
+
+export const REFUSAL = {
+  /** Degraded sentences where a single model added words the speaker never said, against ours. */
+  invented: { baseline: sum((c) => c.baseline.withInventedWords), ours: sum((c) => c.full.withInventedWords), of: sum((c) => c.baseline.relayed) },
+  /** Cases where a "not" was at risk: how often each side flipped the meaning. */
+  flipped: { baseline: sum((c) => c.baseline.negationFlipped), ours: sum((c) => c.full.negationFlipped), of: sum((c) => c.baseline.negationCasesRelayed) },
+  /** Clear speech: it must not ask when nothing is wrong. */
+  clean: nb.byCondition.clean
+    ? { n: nb.byCondition.clean.full.n, relayed: nb.byCondition.clean.full.relayed, overAsked: nb.byCondition.clean.overAsked }
+    : null,
+  /** The self-audit's false alarms on relays that were in fact correct. */
+  audit: audi ? { rightRelays: audi.rightRelays, falseAlarms: audi.rightFlagged } : null,
+};
 
 /**
  * Measured 18 September 2026, eval/probe-vocabulary.mjs: four slurred ways of

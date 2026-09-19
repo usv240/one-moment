@@ -4,6 +4,7 @@
 
 import { useState } from 'react';
 import { RECORDING, RECORDING_CHOICE } from '@/content/measured';
+import { CallRecordLink } from './call-record';
 import { ReplayPlayer } from './replay-player';
 
 const CALLS = [
@@ -35,6 +36,8 @@ export function ReplayTabs({ full = false }: { full?: boolean }) {
       <div role="tabpanel">
         <ReplayPlayer key={call.id} recording={call.recording} audioSrc={call.audio} compact={!full} full={full} />
       </div>
+      <CallRecordLink id={call.id} recording={call.recording} />
     </div>
   );
 }
+

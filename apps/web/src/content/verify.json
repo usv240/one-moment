@@ -1,0 +1,51 @@
+{
+ "ranAt": "2026-09-19T22:42:52.240Z",
+ "checks": [
+  {
+   "name": "NEGBENCH rows score the same today",
+   "ok": true,
+   "detail": "48 relays re-scored against the Harvard Sentences, all identical"
+  },
+  {
+   "name": "NEGBENCH published totals match its rows",
+   "ok": true,
+   "detail": "3 conditions rebuilt from 48 rows"
+  },
+  {
+   "name": "AUDIOBENCH rows score the same today",
+   "ok": true,
+   "detail": "120 sentences re-scored against the TORGO prompts, all identical"
+  },
+  {
+   "name": "AUDIOBENCH published totals match its rows",
+   "ok": true,
+   "detail": "120 sentences, 8 speakers, every arm rebuilt from the rows"
+  },
+  {
+   "name": "AUDIOBENCH still reports its own failures",
+   "ok": true,
+   "detail": "11 wrong relays, 11 questions that were not needed, self-audit caught 3 of 11"
+  },
+  {
+   "name": "recorded-call.json: every word the agent spoke was approved",
+   "ok": true,
+   "detail": "2 replies, 24 approved words, 0 unapproved"
+  },
+  {
+   "name": "recorded-call-choice.json: every word the agent spoke was approved",
+   "ok": true,
+   "detail": "2 replies, 24 approved words, 0 unapproved"
+  },
+  {
+   "name": "the engine tests pass",
+   "ok": true,
+   "detail": "55 of 55 passing, 0 failing"
+  }
+ ],
+ "tests": {
+  "total": 55,
+  "pass": 55,
+  "fail": 0
+ },
+ "ok": true
+}

@@ -4,7 +4,7 @@
 // actually happening. Side by side from the lg breakpoint, tabs below it.
 
 import { useEffect, useState } from 'react';
-import { Mic, Pill, Play, PhoneOff, RotateCcw } from 'lucide-react';
+import { FileDown, Mic, Pill, Play, PhoneOff, RotateCcw } from 'lucide-react';
 import { CallerView } from '@/components/caller-view';
 import { ObserverView } from '@/components/observer/observer-view';
 import { Explain } from '@/components/explain';
@@ -88,6 +88,17 @@ export function DemoClient() {
           </button>
         )}
         <EngineStatus health={health} status={state.status} />
+        {/* What was said in your name, to keep. The one artifact a relay call
+            should leave behind, because the caller never heard it go out. */}
+        {!running && state.callId && (
+          <a
+            href={`${ORCHESTRATOR_URL}/calls/${state.callId}/record.txt`}
+            className="inline-flex min-h-12 items-center gap-2 rounded-xl border border-line-strong bg-raised px-5 font-semibold text-ink hover:border-accent"
+          >
+            <FileDown aria-hidden className="h-5 w-5" />
+            What was said in my name
+          </a>
+        )}
       </div>
       {health !== 'offline' && !running && (
         <p className="mt-3 text-sm text-muted">

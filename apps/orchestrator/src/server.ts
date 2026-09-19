@@ -14,7 +14,7 @@
 import http from 'node:http';
 import { pathToFileURL } from 'node:url';
 import { WebSocketServer, type WebSocket } from 'ws';
-import { isVoice, type CallerProfile, type ClientMessage, type LexiconTerm, type VoiceId } from '@one-moment/core';
+import { callRecord, isVoice, recordAsText, type CallerProfile, type ClientMessage, type LexiconTerm, type VoiceId } from '@one-moment/core';
 import { AUDIO_CHANNEL, Call } from './call.ts';
 import { openTunnel } from './tunnel.ts';
 import { Simulator } from './simulator.ts';
@@ -166,10 +166,23 @@ export async function startServer(opts: { port?: number; tunnel?: boolean; apiKe
       return;
     }
 
-    const m = url.pathname.match(/^\/calls\/([\w-]+)\/(events|escalation)$/);
+    const m = url.pathname.match(/^\/calls\/([\w-]+)\/(events|escalation|record|record\.txt)$/);
     if (req.method === 'GET' && m) {
       const call = calls.get(m[1]!);
       if (!call) { res.writeHead(404).end(); return; }
+      // What was said in the caller's name, for the caller to keep. The plain
+      // text form is the one a person can read, print or hand to a pharmacist.
+      if (m[2] === 'record' || m[2] === 'record.txt') {
+        const rec = callRecord(call.history, { callId: call.id, caller: call.caller, startedAt: new Date(call.t0).toISOString() });
+        if (m[2] === 'record.txt') {
+          res.writeHead(200, { 'content-type': 'text/plain; charset=utf-8', 'content-disposition': `attachment; filename="one-moment-call-${call.id}.txt"` });
+          res.end(recordAsText(rec));
+        } else {
+          res.writeHead(200, { 'content-type': 'application/json' });
+          res.end(JSON.stringify(rec, null, 2));
+        }
+        return;
+      }
       res.writeHead(200, { 'content-type': 'application/json' });
       res.end(JSON.stringify(m[2] === 'events' ? call.history : call.escalationPacket(), null, 2));
       return;

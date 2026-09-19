@@ -4,6 +4,7 @@ import { Block, Code, Page, Pre, Table } from '@/components/page';
 import { CITATIONS, type Group } from '@/content/citations';
 import { CALL, SPIKE, VOCABULARY } from '@/content/measured';
 import negbench from '@/content/negbench.json';
+import verify from '@/content/verify.json';
 import failure from '@/content/failure-agreeing-ears.json';
 import { shownTranscript } from '@/lib/text';
 import { audio, Audiobench } from './audiobench';
@@ -31,6 +32,43 @@ const CONDITION_LABEL: Record<string, string> = {
 
 function frac(a: number, b: number) {
   return b ? `${a} of ${b}` : 'none spoken';
+}
+
+type Verification = { ranAt: string; ok: boolean; tests: { total: number; pass: number; fail: number } | null; checks: { name: string; ok: boolean; detail: string }[] };
+const verified = verify as Verification;
+
+/**
+ * The check on us, rendered from the checker's own output.
+ *
+ * Every number on this page is computed from a committed run file, so the risk
+ * is not a typo, it is the run file quietly changing. npm run verify scores
+ * every relay again from scratch against ground truth we did not write, rebuilds
+ * the totals from those fresh scores, and fails if they differ from what you are
+ * reading. This section renders that run, so the page cannot claim a check that
+ * did not happen, or hide one that failed.
+ */
+function Verify() {
+  return (
+    <Block id="verify" title={verified.ok ? `Check it yourself: ${verified.checks.length} of ${verified.checks.length} checks pass` : 'Check it yourself: a check is failing'}>
+      <p>
+        Every figure above is derived from a run file in the repository rather than typed into the page. So the question is
+        not whether we made a typo, it is whether those files still say what we claim. <Code>npm run verify</Code> scores
+        every relay in both benchmarks again from scratch, against ground truth we did not write, rebuilds the totals from
+        those fresh scores, and exits non-zero if anything differs. This table is that command&apos;s output, not a summary
+        of it.
+      </p>
+      <Table
+        caption="Verification checks"
+        head={['Check', 'Result', 'What it found']}
+        rows={verified.checks.map((c) => [c.name, c.ok ? 'pass' : 'FAIL', c.detail])}
+      />
+      <p className="text-sm text-muted">
+        Run {verified.ranAt.slice(0, 10)}
+        {verified.tests ? `, with ${verified.tests.pass} of ${verified.tests.total} engine tests passing` : ''}. One of the
+        checks asserts that the unflattering numbers are still there, so a future run cannot quietly drop them.
+      </p>
+    </Block>
+  );
 }
 
 function Negbench() {
@@ -186,9 +224,12 @@ export default function EvidencePage() {
         </p>
       </Block>
 
+      <Verify />
+
       <Block id="reproduce" title="Reproduce it">
         <Pre>{`git clone <this repository>
 cd one-moment && npm install
+npm run verify                   # re-derives every number above from the committed runs
 cp .env.example .env            # add your AssemblyAI key
 npm test                         # the engine: floor, evidence, Dissent, semantic patience
 node --env-file=.env apps/orchestrator/scripts/record-sample-call.ts   # a full call, recorded

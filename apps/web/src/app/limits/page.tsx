@@ -48,8 +48,8 @@ export default function LimitsPage() {
             ['Tested with people with aphasia', `No. The numbers come from synthetic speech with a known pause, published text corpora${AUDIO ? `, and ${AUDIO.sentences} recorded sentences from ${AUDIO.speakers} speakers with dysarthria (TORGO), which is a motor speech disorder, not aphasia` : ''}. It is a working prototype, not a clinical study.`],
             ['A medical device', 'No. It does not diagnose or treat. It is a conversation partner on a phone call.'],
             ['Better recognition of disordered speech', 'No. We do not improve recognition, and the design assumes it is often wrong.'],
-            ['Tested against a live pharmacy', 'No. The far party in the demo is simulated with a computer voice.'],
-            ['Real phone calls', 'Not yet. The far party is connected through our orchestrator, not the phone network. Telephony, over SIP, is the next step.'],
+            ['Tested against a live pharmacy', 'The far party is a computer voice, and that is a scoped decision rather than a missing feature. Nothing the far party says is ever relayed or fed to the Adjudicator: it reads the caller\'s two streams and nothing else. A real pharmacist changes when the hold line fires, not what is said in the caller\'s name, so every number here is measured on the caller\'s side.'],
+            ['Telephone-quality audio', 'Not measured, so not claimed. Every number on this site comes from 16kHz audio, which is what a browser microphone and the TORGO recordings give. A phone line delivers 8kHz narrowband, and recognition of disordered speech is harder there. Until we have run the benchmark at 8kHz, treat these figures as the wideband case.'],
             ['Works for every kind of aphasia', 'Unknown. It is designed around word-finding pauses. Fluent aphasia, where speech flows but words are wrong, is a different problem.'],
             ['Ready for many callers at once', 'Not on the shared demo key. Every call opens two streaming sessions and our account holds four, so the public demo runs two live calls at a time and refuses the third rather than failing mid-call. Bring your own key and that limit is yours, not ours. The two recorded calls are always available.'],
           ]}
@@ -64,6 +64,7 @@ export default function LimitsPage() {
             ['The far party knows an assistant is present', 'The first line it ever says includes it: "I\'m his assistant." If that line is cut off because the caller spoke, it is said again before the agent next speaks for him.'],
             ['The agent never claims to be the caller', 'It relays in the third person: "Robert says: ...".'],
             ['Audio is not stored', 'Caller audio is kept only if retention is explicitly switched on. It is off by default and in the demo.'],
+            ['The caller can see what was said for them', 'A caller never hears the sentence that goes out in their name, so every call leaves a record: each approved line, whether it was spoken or cut off, every question and what they chose, and the audit\'s verdict on each relay. It is built from the call\'s own event log, and it re-checks the guarantee that the voice spoke no word the rules did not approve. Download it from any recorded call, or from GET /calls/:id/record.txt.'],
             ['Your API key stays on the server', 'The browser never sees an AssemblyAI key. It talks only to the orchestrator.'],
           ]}
         />

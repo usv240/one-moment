@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { ReplayPlayer } from '@/components/replay/replay-player';
+import { CallRecordLink } from '@/components/replay/call-record';
 import { Explain } from '@/components/explain';
 import { RECORDING, RECORDING_CHOICE } from '@/content/measured';
 
@@ -40,6 +41,7 @@ export default async function ReplayPage({ searchParams }: PageProps<'/replay'>)
       </header>
       <h2 className="sr-only">The call, moment by moment</h2>
       <ReplayPlayer key={id} recording={call.recording} audioSrc={call.audio} compact video={video} />
+      {!video && <CallRecordLink id={id} recording={call.recording} className="mt-6" />}
     </div>
   );
 }

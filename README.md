@@ -58,6 +58,7 @@ Every line below came from a real run, and the command to reproduce it is beside
     caller speaks again mid-hold --> orchestrator stops relaying the agent's audio
     both ears agree the sentence is finished --> ForceEndpoint after 1.5s of silence
     call ends --> pre-recorded API transcribes the caller's audio --> self-audit
+    call ends --> the record of what was said in the caller's name, to keep
 
 **The central idea.** The Voice Agent API lets a stored agent point its LLM at any
 OpenAI-compatible endpoint. One Moment hosts that endpoint, and it is not a language
@@ -103,6 +104,7 @@ of what the agent said.
     POST /v1/decide     {"turn": <AssemblyAI Turn>} or {"transcript": "..."} in,
                         relay | ask | hold out, with the rule that decided
     GET  /v1/models     the LLM Gateway models a key can use
+    GET  /calls/:id/record[.txt]   what was said in the caller's name, to keep
 
 Send formatted text. A complete, punctuated sentence takes the verbatim path and
 is relayed in the caller's own words with no model call; an unpunctuated string

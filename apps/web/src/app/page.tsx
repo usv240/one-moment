@@ -3,12 +3,13 @@ import { ArrowRight, ClipboardCheck, Ear, Hand, Hourglass, MessageSquareQuote, S
 import { Cite, Section } from '@/components/cite';
 import { Explain } from '@/components/explain';
 import { ReplayTabs } from '@/components/replay/replay-tabs';
-import { AUDIO, CALL, SPIKE, VOCABULARY } from '@/content/measured';
+import { AUDIO, CALL, REFUSAL, SPIKE, VOCABULARY } from '@/content/measured';
 
 export default function Home() {
   return (
     <>
       <Hero />
+      <WhatItRefuses />
       <SixtySeconds />
       <OneSentence />
       <Section id="watch" eyebrow="Watch it happen" title="A real call, recorded, and scrubbable.">
@@ -82,6 +83,73 @@ function Hero() {
         </div>
       </figure>
     </section>
+  );
+}
+
+/**
+ * What it refused to do, stated before anything it can do.
+ *
+ * A relay that invents one word is worse than no relay, so the number that
+ * matters most is a zero. Both directions are shown: it must not put words in
+ * the caller's mouth, and it must not get in the way when nothing is wrong.
+ * Every figure comes from the committed benchmark files.
+ */
+function Refusal({ value, label, children }: { value: string; label: string; children: React.ReactNode }) {
+  return (
+    <div className="rounded-2xl border border-line bg-raised p-5">
+      <p className="font-mono text-4xl font-semibold tracking-tight text-ink">{value}</p>
+      <p className="mt-1 text-sm font-semibold text-ink">{label}</p>
+      <p className="mt-2 text-sm leading-relaxed text-muted">{children}</p>
+    </div>
+  );
+}
+
+function WhatItRefuses() {
+  const r = REFUSAL;
+  return (
+    <Section
+      id="refuses"
+      eyebrow="Measured, on speech we did not record"
+      title="The number that matters is a zero."
+    >
+      <p className="max-w-3xl text-lg text-muted">
+        Speaking for someone is not like answering them. One invented word and the relay is worse than useless, because the
+        caller cannot hear what was said in their name. So the first thing we measured is what it refuses to say.
+        <Explain id="invented-words" className="ml-2 align-middle" />
+      </p>
+      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <Refusal value={String(r.invented.ours)} label="Words put in the caller's mouth">
+          Across {r.invented.of} relays of degraded speech. A single model asked what the person meant added them in{' '}
+          {r.invented.baseline}.
+        </Refusal>
+        <Refusal value={String(r.flipped.ours)} label="Meanings flipped">
+          Of {r.flipped.of} relayed sentences carrying a &ldquo;not&rdquo;. The same model flipped {r.flipped.baseline}, every one
+          of them a sentence where a word had been lost.
+        </Refusal>
+        {r.clean && (
+          <Refusal value={String(r.clean.overAsked)} label="Unnecessary questions on clear speech">
+            All {r.clean.relayed} of {r.clean.n} clear sentences went straight through in the speaker&apos;s own words, with no
+            model call. Caution that got in the way would be its own failure.
+          </Refusal>
+        )}
+        {r.audit && (
+          <Refusal value={String(r.audit.falseAlarms)} label="False alarms from the self-audit">
+            On {r.audit.rightRelays} relays that were in fact correct, on real disordered speech. What it missed is published
+            too.
+          </Refusal>
+        )}
+      </div>
+      <p className="mt-6 text-sm text-muted">
+        {AUDIO && (
+          <>
+            On the hard cases it buys those zeros by asking instead of speaking: it asked on {AUDIO.oneMoment.asked} of{' '}
+            {AUDIO.sentences} real dysarthric sentences, and spoke on {AUDIO.oneMoment.spoke}.{' '}
+          </>
+        )}
+        Every figure here is derived from the committed run files, and the failures are published beside the wins:{' '}
+        <Link href="/evidence" className="font-medium text-accent underline underline-offset-2">the evidence</Link>.
+      </p>
+    </Section>
   );
 }
 
