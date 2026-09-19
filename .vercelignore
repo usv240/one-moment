@@ -1,0 +1,7 @@
+# Never upload research audio or run output to the website host.
+eval/data
+eval/results
+**/node_modules
+**/.next
+.env
+.env.*
