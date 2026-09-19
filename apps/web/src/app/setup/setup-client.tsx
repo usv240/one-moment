@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useRef, useState } from 'react';
 import { Download, KeyRound, Plus, Trash2, Upload, X } from 'lucide-react';
-import type { LexiconTerm } from '@one-moment/core';
+import { VOICES, type LexiconTerm, type VoiceId } from '@one-moment/core';
 import { Explain } from '@/components/explain';
 import { ORCHESTRATOR_URL } from '@/lib/use-call';
 import { EMPTY_SETTINGS, exportSettings, forgetEverything, importSettings, useSettings, type Settings } from '@/lib/settings';
@@ -180,6 +180,22 @@ export function SetupClient() {
         ) : (
           <p className="text-sm text-muted">{s.model ? <>Chosen: <code className="font-mono text-ink">{s.model}</code>. </> : null}Check your key above to see the models it can use.</p>
         )}
+      </Card>
+
+      <Card
+        title="Your voice"
+        explain="voice-agent-brain"
+        hint="The AssemblyAI voice that speaks your words to the other person. It says only what the rules approve, whichever voice you pick."
+      >
+        <select className={field} value={s.voice} onChange={(e) => set({ voice: e.target.value as VoiceId })} aria-label="Voice">
+          {VOICES.map((v) => (
+            <option key={v.id} value={v.id}>{v.note ? `${v.label}: ${v.note}` : v.label}</option>
+          ))}
+        </select>
+        <p className="text-sm text-muted">
+          All {VOICES.length} voices the Voice Agent API accepts. Only the ones this project has used are described, because we
+          have not listened to the rest.
+        </p>
       </Card>
 
       <div className="flex flex-wrap items-center gap-3">

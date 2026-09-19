@@ -4,7 +4,7 @@ import { SetupClient } from './setup-client';
 
 export const metadata: Metadata = {
   title: 'Make it yours',
-  description: 'Bring your own words, name, AssemblyAI key and model to One Moment. Nothing is stored on our server.',
+  description: 'Bring your own words, name, AssemblyAI key, model and voice to One Moment. Nothing is stored on our server.',
 };
 
 export default function SetupPage() {

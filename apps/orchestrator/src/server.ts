@@ -14,7 +14,7 @@
 import http from 'node:http';
 import { pathToFileURL } from 'node:url';
 import { WebSocketServer, type WebSocket } from 'ws';
-import type { CallerProfile, ClientMessage, LexiconTerm } from '@one-moment/core';
+import { isVoice, type CallerProfile, type ClientMessage, type LexiconTerm, type VoiceId } from '@one-moment/core';
 import { AUDIO_CHANNEL, Call } from './call.ts';
 import { openTunnel } from './tunnel.ts';
 import { Simulator } from './simulator.ts';
@@ -41,7 +41,7 @@ export type ServerHandle = {
   port: number;
   publicUrl: string | null;
   calls: Map<string, Call>;
-  createCall: (opts?: { profile?: CallerProfile; lexicon?: LexiconTerm[]; retainAudio?: boolean; apiKey?: string; llmModel?: string }) => Promise<Call>;
+  createCall: (opts?: { profile?: CallerProfile; lexicon?: LexiconTerm[]; retainAudio?: boolean; apiKey?: string; llmModel?: string; voice?: VoiceId }) => Promise<Call>;
   close: () => Promise<void>;
 };
 
@@ -189,6 +189,7 @@ export async function startServer(opts: { port?: number; tunnel?: boolean; apiKe
       lexicon: o.lexicon ?? DEMO_LEXICON,
       retainAudio: o.retainAudio ?? false,
       ...(model ? { llmModel: model } : {}),
+      ...(o.voice ? { voice: o.voice } : {}),
     });
     calls.set(call.id, call);
     byToken.set(call.token, call);
@@ -266,6 +267,8 @@ export async function startServer(opts: { port?: number; tunnel?: boolean; apiKe
                   retainAudio: mode === 'sample' || (msg.retainAudio ?? false),
                   ...(byo ? { apiKey: msg.apiKey!.trim() } : {}),
                   ...(msg.llmModel ? { llmModel: msg.llmModel } : {}),
+                  // A voice typed by a visitor never reaches AssemblyAI: only ids we have verified.
+                  ...(isVoice(msg.voice) ? { voice: msg.voice } : {}),
                 });
               } catch (err) {
                 release();

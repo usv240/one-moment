@@ -19,7 +19,7 @@ import {
   EARLY_END_SILENCE_MS, normalizeTokens, runDissent, soundsFinished, stepFloor,
   type CallerProfile, type DissentResult, type EscalationPacket, type EvidenceBundle, type FloorAction,
   type FloorConfig, type FloorEvent, type FloorModel, type ForcedChoice, type LexiconTerm,
-  type ServerMessage, type StreamTurn,
+  type ServerMessage, type StreamTurn, type VoiceId,
 } from '@one-moment/core';
 import { fastConfig, patientConfig, RealtimeStream } from './realtime.ts';
 
@@ -37,6 +37,8 @@ export type CallOptions = {
   lexicon: LexiconTerm[];
   retainAudio: boolean;
   llmModel?: string;
+  /** Bring your own voice: already checked against VOICES by the server. */
+  voice?: VoiceId;
 };
 
 export interface CallEvents {
@@ -190,6 +192,7 @@ export class Call extends EventEmitter<CallEvents> {
               name: `one-moment-${this.id}`,
               llmBaseUrl: `${this.opts.publicUrl}/llm/v1`,
               callToken: this.token,
+              ...(this.opts.voice ? { voice: this.opts.voice } : {}),
             });
             break;
           } catch (err) {

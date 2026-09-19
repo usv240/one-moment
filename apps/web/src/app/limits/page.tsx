@@ -51,6 +51,7 @@ export default function LimitsPage() {
             ['Tested against a live pharmacy', 'No. The far party in the demo is simulated with a computer voice.'],
             ['Real phone calls', 'Not yet. The far party is connected through our orchestrator, not the phone network. Telephony, over SIP, is the next step.'],
             ['Works for every kind of aphasia', 'Unknown. It is designed around word-finding pauses. Fluent aphasia, where speech flows but words are wrong, is a different problem.'],
+            ['Ready for many callers at once', 'Not on the shared demo key. Every call opens two streaming sessions and our account holds four, so the public demo runs two live calls at a time and refuses the third rather than failing mid-call. Bring your own key and that limit is yours, not ours. The two recorded calls are always available.'],
           ]}
         />
       </Block>

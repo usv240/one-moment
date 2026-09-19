@@ -9,3 +9,4 @@ export * from './floor.ts';
 export * from './protocol.ts';
 export * from './stream-config.ts';
 export * from './vocabulary.ts';
+export * from './voices.ts';

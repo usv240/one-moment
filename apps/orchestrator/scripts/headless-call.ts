@@ -13,12 +13,16 @@
 //      approved. No exceptions. This is the product's core promise, checked
 //      end to end rather than asserted.
 //
-// Run: npm run e2e:headless
+// Run: npm run e2e:headless [-- --voice george]
+//
+// --voice proves bring-your-own-voice end to end: the id goes through the same
+// path a browser's hello takes, and the far party hears that voice say the
+// approved lines. Anything not in VOICES is refused before AssemblyAI sees it.
 
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import type { ServerMessage } from '@one-moment/core';
+import { isVoice, type ServerMessage } from '@one-moment/core';
 import { startServer } from '../src/server.ts';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -50,8 +54,11 @@ async function main() {
   const server = await startServer({ port: 8799, tunnel: true });
   console.log(`  public URL: ${server.publicUrl ?? 'NONE, far leg will be off'}`);
 
-  const call = await server.createCall({ retainAudio: true });
-  console.log(`  call ${call.id} started\n`);
+  const asked = process.argv[process.argv.indexOf('--voice') + 1];
+  const voice = process.argv.includes('--voice') && isVoice(asked) ? asked : undefined;
+  if (process.argv.includes('--voice') && !voice) throw new Error(`"${asked}" is not a voice this build offers`);
+  const call = await server.createCall({ retainAudio: true, ...(voice ? { voice } : {}) });
+  console.log(`  call ${call.id} started${voice ? `, speaking in ${voice}` : ''}\n`);
 
   // Record exactly what the Adjudicator handed the Voice Agent each time it asked.
   const approved: string[] = [];

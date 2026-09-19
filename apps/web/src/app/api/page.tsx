@@ -41,8 +41,8 @@ export default function ApiPage() {
           rows={[
             [<Code key="1">turn</Code>, 'Turn message', 'Best: the Turn message from your own Universal-Streaming session, as received. Word confidences and timings are used.'],
             [<Code key="2">fastTurn</Code>, 'Turn message', 'Optional: a second, differently configured stream on the same audio. Where the two disagree, it asks.'],
-            [<Code key="3">transcript</Code>, 'string', 'Or plain text, if you have no Turn. Confidence is then treated as unknown.'],
-            [<Code key="4">fastTranscript</Code>, 'string', 'Plain-text second reading.'],
+            [<Code key="3">transcript</Code>, 'string', 'Or plain text, if you have no Turn (text is accepted too). Confidence is then treated as unknown. Send it formatted: a complete, punctuated sentence takes the verbatim path and needs no model, while an unpunctuated string is read as a fragment.'],
+            [<Code key="4">fastTranscript</Code>, 'string', 'Plain-text second reading (fastText is accepted too).'],
             [<Code key="5">name</Code>, 'string', 'How to refer to the caller when relaying: "Robert says: ...".'],
             [<Code key="6">lexicon</Code>, 'string[]', 'The caller\'s own words: medicines, pharmacy, people. Up to 100.'],
             [<Code key="7">context</Code>, 'string', 'A sentence of context for the models.'],

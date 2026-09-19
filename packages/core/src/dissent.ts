@@ -47,7 +47,7 @@ export const POLICY_RULES: Record<number, { name: string; plain: string }> = {
   7: { name: 'still_speaking', plain: 'The person has not finished. Keep waiting.' },
   8: { name: 'grounded', plain: 'Every word traces back to something the person said. Safe to speak.' },
   9: { name: 'verbatim', plain: 'The person said a complete sentence clearly. Their own words are relayed, with nothing added.' },
-  10: { name: 'model_unavailable', plain: 'The checking models are busy or unreachable, so the system asks rather than guessing.' },
+  10: { name: 'model_unavailable', plain: 'No model was available to check this one: no key was given, or the models are busy or unreachable. A clear, complete sentence still goes straight through as the person\'s own words; anything less is asked about rather than guessed at.' },
   11: { name: 'vocabulary_uncertain', plain: 'A word from the caller\'s own list was only partly said, or heard only by the ear that was listening for it. It is offered as a choice, never assumed. Checked second, before any model.' },
 };
 

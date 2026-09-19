@@ -157,8 +157,8 @@ export function useCall() {
     socket.binaryType = 'arraybuffer';
     ws.current = socket;
 
-    // Bring your own: the key and model apply to any call. The profile and words
-    // apply to live calls only; the recorded caller is always Robert.
+    // Bring your own: the key, model and voice apply to any call. The profile and
+    // words apply to live calls only; the recorded caller is always Robert.
     const settings = loadSettings();
     const { key } = loadKey();
     const hello = {
@@ -168,6 +168,7 @@ export function useCall() {
       ...(mode === 'live' && opts.grade ? { retainAudio: true } : {}),
       ...(key.trim() ? { apiKey: key.trim() } : {}),
       ...(settings.model ? { llmModel: settings.model } : {}),
+      ...(settings.voice ? { voice: settings.voice } : {}),
       ...(mode === 'live' && hasProfile(settings) ? { profile: toProfile(settings), lexicon: settings.words } : {}),
     };
 

@@ -94,11 +94,21 @@ of what the agent said.
   It goes from the browser to the orchestrator for that call only, and is never stored or
   logged there.
 - **Your model.** Pick the LLM Gateway model the Advocate and the Skeptic run on.
+- **Your voice.** Pick which of the 18 AssemblyAI voices speaks for you. It still
+  says only what the rules approved: the voice changes, the words cannot. A voice
+  id from a browser is checked against that list before an agent is created.
 
 ## The API
 
-    POST /v1/decide     a Turn message (or text) in, relay | ask | hold out
+    POST /v1/decide     {"turn": <AssemblyAI Turn>} or {"transcript": "..."} in,
+                        relay | ask | hold out, with the rule that decided
     GET  /v1/models     the LLM Gateway models a key can use
+
+Send formatted text. A complete, punctuated sentence takes the verbatim path and
+is relayed in the caller's own words with no model call; an unpunctuated string
+is read as a fragment, which needs a model, so without a key it is asked about
+instead. `text` and `fastText` are accepted as synonyms of `transcript` and
+`fastTranscript`.
 
 Stateless, open to any origin, rate limited on the public demo. Without a key it still
 answers every turn that needs no model, and asks on the rest. The website has a live
@@ -119,6 +129,7 @@ Requires Node 24 (runs TypeScript natively, no build step) and an AssemblyAI API
 Other commands:
 
     npm run e2e:headless         # a full live call in the terminal, about 40 seconds
+                                 # add -- --voice george to hear a different voice
     npm run record               # record the demo call the website replays
     npm run bench                # NEGBENCH, about 75 minutes on the free LLM tier
 

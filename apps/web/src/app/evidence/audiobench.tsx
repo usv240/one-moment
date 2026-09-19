@@ -47,7 +47,7 @@ export function Audiobench() {
       </p>
       <Table
         caption="Real dysarthric speech: what each system would have said for the caller"
-        head={['', 'Spoke for the caller', 'Put words in their mouth or flipped the meaning', 'Word error rate of what it said']}
+        head={['Listening and deciding', 'Spoke for the caller', 'Put words in their mouth or flipped the meaning', 'Word error rate of what it said']}
         rows={[
           [<b key="o">An ordinary agent</b>, frac(s.ordinary.spoke, n), `${frac(s.ordinary.wrong, s.ordinary.spoke)} (${pct(s.ordinary.wrong, s.ordinary.spoke)})`, w(s.ordinary.meanWer)],
           [<b key="p">Patient ear, no checks</b>, frac(s.patient.spoke, n), `${frac(s.patient.wrong, s.patient.spoke)} (${pct(s.patient.wrong, s.patient.spoke)})`, w(s.patient.meanWer)],
@@ -83,8 +83,11 @@ export function Audiobench() {
           makes these error counts, if anything, too high for every arm alike. Run {audio.ranAt.slice(0, 10)}, model <Code>{audio.model}</Code>, {om.modelCalls} model calls.
         </li>
         <li>
-          <b className="text-ink">Licence:</b> TORGO is free for academic, non-profit use. We use it for non-commercial evaluation, publish only
-          aggregate results and our own transcripts, and redistribute no audio.
+          <b className="text-ink">Licence, and what is deliberately not in the repository:</b> TORGO is free for academic, non-profit use. We use it for
+          non-commercial evaluation, publish only aggregate results and our own transcripts, and redistribute no audio. The audio
+          and the raw per-sentence run output stay on the machine that ran it, by <Code>.gitignore</Code> and <Code>.vercelignore</Code>, so
+          reproducing this means fetching TORGO yourself with the first command below. What ships is the aggregate above, every
+          row in it, and the scripts that made both.
         </li>
       </ul>
       <details className="rounded-xl border border-line">

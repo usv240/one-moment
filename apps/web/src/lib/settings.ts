@@ -1,6 +1,6 @@
 'use client';
 
-// Bring your own: your words, your name, your key, your model.
+// Bring your own: your words, your name, your key, your model, your voice.
 //
 // Where each thing lives, and why:
 //  - Profile and words: this browser's localStorage, so they survive a reload.
@@ -12,7 +12,7 @@
 //    and never stored or logged there.
 
 import { useCallback, useEffect, useState } from 'react';
-import type { CallerProfile, LexiconTerm } from '@one-moment/core';
+import { DEFAULT_VOICE, isVoice, type CallerProfile, type LexiconTerm, type VoiceId } from '@one-moment/core';
 
 export type Settings = {
   name: string;
@@ -21,9 +21,11 @@ export type Settings = {
   context: string;
   words: LexiconTerm[];
   model: string;
+  /** Which AssemblyAI voice speaks for the caller. */
+  voice: VoiceId;
 };
 
-export const EMPTY_SETTINGS: Settings = { name: '', pronoun: 'they', yesNo: 'unknown', context: '', words: [], model: '' };
+export const EMPTY_SETTINGS: Settings = { name: '', pronoun: 'they', yesNo: 'unknown', context: '', words: [], model: '', voice: DEFAULT_VOICE };
 
 const PROFILE_KEY = 'om-profile';
 const KEY_KEY = 'om-key';
@@ -97,6 +99,7 @@ export function importSettings(text: string): Settings {
     context: String(j.context ?? '').slice(0, 500),
     words,
     model: String(j.model ?? ''),
+    voice: isVoice(j.voice) ? j.voice : DEFAULT_VOICE,
   };
 }
 

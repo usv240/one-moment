@@ -48,6 +48,8 @@ export type ClientMessage =
       apiKey?: string;
       /** Bring your own model: an LLM Gateway model id for Dissent. */
       llmModel?: string;
+      /** Bring your own voice: which AssemblyAI voice speaks for the caller. Checked against VOICES. */
+      voice?: string;
     }
   | { type: 'choice'; questionId: string; optionId: string; label: string }
   | { type: 'something_else'; questionId?: string }

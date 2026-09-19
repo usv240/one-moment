@@ -3,6 +3,13 @@
 // Calls on the server's own AssemblyAI key are limited: a few at once, a few
 // per visitor per hour, and a few minutes each. Calls on a visitor's own key
 // are limited only by what this server can carry. Nothing here stores a key.
+//
+// The concurrent limit is not arbitrary. Every live call opens two streaming
+// sessions, and our account holds four at once (eval/spike/tests/01-dual-stream.js),
+// so two calls is the real ceiling on the shared key. Raising it would fail in
+// the middle of someone's call instead of before it, which is worse. When the
+// key is busy the refusal says what to do next, because the two recorded calls
+// at /replay show the same behaviour and are always available.
 
 export type GuardOptions = {
   /** Concurrent calls on the server's key. */
@@ -45,14 +52,16 @@ export class Guard {
 
   /** Returns a release function, or a reason the call cannot start. */
   admit(ip: string, byoKey: boolean): { release: () => void } | { reason: string } {
-    if (this.totalCalls >= this.opts.maxTotalCalls) return { reason: 'The engine is at capacity. Try again in a minute.' };
+    if (this.totalCalls >= this.opts.maxTotalCalls) {
+      return { reason: 'The engine is at capacity right now. Try again in a minute, or hear two recorded calls, with every event they produced, at /replay.' };
+    }
     if (!byoKey) {
       if (this.serverCalls >= this.opts.maxServerCalls) {
-        return { reason: 'The shared demo key is busy with other calls. Try again in a minute, or bring your own AssemblyAI key on the setup page.' };
+        return { reason: 'The shared demo key is busy with another call. It holds two at once. Try again in a minute, bring your own AssemblyAI key on the setup page, or hear two recorded calls at /replay, which show the same thing.' };
       }
       const xs = this.recent(this.starts, ip, 3600_000);
       if (xs.length >= this.opts.perIpPerHour) {
-        return { reason: 'You have used this hour\'s demo calls on the shared key. Bring your own AssemblyAI key on the setup page to keep going.' };
+        return { reason: 'You have used this hour\'s demo calls on the shared key. Bring your own AssemblyAI key on the setup page to keep going, or hear two recorded calls at /replay.' };
       }
       xs.push(Date.now());
       this.serverCalls++;

@@ -115,9 +115,20 @@ export function DemoClient() {
         </p>
       )}
       {state.error && (
-        <p role="alert" className="mt-3 max-w-3xl rounded-lg border border-vetoed bg-raised px-3 py-2 text-sm text-ink">
-          {state.error}
-        </p>
+        <div role="alert" className="mt-3 max-w-3xl rounded-lg border border-vetoed bg-raised px-3 py-2 text-sm text-ink">
+          <p>{state.error}</p>
+          {/* A refusal that names somewhere to go should let you go there. */}
+          {(state.error.includes('/replay') || state.error.includes('setup page')) && (
+            <p className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
+              {state.error.includes('/replay') && (
+                <Link href="/replay" className="font-medium text-accent underline underline-offset-2">Hear the recorded calls</Link>
+              )}
+              {state.error.includes('setup page') && (
+                <Link href="/setup" className="font-medium text-accent underline underline-offset-2">Bring your own key</Link>
+              )}
+            </p>
+          )}
+        </div>
       )}
 
       {health === 'offline' && (

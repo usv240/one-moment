@@ -8,6 +8,11 @@
 // (and the two-choice question to ask), or keep waiting. With no key it still
 // answers every turn that needs no model, and asks on the rest. It never guesses.
 //
+// Send formatted text. A complete, punctuated sentence takes the verbatim path
+// and is relayed in the speaker's own words with no model call; an unpunctuated
+// string is read as a fragment, which needs a model, so without a key it is
+// asked about instead. Turn on format_turns in your stream and this is free.
+//
 // Stateless. Nothing sent to it is stored. The key, if given, is used for this
 // request's LLM Gateway calls and then dropped.
 
@@ -21,9 +26,16 @@ export type DecideRequest = {
   turn?: StreamTurn;
   /** Optional second, differently configured stream on the same audio. */
   fastTurn?: StreamTurn;
-  /** Or plain text, if you have no Turn message. Confidence is then treated as unknown. */
+  /**
+   * Or plain text, if you have no Turn message. Confidence is then treated as
+   * unknown, and so is punctuation: an unpunctuated fragment is treated as a
+   * fragment, which is what the verbatim rule needs in order to stay honest.
+   * `text` is accepted as a synonym, because that is what people try first.
+   */
   transcript?: string;
+  text?: string;
   fastTranscript?: string;
+  fastText?: string;
   /** How to refer to the caller when relaying: "Robert says: ...". */
   name?: string;
   /** The caller's own vocabulary: words, or { term, category } so rule 11 can offer siblings. */
@@ -64,13 +76,15 @@ export class BadRequest extends Error {}
 
 export async function decide(body: DecideRequest, apiKey: string | null): Promise<DecideResponse> {
   const t0 = Date.now();
-  const patient = body.turn ?? (typeof body.transcript === 'string' && body.transcript.trim() ? textTurn(body.transcript) : null);
+  const asText = [body.transcript, body.text].find((x) => typeof x === 'string' && x.trim());
+  const patient = body.turn ?? (asText ? textTurn(asText) : null);
   if (!patient || typeof patient.transcript !== 'string' || !Array.isArray(patient.words)) {
-    throw new BadRequest('Send "turn" (an AssemblyAI Turn message) or "transcript" (text).');
+    throw new BadRequest('Send "turn" (an AssemblyAI Turn message) or "transcript" (plain text, "text" also works).');
   }
   if (patient.transcript.length > 2000) throw new BadRequest('transcript is longer than 2000 characters');
   const span = patient.words.length ? patient.words[patient.words.length - 1]!.end : undefined;
-  const fast = body.fastTurn ?? (body.fastTranscript ? textTurn(body.fastTranscript, span) : null);
+  const fastText = [body.fastTranscript, body.fastText].find((x) => typeof x === 'string' && x.trim());
+  const fast = body.fastTurn ?? (fastText ? textTurn(fastText, span) : null);
   const lexicon: LexiconTerm[] = (body.lexicon ?? []).slice(0, 100).flatMap((x): LexiconTerm[] =>
     typeof x === 'string' ? [{ term: x }] : x && typeof x.term === 'string' ? [{ term: x.term, ...(x.category ? { category: x.category } : {}) }] : []);
   const ev = assembleEvidence({ patient, ...(fast ? { fastFinals: [fast] } : {}), lexicon });
