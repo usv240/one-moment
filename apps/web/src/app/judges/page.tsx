@@ -32,9 +32,11 @@ export default function JudgesPage() {
     >
       <Block id="path" title="Three steps">
         <ol className="grid gap-4 md:grid-cols-3">
-          <Step n={1} title="Hear the two recorded calls (1 minute)" href="/replay">
+          <Step n={1} title="Hear the three recorded calls (2 minutes)" href="/replay">
             Real calls through the live system, replayed with their audio and every event they produced. In the first, the hold
             line is cut off the instant Robert finds his word. In the second, the medicine name only half comes out, and it asks.
+            In the third his sentence never finishes, so neither shortcut applies and both models run, which is the only one of
+            the three where you can watch the Advocate and the Skeptic read the same evidence.
           </Step>
           <Step n={2} title="Run one live (1 minute)" href="/demo">
             &ldquo;Play the recorded call&rdquo; drives the live engine with a recorded caller. Or use your microphone: start a

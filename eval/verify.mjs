@@ -122,7 +122,7 @@ const near = (a, b) => (a === null || b === null ? a === b : Math.abs(a - b) < 1
 }
 
 // ---- The recorded call: the product's own invariant, replayed -------------------
-for (const file of ['recorded-call.json', 'recorded-call-choice.json']) {
+for (const file of ['recorded-call.json', 'recorded-call-choice.json', 'recorded-call-dissent.json']) {
   const rec = JSON.parse(fs.readFileSync(path.join(repo, 'apps', 'web', 'src', 'content', file), 'utf8'));
   const norm = (x) => String(x).toLowerCase().replace(/[^a-z0-9' ]+/g, ' ').replace(/\s+/g, ' ').trim();
   const approved = new Set(rec.events.filter((m) => m.type === 'outward').flatMap((m) => norm(m.text).split(' ')));

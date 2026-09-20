@@ -7,7 +7,7 @@
 
 import { useCallback, useEffect, useReducer, useRef } from 'react';
 import type {
-  CallAudit, DissentResult, EvidenceBundle, FloorModel, FloorState, ForcedChoice, ServerMessage, StreamTurn,
+  CallAudit, DissentResult, EvidenceBundle, FloorModel, FloorState, ForcedChoice, Scenario, ServerMessage, StreamTurn,
 } from '@one-moment/core';
 import { Player, speakInBrowser, startCapture, type Capture } from './audio';
 import { hasProfile, loadKey, loadSettings, toProfile } from './settings';
@@ -135,7 +135,7 @@ export function useCall() {
 
   useEffect(() => teardown, [teardown]);
 
-  const start = useCallback(async (mode: Mode, opts: { grade?: boolean; scenario?: 'pause' | 'choice' } = {}) => {
+  const start = useCallback(async (mode: Mode, opts: { grade?: boolean; scenario?: Scenario } = {}) => {
     teardown();
     dispatch({ type: 'reset' });
     dispatch({ type: 'status', status: 'connecting' });

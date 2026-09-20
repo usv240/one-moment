@@ -2,21 +2,22 @@ import type { Metadata } from 'next';
 import { ReplayPlayer } from '@/components/replay/replay-player';
 import { CallRecordLink } from '@/components/replay/call-record';
 import { Explain } from '@/components/explain';
-import { RECORDING, RECORDING_CHOICE } from '@/content/measured';
+import { RECORDING, RECORDING_CHOICE, RECORDING_DISSENT } from '@/content/measured';
 
 export const metadata: Metadata = {
   title: 'Recorded calls',
-  description: 'Two real calls through the live One Moment system, replayed with their audio and every event they produced.',
+  description: 'Three real calls through the live One Moment system, replayed with their audio and every event they produced.',
 };
 
 const CALLS = {
   pause: { title: 'The long pause', blurb: 'Robert stops for six seconds mid-sentence. The pharmacist fills the silence.', recording: RECORDING, audio: '/recorded/robert-call.mp3' },
   choice: { title: 'The half-found word', blurb: 'The medicine name only half comes out. It is never guessed.', recording: RECORDING_CHOICE, audio: '/recorded/robert-call-choice.mp3' },
+  dissent: { title: 'The sentence that stops', blurb: 'He names the tablet, blocks for six seconds, and stops before the last word. A fragment cannot be relayed verbatim and is not a half-said name, so for the first time in these three calls both models run.', recording: RECORDING_DISSENT, audio: '/recorded/robert-call-dissent.mp3' },
 } as const;
 
 export default async function ReplayPage({ searchParams }: PageProps<'/replay'>) {
   const q = await searchParams;
-  const id = q.call === 'choice' ? 'choice' : 'pause';
+  const id = q.call === 'choice' || q.call === 'dissent' ? q.call : 'pause';
   const video = q.video === '1';
   const call = CALLS[id];
   return (
@@ -40,7 +41,9 @@ export default async function ReplayPage({ searchParams }: PageProps<'/replay'>)
         </nav>
       </header>
       <h2 className="sr-only">The call, moment by moment</h2>
-      <ReplayPlayer key={id} recording={call.recording} audioSrc={call.audio} compact video={video} />
+      {/* The third call exists to show the Advocate and the Skeptic, and those
+          live in the full engine view, so this one is not shown compact. */}
+      <ReplayPlayer key={id} recording={call.recording} audioSrc={call.audio} compact={id !== 'dissent'} full={id === 'dissent'} video={video} />
       {!video && <CallRecordLink id={id} recording={call.recording} className="mt-6" />}
     </div>
   );

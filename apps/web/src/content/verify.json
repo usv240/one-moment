@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-09-19T22:42:52.240Z",
+ "ranAt": "2026-09-20T15:24:04.763Z",
  "checks": [
   {
    "name": "NEGBENCH rows score the same today",
@@ -35,6 +35,11 @@
    "name": "recorded-call-choice.json: every word the agent spoke was approved",
    "ok": true,
    "detail": "2 replies, 24 approved words, 0 unapproved"
+  },
+  {
+   "name": "recorded-call-dissent.json: every word the agent spoke was approved",
+   "ok": true,
+   "detail": "2 replies, 25 approved words, 0 unapproved"
   },
   {
    "name": "the engine tests pass",

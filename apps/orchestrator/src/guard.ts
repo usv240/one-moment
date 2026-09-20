@@ -8,7 +8,7 @@
 // sessions, and our account holds four at once (eval/spike/tests/01-dual-stream.js),
 // so two calls is the real ceiling on the shared key. Raising it would fail in
 // the middle of someone's call instead of before it, which is worse. When the
-// key is busy the refusal says what to do next, because the two recorded calls
+// key is busy the refusal says what to do next, because the three recorded calls
 // at /replay show the same behaviour and are always available.
 
 export type GuardOptions = {
@@ -53,15 +53,15 @@ export class Guard {
   /** Returns a release function, or a reason the call cannot start. */
   admit(ip: string, byoKey: boolean): { release: () => void } | { reason: string } {
     if (this.totalCalls >= this.opts.maxTotalCalls) {
-      return { reason: 'The engine is at capacity right now. Try again in a minute, or hear two recorded calls, with every event they produced, at /replay.' };
+      return { reason: 'The engine is at capacity right now. Try again in a minute, or hear three recorded calls, with every event they produced, at /replay.' };
     }
     if (!byoKey) {
       if (this.serverCalls >= this.opts.maxServerCalls) {
-        return { reason: 'The shared demo key is busy with another call. It holds two at once. Try again in a minute, bring your own AssemblyAI key on the setup page, or hear two recorded calls at /replay, which show the same thing.' };
+        return { reason: 'The shared demo key is busy with another call. It holds two at once. Try again in a minute, bring your own AssemblyAI key on the setup page, or hear three recorded calls at /replay, which show the same thing.' };
       }
       const xs = this.recent(this.starts, ip, 3600_000);
       if (xs.length >= this.opts.perIpPerHour) {
-        return { reason: 'You have used this hour\'s demo calls on the shared key. Bring your own AssemblyAI key on the setup page to keep going, or hear two recorded calls at /replay.' };
+        return { reason: 'You have used this hour\'s demo calls on the shared key. Bring your own AssemblyAI key on the setup page to keep going, or hear three recorded calls at /replay.' };
       }
       xs.push(Date.now());
       this.serverCalls++;

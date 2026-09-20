@@ -10,6 +10,20 @@ import type { FloorModel, FloorState } from './floor.ts';
 
 export type Role = 'caller' | 'far';
 
+/**
+ * Which recorded caller a sample call plays. Each one reaches a different rule,
+ * so between them a visitor sees the whole decision layer without a microphone:
+ *
+ *   pause    a complete, clear sentence around a 6-second block. Relayed in his
+ *            own words, no model involved (rule 9).
+ *   choice   the medicine name only half comes out, so the ear listening for it
+ *            and the unbiased ear disagree. Offered as a choice (rule 11).
+ *   dissent  the sentence never finishes, so neither shortcut applies and the
+ *            Advocate and the Skeptic both run. What happens next is whatever
+ *            the models did on the day it was recorded.
+ */
+export type Scenario = 'pause' | 'choice' | 'dissent';
+
 export type CallerProfile = {
   displayName: string;
   pronoun: 'he' | 'she' | 'they';
@@ -32,12 +46,8 @@ export type ClientMessage =
        * call with no microphone and no second person.
        */
       mode?: 'live' | 'sample';
-      /**
-       * Which recorded caller, in sample mode. pause: a clear sentence with a
-       * 6-second block. choice: the medicine name is slurred, so the ears
-       * disagree about it and the caller is asked (and a simulated tap answers).
-       */
-      scenario?: 'pause' | 'choice';
+      /** Which recorded caller, in sample mode. See Scenario. */
+      scenario?: Scenario;
       /** A simulated pharmacist who speaks up when the caller pauses mid-turn. Labelled as simulated in the UI. */
       simulateFarParty?: boolean;
       /**

@@ -13,11 +13,25 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import type { ServerMessage } from '@one-moment/core';
+import type { Scenario, ServerMessage } from '@one-moment/core';
 import type { Call } from './call.ts';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 export const FIXTURES = path.resolve(here, '../../../eval/fixtures');
+
+/** Each recorded caller, and what a listener is told they are hearing. */
+const FIXTURE: Record<Scenario, string> = {
+  pause: 'caller-pause-6s.wav',
+  choice: 'caller-choice-6s.wav',
+  dissent: 'caller-dissent-6s.wav',
+};
+export const isScenario = (x: unknown): x is Scenario => typeof x === 'string' && x in FIXTURE;
+
+const STARTED: Record<Scenario, string> = {
+  pause: 'Recorded caller, synthetic voice, with a real 6-second pause.',
+  choice: 'Recorded caller, synthetic voice: a 6-second pause, then the medicine name slurred.',
+  dissent: 'Recorded caller, synthetic voice: a sentence that stops before its last word, so both models have to read it.',
+};
 
 function readPcm(file: string): Buffer {
   const b = fs.readFileSync(file);
@@ -55,14 +69,14 @@ export class Simulator {
   private silentMs = 0;
   private turnOpen = false;
 
-  private scenario: 'pause' | 'choice';
+  private scenario: Scenario;
   private chose = false;
 
-  constructor(call: Call, opts: { playCaller: boolean; scenario?: 'pause' | 'choice' }) {
+  constructor(call: Call, opts: { playCaller: boolean; scenario?: Scenario }) {
     this.call = call;
     this.playCaller = opts.playCaller;
     this.scenario = opts.scenario ?? 'pause';
-    const fixture = this.scenario === 'choice' ? 'caller-choice-6s.wav' : 'caller-pause-6s.wav';
+    const fixture = FIXTURE[this.scenario];
     this.callerPcm = opts.playCaller ? readPcm(path.join(FIXTURES, fixture)) : null;
     this.hello = readPcm(path.join(FIXTURES, 'pharmacist-hello-24k.wav'));
     this.thanks = readPcm(path.join(FIXTURES, 'pharmacist-thanks-24k.wav'));
@@ -73,9 +87,7 @@ export class Simulator {
     this.call.on('audio', this.onAudio);
     this.start = Date.now();
     if (this.playCaller) {
-      this.call.note('caller_sample_started', this.scenario === 'choice'
-        ? 'Recorded caller, synthetic voice: a 6-second pause, then the medicine name slurred.'
-        : 'Recorded caller, synthetic voice, with a real 6-second pause.');
+      this.call.note('caller_sample_started', STARTED[this.scenario]);
     }
     // Drift-corrected 50ms clock: turn detection depends on wall-clock silence.
     const step = () => {
@@ -132,7 +144,7 @@ export class Simulator {
   private react(m: ServerMessage): void {
     // The recorded caller cannot tap a screen, so in the choice scenario a
     // simulated tap answers the question after a human-length pause. Labelled.
-    if (m.type === 'question' && this.playCaller && this.scenario === 'choice' && !this.chose) {
+    if (m.type === 'question' && this.playCaller && this.scenario !== 'pause' && !this.chose) {
       this.chose = true;
       const q = m.question;
       const pick = q.options[0]!;

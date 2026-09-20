@@ -17,7 +17,7 @@ import { WebSocketServer, type WebSocket } from 'ws';
 import { callRecord, isVoice, recordAsText, type CallerProfile, type ClientMessage, type LexiconTerm, type VoiceId } from '@one-moment/core';
 import { AUDIO_CHANNEL, Call } from './call.ts';
 import { openTunnel } from './tunnel.ts';
-import { Simulator } from './simulator.ts';
+import { isScenario, Simulator } from './simulator.ts';
 import { BadRequest, decide } from './api.ts';
 import { clientIp, Guard, guardOptionsFromEnv } from './guard.ts';
 
@@ -299,7 +299,7 @@ export async function startServer(opts: { port?: number; tunnel?: boolean; apiKe
               c.once('ended', () => clearTimeout(limit));
               attach(c);
               if (mode === 'sample' || msg.simulateFarParty) {
-                sim = new Simulator(c, { playCaller: mode === 'sample', scenario: msg.scenario === 'choice' ? 'choice' : 'pause' });
+                sim = new Simulator(c, { playCaller: mode === 'sample', scenario: isScenario(msg.scenario) ? msg.scenario : 'pause' });
                 c.once('ended', () => sim?.stop());
                 sim.run();
               }

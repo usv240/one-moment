@@ -15,22 +15,22 @@
 //   apps/web/src/content/recorded-call.json   { recordedAt, events }
 //   apps/web/public/recorded/robert-call.mp3  mixed audio, t=0 is call time 0
 //
-// Usage: node --env-file=.env apps/orchestrator/scripts/record-sample-call.ts [--scenario choice]
+// Usage: node --env-file=.env apps/orchestrator/scripts/record-sample-call.ts [choice|dissent]
 
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import WebSocket from 'ws';
-import type { ServerMessage } from '@one-moment/core';
+import type { Scenario, ServerMessage } from '@one-moment/core';
 import { startServer } from '../src/server.ts';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const WEB = path.resolve(here, '../../web');
 const RATE = 24000;
 const CH_RATE: Record<number, number> = { 1: 16000, 2: 24000, 3: 24000 };
-const SCENARIO = process.argv.includes('choice') ? 'choice' : 'pause';
-const SUFFIX = SCENARIO === 'choice' ? '-choice' : '';
+const SCENARIO: Scenario = process.argv.includes('dissent') ? 'dissent' : process.argv.includes('choice') ? 'choice' : 'pause';
+const SUFFIX = SCENARIO === 'pause' ? '' : `-${SCENARIO}`;
 
 const server = await startServer({ port: 8799, tunnel: true });
 console.log(`server up, public URL ${server.publicUrl ?? 'none'}`);

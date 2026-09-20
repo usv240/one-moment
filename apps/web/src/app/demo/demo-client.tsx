@@ -4,11 +4,12 @@
 // actually happening. Side by side from the lg breakpoint, tabs below it.
 
 import { useEffect, useState } from 'react';
-import { FileDown, Mic, Pill, Play, PhoneOff, RotateCcw } from 'lucide-react';
+import { FileDown, Mic, Pill, Play, PhoneOff, RotateCcw, Scale } from 'lucide-react';
 import { CallerView } from '@/components/caller-view';
 import { ObserverView } from '@/components/observer/observer-view';
 import { Explain } from '@/components/explain';
 import { ORCHESTRATOR_URL, useCall, type Mode } from '@/lib/use-call';
+import type { Scenario } from '@one-moment/core';
 import { ReplayTabs } from '@/components/replay/replay-tabs';
 import { hasProfile, useSettings } from '@/lib/settings';
 import Link from 'next/link';
@@ -34,7 +35,7 @@ export function DemoClient() {
   }, []);
 
   const running = state.status === 'connecting' || state.status === 'live' || state.status === 'ending';
-  const begin = (m: Mode, scenario?: 'pause' | 'choice') => { setMode(m); void call.start(m, { grade, ...(scenario ? { scenario } : {}) }); };
+  const begin = (m: Mode, scenario?: Scenario) => { setMode(m); void call.start(m, { grade, ...(scenario ? { scenario } : {}) }); };
 
   return (
     <div className="mx-auto max-w-7xl px-4 pb-24 pt-8 sm:px-6">
@@ -66,6 +67,15 @@ export function DemoClient() {
             >
               <Pill aria-hidden className="h-5 w-5" />
               Play the harder call
+            </button>
+            {/* The only one of the three where the Advocate and the Skeptic run. */}
+            <button
+              type="button"
+              onClick={() => begin('sample', 'dissent')}
+              className="inline-flex min-h-12 items-center gap-2 rounded-xl border border-line-strong bg-raised px-5 font-semibold text-ink transition-colors hover:border-accent"
+            >
+              <Scale aria-hidden className="h-5 w-5" />
+              Play the unfinished sentence
             </button>
             <button
               type="button"

@@ -1,15 +1,18 @@
 'use client';
 
-// Two recorded calls, one player. Each is a real run of the live system.
+// Three recorded calls, one player. Each is a real run of the live system.
+// Between them they reach the three ways a turn can be answered: the caller's
+// own words, a choice of his own words, and the case where both models run.
 
 import { useState } from 'react';
-import { RECORDING, RECORDING_CHOICE } from '@/content/measured';
+import { RECORDING, RECORDING_CHOICE, RECORDING_DISSENT } from '@/content/measured';
 import { CallRecordLink } from './call-record';
 import { ReplayPlayer } from './replay-player';
 
 const CALLS = [
   { id: 'pause', label: 'The long pause', blurb: 'Robert stops for six seconds mid-sentence. The pharmacist fills the silence.', recording: RECORDING, audio: '/recorded/robert-call.mp3' },
   { id: 'choice', label: 'The half-found word', blurb: 'The medicine name only half comes out: "am, am lo". It is never guessed.', recording: RECORDING_CHOICE, audio: '/recorded/robert-call-choice.mp3' },
+  { id: 'dissent', label: 'The sentence that stops', blurb: 'He never reaches the end. Neither shortcut applies, so both models run and are shown reading it.', recording: RECORDING_DISSENT, audio: '/recorded/robert-call-dissent.mp3' },
 ] as const;
 
 export function ReplayTabs({ full = false }: { full?: boolean }) {
@@ -17,7 +20,7 @@ export function ReplayTabs({ full = false }: { full?: boolean }) {
   const call = CALLS.find((c) => c.id === id)!;
   return (
     <div className="space-y-5">
-      <div role="tablist" aria-label="Choose a recorded call" className="grid gap-2 sm:grid-cols-2">
+      <div role="tablist" aria-label="Choose a recorded call" className="grid gap-2 sm:grid-cols-3">
         {CALLS.map((c) => (
           <button
             key={c.id}

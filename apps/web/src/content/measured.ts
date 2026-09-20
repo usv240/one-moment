@@ -4,6 +4,7 @@
 
 import recorded from './recorded-call.json';
 import recordedChoice from './recorded-call-choice.json';
+import recordedDissent from './recorded-call-dissent.json';
 import audiobench from './audiobench.json';
 import negbench from './negbench.json';
 import type { ServerMessage } from '@one-moment/core';
@@ -12,6 +13,13 @@ import type { Recording } from '@/lib/replay';
 export const RECORDING = recorded as unknown as Recording;
 /** The harder call: the medicine name only half comes out, so it asks. */
 export const RECORDING_CHOICE = recordedChoice as unknown as Recording;
+/**
+ * The call the other two cannot show: the sentence never finishes, so neither
+ * shortcut applies and the Advocate and the Skeptic both run. In the first two
+ * recordings no model is involved at all, which is the product working as
+ * designed and also means its most-asked-about mechanism is never visible.
+ */
+export const RECORDING_DISSENT = recordedDissent as unknown as Recording;
 
 const ev = RECORDING.events as ServerMessage[];
 const find = <T extends ServerMessage['type']>(type: T, pred: (m: Extract<ServerMessage, { type: T }>) => boolean = () => true) =>

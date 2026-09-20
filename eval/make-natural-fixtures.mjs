@@ -110,6 +110,31 @@ function save(name, pcm24, { to16k = false } = {}) {
 const ROBERT = 'george';
 const PHARMACIST = 'jane';
 
+// --only dissent: the third demo caller, whose sentence never finishes.
+//
+// The first two demo calls are answered without a model: a complete clear
+// sentence is relayed verbatim (rule 9), and a half-said medicine name becomes
+// a choice (rule 11). That is the product working as designed, and it means the
+// Advocate and the Skeptic never run in either recording, so the mechanism the
+// project is most often asked about is the one a visitor never sees.
+//
+// This caller names the tablet, blocks for six seconds, and stops at "I want to
+// stop the". There is no terminal punctuation and no object, so the verbatim
+// path cannot fire and the fragment goes to both models.
+//
+// Two other endings were recorded and rejected. "I want to, um, I need to" and
+// "the, the one for the, um" both produced a grounded relay of the fragment
+// itself: true, stilted and useless to a pharmacist. Neither made the Advocate
+// reach for a word that was never said, which is worth stating plainly: across
+// every take, invention was the thing that did not happen.
+if (process.argv.includes('--only') && process.argv.includes('dissent')) {
+  const first = await tts('The water pill, the small white one', ROBERT);
+  const second = await tts('I want to stop the', ROBERT);
+  console.log(`  "${first.spoken}" / "${second.spoken}"`);
+  save('caller-dissent-6s', Buffer.concat([silence(500), trim(first.pcm), silence(6000), trim(second.pcm), silence(1500)]), { to16k: true });
+  process.exit(0);
+}
+
 // --only choice: just the second demo caller, who slurs the medicine name so the
 // boosted ear and the unbiased ear disagree about it (measured, probe-vocabulary.mjs).
 if (process.argv.includes('--only') && process.argv.includes('choice')) {

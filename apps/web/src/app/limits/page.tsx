@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { Block, Page, Table } from '@/components/page';
 import { AUDIO } from '@/content/measured';
 
@@ -38,6 +39,16 @@ export default function LimitsPage() {
           &ldquo;not&rdquo;, the text no longer contains it and no check can recover it; the benchmark publishes how often. So
           this is positioned as a first line with a human behind it, never as a replacement for a trained relay assistant.
         </p>
+        <p>
+          <b>And here is one the controls above do not catch</b>, in the third recorded call. Robert says &ldquo;The water pill,
+          the small white one&rdquo;, blocks for six seconds, and stops at &ldquo;I want to stop the&rdquo;. What went out was
+          &ldquo;He is saying he wants to stop the water pill.&rdquo; Every word of that is a word he said, both models read it
+          the same way independently, and so rule 8 allowed it. But he never joined &ldquo;stop&rdquo; to &ldquo;the water
+          pill&rdquo;. The models did. Checking that every word was said does not check the relations between the words, and on
+          a blood pressure tablet that gap matters. It is the clearest argument in the whole project for the human behind the
+          line.{' '}
+          <Link className="text-accent underline underline-offset-2" href="/replay?call=dissent">Hear it</Link>.
+        </p>
       </Block>
 
       <Block id="scope" title="What we measured, and what we did not">
@@ -51,7 +62,7 @@ export default function LimitsPage() {
             ['Tested against a live pharmacy', 'The far party is a computer voice, and that is a scoped decision rather than a missing feature. Nothing the far party says is ever relayed or fed to the Adjudicator: it reads the caller\'s two streams and nothing else. A real pharmacist changes when the hold line fires, not what is said in the caller\'s name, so every number here is measured on the caller\'s side.'],
             ['Telephone-quality audio', 'Not measured, so not claimed. Every number on this site comes from 16kHz audio, which is what a browser microphone and the TORGO recordings give. A phone line delivers 8kHz narrowband, and recognition of disordered speech is harder there. Until we have run the benchmark at 8kHz, treat these figures as the wideband case.'],
             ['Works for every kind of aphasia', 'Unknown. It is designed around word-finding pauses. Fluent aphasia, where speech flows but words are wrong, is a different problem.'],
-            ['Ready for many callers at once', 'Not on the shared demo key. Every call opens two streaming sessions and our account holds four, so the public demo runs two live calls at a time and refuses the third rather than failing mid-call. Bring your own key and that limit is yours, not ours. The two recorded calls are always available.'],
+            ['Ready for many callers at once', 'Not on the shared demo key. Every call opens two streaming sessions and our account holds four, so the public demo runs two live calls at a time and refuses the third rather than failing mid-call. Bring your own key and that limit is yours, not ours. The three recorded calls are always available.'],
           ]}
         />
       </Block>
