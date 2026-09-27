@@ -14,7 +14,13 @@ import { ReplayTabs } from '@/components/replay/replay-tabs';
 import { hasProfile, useSettings } from '@/lib/settings';
 import Link from 'next/link';
 
-type Health = 'checking' | 'online' | 'offline';
+/**
+ * 'degraded': the engine is running but its shared AssemblyAI key is not
+ * usable, so a live call would fail. A public demo can outlive the credit that
+ * pays for it, and a red error box is a worse answer than the recordings.
+ * Visitors who brought their own key are unaffected.
+ */
+type Health = 'checking' | 'online' | 'degraded' | 'offline';
 
 export function DemoClient() {
   const call = useCall();
@@ -29,13 +35,20 @@ export function DemoClient() {
   useEffect(() => {
     const ctl = new AbortController();
     fetch(`${ORCHESTRATOR_URL}/health`, { signal: ctl.signal })
-      .then((r) => setHealth(r.ok ? 'online' : 'offline'))
+      .then(async (r) => {
+        if (!r.ok) return setHealth('offline');
+        const h = (await r.json()) as { serverKeyOk?: boolean | null };
+        setHealth(h.serverKeyOk === false ? 'degraded' : 'online');
+      })
       .catch(() => { if (!ctl.signal.aborted) setHealth('offline'); });
     return () => ctl.abort();
   }, []);
 
   const running = state.status === 'connecting' || state.status === 'live' || state.status === 'ending';
   const begin = (m: Mode, scenario?: Scenario) => { setMode(m); void call.start(m, { grade, ...(scenario ? { scenario } : {}) }); };
+  // A live call is possible when the engine is up and some usable key exists:
+  // ours, or the visitor's own when ours has run out.
+  const canCall = health === 'online' || (health === 'degraded' && Boolean(key.key.trim()));
 
   return (
     <div className="mx-auto max-w-7xl px-4 pb-24 pt-8 sm:px-6">
@@ -49,7 +62,7 @@ export function DemoClient() {
       </header>
 
       <div className="mt-6 flex flex-wrap items-center gap-3">
-        {health === 'offline' ? null : !running ? (
+        {!canCall ? null : !running ? (
           <>
             <button
               type="button"
@@ -110,7 +123,7 @@ export function DemoClient() {
           </a>
         )}
       </div>
-      {health !== 'offline' && !running && (
+      {canCall && !running && (
         <p className="mt-3 text-sm text-muted">
           {own
             ? <>&ldquo;Use my microphone&rdquo; calls as <b className="text-ink">{settings.name}</b>{settings.words.length ? `, with ${settings.words.length} of your words` : ''}.</>
@@ -119,7 +132,7 @@ export function DemoClient() {
           <Link href="/setup" className="font-medium text-accent underline underline-offset-2">{own ? 'Change' : 'Make it yours'}</Link>
         </p>
       )}
-      {health !== 'offline' && !running && (
+      {canCall && !running && (
         <label className="mt-2 flex max-w-3xl items-start gap-2 text-sm text-ink">
           <input type="checkbox" checked={grade} onChange={(e) => setGrade(e.target.checked)} className="mt-0.5 h-5 w-5 shrink-0 accent-[var(--accent)]" />
           <span>
@@ -152,17 +165,29 @@ export function DemoClient() {
         </div>
       )}
 
-      {health === 'offline' && (
+      {!canCall && (
         <div className="mt-8 space-y-6">
           <p className="max-w-3xl rounded-lg border border-line bg-raised px-4 py-3 text-ink">
-            The live engine is not reachable right now, so here is a recording of a real call through it instead: the same
-            audio, and every event it produced, replayed through the same code.
+            {health === 'degraded' ? (
+              <>
+                The engine is running, but the shared demo key it calls AssemblyAI with is not usable right now, so a live call
+                would fail. Rather than show you that, here are three real calls through this system: the same audio, and every
+                event each one produced, replayed through the same code. To run one live,{' '}
+                <Link href="/setup" className="font-medium text-accent underline underline-offset-2">bring your own AssemblyAI key</Link>
+                {' '}and every button above comes back.
+              </>
+            ) : (
+              <>
+                The live engine is not reachable right now, so here are recordings of real calls through it instead: the same
+                audio, and every event they produced, replayed through the same code.
+              </>
+            )}
           </p>
           <ReplayTabs full />
         </div>
       )}
 
-      {health !== 'offline' && <>
+      {canCall && <>
       <p className="mt-8 text-sm font-medium text-muted">
         Left is what the person using it sees. Right is what is actually happening. Both are live.
       </p>
@@ -208,6 +233,7 @@ export function DemoClient() {
 function EngineStatus({ health, status }: { health: Health; status: string }) {
   if (health === 'checking') return <span className="text-sm text-muted">Checking the engine</span>;
   if (health === 'offline') return <span className="text-sm text-muted">Engine offline</span>;
+  if (health === 'degraded') return <span className="text-sm text-muted">Engine up, shared key unusable</span>;
   const label = status === 'connecting' ? 'Connecting' : status === 'live' ? 'Call in progress' : status === 'ending' ? 'Grading the call' : 'Engine online';
   return (
     <span className="flex items-center gap-2 text-sm text-muted">

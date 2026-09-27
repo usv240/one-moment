@@ -84,7 +84,28 @@ function select() {
 
 // ---- streaming ---------------------------------------------------------------
 const FRAME = 1600; // 50ms at 16kHz PCM16
-const pcmOf = (wav) => execFileSync('ffmpeg', ['-loglevel', 'error', '-i', wav, '-ac', '1', '-ar', '16000', '-f', 's16le', '-'], { maxBuffer: 1 << 28 });
+
+/**
+ * --narrowband: the same sentence as a phone line would deliver it.
+ *
+ * A PSTN call is not just quieter. It is band-limited to roughly 300 to 3400Hz
+ * and companded to 8-bit mu-law, which throws away most of the high frequency
+ * detail that distinguishes fricatives and stops, the consonants disordered
+ * speech is already least reliable on. So the degradation is applied the way a
+ * phone applies it, by resampling to 8kHz, encoding to mu-law and decoding
+ * back, and only then is it resampled to the 16kHz the streaming API takes.
+ *
+ * Everything else is held identical to the wideband run: same sentences, same
+ * seed, same two ear configurations, same end-of-turn rules. Audio quality is
+ * the only variable, which is what makes the two runs comparable.
+ */
+const NARROWBAND = process.argv.includes('--narrowband');
+const filters = NARROWBAND ? ['-ar', '8000', '-c:a', 'pcm_mulaw', '-f', 'wav'] : ['-ar', '16000', '-f', 's16le'];
+function pcmOf(wav) {
+  if (!NARROWBAND) return execFileSync('ffmpeg', ['-loglevel', 'error', '-i', wav, '-ac', '1', ...filters, '-'], { maxBuffer: 1 << 28 });
+  const phone = execFileSync('ffmpeg', ['-loglevel', 'error', '-i', wav, '-ac', '1', ...filters, '-'], { maxBuffer: 1 << 28 });
+  return execFileSync('ffmpeg', ['-loglevel', 'error', '-i', 'pipe:0', '-ac', '1', '-ar', '16000', '-f', 's16le', '-'], { input: phone, maxBuffer: 1 << 28 });
+}
 
 async function openEars() {
   for (let attempt = 1; ; attempt++) {

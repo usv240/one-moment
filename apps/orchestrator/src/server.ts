@@ -56,6 +56,15 @@ function sse(res: http.ServerResponse, model: string, text: string): void {
   res.end('data: [DONE]\n\n');
 }
 
+/**
+ * An error from a call started on the shared key: does it mean the key itself
+ * is finished, rather than something transient? Matched on the message because
+ * the failure can surface from the REST API, the streaming socket or the Voice
+ * Agent leg, each of which words it differently.
+ */
+export const keyRefused = (m: string) =>
+  /401|402|403|unauthori[sz]ed|invalid api key|authentication|insufficient|quota|balance|payment|credit/i.test(m);
+
 export async function startServer(opts: { port?: number; tunnel?: boolean; apiKey?: string } = {}): Promise<ServerHandle> {
   // Optional: without a server key, every call must bring its own.
   const apiKey = opts.apiKey ?? process.env.ASSEMBLYAI_API_KEY ?? null;
@@ -66,6 +75,29 @@ export async function startServer(opts: { port?: number; tunnel?: boolean; apiKe
 
   const calls = new Map<string, Call>();
   const byToken = new Map<string, Call>();
+
+  /**
+   * Is the shared demo key still usable?
+   *
+   * A public demo outlives the credit that pays for it. If the key expires or
+   * runs out while people are still visiting, the orchestrator is up, so the
+   * website thinks everything is fine, and a visitor clicking "play the
+   * recorded call" gets a red error instead of the recording. That is worse
+   * than being offline, because being offline already falls back gracefully.
+   *
+   * So the key's health is part of the health check: probed at startup, cheaply
+   * and periodically after that, and marked bad the moment a real call is
+   * refused for an auth or quota reason. The website reads this and falls back
+   * to the recordings, while calls on a visitor's own key keep working.
+   */
+  let serverKeyOk = apiKey ? null : false; // null: not probed yet
+  const probeKey = async (): Promise<void> => {
+    if (!apiKey) return;
+    const r = await fetch('https://api.assemblyai.com/v2/transcript?limit=1', { headers: { authorization: apiKey } }).catch(() => null);
+    // A network blip is not evidence the key is bad; only a clear refusal is.
+    if (r && (r.status === 401 || r.status === 402 || r.status === 403)) serverKeyOk = false;
+    else if (r && r.ok) serverKeyOk = true;
+  };
 
   const cors = (req: http.IncomingMessage, res: http.ServerResponse) => {
     const origin = req.headers.origin;
@@ -133,6 +165,8 @@ export async function startServer(opts: { port?: number; tunnel?: boolean; apiKe
         calls: calls.size,
         publicUrl: handle.publicUrl,
         serverKey: Boolean(apiKey),
+        /** null until probed. false means: fall back to the recordings, or bring your own key. */
+        serverKeyOk,
         limits: { maxCallSeconds: guard.opts.maxCallMs / 1000, callsPerHour: guard.opts.perIpPerHour },
       });
       return;
@@ -287,8 +321,15 @@ export async function startServer(opts: { port?: number; tunnel?: boolean; apiKe
                 release();
                 release = null;
                 const m = (err as Error).message;
-                const bad = /401|unauthori[sz]ed|invalid api key|authentication/i.test(m);
-                throw new Error(bad ? 'That AssemblyAI key was not accepted.' : m);
+                const bad = keyRefused(m);
+                // If it was our own key that was refused, say so in the health
+                // check, so the next visitor gets the recordings rather than this.
+                if (bad && !byo) { serverKeyOk = false; void probeKey(); }
+                throw new Error(bad
+                  ? (byo
+                    ? 'That AssemblyAI key was not accepted.'
+                    : 'The shared demo key is not working right now. Hear three recorded calls at /replay, or bring your own AssemblyAI key on the setup page.')
+                  : m);
               }
               c.once('ended', () => { release?.(); release = null; });
               // A demo call has a length limit, so one visitor cannot hold the shared key.
@@ -341,7 +382,15 @@ export async function startServer(opts: { port?: number; tunnel?: boolean; apiKe
     if (t) { handle.publicUrl = t.url; tunnelProc = t.proc; }
   }
 
+  // Know the key's state before the first visitor asks, and notice if it runs
+  // out later. Fifteen minutes is often enough for a demo that outlives its
+  // credit, and cheap enough to be invisible.
+  void probeKey();
+  const keyTimer = setInterval(() => void probeKey(), 15 * 60 * 1000);
+  keyTimer.unref?.();
+
   handle.close = async () => {
+    clearInterval(keyTimer);
     for (const c of calls.values()) await c.end();
     wss.close();
     tunnelProc?.kill();
