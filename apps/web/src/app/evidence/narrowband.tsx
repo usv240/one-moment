@@ -74,6 +74,15 @@ export function Narrowband() {
           heard, and that is why it survives the transcoding intact.
         </li>
         <li>
+          <b className="text-ink">The caution got better aimed, not worse.</b> This is the result we did not expect. On worse
+          audio One Moment spoke about as often and was wrong about as often ({s.oneMoment.wrong} of {s.oneMoment.spoke} against{' '}
+          {wide.oneMoment.wrong} of {wide.oneMoment.spoke}), but of the questions it asked, the ones that were not needed fell from{' '}
+          {wide.oneMoment.askedUnneeded} to {s.oneMoment.askedUnneeded}, and the ones that were needed rose from {wide.oneMoment.askedNeeded} to{' '}
+          {s.oneMoment.askedNeeded}. Degrading the audio degrades confidence and makes the two ears disagree more, and those are
+          exactly the signals the rules key on. The caution is driven by real uncertainty rather than by a guess about it, so
+          when the line gets worse it lands on the right sentences.
+        </li>
+        <li>
           <b className="text-ink">Why this run exists.</b> Until it, the honest line on the limits page was that telephone audio
           was unmeasured, so nothing about phone calls was claimed. A product whose entire premise is a phone call cannot
           leave that unmeasured and still expect to be believed.
