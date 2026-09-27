@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-09-27T04:14:18.800Z",
+ "ranAt": "2026-09-27T04:40:07.477Z",
  "checks": [
   {
    "name": "NEGBENCH rows score the same today",
@@ -44,12 +44,12 @@
   {
    "name": "the engine tests pass",
    "ok": true,
-   "detail": "55 of 55 passing, 0 failing"
+   "detail": "65 of 65 passing, 0 failing"
   }
  ],
  "tests": {
-  "total": 55,
-  "pass": 55,
+  "total": 65,
+  "pass": 65,
   "fail": 0
  },
  "ok": true

@@ -40,6 +40,7 @@ Every line below came from a real run, and the command to reproduce it is beside
 | A boosted word is not trusted on its own | 4 of 4 slurred ways of saying "amlodipine" came back as amlodipine from the ear told the caller's words, 0 of 4 from the unbiased ear. So rule 11 asks: "Amlodipine, or metformin?" | `node --env-file=.env eval/probe-vocabulary.mjs` |
 | It does not invent words | NEGBENCH on the product's own engine, failures included | `npm run bench` |
 | It holds up on real disordered speech | 120 recorded sentences, 8 speakers with dysarthria (TORGO): an ordinary agent would have relayed something wrong in **65 of 120**; One Moment in **11 of the 57** it spoke, asking on the other 63 (52 of those questions needed). Ordinary settings split **48** sentences mid-way; the patient ear split **0** | `eval/audiobench-stream.mjs`, then `eval/audiobench-decide.mjs` |
+| It answers a real phone call | 8kHz mu-law in and out over Twilio Media Streams, bridged into the same call the browser uses. The 6s pause survived on telephone audio, the sentence was relayed verbatim, **7.7s** of audio came back down the line | `npm run proof:phone` |
 | When both ears are wrong, the audit catches it | A documented failure: both live ears heard "amlodipine" in "am low dippy"; the careful model did not; the self-audit flagged the relay | see `/evidence#failure` |
 
 ---
@@ -52,6 +53,7 @@ Every line below came from a real run, and the command to reproduce it is beside
                    +----> fast ear       min_latency, defaults, unbiased
 
     pharmacist ---24kHz--> Voice Agent API, whose "LLM" is One Moment's own endpoint
+    a phone ------8kHz----> Twilio Media Streams --> the same Call, unchanged
 
     patient turn ends --> evidence --> Dissent --> Adjudicator --> relay | ask | hold
     pharmacist speaks while the caller is mid-turn --> Floor Controller --> hold line
@@ -134,6 +136,8 @@ Other commands:
                                  # add -- --voice george to hear a different voice
     npm run record               # record the demo call the website replays
     npm run bench                # NEGBENCH, about 75 minutes on the free LLM tier
+    npm run verify               # re-derive every published number from the run files
+    npm run proof:phone          # a full call over the telephone protocol, no phone needed
 
 The Voice Agent API only calls public HTTPS endpoints, so on a laptop the orchestrator
 opens a Cloudflare quick tunnel automatically. Deployed, set `PUBLIC_URL` instead.

@@ -6,6 +6,8 @@
 //   POST /llm/v1/chat/completions   called by the Voice Agent, Bearer <call token>
 //   GET  /calls/:id/events          full stamped event log, for exact replay
 //   GET  /calls/:id/escalation      the handoff packet for a human relay assistant
+//   POST /twilio/voice              TwiML for an inbound phone call
+//   WS   /twilio/stream             the phone leg: Twilio Media Streams, 8kHz mu-law
 //   WS   /ws                        browsers: JSON control messages + binary audio
 //
 // Browser audio frames: caller sends 16kHz PCM16, far party sends 24kHz PCM16.
@@ -20,6 +22,7 @@ import { openTunnel } from './tunnel.ts';
 import { isScenario, Simulator } from './simulator.ts';
 import { BadRequest, decide } from './api.ts';
 import { clientIp, Guard, guardOptionsFromEnv } from './guard.ts';
+import { bridgeCall, inboundTwiml, isFromTwilio } from './telephony.ts';
 
 export const DEMO_PROFILE: CallerProfile = {
   displayName: 'Robert',
@@ -159,6 +162,25 @@ export async function startServer(opts: { port?: number; tunnel?: boolean; apiKe
 
     cors(req, res);
 
+    // Twilio asks what to do with an inbound call. The answer connects the
+    // caller's audio to this server's phone leg, both ways.
+    if (url.pathname === '/twilio/voice' && (req.method === 'POST' || req.method === 'GET')) {
+      const body = req.method === 'POST' ? await readBody(req).catch(() => '') : '';
+      const params = Object.fromEntries(new URLSearchParams(body));
+      const token = process.env.TWILIO_AUTH_TOKEN;
+      // Unsigned requests are refused when a token is configured: without this
+      // anyone who finds the URL can spend the demo key.
+      if (token) {
+        const full = `${process.env.PUBLIC_URL ?? handle.publicUrl ?? ''}/twilio/voice`;
+        const ok = await isFromTwilio(token, req.headers['x-twilio-signature'] as string | undefined, full, params);
+        if (!ok) { res.writeHead(403, { 'content-type': 'text/plain' }).end('bad signature'); return; }
+      }
+      const base = (process.env.PUBLIC_URL ?? handle.publicUrl ?? '').replace(/^http/, 'ws');
+      res.writeHead(200, { 'content-type': 'text/xml' });
+      res.end(inboundTwiml(`${base}/twilio/stream`, process.env.TWILIO_GREETING));
+      return;
+    }
+
     if (req.method === 'GET' && url.pathname === '/health') {
       json(res, 200, {
         ok: true,
@@ -248,7 +270,58 @@ export async function startServer(opts: { port?: number; tunnel?: boolean; apiKe
     return call;
   };
 
-  const wss = new WebSocketServer({ server, path: '/ws' });
+  /**
+   * The phone leg. A real inbound call, bridged into exactly the same Call the
+   * browser uses, so nothing in the decision layer knows it is on a phone.
+   *
+   * Guarded by the same demo limits as any other call, because a phone number
+   * is the one entrance a stranger can find without visiting the website.
+   */
+  const phoneWss = new WebSocketServer({ noServer: true });
+  phoneWss.on('connection', async (ws: WebSocket, req) => {
+    const ip = clientIp(req.headers, req.socket.remoteAddress);
+    const admitted = guard.admit(ip, false);
+    if ('reason' in admitted) { ws.close(1013, 'busy'); return; }
+
+    // Twilio starts talking the instant the socket opens, while opening two
+    // listening streams and a Voice Agent still takes a few seconds. Anything
+    // said in that window is queued rather than dropped: losing the "start"
+    // event loses the stream id and the caller hears nothing back, and losing
+    // audio is the one thing this product must never do.
+    const early: Buffer[] = [];
+    const queue = (raw: Buffer) => early.push(raw);
+    ws.on('message', queue);
+
+    let call: Call | null = null;
+    try {
+      call = await createCall({ retainAudio: false });
+    } catch (err) {
+      const m = (err as Error).message;
+      if (keyRefused(m)) { serverKeyOk = false; void probeKey(); }
+      admitted.release();
+      ws.off('message', queue);
+      ws.close(1011, 'could not start');
+      return;
+    }
+    const limit = setTimeout(() => ws.close(1000, 'demo call limit'), guard.opts.maxCallMs);
+    call.once('ended', () => { clearTimeout(limit); admitted.release(); });
+    ws.off('message', queue);
+    bridgeCall(ws, call, (m) => console.log(`[phone] ${m}`));
+    for (const raw of early) ws.emit('message', raw);
+  });
+
+  const wss = new WebSocketServer({ noServer: true });
+
+  // Two WebSocket servers on one HTTP server have to share the upgrade event:
+  // letting ws attach its own listener twice makes both try to complete the
+  // same handshake, which shows up as "RSV1 must be clear" on the first frame.
+  server.on('upgrade', (req, socket, head) => {
+    const p = new URL(req.url ?? '/', 'http://x').pathname;
+    const target = p === '/ws' ? wss : p === '/twilio/stream' ? phoneWss : null;
+    if (!target) { socket.destroy(); return; }
+    target.handleUpgrade(req, socket, head, (client) => target.emit('connection', client, req));
+  });
+
   wss.on('connection', (ws: WebSocket, req) => {
     const origin = req.headers.origin;
     if (origin && !allowed.includes(origin)) { ws.close(1008, 'origin not allowed'); return; }
