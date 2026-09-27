@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Block, Code, Page, Pre, Table } from '@/components/page';
+import { Cite } from '@/components/cite';
 import { CITATIONS, type Group } from '@/content/citations';
 import { CALL, SPIKE, VOCABULARY } from '@/content/measured';
 import negbench from '@/content/negbench.json';
@@ -236,6 +237,54 @@ cp .env.example .env            # add your AssemblyAI key
 npm test                         # the engine: floor, evidence, Dissent, semantic patience
 node --env-file=.env apps/orchestrator/scripts/record-sample-call.ts   # a full call, recorded
 node --env-file=.env eval/negbench.mjs --n 16 --seed 11                # the benchmark`}</Pre>
+      </Block>
+
+      <Block id="parameters" title="Where the waiting time came from, and what the literature says about it">
+        <p>
+          We have not tested this with a person who has aphasia. That is the honest limit of the whole project, and no amount
+          of benchmarking substitutes for it. What we can do is say where each design decision came from, and then check it
+          against research done by people who did work with them.
+        </p>
+        <Table
+          caption="Design decisions against published research"
+          head={['The decision', 'Why we chose it', 'What the literature says']}
+          rows={[
+            [
+              <b key="a">Wait 6 to 9 seconds</b>,
+              'Measured, not reasoned: on one recording, default settings split a 6.0-second word-finding pause into two turns, so the patient ear was set to hold past it.',
+              <span key="a2">
+                Optimal response-time cutoffs for people with aphasia cluster at <b className="text-ink">approximately 5 to 10 seconds</b>, measured across 10
+                people with aphasia, in an assessment context where they are typically allowed up to 30 seconds. <Cite id="evans2020" /> The window we
+                picked by measurement sits inside the window the literature identifies. We did not know that when we picked it.
+              </span>,
+            ],
+            [
+              <b key="b">Target the phone, not the room</b>,
+              'A trained partner is the best-evidenced help in conversation, and the person on the other end of a phone call cannot be trained.',
+              <span key="b2">
+                The phone is a documented barrier in its own right: it strips the gesture and facial cues people with aphasia rely on, and phone
+                difficulty is associated with greater social isolation. <Cite id="greig2008" /> Assessment by telephone has been reported as
+                anxiety-provoking in a way that itself degrades spoken output.
+              </span>,
+            ],
+            [
+              <b key="c">Ask, rather than guess</b>,
+              'A relay that invents one word is worse than no relay, because the caller cannot hear what was said in their name.',
+              <span key="c2">
+                In the one study we found of voice assistants and aphasia, 8 participants, recognition failures caused frustration but did not
+                destroy acceptance where the device met a real need, and a participant valued getting answers &ldquo;without being perceived as
+                dumb&rdquo;. The authors argue a voice assistant is less stigmatising than other assistive technology because it is used in spite
+                of the impairment rather than because of it. <Cite id="nunez2023" />
+              </span>,
+            ],
+          ]}
+        />
+        <p className="text-sm text-muted">
+          <b className="text-ink">What this does not establish.</b> None of these studies tested this system, or any automated conversation partner.
+          They establish that the problem is real, that the waiting window we chose is the right order of magnitude, and that
+          people with aphasia will use a voice assistant that earns it. They do not establish that this one helps anybody. Only
+          testing with people who have aphasia would do that, and that is the next step rather than a claim.
+        </p>
       </Block>
 
       <Block id="research" title="The research it rests on">

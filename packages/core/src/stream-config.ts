@@ -35,8 +35,8 @@ export function fastConfig(): RealtimeConfig {
 export const PARAMETER_REASONS: Record<string, string> = {
   speech_model: 'Universal-3.5 Pro. The flagship streaming model, set explicitly because it is not the default.',
   mode: 'max_accuracy on the patient ear, min_latency on the fast ear. One ear optimises for being right, the other for being quick, and where they disagree is the uncertainty signal.',
-  min_turn_silence: 'A word-finding block commonly lasts several seconds. Measured: with defaults, a 6.0-second pause split one sentence into two turns; with 6000 it stayed one.',
-  max_turn_silence: 'The hard ceiling. 9 seconds, so even a long block is not cut off, while a caller who has genuinely stopped is not left hanging forever.',
+  min_turn_silence: 'A word-finding block commonly lasts several seconds. Measured: with defaults, a 6.0-second pause split one sentence into two turns; with 6000 it stayed one. Chosen from that measurement, and it lands inside the published window: optimal response-time cutoffs for people with aphasia cluster at roughly 5 to 10 seconds (Evans, Hula, Quique and Starns, 2020, JSLHR 63(2), 10 participants).',
+  max_turn_silence: 'The hard ceiling. 9 seconds, so even a long block is not cut off, while a caller who has genuinely stopped is not left hanging forever. The same study notes people with aphasia are typically allowed up to 30 seconds in assessment, so 9 is patient by phone standards and brisk by clinical ones.',
   vad_threshold: 'Lower than default, so quiet speech (common after a stroke, and in Parkinson\'s) is not classified as silence.',
   keyterms_prompt: 'The caller\'s own words: medications, pharmacy, doctor. Only on the patient ear, so the unbiased fast ear can confirm a boosted word was really said.',
   prompt: 'Short context about the caller and the call, so the model expects pharmacy vocabulary.',

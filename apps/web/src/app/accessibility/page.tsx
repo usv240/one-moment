@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { Check, X } from 'lucide-react';
 import { Block, Code, Page, Table } from '@/components/page';
 import { Cite } from '@/components/cite';
@@ -103,9 +104,33 @@ export default function AccessibilityPage() {
         )}
       </Block>
 
+      <Block id="browsers" title="Which browsers this was tested in">
+        <p>
+          Everything above was run in Chromium, on Windows, at desktop and phone widths, in both themes. We have no Apple
+          device, so Safari and iOS are untested, and rather than guess we have made sure the part a visitor most needs does
+          not depend on anything exotic.
+        </p>
+        <Table
+          caption="Browser support by path"
+          head={['What you are doing', 'What the browser has to support', 'If it does not']}
+          rows={[
+            ['Reading any page', 'Nothing beyond HTML and CSS. Every page is server-rendered.', 'Not applicable.'],
+            ['The three recorded calls', 'One <audio> element playing an MP3. No microphone, no AudioContext, no worklet.', 'Nothing to fall back to, because there is nothing unusual to fail.'],
+            ['Play the recorded call live', 'AudioContext, to play what the engine sends back.', 'The call reports the error and the recorded calls remain.'],
+            ['Use my microphone', 'getUserMedia and AudioWorklet, both supported in Safari since 14.5.', 'The demo hands its slot back at once and points you at the recorded calls, which show the same behaviour.'],
+          ]}
+        />
+        <p className="text-sm text-muted">
+          The practical consequence: a judge on an untested browser, or one who declines the microphone prompt, still sees
+          three real calls with every event they produced. That path was made to need nothing more than an audio tag precisely
+          because it is the one we cannot verify everywhere.
+        </p>
+      </Block>
+
       <Block id="gaps" title="What we have not done">
         <ul className="list-disc space-y-2 pl-5">
-          <li>No testing with people with aphasia, and no review by a speech-language pathologist.</li>
+          <li>No testing with people with aphasia, and no review by a speech-language pathologist. What we did instead is check each design decision against research done by people who worked with them, and say plainly what that does and does not establish: <Link className="text-accent underline underline-offset-2" href="/evidence#parameters">the parameters, against the literature</Link>.</li>
+          <li>No testing on Safari or iOS, because we have no Apple device. See above for what depends on what.</li>
           <li>No full manual screen-reader walkthrough. Live regions announce the caller&apos;s state and the replay captions, but that is not the same as a real audit.</li>
           <li>Voice input only. A caller who cannot speak at all needs a different product.</li>
         </ul>
