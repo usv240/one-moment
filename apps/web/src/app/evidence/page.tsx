@@ -8,6 +8,7 @@ import verify from '@/content/verify.json';
 import failure from '@/content/failure-agreeing-ears.json';
 import { shownTranscript } from '@/lib/text';
 import { audio, Audiobench } from './audiobench';
+import { narrow, Narrowband } from './narrowband';
 
 export const metadata: Metadata = {
   title: 'Evidence',
@@ -182,6 +183,7 @@ export default function EvidencePage() {
       {/* A smoke run is not a result. The section appears only with a real sample. */}
       {bench.cases >= 10 && <Negbench />}
       {audio.summary.sentences >= 30 && <Audiobench />}
+      {narrow.summary.sentences >= 30 && <Narrowband />}
 
       <Block id="vocabulary" title="Your words, double-checked">
         <p>

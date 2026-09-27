@@ -23,20 +23,35 @@ import { claim, findInventedWords, isInverted, materiallyWrong, wer } from './sc
 import { grade } from '../apps/orchestrator/src/audit.ts';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
-const CACHE = path.join(here, 'results', 'audiobench-decisions.json');
 const key = process.env.ASSEMBLYAI_API_KEY;
 const rescore = process.argv.includes('--rescore');
 if (!key && !rescore) throw new Error('ASSEMBLYAI_API_KEY is not set');
 const MODEL = process.env.LLM_GATEWAY_MODEL || undefined;
 
-// Every evidence file phase 1 wrote (speakers can be streamed in parallel), merged.
-const files = fs.readdirSync(path.join(here, 'results')).filter((f) => /^audiobench-evidence.*\.json$/.test(f));
+/**
+ * --arm <name>: which run to decide.
+ *
+ * The narrowband run streams the same sentences with the same ids, so the two
+ * runs must not be merged or deduplicated against each other. Each arm gets its
+ * own evidence files, its own decision cache and its own published file.
+ */
+const argIdx = process.argv.indexOf('--arm');
+const ARM = argIdx > -1 ? process.argv[argIdx + 1] : null;
+const SUFFIX = ARM ? `-${ARM}` : '';
+const CACHE = path.join(here, 'results', `audiobench-decisions${SUFFIX}.json`);
+const CONTENT = ARM ? `audiobench${SUFFIX}.json` : 'audiobench.json';
+// Every evidence file phase 1 wrote for this arm (speakers can be streamed in
+// parallel), merged. Wideband is the files with no arm suffix.
+const match = ARM ? new RegExp(`^audiobench-evidence.*-${ARM}\\.json$|^audiobench-evidence-${ARM}.*\\.json$`) : /^audiobench-evidence(-[A-Z]+)?\.json$/;
+const files = fs.readdirSync(path.join(here, 'results')).filter((f) => match.test(f));
+if (!files.length) throw new Error(`no evidence files for arm ${ARM ?? 'wideband'}`);
+console.log(`arm ${ARM ?? 'wideband'}: ${files.join(', ')}`);
 const seenIds = new Set();
 const evidence = { rows: files.flatMap((f) => JSON.parse(fs.readFileSync(path.join(here, 'results', f), 'utf8')).rows).filter((r) => !seenIds.has(r.id) && seenIds.add(r.id)) };
 evidence.rows.sort((a, b) => a.id.localeCompare(b.id));
 const cache = fs.existsSync(CACHE) ? JSON.parse(fs.readFileSync(CACHE, 'utf8')) : {};
 // The self-audit's careful transcripts (audiobench-careful.mjs), if present.
-const CAREFUL = path.join(here, 'results', 'audiobench-careful.json');
+const CAREFUL = path.join(here, 'results', `audiobench-careful${SUFFIX}.json`);
 const careful = fs.existsSync(CAREFUL) ? JSON.parse(fs.readFileSync(CAREFUL, 'utf8')) : {};
 
 /** All of a stream's final turns for one sentence, as one turn. */
@@ -152,6 +167,6 @@ const result = {
   summary,
   rows,
 };
-fs.writeFileSync(path.join(here, 'results', `audiobench-${result.ranAt.slice(0, 10)}.json`), JSON.stringify(result, null, 1));
-fs.writeFileSync(path.join(here, '..', 'apps', 'web', 'src', 'content', 'audiobench.json'), JSON.stringify(result, null, 1));
+fs.writeFileSync(path.join(here, 'results', `audiobench${SUFFIX}-${result.ranAt.slice(0, 10)}.json`), JSON.stringify(result, null, 1));
+fs.writeFileSync(path.join(here, '..', 'apps', 'web', 'src', 'content', CONTENT), JSON.stringify(result, null, 1));
 console.log('\n' + JSON.stringify(summary, null, 2));
