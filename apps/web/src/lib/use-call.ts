@@ -182,7 +182,18 @@ export function useCall() {
             onLevel: (rms) => { levelRef.current = rms; },
           });
         } catch {
-          dispatch({ type: 'status', status: 'error', error: 'Microphone unavailable. Try the recorded call instead.' });
+          // Declining the microphone prompt is the likeliest way this demo
+          // fails for a visitor, and until now it left the call running on the
+          // server until its time limit, holding one of only two shared-key
+          // slots against everyone else. Hand the slot back and say where the
+          // same thing can be seen without a microphone.
+          socket.send(JSON.stringify({ type: 'end' }));
+          socket.close();
+          dispatch({
+            type: 'status',
+            status: 'error',
+            error: 'This browser did not give us a microphone, so there is nothing to listen to. The three recorded calls at /replay are real calls through this same engine, with every event they produced.',
+          });
         }
       }
     };
