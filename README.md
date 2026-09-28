@@ -2,197 +2,299 @@
 
 **The voice agent that waits for you.**
 
-One Moment waits as long as a stroke survivor needs, offers two choices when the word
-will not come, asks the pharmacist to hold the line, and speaks only the words he
-actually said.
+One Moment holds the phone line open through a six-second word-finding pause, cuts its own
+voice off the instant the caller speaks again, offers two of the caller's own words when
+one only half comes out, and says nothing the caller did not say.
 
-**Live:** https://one-moment-mu.vercel.app  (try a call at [/demo](https://one-moment-mu.vercel.app/demo), the three-minute path for judges at [/judges](https://one-moment-mu.vercel.app/judges))
-**API:** https://orchestrator-production-494f.up.railway.app/v1/decide  (playground at [/api](https://one-moment-mu.vercel.app/api))
+It exists so that a person with aphasia can make their own phone call.
+
+| | |
+|---|---|
+| **Live site** | https://one-moment-mu.vercel.app |
+| **Start here if you are judging** | https://one-moment-mu.vercel.app/judges |
+| **Three recorded calls** | https://one-moment-mu.vercel.app/replay |
+| **Public API and playground** | https://one-moment-mu.vercel.app/api |
 
 Built for the AssemblyAI Voice Agent Hackathon, September 2026. MIT licensed.
-Not a medical device. Not clinically validated.
+Not a medical device. Not clinically validated. Not tested with people who have aphasia.
 
 ---
 
 ## The problem, in one paragraph
 
-People with aphasia, often after a stroke, know exactly what they mean. Finding the word
+People with aphasia, usually after a stroke, know exactly what they mean. Finding the word
 takes time: several seconds of silence in the middle of a sentence. Every voice agent is
-built to treat that silence as the end of a turn. On a recording of one such sentence,
-AssemblyAI's default settings split it into two turns at the pause. One Moment keeps it
-whole, holds the line while the caller finds the word, and relays only what was said.
-
----
-
-## What it does, measured against the live AssemblyAI APIs
-
-Every line below came from a real run, and the command to reproduce it is beside it.
-
-| Claim | Measured | Reproduce |
-|---|---|---|
-| A 6-second mid-sentence pause survives | Server defaults split it into **2 turns**. The patient ear keeps **1 sentence**. | `node --env-file=.env eval/spike/tests/02-patience.js` |
-| Two differently configured listening sessions on one microphone | Both run, **4 held at once**, the second costs **-67ms** | `node --env-file=.env eval/spike/tests/01-dual-stream.js` |
-| The silence the realtime API hides can be recovered | **7186ms** of hidden silence estimated against **7220ms** actual | `npm test` |
-| The Voice Agent speaks only what our Adjudicator approves | **Word for word**, and silent when we approve nothing | `node --env-file=.env eval/proofs/voice-agent-verbatim.mjs` |
-| The hold line never talks over the caller | Cut off by the orchestrator about 100ms after the caller resumes | `npm run record` |
-| No dead air after a finished sentence | Turn ended **1.5s** after the last word instead of 6s+, via `ForceEndpoint` | `npm run record` |
-| Every call graded against itself | The pre-recorded model heard the pause as **6.3s**, the live stream showed **45ms**; every relayed word confirmed | `npm run record` |
-| A boosted word is not trusted on its own | 4 of 4 slurred ways of saying "amlodipine" came back as amlodipine from the ear told the caller's words, 0 of 4 from the unbiased ear. So rule 11 asks: "Amlodipine, or metformin?" | `node --env-file=.env eval/probe-vocabulary.mjs` |
-| It does not invent words | NEGBENCH on the product's own engine, failures included | `npm run bench` |
-| It holds up on real disordered speech | 120 recorded sentences, 8 speakers with dysarthria (TORGO): an ordinary agent would have relayed something wrong in **65 of 120**; One Moment in **11 of the 57** it spoke, asking on the other 63 (52 of those questions needed). Ordinary settings split **48** sentences mid-way; the patient ear split **0** | `eval/audiobench-stream.mjs`, then `eval/audiobench-decide.mjs` |
-| The claim survives a phone line | The same 120 sentences at 8kHz mu-law: recognition costs ~4 points of WER, ordinary settings still split **46**, the patient ear still splits **0**, and One Moment's unnecessary questions fall from 11 to **5** | `eval/audiobench-stream.mjs --narrowband` |
-| It answers a real phone call | 8kHz mu-law in and out over Twilio Media Streams, bridged into the same call the browser uses. The 6s pause survived on telephone audio, the sentence was relayed verbatim, **7.7s** of audio came back down the line | `npm run proof:phone` |
-| When both ears are wrong, the audit catches it | A documented failure: both live ears heard "amlodipine" in "am low dippy"; the careful model did not; the self-audit flagged the relay | see `/evidence#failure` |
+built to treat that silence as the end of a turn. On one recording, the AssemblyAI default
+settings ended the caller's turn **0.37 seconds** after he stopped. The word he was
+looking for arrived **6.08 seconds** later. The phone is where this hurts most, because it
+strips away the gestures and facial cues that carry a conversation in person.
 
 ---
 
 ## How it works
 
-    caller mic --16kHz--> patient ear    Universal-3.5 Pro, max_accuracy,
-                   |                     6s min / 9s max turn silence,
-                   |                     the caller's own vocabulary
-                   +----> fast ear       min_latency, defaults, unbiased
+```mermaid
+flowchart TD
+    C["Caller with aphasia<br/>microphone or phone"] -->|16kHz PCM| P["Patient ear<br/>Universal-3.5 Pro, max_accuracy<br/>6 to 9s turn silence<br/>his own words boosted"]
+    C -->|the same audio| F["Fast ear<br/>min_latency, defaults, unbiased"]
 
-    pharmacist ---24kHz--> Voice Agent API, whose "LLM" is One Moment's own endpoint
-    a phone ------8kHz----> Twilio Media Streams --> the same Call, unchanged
+    P --> E["Evidence<br/>both readings, word confidence<br/>and where the ears disagree"]
+    F --> E
 
-    patient turn ends --> evidence --> Dissent --> Adjudicator --> relay | ask | hold
-    pharmacist speaks while the caller is mid-turn --> Floor Controller --> hold line
-    caller speaks again mid-hold --> orchestrator stops relaying the agent's audio
-    both ears agree the sentence is finished --> ForceEndpoint after 1.5s of silence
-    call ends --> pre-recorded API transcribes the caller's audio --> self-audit
-    call ends --> the record of what was said in the caller's name, to keep
+    E --> AD{"Adjudicator<br/>ordered rules, not a model"}
+    AD -->|clear sentence| R["Relay his own words"]
+    AD -->|fragment| D["Dissent<br/>Advocate and Skeptic<br/>on the LLM Gateway"]
+    D --> AD
+    AD -->|any doubt| Q["Ask him<br/>two real choices"]
+    Q -->|he taps one| R
+
+    R --> VA["AssemblyAI Voice Agent<br/>its LLM is our endpoint<br/>which is not a model"]
+    VA --> O["The other person"]
+    O -->|speaks while he is mid-turn| FC["Floor Controller"]
+    FC -->|One moment please| VA
+    C -.->|he speaks again| X["Orchestrator cuts<br/>the agent off mid-word"]
+
+    R --> REC["After the call<br/>the pre-recorded API re-transcribes his audio<br/>every relayed word is checked<br/>and he keeps a record of it"]
+```
 
 **The central idea.** The Voice Agent API lets a stored agent point its LLM at any
-OpenAI-compatible endpoint. One Moment hosts that endpoint, and it is not a language
-model. It is the Adjudicator's output channel. It returns exactly the approved text, or
-nothing. **The voice cannot say a word the rules did not approve, because it has no other
-source of words.** The live view checks every reply against AssemblyAI's own transcript
-of what the agent said.
+OpenAI-compatible endpoint. One Moment hosts that endpoint, and it is not a language model.
+It is the Adjudicator's output channel: it returns exactly the approved text, or nothing
+at all. **The voice cannot say a word the rules did not approve, because it has no other
+source of words.**
 
-### Deciding what to say
+### How it decides what to say
 
-1. **Deterministic checks first.** If the two listening streams disagree about a "not",
-   ask, offering the two readings the ears actually heard. No model is involved.
+1. **Deterministic checks first.** If the two listening streams disagree about a "not", it
+   asks, offering the two readings the ears actually heard. No model involved.
 2. **Verbatim when possible.** A complete, clear sentence is relayed as the caller's own
-   words: "Robert says: ...". Zero model calls, so zero chance of an invented word.
-3. **Dissent for fragments.** An Advocate proposes what was meant. A Skeptic gives its own
-   independent reading. If they disagree, or the proposal contains a word the caller never
-   said, the caller is asked, never guessed for.
+   words. Zero model calls, so zero chance of an invented word.
+3. **Dissent for fragments.** An Advocate proposes what was meant. A Skeptic reads the same
+   evidence independently. If they disagree, or the proposal contains a word the caller never
+   said, the caller is asked rather than guessed for.
 4. **Never trust a half-found word.** A word from the caller's own list that only the ear
-   listening for it heard, or that only partly came out ("am, am lo"), is offered as a
-   choice with its sibling from the list (rule 11). Medicines, pharmacy, doctor, family,
-   place only: never "prescription, or refill?".
+   listening for it heard, or that only partly came out ("am, am lo"), is offered as a choice
+   against its sibling from the list. Medicines, pharmacy, doctor, family and places only:
+   never "prescription, or refill?".
 5. **Forced choice, never yes or no.** In aphasia the default answer may be "yes". So the
-   caller gets two real options, and the full grounded sentence behind the one they pick
-   is what the pharmacist hears.
+   caller gets two real options, and the full grounded sentence behind the one they pick is
+   what the other person hears.
 
 ---
 
-## Bring your own
+## What it does, measured
 
-- **Your words.** Medicines, pharmacy, doctor, family names, on the setup page. They bias
-  the patient ear only, so the unbiased fast ear can confirm a boosted word was said.
-  Exported as a file you can take elsewhere.
-- **Your key.** Paste an AssemblyAI key on the setup page and calls run on your account.
-  It goes from the browser to the orchestrator for that call only, and is never stored or
-  logged there.
-- **Your model.** Pick the LLM Gateway model the Advocate and the Skeptic run on.
-- **Your voice.** Pick which of the 18 AssemblyAI voices speaks for you. It still
-  says only what the rules approved: the voice changes, the words cannot. A voice
-  id from a browser is checked against that list before an agent is created.
+Every number below came from a real run against the live AssemblyAI APIs. `npm run verify`
+re-derives all of them from the committed run files and fails if any has drifted.
 
-## The API
+### On real disordered speech
 
-    POST /v1/decide     {"turn": <AssemblyAI Turn>} or {"transcript": "..."} in,
-                        relay | ask | hold out, with the rule that decided
-    GET  /v1/models     the LLM Gateway models a key can use
-    GET  /calls/:id/record[.txt]   what was said in the caller's name, to keep
+120 recorded sentences from 8 speakers with dysarthria (TORGO), streamed live through both
+ears and then through the product's own engine, scored against the sentence each speaker
+was asked to read.
 
-Send formatted text. A complete, punctuated sentence takes the verbatim path and
-is relayed in the caller's own words with no model call; an unpunctuated string
-is read as a fragment, which needs a model, so without a key it is asked about
-instead. `text` and `fastText` are accepted as synonyms of `transcript` and
-`fastTranscript`.
+| | Spoke for the caller | Put words in their mouth | Word error rate of what it said |
+|---|---|---|---|
+| An ordinary voice agent | 120 of 120 | **65** | 42% |
+| Patient ear, no checks | 120 of 120 | 57 | 36% |
+| **One Moment** | 57 of 120 | **11** | **20%** |
 
-Stateless, open to any origin, rate limited on the public demo. Without a key it still
-answers every turn that needs no model, and asks on the rest. The website has a live
-playground at `/api`.
+It asked the caller instead of speaking on the other 63. On **52** of those the ordinary relay
+would have been wrong; **11** questions were not needed. Ordinary settings split **48** of the
+120 sentences into more than one turn, each split a point where an agent would have started
+talking over the speaker. The patient ear split **0**.
+
+### Over a telephone line
+
+The same 120 sentences, re-streamed through a real 8kHz mu-law telephone encoder, with
+everything else held identical.
+
+| | 16kHz | Over a phone line |
+|---|---|---|
+| Ordinary ear, word error rate | 42% | 46% |
+| Patient ear, word error rate | 36% | 40% |
+| Ordinary settings split the sentence | 48 of 120 | **46 of 120** |
+| The patient ear split the sentence | 0 of 120 | **0 of 120** |
+| One Moment put words in their mouth | 11 of 57 | 12 of 60 |
+| Its questions that were **not** needed | 11 | **5** |
+
+Recognition costs about four points to the phone line. The turn-taking result does not move,
+because the claim is about when a turn ends, not how well anything is heard. And the caution
+got better aimed: worse audio lowers confidence and makes the ears disagree more, which are
+exactly the signals the rules key on.
+
+### What it refuses to do
+
+| | One Moment | The obvious alternative |
+|---|---|---|
+| Words put in the caller's mouth, across 48 relays of degraded speech | **0** | 11 |
+| Meanings flipped, of 30 relayed sentences carrying a "not" | **0** | 15 |
+| Unnecessary questions on 16 clear sentences | **0** | n/a |
+| False alarms from the self-audit, on 46 correct relays | **0** | n/a |
+
+### Every other claim
+
+| Claim | Measured | Reproduce |
+|---|---|---|
+| A 6-second mid-sentence pause survives | Defaults split it into **2 turns**. The patient ear keeps **1**. | `node --env-file=.env eval/spike/tests/02-patience.js` |
+| Two differently configured sessions on one microphone | Both run, **4 held at once**, the second costs **-67ms** | `node --env-file=.env eval/spike/tests/01-dual-stream.js` |
+| The silence the realtime API hides can be recovered | **7186ms** estimated against **7220ms** actual | `npm test` |
+| The Voice Agent speaks only what the Adjudicator approves | **Word for word**, and silent when nothing is approved | `node --env-file=.env eval/proofs/voice-agent-verbatim.mjs` |
+| The hold line never talks over the caller | Cut off about **100ms** after the caller resumes | `npm run record` |
+| No dead air after a finished sentence | Turn ended **1.5s** after the last word instead of 6s, via `ForceEndpoint` | `npm run record` |
+| A boosted word is not trusted on its own | 4 of 4 slurred attempts came back as "amlodipine" from the boosted ear, **0 of 4** from the unbiased one | `node --env-file=.env eval/probe-vocabulary.mjs` |
+| It answers a real phone call | 8kHz mu-law both ways over Twilio Media Streams. The pause survived, the sentence was relayed verbatim, **7.7s** of audio came back down the line | `npm run proof:phone` |
+| When both ears are wrong, the self-audit catches it | A documented failure: both live ears heard "amlodipine" in "am low dippy"; the careful model did not | see `/evidence#failure` |
+
+---
+
+## The research it rests on
+
+The honest limit first: **no person with aphasia has used this.** No benchmark substitutes for
+that. What follows is where each design decision came from, checked against research by people
+who did work with them.
+
+| Decision | Why we chose it | What the literature says |
+|---|---|---|
+| **Wait 6 to 9 seconds** | Measured, not reasoned: default settings split a 6.0s pause, so the patient ear was set to hold past it. | Optimal response-time cutoffs for people with aphasia cluster at **approximately 5 to 10 seconds** across 10 participants, where 30s is what they are typically allowed in assessment. The window we picked by measurement sits inside the published one. [Evans et al. 2020][evans] |
+| **Target the phone** | The best-evidenced help in conversation is a trained partner, and the person on the other end of a phone call cannot be trained. | The phone is a documented barrier in its own right, and difficulty with it is associated with greater social isolation. [Greig et al. 2008][greig] |
+| **Ask, never guess** | A relay that invents one word is worse than no relay: the caller cannot hear what was said in their name. | With 8 participants, recognition failures frustrated people without destroying acceptance where the device met a real need; one valued answers "without being perceived as dumb". [Nunez Macias et al. 2023][nunez] |
+| **A trained partner, in software** | The technique this is modelled on is Supported Conversation for Adults with Aphasia. | Communication partner training is effective across two systematic reviews covering 56 studies. [Simmons-Mackie et al. 2010][sm2010], [2016][sm2016]; [Kagan et al. 2001][kagan] |
+| **Silence reads as trouble quickly** | The hold line exists because the other person fills a pause long before the caller has finished. | The usual gap between turns in conversation is about 208ms. [Stivers et al. 2009][stivers] |
+| **Two models arguing** | One model proposing and another checking is more reliable than one model asserting. | [Irving et al. 2018][debate], [Du et al. 2023][du] |
+
+**None of these studies tested this system**, or any automated conversation partner. They
+establish that the problem is real, that the waiting window is the right order of magnitude,
+and that people with aphasia will use a voice assistant that earns it. Not that this one helps
+anybody. Testing with people who have aphasia is the next step, not a claim.
+
+Corpora: the Harvard Sentences (IEEE Std 297-1969, public domain) and the TORGO database
+([Rudzicz et al. 2012][torgo], free for academic non-profit use; no audio redistributed).
+
+[evans]: https://pubs.asha.org/doi/abs/10.1044/2019_JSLHR-19-00255
+[greig]: https://www.tandfonline.com/doi/abs/10.1310/tsr1504-307
+[nunez]: https://www.frontiersin.org/journals/communication/articles/10.3389/fcomm.2023.1176475/full
+[sm2010]: https://www.archives-pmr.org/article/S0003-9993(10)00771-9/abstract
+[sm2016]: https://www.archives-pmr.org/article/S0003-9993(16)30074-0/abstract
+[kagan]: https://pubs.asha.org/doi/10.1044/1092-4388(2001/051)
+[stivers]: https://www.pnas.org/doi/10.1073/pnas.0903616106
+[debate]: https://arxiv.org/abs/1805.00899
+[du]: https://arxiv.org/abs/2305.14325
+[torgo]: https://www.cs.toronto.edu/~complingweb/data/TORGO/torgo.html
 
 ---
 
 ## Run it
 
-Requires Node 24 (runs TypeScript natively, no build step) and an AssemblyAI API key.
+Requires **Node 24** (it runs TypeScript natively, no build step), **ffmpeg** on the path, and
+an AssemblyAI API key.
 
-    cp .env.example .env         # add ASSEMBLYAI_API_KEY
-    npm install
-    npm test                     # the engine, no network
-    npm run orchestrator         # opens a Cloudflare quick tunnel for the Voice Agent
-    npm run web                  # http://localhost:3000
+```bash
+cp .env.example .env         # add ASSEMBLYAI_API_KEY
+npm install
+npm test                     # the engine: 65 tests, no network
+npm run verify               # re-derive every published number from the run files
+npm run orchestrator         # opens a Cloudflare tunnel so the Voice Agent can reach it
+npm run web                  # http://localhost:3000
+```
 
-Other commands:
+### Testing
 
-    npm run e2e:headless         # a full live call in the terminal, about 40 seconds
-                                 # add -- --voice george to hear a different voice
-    npm run record               # record the demo call the website replays
-    npm run bench                # NEGBENCH, about 75 minutes on the free LLM tier
-    npm run verify               # re-derive every published number from the run files
-    npm run proof:phone          # a full call over the telephone protocol, no phone needed
+| Command | What it proves | Needs a key |
+|---|---|---|
+| `npm test` | The engine: floor control, evidence, Dissent, rule 11, semantic patience, the call record, the telephone codecs. 65 tests. | no |
+| `npm run verify` | Every number the site publishes, re-scored from the committed run files. Exits non-zero if one has drifted. 9 checks. | no |
+| `npm run typecheck` | Types across all three workspaces. | no |
+| `npm run e2e:headless` | A full live call in the terminal, about 40 seconds. Add `-- --voice george` to change the voice. | yes |
+| `npm run proof:phone` | A full call over the Twilio Media Streams protocol, with no phone needed. | yes |
+| `npm run bench` | NEGBENCH, about 75 minutes on the free LLM tier. | yes |
+| `npm run audit:a11y` | axe-core over every page in both themes. Needs the site running. | no |
 
-The Voice Agent API only calls public HTTPS endpoints, so on a laptop the orchestrator
-opens a Cloudflare quick tunnel automatically. Deployed, set `PUBLIC_URL` instead.
+Reproducing the disordered-speech benchmark needs TORGO, which we do not redistribute:
+
+```bash
+./eval/spike/scripts/fetch-torgo.sh
+node --env-file=.env eval/audiobench-stream.mjs --per-speaker 15
+node --env-file=.env eval/audiobench-decide.mjs
+
+# and the same over a telephone line
+node --env-file=.env eval/audiobench-stream.mjs --narrowband --out eval/results/audiobench-evidence-8k.json
+node --env-file=.env eval/audiobench-decide.mjs --arm 8k
+```
+
+---
+
+## Bring your own
+
+- **Your words.** Medicines, pharmacy, doctor, family names, on the setup page. They bias the
+  patient ear only, so the unbiased fast ear can confirm a boosted word was really said.
+  Exportable as a file you can take elsewhere.
+- **Your key.** Paste an AssemblyAI key and calls run on your account. It goes from the browser
+  to the orchestrator for that call only, and is never stored or logged.
+- **Your model.** Pick the LLM Gateway model the Advocate and the Skeptic run on.
+- **Your voice.** Any of the 18 voices the Voice Agent API accepts. It still says only what the
+  rules approved: the voice changes, the words cannot.
+
+## The API
+
+```
+POST /v1/decide                a Turn from your own stream, or plain text
+                               relay | ask | hold out, with the rule that decided
+GET  /v1/models                the LLM Gateway models your key can use
+GET  /calls/:id/record[.txt]   what was said in the caller's name, to keep
+POST /twilio/voice             TwiML for an inbound phone call
+WS   /twilio/stream            the phone leg: Twilio Media Streams, 8kHz mu-law
+```
+
+Stateless, open to any origin, rate limited on the public demo. Without a key it still answers
+every turn that needs no model, and asks on the rest. Send formatted text: a complete,
+punctuated sentence takes the verbatim path and needs no model call at all.
+
+---
 
 ## Deploy
 
-- **Orchestrator:** `apps/orchestrator/Dockerfile`, built from the repository root. On
-  Railway set `RAILWAY_DOCKERFILE_PATH=apps/orchestrator/Dockerfile`, plus
-  `ASSEMBLYAI_API_KEY`, `PUBLIC_URL` (its own https address) and `ALLOWED_ORIGINS` (the
-  website's address). See `.env.example` for the demo limits.
+- **Orchestrator:** `apps/orchestrator/Dockerfile`, built from the repository root. On Railway
+  set `RAILWAY_DOCKERFILE_PATH=apps/orchestrator/Dockerfile`, plus `ASSEMBLYAI_API_KEY`,
+  `PUBLIC_URL` and `ALLOWED_ORIGINS`. For a phone number, point its voice webhook at
+  `/twilio/voice` and set `TWILIO_AUTH_TOKEN` so the webhook is signature checked.
 - **Website:** `apps/web` on Vercel, with `NEXT_PUBLIC_ORCHESTRATOR_URL` set to the
-  orchestrator's address. The build fails if any colour pair falls below its WCAG ratio.
-
----
+  orchestrator address. The build fails if any colour pair falls below its WCAG ratio.
 
 ## Repository
 
-    packages/core/        the engine: evidence, negation checks, Dissent, Adjudicator,
-                          forced choices, Floor Controller, stream settings. Pure and tested.
-    apps/orchestrator/    the call: two realtime streams, the Voice Agent leg, the endpoint
-                          the agent calls, the self-audit, the public API, the demo guard
-    apps/web/             the website: landing page, live demo, replay, setup, API
-                          playground, evidence, accessibility report
-    eval/negbench.mjs     the benchmark, run against the product's own engine
-    eval/spike/           the day-one assumption tests that proved the architecture
-    eval/proofs/          standalone proofs of each claim above
-    eval/fixtures/        the demo voices, generated with AssemblyAI text to speech
+```
+packages/core/        the engine: evidence, negation checks, Dissent, the Adjudicator,
+                      forced choices, Floor Controller, stream settings, the call record.
+                      Pure, no network, fully tested.
+apps/orchestrator/    the call: two realtime streams, the Voice Agent leg, the endpoint the
+                      agent calls, the phone leg, the self-audit, the public API
+apps/web/             the site: landing page, live demo, replay, setup, API playground,
+                      evidence, accessibility report
+eval/negbench.mjs     the text benchmark, run against the product own engine
+eval/audiobench-*.mjs the disordered-speech benchmark, wideband and telephone
+eval/verify.mjs       re-derives every published number and fails if one has drifted
+eval/proofs/          standalone proofs of the claims above
+eval/spike/           the day-one tests that proved the architecture was possible
+```
 
 ---
 
-## What we measured, and what we did not
+## What we did not do
 
-- Tested on synthetic speech with exactly known pauses, on published sentence sets, and on
-  120 recorded sentences from 8 speakers with dysarthria (TORGO; Rudzicz, Namasivayam and
-  Wolff, 2012; free for academic, non-profit use; no audio redistributed). Dysarthria is a
-  motor speech disorder, not aphasia. **Not tested with people who have aphasia.**
-- On that real speech, AssemblyAI's pre-recorded model was barely more accurate than the
-  live ears (35% word error rate against 36%), so the self-audit flagged 3 of One Moment's
-  11 wrong relays: it catches context-driven mistakes, not errors every model shares.
-- Recognition of disordered speech is hard for every system. We do not improve it and do
-  not claim to. The claim is that the conversation still reaches its goal without
-  anything being invented.
+- **Not tested with people who have aphasia**, and not reviewed by a speech-language
+  pathologist. The real speech we tested on is dysarthric, which is a different disorder.
+- **Not a medical device.** It does not diagnose or treat.
+- **We do not improve recognition** of disordered speech, and the design assumes it is often
+  wrong.
+- **No phone number yet.** The phone leg is built and proven; what is missing is an account.
+- **Safari and iOS are untested**, because we have no Apple device. The recorded calls
+  deliberately need nothing but an audio element, so that path works anywhere.
 - If both listening streams lose the same "not", no check can recover it from text alone.
   NEGBENCH publishes how often that happens.
-- The free-tier LLM Gateway allows 2 requests per minute. The verbatim path needs none;
-  fragmentary turns need two. For more, bring your own key and model.
-
----
 
 ## Built on
 
-AssemblyAI Universal-Streaming (Universal-3.5 Pro, two sessions per call, `ForceEndpoint`),
-the Voice Agent API with a custom LLM endpoint and its text to speech, the LLM Gateway, and
-the pre-recorded API for the post-call self-audit.
-
-Cite the Harvard Sentences (IEEE Std 297-1969) and, where used, the TORGO database
-(Rudzicz, Namasivayam and Wolff, 2012) wherever their numbers appear.
+AssemblyAI Universal-Streaming (two sessions per call, configured against each other,
+`ForceEndpoint`, `keyterms_prompt`), the Voice Agent API with a custom LLM endpoint and its
+text to speech, the LLM Gateway, and the pre-recorded API for the post-call self-audit.

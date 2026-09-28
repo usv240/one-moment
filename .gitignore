@@ -15,3 +15,7 @@ eval/fixtures/*.raw.wav
 .vercel
 .env*
 !.env.example
+
+# Written by `next dev` for AI coding agents, not part of the project.
+AGENTS.md
+CLAUDE.md
