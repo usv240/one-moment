@@ -25,6 +25,26 @@ export default function ApiPage() {
         <Playground />
       </Block>
 
+      <Block id="package" title="Or install the engine">
+        <p>
+          The decision layer is published, so it can be used without the service and without this repository. It is pure: no
+          network, no audio, no I/O of any kind except an optional model client you pass in. That is why it is testable, and why
+          every number on the evidence page can be re-derived from committed files.
+        </p>
+        <Pre>{`npm install @one-moment/core`}</Pre>
+        <Pre>{`import { assembleEvidence, runDissent } from '@one-moment/core';
+
+const evidence = assembleEvidence({ patient: turn, fastFinals: [fastTurn] });
+const result = await runDissent(evidence, { apiKey, callerName: 'Robert', lexicon });
+
+result.decision.action;     // 'relay' | 'ask' | 'hold'
+result.decision.text;       // exactly what to say, when the action is relay
+result.decision.policyRule; // which rule decided`}</Pre>
+        <p className="text-sm text-muted">
+          Requires Node 24. Ships compiled JavaScript with type declarations. MIT licensed, same as the rest.
+        </p>
+      </Block>
+
       <Block id="request" title="POST /v1/decide">
         <Pre>{`curl -X POST ${base}/v1/decide \\
   -H "Content-Type: application/json" \\
