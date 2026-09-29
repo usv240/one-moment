@@ -14,6 +14,7 @@ It exists so that a person with aphasia can make their own phone call.
 | **Start here if you are judging** | https://one-moment-mu.vercel.app/judges |
 | **Three recorded calls** | https://one-moment-mu.vercel.app/replay |
 | **Public API and playground** | https://one-moment-mu.vercel.app/api |
+| **The engine, on npm** | `npm install @one-moment/core` |
 
 Built for the AssemblyAI Voice Agent Hackathon, September 2026. MIT licensed.
 Not a medical device. Not clinically validated. Not tested with people who have aphasia.
@@ -274,6 +275,28 @@ node eval/turnbench-summarise.mjs
 ```
 
 ---
+
+## Use the engine on its own
+
+The decision layer is published, so it can be used without this repository. It is pure:
+no network, no audio, no I/O of any kind except an optional model client you pass in.
+
+```bash
+npm install @one-moment/core
+```
+
+```ts
+import { assembleEvidence, runDissent } from '@one-moment/core';
+
+const evidence = assembleEvidence({ patient: turn, fastFinals: [fastTurn] });
+const result = await runDissent(evidence, { apiKey, callerName: 'Robert', lexicon });
+
+result.decision.action;     // 'relay' | 'ask' | 'hold'
+result.decision.text;       // exactly what to say, when the action is relay
+result.decision.policyRule; // which rule decided
+```
+
+Requires Node 24. Ships compiled JavaScript with type declarations.
 
 ## Bring your own
 
