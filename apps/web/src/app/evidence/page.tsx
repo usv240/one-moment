@@ -11,6 +11,7 @@ import { shownTranscript } from '@/lib/text';
 import { audio, Audiobench } from './audiobench';
 import { narrow, Narrowband } from './narrowband';
 import { fluentb, Fluentbench } from './fluentbench';
+import { turnb, Turnbench } from './turnbench';
 
 export const metadata: Metadata = {
   title: 'Evidence',
@@ -187,6 +188,7 @@ export default function EvidencePage() {
       {audio.summary.sentences >= 30 && <Audiobench />}
       {narrow.summary.sentences >= 30 && <Narrowband />}
       {fluentb.summary.sentences >= 30 && <Fluentbench />}
+      {(turnb.settings?.length ?? 0) >= 2 && <Turnbench />}
 
       <Block id="vocabulary" title="Your words, double-checked">
         <p>

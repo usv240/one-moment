@@ -1,0 +1,57 @@
+{
+ "ranAt": "2026-09-29T13:35:57.767Z",
+ "corpus": "TORGO, head microphone",
+ "note": "One ear, no ForceEndpoint and no second stream, so each number is about the setting rather than about our orchestration on top of it.",
+ "sentences": 12,
+ "speakers": 7,
+ "settings": [
+  {
+   "label": "vendor default",
+   "minTurnSilence": null,
+   "sentences": 12,
+   "split": 2,
+   "firedDuringSpeech": 4,
+   "lostWordsTotal": 10,
+   "saidWordsTotal": 86,
+   "sentencesLosingWords": 4,
+   "waitedMedianMs": 223,
+   "waitedMeanMs": -515
+  },
+  {
+   "label": "1000ms",
+   "minTurnSilence": 1000,
+   "sentences": 12,
+   "split": 1,
+   "firedDuringSpeech": 1,
+   "lostWordsTotal": 4,
+   "saidWordsTotal": 86,
+   "sentencesLosingWords": 3,
+   "waitedMedianMs": 922,
+   "waitedMeanMs": 519
+  },
+  {
+   "label": "2400ms",
+   "minTurnSilence": 2400,
+   "sentences": 12,
+   "split": 0,
+   "firedDuringSpeech": 0,
+   "lostWordsTotal": 2,
+   "saidWordsTotal": 86,
+   "sentencesLosingWords": 2,
+   "waitedMedianMs": 2377,
+   "waitedMeanMs": 2370
+  },
+  {
+   "label": "6000ms (ours)",
+   "minTurnSilence": 6000,
+   "sentences": 12,
+   "split": 0,
+   "firedDuringSpeech": 0,
+   "lostWordsTotal": 2,
+   "saidWordsTotal": 86,
+   "sentencesLosingWords": 2,
+   "waitedMedianMs": 6077,
+   "waitedMeanMs": 6030
+  }
+ ]
+}
