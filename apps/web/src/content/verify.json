@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-09-27T13:46:59.898Z",
+ "ranAt": "2026-09-29T05:36:45.025Z",
  "checks": [
   {
    "name": "NEGBENCH rows score the same today",
@@ -25,6 +25,21 @@
    "name": "AUDIOBENCH still reports its own failures",
    "ok": true,
    "detail": "11 wrong relays, 11 questions that were not needed, self-audit caught 3 of 11"
+  },
+  {
+   "name": "FLUENTBENCH rows score the same today",
+   "ok": true,
+   "detail": "60 fluent sentences re-scored against the LibriSpeech references"
+  },
+  {
+   "name": "FLUENTBENCH published totals match its rows",
+   "ok": true,
+   "detail": "60 sentences from 35 readers, every total rebuilt"
+  },
+  {
+   "name": "FLUENTBENCH still reports what the caution costs",
+   "ok": true,
+   "detail": "11 of 60 became a question rather than a relay"
   },
   {
    "name": "recorded-call.json: every word the agent spoke was approved",

@@ -10,6 +10,7 @@ import failure from '@/content/failure-agreeing-ears.json';
 import { shownTranscript } from '@/lib/text';
 import { audio, Audiobench } from './audiobench';
 import { narrow, Narrowband } from './narrowband';
+import { fluentb, Fluentbench } from './fluentbench';
 
 export const metadata: Metadata = {
   title: 'Evidence',
@@ -185,6 +186,7 @@ export default function EvidencePage() {
       {bench.cases >= 10 && <Negbench />}
       {audio.summary.sentences >= 30 && <Audiobench />}
       {narrow.summary.sentences >= 30 && <Narrowband />}
+      {fluentb.summary.sentences >= 30 && <Fluentbench />}
 
       <Block id="vocabulary" title="Your words, double-checked">
         <p>

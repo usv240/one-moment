@@ -100,6 +100,16 @@ export default function TechnologyPage() {
           rows={keys.map((k) => [<Code key={k}>{k}</Code>, show(patient[k]), show(fast[k]), <span key="r" className="text-muted">{PARAMETER_REASONS[k] ?? ''}</span>])}
         />
         <p className="text-sm text-muted">
+          <b className="text-ink">Where these numbers came from, and how far they have been tested.</b> The 6 to 9 second window was
+          set by measurement, not by argument: on one recording the default settings split a 6.0 second word-finding pause into
+          two turns, so the patient ear was set to hold past it. It then turned out to sit inside the window the clinical
+          literature identifies, roughly 5 to 10 seconds of optimal response time for people with aphasia. And it has been
+          tested where it matters: on 120 recorded sentences from 8 speakers with dysarthria, ordinary settings split 48 of
+          them mid-way and this configuration split none; repeated through a real 8kHz telephone encoder, 46 against none.
+          Settings can be tuned against synthetic speech, but only real disordered speech shows whether the tuning survives the
+          thing it was built for.
+        </p>
+        <p className="text-sm text-muted">
           Semantic patience: when the patient ear&apos;s running transcript ends like a finished sentence, the fast ear has closed a
           turn on the same last words, and the caller has been silent for {EARLY_END_SILENCE_MS / 1000} seconds, the orchestrator
           sends <Code>ForceEndpoint</Code>. A sentence that trails off still gets the full wait.

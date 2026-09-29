@@ -121,6 +121,39 @@ const near = (a, b) => (a === null || b === null ? a === b : Math.abs(a - b) < 1
     `${s.oneMoment.wrong} wrong relays, ${s.oneMoment.askedUnneeded} questions that were not needed, self-audit caught ${s.audit.wrongFlagged} of ${s.audit.wrongRelays}`);
 }
 
+// ---- FLUENTBENCH: the negative control, re-scored the same way ------------------
+{
+  const f = content('fluentbench.json');
+  if (f.summary.sentences > 0) {
+    const s = f.summary;
+    const bad = [];
+    for (const r of f.rows) {
+      const said = r.oneMoment.relayed;
+      if (!said) continue;
+      const c = claim(said);
+      if (JSON.stringify(findInventedWords(c, r.prompt)) !== JSON.stringify(r.oneMoment.invented)
+        || materiallyWrong(c, r.prompt) !== r.oneMoment.wrong
+        || !near(wer(c, r.prompt), r.oneMoment.wer)) bad.push(r.id);
+    }
+    check('FLUENTBENCH rows score the same today', bad.length === 0,
+      bad.length ? `${bad.length} rows differ, first: ${bad[0]}` : `${f.rows.length} fluent sentences re-scored against the LibriSpeech references`);
+
+    const relayed = f.rows.filter((r) => r.oneMoment.relayed);
+    const wrong = [];
+    if (relayed.length !== s.relayed) wrong.push(`relayed ${relayed.length} not ${s.relayed}`);
+    if (f.rows.length - relayed.length !== s.asked) wrong.push('asked');
+    if (relayed.filter((r) => r.oneMoment.wrong).length !== s.wrong) wrong.push('wrong');
+    if (f.rows.filter((r) => r.patientTurns > 1).length !== s.turns.patientSplit) wrong.push('patientSplit');
+    if (f.rows.filter((r) => r.fastTurns > 1).length !== s.turns.fastSplit) wrong.push('fastSplit');
+    check('FLUENTBENCH published totals match its rows', wrong.length === 0,
+      wrong.length ? wrong.join('; ') : `${s.sentences} sentences from ${s.speakers} readers, every total rebuilt`);
+
+    // The cost of caution on clean speech is not allowed to quietly vanish.
+    check('FLUENTBENCH still reports what the caution costs', s.asked > 0,
+      `${s.asked} of ${s.sentences} became a question rather than a relay`);
+  }
+}
+
 // ---- The recorded call: the product's own invariant, replayed -------------------
 for (const file of ['recorded-call.json', 'recorded-call-choice.json', 'recorded-call-dissent.json']) {
   const rec = JSON.parse(fs.readFileSync(path.join(repo, 'apps', 'web', 'src', 'content', file), 'utf8'));

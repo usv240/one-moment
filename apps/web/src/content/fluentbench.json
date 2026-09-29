@@ -1,0 +1,1739 @@
+{
+ "ranAt": "2026-09-29T05:34:37.407Z",
+ "corpus": "LibriSpeech test-clean",
+ "model": "qwen3.5-4b-32k-fast",
+ "summary": {
+  "sentences": 60,
+  "speakers": 35,
+  "relayed": 49,
+  "asked": 11,
+  "wrong": 7,
+  "invented": 7,
+  "flipped": 0,
+  "verbatim": 39,
+  "modelCalls": 42,
+  "turns": {
+   "patientSplit": 0,
+   "fastSplit": 8,
+   "endedEarly": 35,
+   "endedNatural": 24,
+   "endedCap": 1
+  },
+  "waited": {
+   "meanMs": 3712,
+   "medianMs": 1700,
+   "underTwoSeconds": 34
+  },
+  "wer": {
+   "patient": 0.046402697176690974,
+   "fast": 0.04635883752756817
+  },
+  "byRule": {
+   "2": 4,
+   "3": 2,
+   "4": 2,
+   "6": 3,
+   "8": 10,
+   "9": 39
+  }
+ },
+ "rows": [
+  {
+   "id": "121-127105-0001",
+   "speaker": "121",
+   "prompt": "SOMEONE ELSE TOLD A STORY NOT PARTICULARLY EFFECTIVE WHICH I SAW HE WAS NOT FOLLOWING",
+   "audioMs": 5058,
+   "waitedMs": 1700,
+   "endedBy": "early",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "Someone else told a story not particularly effective, which I saw he was not following.",
+    "fast": "Someone else told a story not particularly effective, which I saw he was not following."
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 4,
+    "models": 2
+   }
+  },
+  {
+   "id": "1995-1836-0011",
+   "speaker": "1995",
+   "prompt": "POSITIVELY HEROIC ADDED CRESSWELL AVOIDING HIS SISTER'S EYES",
+   "audioMs": 4762,
+   "waitedMs": 1702,
+   "endedBy": "early",
+   "patientTurns": 1,
+   "fastTurns": 2,
+   "heard": {
+    "patient": "Positively heroic, added Cresswell, avoiding his sister's eyes.",
+    "fast": "Positively heroic. added Cresswell, avoiding his sister's eyes."
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": "The caller says: Positively heroic, added Cresswell, avoiding his sister's eyes.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "models": 0
+   }
+  },
+  {
+   "id": "3575-170457-0028",
+   "speaker": "3575",
+   "prompt": "KESWICK MARCH TWENTY SECOND EIGHTEEN THIRTY SEVEN DEAR MADAM",
+   "audioMs": 5551,
+   "waitedMs": 9149,
+   "endedBy": "natural",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "Keswick, March 22nd, 1837. Dear Madame,",
+    "fast": "Keswick, March 22nd, 1837. Dear Madame,"
+   },
+   "wer": {
+    "patient": 0.6666666666666666,
+    "fast": 0.6666666666666666
+   },
+   "oneMoment": {
+    "relayed": "He is saying Keswick, March 22nd, 1837, Dear Madame.",
+    "invented": [
+     "22nd",
+     "1837"
+    ],
+    "inverted": false,
+    "wer": 0.8888888888888888,
+    "wrong": true,
+    "action": "relay",
+    "rule": 8,
+    "models": 2
+   }
+  },
+  {
+   "id": "5142-33396-0011",
+   "speaker": "5142",
+   "prompt": "THERE SHE SAT ON THE ROLLERS AS FAIR A SHIP AS I EVER SAW",
+   "audioMs": 3550,
+   "waitedMs": 1655,
+   "endedBy": "early",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "There she sat on the rollers, as fair a ship as I ever saw.",
+    "fast": "There she sat on the rollers, as fair a ship as I ever saw."
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": "The caller says: There she sat on the rollers, as fair a ship as I ever saw.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "models": 0
+   }
+  },
+  {
+   "id": "5683-32866-0014",
+   "speaker": "5683",
+   "prompt": "DON'T INSULT ME STANLEY BY TALKING AGAIN AS YOU DID THIS MORNING",
+   "audioMs": 4011,
+   "waitedMs": 6297,
+   "endedBy": "natural",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "Don't insult me, Stanley, by talking again as you did this morning.",
+    "fast": "Don't insult me, Stanley, by talking again as you did this morning."
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": "The caller says: Don't insult me, Stanley, by talking again as you did this morning.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "models": 0
+   }
+  },
+  {
+   "id": "8463-287645-0000",
+   "speaker": "8463",
+   "prompt": "THIS WAS WHAT DID THE MISCHIEF SO FAR AS THE RUNNING AWAY WAS CONCERNED",
+   "audioMs": 4761,
+   "waitedMs": 1641,
+   "endedBy": "early",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "This was what did the mischief so far as the running away was concerned.",
+    "fast": "This was what did the mischief so far as the running away was concerned."
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": "The caller says: This was what did the mischief so far as the running away was concerned.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "models": 0
+   }
+  },
+  {
+   "id": "5142-33396-0029",
+   "speaker": "5142",
+   "prompt": "BRING IN THE TABLE WE ARE HUNGRY",
+   "audioMs": 2154,
+   "waitedMs": 1656,
+   "endedBy": "early",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "Bring in the table. We are hungry.",
+    "fast": "Bring in the table; we are hungry."
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 2,
+    "models": 2
+   }
+  },
+  {
+   "id": "1995-1826-0025",
+   "speaker": "1995",
+   "prompt": "SOME TIME YOU'LL TELL ME PLEASE WON'T YOU",
+   "audioMs": 3307,
+   "waitedMs": 6100,
+   "endedBy": "natural",
+   "patientTurns": 1,
+   "fastTurns": 2,
+   "heard": {
+    "patient": "Sometime you tell me, please, won't you?",
+    "fast": "Sometime you tell me, please. Won't you?"
+   },
+   "wer": {
+    "patient": 0.375,
+    "fast": 0.375
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 3,
+    "models": 2
+   }
+  },
+  {
+   "id": "8455-210777-0002",
+   "speaker": "8455",
+   "prompt": "ON ARRIVING AT HOME AT MY OWN RESIDENCE I FOUND THAT OUR SALON WAS FILLED WITH A BRILLIANT COMPANY",
+   "audioMs": 6260,
+   "waitedMs": 6043,
+   "endedBy": "natural",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "On arriving at home, at my own residence, I found that our salon was filled with brilliant company.",
+    "fast": "On arriving at home, at my own residence, I found that our salon was filled with brilliant company."
+   },
+   "wer": {
+    "patient": 0.05263157894736842,
+    "fast": 0.05263157894736842
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 2,
+    "models": 2
+   }
+  },
+  {
+   "id": "8555-292519-0013",
+   "speaker": "8555",
+   "prompt": "THAT WAS BUT RUSTLING OF DRIPPING PLANTS IN THE DARK",
+   "audioMs": 4202,
+   "waitedMs": 5806,
+   "endedBy": "natural",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "That was but rustling of dripping plants in the dark.",
+    "fast": "That was but rustling of dripping plants in the dark."
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": "The caller says: That was but rustling of dripping plants in the dark.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "models": 0
+   }
+  },
+  {
+   "id": "5105-28240-0011",
+   "speaker": "5105",
+   "prompt": "I LEFT YOU ON A CONTINENT AND HERE I HAVE THE HONOR OF FINDING YOU ON AN ISLAND",
+   "audioMs": 6064,
+   "waitedMs": 6149,
+   "endedBy": "natural",
+   "patientTurns": 1,
+   "fastTurns": 2,
+   "heard": {
+    "patient": "I left you on a continent, and here I have the honor of finding you on an island.",
+    "fast": "I left you on a continent. And here I have the honor of finding you on an island."
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": "The caller says: I left you on a continent, and here I have the honor of finding you on an island.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "models": 0
+   }
+  },
+  {
+   "id": "5683-32866-0015",
+   "speaker": "5683",
+   "prompt": "WHAT I SAY IS ALTOGETHER ON YOUR OWN ACCOUNT",
+   "audioMs": 2861,
+   "waitedMs": 1593,
+   "endedBy": "early",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "What I say is altogether on your own account.",
+    "fast": "What I say is altogether on your own account."
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": "The caller says: What I say is altogether on your own account.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "models": 0
+   }
+  },
+  {
+   "id": "1580-141084-0006",
+   "speaker": "1580",
+   "prompt": "YOU DON'T SEEM TO REALIZE THE POSITION",
+   "audioMs": 2152,
+   "waitedMs": 1652,
+   "endedBy": "early",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "You don't seem to realize the position.",
+    "fast": "You don't seem to realize the position."
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": "The caller says: You don't seem to realize the position.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "models": 0
+   }
+  },
+  {
+   "id": "672-122797-0013",
+   "speaker": "672",
+   "prompt": "I AM NOW TALL AND MY BRANCHES SPREAD LIKE THE OTHERS THAT WERE CARRIED OFF LAST YEAR OH",
+   "audioMs": 8760,
+   "waitedMs": 6203,
+   "endedBy": "natural",
+   "patientTurns": 1,
+   "fastTurns": 3,
+   "heard": {
+    "patient": "I am now tall, and my branches spread like the others that were carried off last year. Oh!",
+    "fast": "I am now tall. And my branches spread like the others that were carried off last year. Oh."
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": "The caller says: I am now tall, and my branches spread like the others that were carried off last year. Oh!",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "models": 0
+   }
+  },
+  {
+   "id": "1320-122617-0026",
+   "speaker": "1320",
+   "prompt": "WELL WHAT CAN'T BE DONE BY MAIN COURAGE IN WAR MUST BE DONE BY CIRCUMVENTION",
+   "audioMs": 5251,
+   "waitedMs": 6256,
+   "endedBy": "natural",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "Well, what can't be done by main courage in war must be done by circumvention.",
+    "fast": "Well, what can't be done by main courage in war must be done by circumvention."
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": "The caller says: Well, what can't be done by main courage in war must be done by circumvention.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "models": 0
+   }
+  },
+  {
+   "id": "4446-2271-0000",
+   "speaker": "4446",
+   "prompt": "MAINHALL LIKED ALEXANDER BECAUSE HE WAS AN ENGINEER",
+   "audioMs": 3514,
+   "waitedMs": 1641,
+   "endedBy": "early",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "Maine Hall liked Alexander because he was an engineer.",
+    "fast": "Maine Hall liked Alexander because he was an engineer."
+   },
+   "wer": {
+    "patient": 0.25,
+    "fast": 0.25
+   },
+   "oneMoment": {
+    "relayed": "He is saying Maine Hall liked Alexander because he was an engineer.",
+    "invented": [
+     "hall"
+    ],
+    "inverted": false,
+    "wer": 0.625,
+    "wrong": true,
+    "action": "relay",
+    "rule": 8,
+    "models": 2
+   }
+  },
+  {
+   "id": "1580-141083-0040",
+   "speaker": "1580",
+   "prompt": "ONE HARDLY LIKES TO THROW SUSPICION WHERE THERE ARE NO PROOFS",
+   "audioMs": 3753,
+   "waitedMs": 1608,
+   "endedBy": "early",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "One hardly likes to throw suspicion where there are no proofs.",
+    "fast": "One hardly likes to throw suspicion where there are no proofs."
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": "The caller says: One hardly likes to throw suspicion where there are no proofs.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "models": 0
+   }
+  },
+  {
+   "id": "61-70968-0012",
+   "speaker": "61",
+   "prompt": "CRIES OF A NOTTINGHAM A NOTTINGHAM",
+   "audioMs": 2654,
+   "waitedMs": 1747,
+   "endedBy": "early",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "Cries of, a Nottingham! A Nottingham!",
+    "fast": "Cries of, a Nottingham! A Nottingham!"
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 2,
+    "models": 2
+   }
+  },
+  {
+   "id": "4446-2273-0018",
+   "speaker": "4446",
+   "prompt": "DO YOU REMEMBER THAT FIRST WALK WE TOOK TOGETHER IN PARIS",
+   "audioMs": 3414,
+   "waitedMs": 1594,
+   "endedBy": "early",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "Do you remember that first walk we took together in Paris?",
+    "fast": "Do you remember that first walk we took together in Paris?"
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": "The caller says: Do you remember that first walk we took together in Paris?",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "models": 0
+   }
+  },
+  {
+   "id": "6930-76324-0010",
+   "speaker": "6930",
+   "prompt": "WHAT IN THE WORLD IS THAT QUERIED JOYCE",
+   "audioMs": 2715,
+   "waitedMs": 6285,
+   "endedBy": "early",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "What in the world is it? queried Joyce.",
+    "fast": "What in the world is it? queried Joyce."
+   },
+   "wer": {
+    "patient": 0.125,
+    "fast": 0.125
+   },
+   "oneMoment": {
+    "relayed": "The caller says: What in the world is it? queried Joyce.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.125,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "models": 0
+   }
+  },
+  {
+   "id": "6829-68769-0031",
+   "speaker": "6829",
+   "prompt": "AS REGARDS MY ROBBING THE COMPANY I'LL SAY THAT I SAVED THEM A HEAVY LOSS ONE DAY",
+   "audioMs": 5602,
+   "waitedMs": 6307,
+   "endedBy": "natural",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "As regards my robbing the company, I'll say that I saved him a heavy loss one day.",
+    "fast": "As regards my robbing the company, I'll say that I saved him a heavy loss one day."
+   },
+   "wer": {
+    "patient": 0.058823529411764705,
+    "fast": 0.058823529411764705
+   },
+   "oneMoment": {
+    "relayed": "The caller says: As regards my robbing the company, I'll say that I saved him a heavy loss one day.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.058823529411764705,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "models": 0
+   }
+  },
+  {
+   "id": "2094-142345-0048",
+   "speaker": "2094",
+   "prompt": "SAID CAPTAIN DONNITHORNE SEATING HIMSELF WHERE HE COULD SEE ALONG THE SHORT PASSAGE TO THE OPEN DAIRY DOOR",
+   "audioMs": 6401,
+   "waitedMs": 1610,
+   "endedBy": "early",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "said Captain Donnithorne, seating himself where he could see along the short passage to the open dairy door.",
+    "fast": "said Captain Donnithorne, seating himself where he could see along the short passage to the open dairy door."
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 6,
+    "models": 2
+   }
+  },
+  {
+   "id": "2961-961-0020",
+   "speaker": "2961",
+   "prompt": "THIS IS THE EXPLANATION OF THE SHALLOWS WHICH ARE FOUND IN THAT PART OF THE ATLANTIC OCEAN",
+   "audioMs": 6155,
+   "waitedMs": 1596,
+   "endedBy": "early",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "This is the explanation of the shallows which are found in that part of the Atlantic Ocean.",
+    "fast": "This is the explanation of the shallows which are found in that part of the Atlantic Ocean."
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": "The caller says: This is the explanation of the shallows which are found in that part of the Atlantic Ocean.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "models": 0
+   }
+  },
+  {
+   "id": "237-134500-0014",
+   "speaker": "237",
+   "prompt": "AND EMIL MOWED HIS WAY SLOWLY DOWN TOWARD THE CHERRY TREES",
+   "audioMs": 4261,
+   "waitedMs": 1649,
+   "endedBy": "early",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "And Amiel mowed his way slowly down toward the cherry trees.",
+    "fast": "And Amiel mowed his way slowly down toward the cherry trees."
+   },
+   "wer": {
+    "patient": 0.09090909090909091,
+    "fast": 0.09090909090909091
+   },
+   "oneMoment": {
+    "relayed": "The caller says: And Amiel mowed his way slowly down toward the cherry trees.",
+    "invented": [
+     "amiel"
+    ],
+    "inverted": false,
+    "wer": 0.09090909090909091,
+    "wrong": true,
+    "action": "relay",
+    "rule": 9,
+    "models": 0
+   }
+  },
+  {
+   "id": "2830-3980-0017",
+   "speaker": "2830",
+   "prompt": "WHEN I WAS A YOUNG MAN I THOUGHT PAUL WAS MAKING TOO MUCH OF HIS CALL",
+   "audioMs": 3706,
+   "waitedMs": 6248,
+   "endedBy": "natural",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "When I was a young man, I thought Paul was making too much of his call.",
+    "fast": "When I was a young man, I thought Paul was making too much of his call."
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": "The caller says: When I was a young man, I thought Paul was making too much of his call.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "models": 0
+   }
+  },
+  {
+   "id": "7127-75947-0003",
+   "speaker": "7127",
+   "prompt": "YES THE CHARACTER WHICH YOUR ROYAL HIGHNESS ASSUMED IS IN PERFECT HARMONY WITH YOUR OWN",
+   "audioMs": 6013,
+   "waitedMs": 5895,
+   "endedBy": "natural",
+   "patientTurns": 1,
+   "fastTurns": 2,
+   "heard": {
+    "patient": "Yes, the character which Your Royal Highness assumed is in perfect harmony with your own.",
+    "fast": "Yes. The character which Your Royal Highness assumed is in perfect harmony with your own."
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 6,
+    "models": 2
+   }
+  },
+  {
+   "id": "672-122797-0061",
+   "speaker": "672",
+   "prompt": "DON'T YOU KNOW ONE ABOUT BACON AND TALLOW CANDLES CAN'T YOU TELL ANY LARDER STORIES",
+   "audioMs": 7609,
+   "waitedMs": 1651,
+   "endedBy": "early",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "Don't you know one about bacon and tallow candles? Can't you tell any larder stories?",
+    "fast": "Don't you know one about bacon and tallow candles? Can't you tell any larder stories?"
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": "The caller says: Don't you know one about bacon and tallow candles? Can't you tell any larder stories?",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "models": 0
+   }
+  },
+  {
+   "id": "6930-76324-0012",
+   "speaker": "6930",
+   "prompt": "WE'LL COME IN HERE THIS AFTERNOON WITH OLD CLOTHES ON AND HAVE A REGULAR HOUSE CLEANING",
+   "audioMs": 4706,
+   "waitedMs": 1599,
+   "endedBy": "early",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "We'll come in here this afternoon with old clothes on and have a regular house cleaning.",
+    "fast": "We'll come in here this afternoon with old clothes on and have a regular house cleaning."
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": "He is saying they will come in here this afternoon with old clothes on and have a regular house cleaning.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.3125,
+    "wrong": false,
+    "action": "relay",
+    "rule": 8,
+    "models": 2
+   }
+  },
+  {
+   "id": "4507-16021-0043",
+   "speaker": "4507",
+   "prompt": "THE EARTH IS NOT DEVOID OF RESEMBLANCE TO A JAIL",
+   "audioMs": 4004,
+   "waitedMs": 1602,
+   "endedBy": "early",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "The earth is not devoid of resemblance to a jail.",
+    "fast": "The earth is not devoid of resemblance to a jail."
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": "The caller says: The earth is not devoid of resemblance to a jail.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "models": 0
+   }
+  },
+  {
+   "id": "4992-41797-0011",
+   "speaker": "4992",
+   "prompt": "WHATEVER APPEALED TO HER SENSE OF BEAUTY WAS STRAIGHTWAY TRANSFERRED TO PAPER OR CANVAS",
+   "audioMs": 5453,
+   "waitedMs": 1609,
+   "endedBy": "early",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "Whatever appealed to her sense of beauty was straightway transferred to paper or canvas.",
+    "fast": "Whatever appealed to her sense of beauty was straightway transferred to paper or canvas."
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": "The caller says: Whatever appealed to her sense of beauty was straightway transferred to paper or canvas.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "models": 0
+   }
+  },
+  {
+   "id": "237-134493-0004",
+   "speaker": "237",
+   "prompt": "THE AIR AND THE EARTH ARE CURIOUSLY MATED AND INTERMINGLED AS IF THE ONE WERE THE BREATH OF THE OTHER",
+   "audioMs": 6861,
+   "waitedMs": 6045,
+   "endedBy": "natural",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "The air and the earth are curiously mated and intermingled, as if the one were the breath of the other.",
+    "fast": "The air and the earth are curiously mated and intermingled, as if the one were the breath of the other."
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": "The caller says: The air and the earth are curiously mated and intermingled, as if the one were the breath of the other.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "models": 0
+   }
+  },
+  {
+   "id": "5105-28233-0000",
+   "speaker": "5105",
+   "prompt": "LENGTH OF SERVICE FOURTEEN YEARS THREE MONTHS AND FIVE DAYS",
+   "audioMs": 4564,
+   "waitedMs": 6144,
+   "endedBy": "natural",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "Length of service: 14 years, 3 months, and 5 days.",
+    "fast": "Length of service: 14 years, 3 months, and 5 days."
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 2,
+    "models": 2
+   }
+  },
+  {
+   "id": "7176-92135-0010",
+   "speaker": "7176",
+   "prompt": "HAM TO BE OR NOT TO BE",
+   "audioMs": 2210,
+   "waitedMs": 6200,
+   "endedBy": "natural",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "Ham. To be or not to be.",
+    "fast": "Ham, to be or not to be."
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": "He is saying Ham, to be or not to be.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.42857142857142855,
+    "wrong": false,
+    "action": "relay",
+    "rule": 8,
+    "models": 2
+   }
+  },
+  {
+   "id": "260-123288-0000",
+   "speaker": "260",
+   "prompt": "THE ROARINGS BECOME LOST IN THE DISTANCE",
+   "audioMs": 3064,
+   "waitedMs": 5842,
+   "endedBy": "natural",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "The roarings become lost in the distance.",
+    "fast": "The roarings become lost in the distance."
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": "The caller says: The roarings become lost in the distance.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "models": 0
+   }
+  },
+  {
+   "id": "1320-122617-0022",
+   "speaker": "1320",
+   "prompt": "THE DELAWARES ARE CHILDREN OF THE TORTOISE AND THEY OUTSTRIP THE DEER",
+   "audioMs": 3903,
+   "waitedMs": 6107,
+   "endedBy": "natural",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "The Delawares are children of the tortoise, and they outstrip the deer.",
+    "fast": "The Delawares are children of the tortoise, and they outstrip the deer."
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": "The caller says: The Delawares are children of the tortoise, and they outstrip the deer.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "models": 0
+   }
+  },
+  {
+   "id": "7176-88083-0000",
+   "speaker": "7176",
+   "prompt": "ALL ABOUT HIM WAS A TUMULT OF BRIGHT AND BROKEN COLOR SCATTERED IN BROAD SPLASHES",
+   "audioMs": 5711,
+   "waitedMs": 6388,
+   "endedBy": "natural",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "All about him was a tumult of bright and broken color scattered in broad splashes.",
+    "fast": "All about him was a tumult of bright and broken color scattered in broad splashes."
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": "He is saying all about him was a tumult of bright and broken color scattered in broad splashes.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.2,
+    "wrong": false,
+    "action": "relay",
+    "rule": 8,
+    "models": 2
+   }
+  },
+  {
+   "id": "3729-6852-0016",
+   "speaker": "3729",
+   "prompt": "MADAME QUINSON BESIDES CAN ANSWER YOUR ENQUIRIES",
+   "audioMs": 4215,
+   "waitedMs": 6385,
+   "endedBy": "natural",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "Madame Quinson, besides, can answer your inquiries.",
+    "fast": "Madame Quinson, besides, can answer your inquiries."
+   },
+   "wer": {
+    "patient": 0.14285714285714285,
+    "fast": 0.14285714285714285
+   },
+   "oneMoment": {
+    "relayed": "Madame Quinson can answer your inquiries.",
+    "invented": [
+     "inquiries"
+    ],
+    "inverted": false,
+    "wer": 0.2857142857142857,
+    "wrong": true,
+    "action": "relay",
+    "rule": 8,
+    "models": 2
+   }
+  },
+  {
+   "id": "2094-142345-0028",
+   "speaker": "2094",
+   "prompt": "NO NO NO TOTTY UD GET HER FEET WET SAID MISSUS POYSER CARRYING AWAY HER IRON",
+   "audioMs": 6864,
+   "waitedMs": 6138,
+   "endedBy": "natural",
+   "patientTurns": 1,
+   "fastTurns": 2,
+   "heard": {
+    "patient": "No, no, no! Tottie'd get her feet wet, said Mrs. Poiser, carrying away her iron.",
+    "fast": "No, no, no, Tottie'd get her feet wet, said Mrs. Poiser. carrying away her iron."
+   },
+   "wer": {
+    "patient": 0.25,
+    "fast": 0.25
+   },
+   "oneMoment": {
+    "relayed": "No, no, no, Tottie'd get her feet wet, said Mrs. Poiser. carrying away her iron.",
+    "invented": [
+     "mrs",
+     "poiser"
+    ],
+    "inverted": false,
+    "wer": 0.25,
+    "wrong": true,
+    "action": "relay",
+    "rule": 8,
+    "models": 2
+   }
+  },
+  {
+   "id": "61-70970-0026",
+   "speaker": "61",
+   "prompt": "FITZOOTH'S HAND RESTED AT LAST UPON THE TOP RUNG OF A LADDER AND SLOWLY THE TRUTH CAME TO HIM",
+   "audioMs": 5507,
+   "waitedMs": 1655,
+   "endedBy": "early",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "Fitzhugh's hand rested at last upon the top rung of a ladder, and slowly the truth came to him.",
+    "fast": "Fitzooth's hand rested at last upon the top rung of a ladder, and slowly the truth came to him."
+   },
+   "wer": {
+    "patient": 0.05263157894736842,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": "Fitzhugh's hand rested at last upon the top rung of a ladder, and slowly the truth came to him.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.05263157894736842,
+    "wrong": false,
+    "action": "relay",
+    "rule": 8,
+    "models": 2
+   }
+  },
+  {
+   "id": "4970-29095-0009",
+   "speaker": "4970",
+   "prompt": "MARGARET BOLTON ALMOST LOST FOR A MOMENT HER HABITUAL PLACIDITY",
+   "audioMs": 5601,
+   "waitedMs": 1598,
+   "endedBy": "early",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "Margaret Bolton almost lost for a moment her habitual placidity.",
+    "fast": "Margaret Bolton almost lost for a moment her habitual placidity."
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 4,
+    "models": 2
+   }
+  },
+  {
+   "id": "8455-210777-0050",
+   "speaker": "8455",
+   "prompt": "ONE OF US ALWAYS REMAINS ON BOARD WHILE THE OTHER IS ON SHORE",
+   "audioMs": 3963,
+   "waitedMs": 6198,
+   "endedBy": "natural",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "One of us always remains on board while the other is on shore.",
+    "fast": "One of us always remains on board while the other is on shore."
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": "The caller says: One of us always remains on board while the other is on shore.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "models": 0
+   }
+  },
+  {
+   "id": "2830-3980-0038",
+   "speaker": "2830",
+   "prompt": "GRACE BE TO YOU AND PEACE FROM GOD THE FATHER AND FROM OUR LORD JESUS CHRIST",
+   "audioMs": 5559,
+   "waitedMs": 1593,
+   "endedBy": "early",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "Grace be to you and peace from God the Father and from our Lord Jesus Christ.",
+    "fast": "Grace be to you and peace from God the Father and from our Lord Jesus Christ."
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": "The caller says: Grace be to you and peace from God the Father and from our Lord Jesus Christ.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "models": 0
+   }
+  },
+  {
+   "id": "8463-294828-0032",
+   "speaker": "8463",
+   "prompt": "IN PERSON WELCOME ABOARD PROFESSOR YOUR CABIN IS WAITING FOR YOU",
+   "audioMs": 4411,
+   "waitedMs": 1695,
+   "endedBy": "early",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "In person? Welcome aboard, Professor. Your cabin is waiting for you.",
+    "fast": "In person, welcome aboard, Professor. Your cabin is waiting for you."
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 6,
+    "models": 2
+   }
+  },
+  {
+   "id": "4507-16021-0040",
+   "speaker": "4507",
+   "prompt": "ONE THINKS ONE HEARS HYDRAS TALKING",
+   "audioMs": 3965,
+   "waitedMs": 5899,
+   "endedBy": "natural",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "One thinks one hears hydras talking.",
+    "fast": "One thinks one hears hydras talking."
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": "The caller says: One thinks one hears hydras talking.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "models": 0
+   }
+  },
+  {
+   "id": "4077-13751-0001",
+   "speaker": "4077",
+   "prompt": "ITS ORIGIN WAS SMALL A GERM AN INSIGNIFICANT SEED HARDLY TO BE THOUGHT OF AS LIKELY TO AROUSE OPPOSITION",
+   "audioMs": 8752,
+   "waitedMs": 1600,
+   "endedBy": "early",
+   "patientTurns": 1,
+   "fastTurns": 3,
+   "heard": {
+    "patient": "Its origin was small, a germ, an insignificant seed, hardly to be thought of as likely to arouse opposition.",
+    "fast": "Its origin was small. A germ, an insignificant seed. hardly to be thought of as likely to arouse opposition."
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": "The caller says: Its origin was small, a germ, an insignificant seed, hardly to be thought of as likely to arouse opposition.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "models": 0
+   }
+  },
+  {
+   "id": "7127-75947-0024",
+   "speaker": "7127",
+   "prompt": "LOOK YONDER DO YOU NOT SEE THE MOON SLOWLY RISING SILVERING THE TOPMOST BRANCHES OF THE CHESTNUTS AND THE OAKS",
+   "audioMs": 7357,
+   "waitedMs": 1700,
+   "endedBy": "early",
+   "patientTurns": 1,
+   "fastTurns": 2,
+   "heard": {
+    "patient": "Look yonder! Do you not see the moon slowly rising, silvering the topmost branches of the chestnuts and the oaks?",
+    "fast": "Look yonder, do you not see the moon slowly rising? silverying the topmost branches of the chestnuts and the oaks?"
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0.05
+   },
+   "oneMoment": {
+    "relayed": null,
+    "invented": [],
+    "inverted": false,
+    "wer": null,
+    "wrong": false,
+    "action": "ask",
+    "rule": 3,
+    "models": 2
+   }
+  },
+  {
+   "id": "1089-134686-0007",
+   "speaker": "1089",
+   "prompt": "A COLD LUCID INDIFFERENCE REIGNED IN HIS SOUL",
+   "audioMs": 4307,
+   "waitedMs": 1596,
+   "endedBy": "early",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "A cold, lucid indifference reigned in his soul.",
+    "fast": "A cold, lucid indifference reigned in his soul."
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": "The caller says: A cold, lucid indifference reigned in his soul.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "models": 0
+   }
+  },
+  {
+   "id": "6829-68771-0030",
+   "speaker": "6829",
+   "prompt": "HER MANNER WAS NEITHER INDEPENDENT NOR ASSERTIVE BUT RATHER ONE OF WELL BRED COMPOSURE AND CALM RELIANCE",
+   "audioMs": 6260,
+   "waitedMs": 1643,
+   "endedBy": "early",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "Her manner was neither independent nor assertive, but rather one of well-bred composure and calm reliance.",
+    "fast": "Her manner was neither independent nor assertive, but rather one of well-bred composure and calm reliance."
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": "The caller says: Her manner was neither independent nor assertive, but rather one of well-bred composure and calm reliance.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "models": 0
+   }
+  },
+  {
+   "id": "8224-274381-0007",
+   "speaker": "8224",
+   "prompt": "BY QUICK MARCHES THROUGH THESE INACCESSIBLE MOUNTAINS THAT GENERAL FREED HIMSELF FROM THE SUPERIOR FORCES OF THE COVENANTERS",
+   "audioMs": 10103,
+   "waitedMs": 1653,
+   "endedBy": "early",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "By quick marches through these inaccessible mountains, that general freed himself from the superior forces of the Covenanters.",
+    "fast": "By quick marches through these inaccessible mountains, that general freed himself from the superior forces of the Covenanters."
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": "The caller says: By quick marches through these inaccessible mountains, that general freed himself from the superior forces of the Covenanters.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "models": 0
+   }
+  },
+  {
+   "id": "7729-102255-0025",
+   "speaker": "7729",
+   "prompt": "THEIR ASSUMED CHARACTER CHANGED WITH THEIR CHANGING OPPORTUNITIES OR NECESSITIES",
+   "audioMs": 5512,
+   "waitedMs": 1640,
+   "endedBy": "early",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "Their assumed character changed with their changing opportunities or necessities.",
+    "fast": "Their assumed character changed with their changing opportunities or necessities."
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": "The caller says: Their assumed character changed with their changing opportunities or necessities.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "models": 0
+   }
+  },
+  {
+   "id": "3575-170457-0031",
+   "speaker": "3575",
+   "prompt": "ON AUGUST TWENTY SEVENTH EIGHTEEN THIRTY SEVEN SHE WRITES",
+   "audioMs": 4014,
+   "waitedMs": 9500,
+   "endedBy": "cap",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "On August 27th, 1837, she writes:",
+    "fast": "On August 27th, 1837, she writes:"
+   },
+   "wer": {
+    "patient": 0.5555555555555556,
+    "fast": 0.5555555555555556
+   },
+   "oneMoment": {
+    "relayed": "On August 27th, 1837, she writes:",
+    "invented": [
+     "27th",
+     "1837"
+    ],
+    "inverted": false,
+    "wer": 0.5555555555555556,
+    "wrong": true,
+    "action": "relay",
+    "rule": 8,
+    "models": 2
+   }
+  },
+  {
+   "id": "1221-135766-0002",
+   "speaker": "1221",
+   "prompt": "YET THESE THOUGHTS AFFECTED HESTER PRYNNE LESS WITH HOPE THAN APPREHENSION",
+   "audioMs": 4853,
+   "waitedMs": 1603,
+   "endedBy": "early",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "Yet these thoughts affected Hester Prynne less with hope than apprehension.",
+    "fast": "Yet these thoughts affected Hester Prynne less with hope than apprehension."
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": "The caller says: Yet these thoughts affected Hester Prynne less with hope than apprehension.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "models": 0
+   }
+  },
+  {
+   "id": "908-31957-0000",
+   "speaker": "908",
+   "prompt": "ALL IS SAID WITHOUT A WORD",
+   "audioMs": 2151,
+   "waitedMs": 1612,
+   "endedBy": "early",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "All is said without a word.",
+    "fast": "All is said without a word."
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": "The caller says: All is said without a word.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "models": 0
+   }
+  },
+  {
+   "id": "1089-134686-0014",
+   "speaker": "1089",
+   "prompt": "HE TRIED TO THINK HOW IT COULD BE",
+   "audioMs": 2255,
+   "waitedMs": 6254,
+   "endedBy": "natural",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "He tried to think how it could be.",
+    "fast": "He tried to think how it could be."
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": "The caller says: He tried to think how it could be.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "models": 0
+   }
+  },
+  {
+   "id": "1284-1181-0009",
+   "speaker": "1284",
+   "prompt": "SHE RAN TO HER HUSBAND'S SIDE AT ONCE AND HELPED HIM LIFT THE FOUR KETTLES FROM THE FIRE",
+   "audioMs": 5252,
+   "waitedMs": 1606,
+   "endedBy": "early",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "She ran to her husband's side at once and helped him lift the 4 kettles from the fire.",
+    "fast": "She ran to her husband's side at once and helped him lift the 4 kettles from the fire."
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": "The caller says: She ran to her husband's side at once and helped him lift the 4 kettles from the fire.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "models": 0
+   }
+  },
+  {
+   "id": "4970-29095-0022",
+   "speaker": "4970",
+   "prompt": "IS THEE GOING TO THE YEARLY MEETING RUTH ASKED ONE OF THE GIRLS",
+   "audioMs": 4805,
+   "waitedMs": 1597,
+   "endedBy": "early",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "Is thee going to the yearly meeting, Ruth? asked one of the girls.",
+    "fast": "Is thee going to the yearly meeting, Ruth? asked one of the girls."
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": "The caller says: Is thee going to the yearly meeting, Ruth? asked one of the girls.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "models": 0
+   }
+  },
+  {
+   "id": "4992-41797-0012",
+   "speaker": "4992",
+   "prompt": "SHE IS WILD TO KNOW HOW TO DO THINGS",
+   "audioMs": 2760,
+   "waitedMs": 1655,
+   "endedBy": "early",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "She is wild to know how to do things.",
+    "fast": "She is wild to know how to do things."
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": "The caller says: She is wild to know how to do things.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "models": 0
+   }
+  },
+  {
+   "id": "2961-960-0004",
+   "speaker": "2961",
+   "prompt": "THERE IS NO DANGER OF THE MODERN COMMENTATORS ON THE TIMAEUS FALLING INTO THE ABSURDITIES OF THE NEO PLATONISTS",
+   "audioMs": 8257,
+   "waitedMs": 1697,
+   "endedBy": "early",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "There is no danger of the modern commentators on the Timaeus falling into the absurdities of the Neoplatonists.",
+    "fast": "There is no danger of the modern commentators on the Timaeus falling into the absurdities of the Neoplatonists."
+   },
+   "wer": {
+    "patient": 0.10526315789473684,
+    "fast": 0.10526315789473684
+   },
+   "oneMoment": {
+    "relayed": "The caller says: There is no danger of the modern commentators on the Timaeus falling into the absurdities of the Neoplatonists.",
+    "invented": [
+     "neoplatonists"
+    ],
+    "inverted": false,
+    "wer": 0.10526315789473684,
+    "wrong": true,
+    "action": "relay",
+    "rule": 9,
+    "models": 0
+   }
+  },
+  {
+   "id": "3570-5694-0001",
+   "speaker": "3570",
+   "prompt": "THE UTILITY OF CONSUMPTION AS AN EVIDENCE OF WEALTH IS TO BE CLASSED AS A DERIVATIVE GROWTH",
+   "audioMs": 5706,
+   "waitedMs": 6907,
+   "endedBy": "natural",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "The utility of consumption as an evidence of wealth is to be classed as a derivative of growth.",
+    "fast": "The utility of consumption as an evidence of wealth is to be classed as a derivative of growth."
+   },
+   "wer": {
+    "patient": 0.058823529411764705,
+    "fast": 0.058823529411764705
+   },
+   "oneMoment": {
+    "relayed": "He is saying the utility of consumption as an evidence of wealth is to be classed as a derivative of growth.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0.23529411764705882,
+    "wrong": false,
+    "action": "relay",
+    "rule": 8,
+    "models": 2
+   }
+  },
+  {
+   "id": "1284-1181-0002",
+   "speaker": "1284",
+   "prompt": "THE HEAD OF THE PATCHWORK GIRL WAS THE MOST CURIOUS PART OF HER",
+   "audioMs": 3863,
+   "waitedMs": 6352,
+   "endedBy": "natural",
+   "patientTurns": 1,
+   "fastTurns": 1,
+   "heard": {
+    "patient": "The head of the patchwork girl was the most curious part of her.",
+    "fast": "The head of the patchwork girl was the most curious part of her."
+   },
+   "wer": {
+    "patient": 0,
+    "fast": 0
+   },
+   "oneMoment": {
+    "relayed": "The caller says: The head of the patchwork girl was the most curious part of her.",
+    "invented": [],
+    "inverted": false,
+    "wer": 0,
+    "wrong": false,
+    "action": "relay",
+    "rule": 9,
+    "models": 0
+   }
+  }
+ ]
+}

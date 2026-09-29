@@ -123,6 +123,26 @@ because the claim is about when a turn ends, not how well anything is heard. And
 got better aimed: worse audio lowers confidence and makes the ears disagree more, which are
 exactly the signals the rules key on.
 
+### And it does not get in the way of everyone else
+
+The fair objection to a system tuned for patience is that it might be unusable for a
+speaker with no difficulty. So the same engine ran 60 sentences of ordinary fluent speech
+from 35 readers (LibriSpeech test-clean, CC BY 4.0), which we did not record.
+
+| Measured | Result |
+|---|---|
+| It spoke rather than asked | **49 of 60**, and **39** of those needed no model at all |
+| How long it waited after they stopped | **1.7s median**, 34 of 60 turns ended in under two seconds |
+| The patient ear split the sentence | **0 of 60** |
+| Ordinary settings split the sentence | 8 of 60 |
+| Word error rate, patient ear | 5% |
+
+7 relays were flagged against the reference, and none of them is an invention: every
+flagged word was in what the ears actually heard. Most are the corpus and the recogniser
+disagreeing about spelling, such as LibriSpeech writing "MARCH TWENTY SECOND EIGHTEEN
+THIRTY SEVEN" where AssemblyAI heard "March 22nd, 1837". The genuine ones are misheard
+names, passed on faithfully, because we do not improve recognition.
+
 ### What it refuses to do
 
 | | One Moment | The obvious alternative |
@@ -203,7 +223,7 @@ npm run web                  # http://localhost:3000
 | Command | What it proves | Needs a key |
 |---|---|---|
 | `npm test` | The engine: floor control, evidence, Dissent, rule 11, semantic patience, the call record, the telephone codecs. 65 tests. | no |
-| `npm run verify` | Every number the site publishes, re-scored from the committed run files. Exits non-zero if one has drifted. 9 checks. | no |
+| `npm run verify` | Every number the site publishes, re-scored from the committed run files. Exits non-zero if one has drifted. 12 checks. | no |
 | `npm run typecheck` | Types across all three workspaces. | no |
 | `npm run e2e:headless` | A full live call in the terminal, about 40 seconds. Add `-- --voice george` to change the voice. | yes |
 | `npm run proof:phone` | A full call over the Twilio Media Streams protocol, with no phone needed. | yes |
