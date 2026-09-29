@@ -143,6 +143,33 @@ disagreeing about spelling, such as LibriSpeech writing "MARCH TWENTY SECOND EIG
 THIRTY SEVEN" where AssemblyAI heard "March 22nd, 1837". The genuine ones are misheard
 names, passed on faithfully, because we do not improve recognition.
 
+### What the turn setting costs the person speaking
+
+One setting decides whether a sentence survives: `min_turn_silence`. Sweeping it against
+synthetic speech tells you when a turn fires; it cannot tell you what firing costs, because
+a synthetic voice never stops mid-word to look for one. So it was swept across 12 sentences
+from 7 speakers with dysarthria, one ear at a time, with no ForceEndpoint and no second
+stream, so each number is about the setting rather than our orchestration on top of it.
+
+| `min_turn_silence` | Closed while they were still speaking | Split | Words still to come | Median wait |
+|---|---|---|---|---|
+| `vendor default` | 4 of 12 | 2 of 12 | 10 of 86 | 0.2s |
+| `1000ms` | 1 of 12 | 1 of 12 | 4 of 86 | 0.9s |
+| `2400ms` | 0 of 12 | 0 of 12 | 2 of 86 | 2.4s |
+| `6000ms (ours)` | 0 of 12 | 0 of 12 | 2 of 86 | 6.1s |
+
+At the vendor default the turn closes **while the person is still talking**, on a third of
+these sentences. That is not an agent waiting for a pause; it is an agent answering before
+the sentence exists.
+
+**The row that argues against us:** at 2400ms nothing fires early, nothing splits and the
+same two words are lost, for 3.7 seconds less waiting. On this corpus, 6000ms buys nothing
+2400ms has not. We kept 6000 because TORGO is read speech with short pauses, while the pause
+this product exists for is an aphasic word-finding block of roughly 5 to 10 seconds that no
+dysarthric read-speech corpus can show. It is a ceiling, not a delay paid every turn:
+`ForceEndpoint` closes a finished sentence early, measured at a 1.7s median on fluent speech.
+Twelve sentences is a small sample and is reported as one.
+
 ### What it refuses to do
 
 | | One Moment | The obvious alternative |
@@ -240,6 +267,10 @@ node --env-file=.env eval/audiobench-decide.mjs
 # and the same over a telephone line
 node --env-file=.env eval/audiobench-stream.mjs --narrowband --out eval/results/audiobench-evidence-8k.json
 node --env-file=.env eval/audiobench-decide.mjs --arm 8k
+
+# what each turn setting costs the speaker
+node --env-file=.env eval/turnbench.mjs --n 12
+node eval/turnbench-summarise.mjs
 ```
 
 ---
