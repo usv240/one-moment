@@ -1,9 +1,38 @@
 {
   "name": "@one-moment/core",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
   "type": "module",
   "license": "MIT",
-  "description": "The One Moment engine: evidence assembly, Dissent, the Adjudicator and the Floor Controller. No I/O except the model client.",
-  "exports": { ".": "./src/index.ts" }
+  "description": "The decision layer of a voice agent that waits: evidence from two listening streams, negation checks, Dissent, the Adjudicator, forced choices and the Floor Controller. Pure, no network, no I/O.",
+  "keywords": [
+    "voice-agent",
+    "speech-to-text",
+    "assemblyai",
+    "turn-taking",
+    "accessibility",
+    "aphasia",
+    "assistive-technology"
+  ],
+  "homepage": "https://one-moment-mu.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/usv240/one-moment.git",
+    "directory": "packages/core"
+  },
+  "bugs": "https://github.com/usv240/one-moment/issues",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=24"
+  },
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json"
+  },
+  "private": true
 }
